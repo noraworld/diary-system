@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
-  get '/articles', to: redirect('/')
+
   root 'articles#index'
+  get '/:year/:month' => 'articles#index', constraints: {year: /[0-9]{4}/, month: /[0-9]{2}/}
+  get '/:year/:month/:day' => 'articles#show', constraints: {year: /[0-9]{4}/, month: /[0-9]{2}/, day: /[0-9]{2}/}
+  get '/:year/:month/:day/edit' => 'articles#edit', constraints: {year: /[0-9]{4}/, month: /[0-9]{2}/, day: /[0-9]{2}/}
+  get 'new' => 'articles#new'
   resources :articles
-  # get 'articles/index'
-  # get 'articles/show'
-  # get 'articles/new'
-  # get 'articles/create'
-  # get 'articles/edit'
-  # get 'articles/update'
-  # get 'articles/destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

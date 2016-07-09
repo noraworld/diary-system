@@ -1,18 +1,26 @@
 <h1>Listing articles</h1>
 
-<table>
-  <tr>
-    <th>Text</th>
-  </tr>
+<div>
+  <%= link_to 'New article', '/new' %>
 
+  <% day = 0 %>
   <% @articles.each do |article| %>
-    <tr>
-      <td><%= article.text %></td>
-      <td><%= link_to 'Show', article_path(article) %></td>
-      <td><%= link_to 'Edit', edit_article_path(article) %></td>
-      <td><%= link_to 'Destroy', article_path(article), method: :delete, data: {confirm: '本当に削除しますか?'} %></td>
-    </tr>
+    <% post_day = article.day.to_i %>
+    <% day += 1 %>
+    <%# 次の更新日までリンクなしの数字(日付)を出力 %>
+    <% while day < post_day %>
+      <div><p><%= day %></p></div>
+      <% day += 1 %>
+    <% end %>
+    <%# 更新日はリンクつきの数字(日付)を出力 %>
+    <% date = '/' + format('%04d', article.year) + '/' + format('%02d', article.month) + '/' + format('%02d', article.day) %>
+    <p><%= link_to post_day, date %></p>
   <% end %>
-</table>
 
-<%= link_to 'New article', new_article_path %>
+  <% day += 1 %>
+  <%# その月の最終更新日から月末までリンクなしの数字(日付)を出力 %>
+  <% while day <= Date.new(@year, @month).end_of_month.day.to_i %>
+    <div><p><%= day %></p></div>
+    <% day += 1 %>
+  <% end %>
+</div>
