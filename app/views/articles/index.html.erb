@@ -23,4 +23,16 @@
     <div><p><%= day %></p></div>
     <% day += 1 %>
   <% end %>
+
+  <%# 先月と今月へのリンク %>
+  <% prev_calendar = format('%04d', Date.new(@year, @month).prev_month.year).to_s + '/' + format('%02d', Date.new(@year, @month).prev_month.month).to_s %>
+  <%= link_to '<', '/' + prev_calendar %>
+  <% next_calendar = format('%04d', Date.new(@year, @month).next_month.year).to_s + '/' + format('%02d', Date.new(@year, @month).next_month.month).to_s %>
+  <%= link_to '>', '/' + next_calendar %>
+
+  <%# 今年のカレンダーではないときに今年のカレンダーのリンク(root)が表示される %>
+  <% if request.path_info == '/' || request.path_info == '/' + Time.now.in_time_zone('Tokyo').strftime('%Y').to_s + '/' + Time.now.in_time_zone('Tokyo').strftime('%m').to_s %>
+  <% else %>
+    <%= link_to 'This month', '/' %>
+  <% end %>
 </div>
