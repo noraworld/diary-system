@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
   root 'articles#index'
-  get '/:year/:month' => 'articles#index', constraints: {year: /[0-9]{4}/, month: /[0-9]{2}/}
-  get '/:year/:month/:day' => 'articles#show', constraints: {year: /[0-9]{4}/, month: /[0-9]{2}/, day: /[0-9]{2}/}
-  get '/:year/:month/:day/edit' => 'articles#edit', constraints: {year: /[0-9]{4}/, month: /[0-9]{2}/, day: /[0-9]{2}/}
+  get '/:year/:month'           => 'articles#index', constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/}
+  get '/:year/:month/:day'      => 'articles#show',  constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
+  get '/:year/:month/:day/edit' => 'articles#edit',  constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
   get 'new' => 'articles#new'
   resources :articles
 

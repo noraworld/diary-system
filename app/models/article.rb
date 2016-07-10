@@ -25,7 +25,7 @@ class Article < ActiveRecord::Base
   validate :day_range
   def day_range
     if !(day.between?(1, Date.new(year, month).end_of_month.day.to_i))
-      errors.add(:day, ':その日付は存在しません')
+      errors.add(:day, 'その日付は存在しません')
     end
   end
 end
