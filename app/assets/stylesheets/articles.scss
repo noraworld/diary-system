@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$normal-font-color: #444444;
+
+body {
+  font-family: 'Open Sans';
+  color: $normal-font-color;
+}
+
 a:link {
   color: skyblue;
 }
@@ -10,4 +17,56 @@ a:visited {
 }
 a:hover {
   color: orange;
+}
+
+#month {
+  display: inline-block;
+  width: 300px;
+}
+#prev-month, #next-month {
+  display: inline-block;
+}
+#day-of-week {
+  width: 150px;
+  height: 50px;
+  background-color: #dd453e;
+}
+.day-box {
+  width: 150px;
+  height: 100px;
+  background-color: #ff906a;
+}
+.post-day {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+.post-day:after {
+  content: '●';
+  color: #dd453e;
+  margin-left: 5px;
+}
+.post-day:link {
+  color: $normal-font-color;
+}
+.post-day:visited {
+  color: $normal-font-color;
+}
+.post-day.hover {
+  color: $normal-font-color;
+}
+.day {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  margin: 0;
+}
+
+#calendar-wrap, #calendar-header {
+  text-align: center;
+}
+#calendar {
+  display: inline-block;
 }
