@@ -30,9 +30,9 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
 
-    @article.year = Time.now.in_time_zone('Tokyo').strftime('%Y').to_i
+    @article.year  = Time.now.in_time_zone('Tokyo').strftime('%Y').to_i
     @article.month = Time.now.in_time_zone('Tokyo').strftime('%m').to_i
-    @article.day = Time.now.in_time_zone('Tokyo').strftime('%d').to_i
+    @article.day   = Time.now.in_time_zone('Tokyo').strftime('%d').to_i
 
     if @article.save
       redirect_to root_path
