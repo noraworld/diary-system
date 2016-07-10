@@ -44,4 +44,34 @@ module ApplicationHelper
     return english_month
   end
 
+  def to_day_of_week (wday, short = nil)
+
+    wday = wday.to_i
+
+    case wday
+    when 0
+      wday = 'Sunday'
+    when 1
+      wday = 'Monday'
+    when 2
+      wday = 'Tuesday'
+    when 3
+      wday = 'Wednesday'
+    when 4
+      wday = 'Thursday'
+    when 5
+      wday = 'Friday'
+    when 6
+      wday = 'Saturday'
+    else
+      wday = 'Error!'
+    end
+
+    if (short.is_a?(Integer))
+      wday = wday[0..(short-1)]
+    end
+
+    return wday
+  end
+
 end
