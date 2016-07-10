@@ -4,9 +4,15 @@
 
 $normal-font-color: #444444;
 
+* {
+  padding: 0;
+  margin: 0;
+}
 body {
   font-family: 'Open Sans';
   color: $normal-font-color;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 a:link {
@@ -19,17 +25,65 @@ a:hover {
   color: orange;
 }
 
+$calendar-angulus-radius: 10px;
+td {
+  border-radius: 4px;
+}
+tr:first-child td:first-child {
+  border-top-left-radius: $calendar-angulus-radius;
+}
+tr:first-child td:last-child {
+  border-top-right-radius: $calendar-angulus-radius;
+}
+tr:last-child td:first-child {
+  border-bottom-left-radius: $calendar-angulus-radius;
+}
+tr:last-child td:last-child {
+  border-bottom-right-radius: $calendar-angulus-radius;
+}
+
+#calendar-outline {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #e3f2f5;
+  border: 5px solid #e2e2e2;
+  border-radius: 10px;
+}
+
+#year {
+  display: inline-block;
+  width: 80px;
+}
+#prev-year, #next-year {
+  display: inline-block;
+}
+#prev-year {
+  padding-right: 75px;
+}
+#next-year {
+  padding-left: 75px;
+}
 #month {
   display: inline-block;
-  width: 300px;
+  width: 200px;
 }
 #prev-month, #next-month {
   display: inline-block;
+}
+#prev-month {
+  padding-right: 75px;
+}
+#next-month {
+  padding-left: 75px;
 }
 #day-of-week {
   width: 150px;
   height: 50px;
   background-color: #dd453e;
+}
+#day-of-week > p {
+  color: white;
 }
 .day-box {
   width: 150px;
@@ -44,19 +98,21 @@ a:hover {
 }
 .post-day:after {
   content: '●';
+  font-size: 18px;
   color: #dd453e;
   margin-left: 5px;
 }
 .post-day:link {
-  color: $normal-font-color;
+  color: white;
 }
 .post-day:visited {
-  color: $normal-font-color;
+  color: white;
 }
 .post-day.hover {
-  color: $normal-font-color;
+  color: white;
 }
 .day {
+  font-size: 18px;
   display: inline-block;
   width: 100%;
   height: 100%;

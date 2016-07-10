@@ -1,71 +1,80 @@
-<%# 先月へのリンク %>
-<div id="calendar-header">
-  <% prev_calendar = format('%04d', Date.new(@year, @month).prev_month.year).to_s + '/' + format('%02d', Date.new(@year, @month).prev_month.month).to_s %>
-  <h1 id=prev-month><%= link_to '<', '/' + prev_calendar %></h1>
-  <%# 月を表示 %>
-  <h1 id="month"><%= to_english_month(@month) %></h1>
-  <%# 来月へのリンク %>
-  <% next_calendar = format('%04d', Date.new(@year, @month).next_month.year).to_s + '/' + format('%02d', Date.new(@year, @month).next_month.month).to_s %>
-  <h1 id="next-month"><%= link_to '>', '/' + next_calendar %></h1>
-</div>
+<div id="calendar-outline">
+  <div id="calendar-header">
+    <%# 去年へのリンク %>
+    <% prev_year_calendar = format('%04d', Date.new(@year, @month).prev_year.year).to_s + '/' + format('%02d', Date.new(@year, @month).month).to_s %>
+    <h1 id=prev-year><%= link_to '<<', '/' + prev_year_calendar %></h1>
+    <%# 先月へのリンク %>
+    <% prev_month_calendar = format('%04d', Date.new(@year, @month).prev_month.year).to_s + '/' + format('%02d', Date.new(@year, @month).prev_month.month).to_s %>
+    <h1 id=prev-month><%= link_to '<', '/' + prev_month_calendar %></h1>
+    <%# 月を表示 %>
+    <h1 id="year"><%= @year %></h1><h1 id="month"><%= to_english_month(@month) %></h1>
+    <%# 来月へのリンク %>
+    <% next_month_calendar = format('%04d', Date.new(@year, @month).next_month.year).to_s + '/' + format('%02d', Date.new(@year, @month).next_month.month).to_s %>
+    <h1 id="next-month"><%= link_to '>', '/' + next_month_calendar %></h1>
+    <%# 来年へのリンク %>
+    <% next_year_calendar = format('%04d', Date.new(@year, @month).next_year.year).to_s + '/' + format('%02d', Date.new(@year, @month).month).to_s %>
+    <h1 id=next-year><%= link_to '>>', '/' + next_year_calendar %></h1>
+  </div>
 
-<div>
-  <%= link_to 'New article', '/new' %>
-
-  <% day = 0 %>
-  <div id="calendar-wrap"><table id="calendar"><tbody>
-  <%# 曜日(Sun, Mon, Tue, Wed, Thu, Fri, Sat)を表示 %>
-  <tr>
-    <% 7.times do |wday| %>
-      <td id="day-of-week"><%= to_day_of_week(wday, 3) %></td>
+  <div>
+    <%# 新しい日記を追加するリンク %>
+    <%= link_to 'New article', '/new' %>
+    <%# 今年のカレンダーではないときに今年のカレンダーへのリンク(root)が表示される %>
+    <% if request.path_info == '/' || request.path_info == '/' + Time.now.in_time_zone('Tokyo').strftime('%Y').to_s + '/' + Time.now.in_time_zone('Tokyo').strftime('%m').to_s %>
+    <% else %>
+      <%= link_to 'This month', '/' %>
     <% end %>
-  </tr>
 
-  <%# 1日までの空白のボックスを表示 %>
-  <% empty_day = 0 %>
-  <% while empty_day < Date.new(@year, @month, 1).wday %>
-    <td class="day-box"></td>
-    <% empty_day += 1 %>
-  <% end %>
+    <% day = 0 %>
+    <div id="calendar-wrap"><table id="calendar"><tbody>
+    <%# 曜日(Sun, Mon, Tue, Wed, Thu, Fri, Sat)を表示 %>
+    <tr>
+      <% 7.times do |wday| %>
+        <td id="day-of-week"><p><%= to_day_of_week(wday, 3) %></p></td>
+      <% end %>
+    </tr>
 
-  <% @articles.each do |article| %>
-    <% post_day = article.day.to_i %>
+    <%# 1日までの空白のボックスを表示 %>
+    <% empty_day = 0 %>
+    <% while empty_day < Date.new(@year, @month, 1).wday %>
+      <td class="day-box"></td>
+      <% empty_day += 1 %>
+    <% end %>
+
+    <% @articles.each do |article| %>
+      <% post_day = article.day.to_i %>
+      <% day += 1 %>
+      <%# 次の更新日までリンクなしの数字(日付)を出力 %>
+      <% while day < post_day %>
+        <% if Date.new(@year, @month, day).wday == 0 %><tr><% end %>
+        <td class="day-box"><p class="day"><%= day %></p></td>
+        <% if Date.new(@year, @month, day).wday == 6 %></tr><% end %>
+        <% day += 1 %>
+      <% end %>
+
+      <%# 更新日はリンクつきの数字(日付)を出力 %>
+      <% date = '/' + format('%04d', article.year) + '/' + format('%02d', article.month) + '/' + format('%02d', article.day) %>
+      <% if Date.new(@year, @month, day).wday == 0 %><tr><% end %>
+      <td class="day-box"><p class="day"><%= link_to post_day, date, {:class => 'post-day'} %></p></td>
+      <% if Date.new(@year, @month, day).wday == 6 %></tr><% end %>
+    <% end %>
+
     <% day += 1 %>
-    <%# 次の更新日までリンクなしの数字(日付)を出力 %>
-    <% while day < post_day %>
+    <%# その月の最終更新日から月末までリンクなしの数字(日付)を出力 %>
+    <% while day <= Date.new(@year, @month).end_of_month.day.to_i %>
       <% if Date.new(@year, @month, day).wday == 0 %><tr><% end %>
       <td class="day-box"><p class="day"><%= day %></p></td>
       <% if Date.new(@year, @month, day).wday == 6 %></tr><% end %>
       <% day += 1 %>
     <% end %>
 
-    <%# 更新日はリンクつきの数字(日付)を出力 %>
-    <% date = '/' + format('%04d', article.year) + '/' + format('%02d', article.month) + '/' + format('%02d', article.day) %>
-    <% if Date.new(@year, @month, day).wday == 0 %><tr><% end %>
-    <td class="day-box"><p class="day"><%= link_to post_day, date, {:class => 'post-day'} %></p></td>
-    <% if Date.new(@year, @month, day).wday == 6 %></tr><% end %>
-  <% end %>
+    <%# 月末日以降の空白のボックスを表示 %>
+    <% empty_day = Date.new(@year, @month, day-1).wday.to_i + 1 %>
+    <% while empty_day < 7 %>
+      <td class="day-box"></td>
+      <% empty_day += 1 %>
+    <% end %>
+    </tbody></table></div>
 
-  <% day += 1 %>
-  <%# その月の最終更新日から月末までリンクなしの数字(日付)を出力 %>
-  <% while day <= Date.new(@year, @month).end_of_month.day.to_i %>
-    <% if Date.new(@year, @month, day).wday == 0 %><tr><% end %>
-    <td class="day-box"><p class="day"><%= day %></p></td>
-    <% if Date.new(@year, @month, day).wday == 6 %></tr><% end %>
-    <% day += 1 %>
-  <% end %>
-
-  <%# 月末日以降の空白のボックスを表示 %>
-  <% empty_day = Date.new(@year, @month, day-1).wday.to_i + 1 %>
-  <% while empty_day < 7 %>
-    <td class="day-box"></td>
-    <% empty_day += 1 %>
-  <% end %>
-  </tbody></table></div>
-
-  <%# 今年のカレンダーではないときに今年のカレンダーへのリンク(root)が表示される %>
-  <% if request.path_info == '/' || request.path_info == '/' + Time.now.in_time_zone('Tokyo').strftime('%Y').to_s + '/' + Time.now.in_time_zone('Tokyo').strftime('%m').to_s %>
-  <% else %>
-    <%= link_to 'This month', '/' %>
-  <% end %>
+  </div>
 </div>
