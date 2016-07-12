@@ -86,15 +86,27 @@ tr:last-child td:last-child {
   color: white;
 }
 .day-box {
+  position: relative;
   width: 150px;
   height: 100px;
   background-color: #ff906a;
 }
-.post-day {
+$post-link-over-post-day: 1;
+.post-link {
+  position: relative;
   display: block;
   width: 100%;
   height: 100%;
   text-decoration: none;
+  // 日付(pタグ)よりもリンクが上に来るようにする
+  // 日付にマウスオーバーしたときにその部分が
+  // リンクにならない現象を防ぐため
+  z-index: $post-link-over-post-day + 1;
+}
+.post-day {
+  color: white;
+  // リンクがあれば日付(pタグ)はそれより下に来るようにする
+  z-index: $post-link-over-post-day;
 }
 .post-day:after {
   content: '●';
@@ -102,21 +114,12 @@ tr:last-child td:last-child {
   color: #dd453e;
   margin-left: 5px;
 }
-.post-day:link {
-  color: white;
-}
-.post-day:visited {
-  color: white;
-}
-.post-day.hover {
-  color: white;
-}
 .day {
+  position: absolute;
+  top: 5px;
+  left: 10px;
   font-size: 18px;
   display: inline-block;
-  width: 100%;
-  height: 100%;
-  text-align: left;
   margin: 0;
 }
 

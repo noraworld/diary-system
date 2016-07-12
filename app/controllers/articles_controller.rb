@@ -3,13 +3,13 @@ class ArticlesController < ApplicationController
   def index
     # rootにアクセスしたときは@yearは今年
     @year = params[:year].to_i
-    if @year == 0
+    if @year === 0
       @year = Time.now.in_time_zone('Tokyo').strftime('%Y').to_i
     end
 
     # rootにアクセスしたときは@monthは今月
     @month = params[:month].to_i
-    if @month == 0
+    if @month === 0
       @month = Time.now.in_time_zone('Tokyo').strftime('%m').to_i
     end
 
@@ -17,9 +17,9 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    year = params[:year].to_i
+    year  = params[:year].to_i
     month = params[:month].to_i
-    day = params[:day].to_i
+    day   = params[:day].to_i
     @article = Article.find_by(year: year, month: month, day: day)
   end
 
