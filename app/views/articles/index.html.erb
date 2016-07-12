@@ -55,7 +55,7 @@
       <%# 更新日はリンクつきの数字(日付)を出力 %>
       <% date = '/' + format('%04d', article.year) + '/' + format('%02d', article.month) + '/' + format('%02d', article.day) %>
       <% if Date.new(@year, @month, day).wday == 0 %><tr><% end %>
-      <td class="day-box"><%= link_to '', date, {:class => 'post-link'} %><p class="day post-day"><%= post_day %></p></td>
+      <td class="day-box post-box"><%= link_to '', date, {:class => 'post-link'} %><p class="day post-day"><%= post_day %></p></td>
       <% if Date.new(@year, @month, day).wday == 6 %></tr><% end %>
     <% end %>
 

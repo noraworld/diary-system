@@ -1,14 +1,15 @@
 $(function() {
 
-  $('.post-link').parent().hover(function() {
-    $(this).css('z-index', 10000).css('border', '2px solid white');
-    $(this).animate({
-      scale: [1.2, 1.2]
-    }, 100);
-  }, function() {
-    $(this).animate({
-      scale: [1.0, 1.0],
-    }, {duration: 100, complete: function() { $(this).css('z-index', 1).css('border', 'none'); }});
+  $('.post-box').on('mouseover', function() {
+    $(this).css('z-index', 2).css('border', '2px solid white');
+    $(this).stop().animate({
+      scale: [1.15, 1.15]
+    }, 50);
+  }).on('mouseout', function() {
+    $(this).css('z-index', 1);
+    $(this).stop().animate({
+      scale: [1.0, 1.0]
+    }, {duration: 50, complete: function() {$(this).css('border', '2px solid rgba(255, 255, 255, 0)'); }});
   });
 
 });
