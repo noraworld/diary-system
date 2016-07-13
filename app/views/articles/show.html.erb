@@ -1,9 +1,9 @@
-<p>
-  <%= simple_format(@article.text) %>
-</p>
+<div id="post-content">
+  <%= simple_format(linebreak_to_br(@article.text)) %>
+</div>
 
 <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
 
-<%= link_to 'Back', root_path %>
-<%= link_to 'Edit', date + '/edit' %>
-<%= link_to 'Destroy', @article, method: :delete, data: {confirm: '本当に削除しますか?'} %>
+<%# link_to 'Back', root_path %>
+<%# link_to 'Edit', date + '/edit' %>
+<%# link_to 'Destroy', @article, method: :delete, data: {confirm: '本当に削除しますか?'} %>

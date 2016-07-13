@@ -185,3 +185,20 @@ $post-link-over-post-day: 1;
 #calendar {
   display: inline-block;
 }
+
+#post-content {
+  width: 1200px;
+  min-height: 600px;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 31px;
+  padding: 31px;
+  box-shadow: 0.2em 0.2em 0.5em black;
+  background-image: -webkit-linear-gradient(left, white 10px, transparent 10px), -webkit-linear-gradient(right, white 10px, transparent 10px), -webkit-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
+  background-image: -moz-linear-gradient(left, white 10px, transparent 10px), -moz-linear-gradient(right, white 10px, transparent 10px), -moz-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
+  background-image: -ms-linear-gradient(left, white 10px, transparent 10px), -ms-linear-gradient(right, white 10px, transparent 10px), -ms-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
+  background-image: -o-linear-gradient(left, white 10px, transparent 10px), -o-linear-gradient(right, white 10px, transparent 10px), -o-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
+  background-image: linear-gradient(left, white 10px, transparent 10px), linear-gradient(right, white 10px, transparent 10px), linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
+  background-size: 100% 100%, 100% 100%, 100% 31px;
+  border: 1px solid #ccc;
+}

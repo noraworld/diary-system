@@ -74,4 +74,11 @@ module ApplicationHelper
     return wday
   end
 
+  # 改行コードをbrタグに変換する
+  # text: 変換するテキスト(text)
+  # return -> brタグつきのテキスト(text)
+  def linebreak_to_br(text)
+    text.gsub(/\r\n|\r|\n/, "<br>")
+  end
+
 end
