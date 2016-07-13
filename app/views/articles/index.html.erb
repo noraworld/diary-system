@@ -14,16 +14,15 @@
     <%# 来年へのリンク %>
     <% next_year_calendar = format('%04d', Date.new(@year, @month).next_year.year).to_s + '/' + format('%02d', Date.new(@year, @month).month).to_s %>
     <h1 id=next-year><%= link_to '', '/' + next_year_calendar %></h1>
+    <%# 今月のカレンダーではないときに今月のカレンダーへのリンク(root)が表示される %>
+    <% this_month = '/' + Time.now.in_time_zone('Tokyo').strftime('%Y').to_s + '/' + Time.now.in_time_zone('Tokyo').strftime('%m').to_s %>
+    <% if request.path_info == '/' || request.path_info == this_month %>
+    <% else %>
+    <%= link_to 'TODAY', this_month, {:id => 'today-button'} %>
+    <% end %>
   </div>
 
-  <div>
-    <%# 新しい日記を追加するリンク %>
-    <%= link_to 'New article', '/new' %>
-    <%# 今年のカレンダーではないときに今年のカレンダーへのリンク(root)が表示される %>
-    <% if request.path_info == '/' || request.path_info == '/' + Time.now.in_time_zone('Tokyo').strftime('%Y').to_s + '/' + Time.now.in_time_zone('Tokyo').strftime('%m').to_s %>
-    <% else %>
-      <%= link_to 'This month', '/' %>
-    <% end %>
+  <div id="calendar-inner-box">
 
     <% day = 0 %>
     <div id="calendar-wrap"><table id="calendar"><tbody>

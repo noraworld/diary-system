@@ -1,6 +1,5 @@
 <p>
-  <strong>Text</strong>
-  <%= @article.text %>
+  <%= simple_format(@article.text) %>
 </p>
 
 <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>

@@ -47,6 +47,7 @@ tr:last-child td:last-child {
   background-color: #e3f2f5;
   border: 5px solid #e2e2e2;
   border-radius: 10px;
+  position: relative;
 }
 
 #year {
@@ -152,8 +153,34 @@ $post-link-over-post-day: 1;
   margin: 0;
 }
 
+#today-button {
+  background-color: #62a6ea;
+  padding: 10px;
+  color: white !important;
+  position: absolute;
+  font-size: 11px !important;
+  text-align: center;
+  letter-spacing: 1px;
+  display: table-cell;
+  vertical-align: middle;
+  right: 15px;
+  top: 12px;
+  width: 70px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid #bbbbbb;
+  text-decoration: none;
+}
+#today-button:hover {
+  background-color: #6868ff;
+}
+
 #calendar-wrap, #calendar-header {
   text-align: center;
+}
+#calendar-header {
+  padding-top: 10px;
+  padding-bottom: 15px;
 }
 #calendar {
   display: inline-block;

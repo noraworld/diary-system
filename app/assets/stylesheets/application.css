@@ -18,15 +18,41 @@ header {
   background-color: rgba(255, 255, 255, 0.92);
   box-shadow: 0 0.0625em 0.3125em rgba(0, 0, 0, 0.25);
   margin-bottom: 20px;
+  position: relative;
 }
 #header {
   width: 1000px;
   margin: 0 auto;
 }
 #header a {
-  color: #8c8cff;
+  color: #62a6ea;
   font-size: 20px;
   text-decoration: none;
+}
+#header a:hover {
+  color: #6868ff;
+}
+#new-post {
+  background-color: #62a6ea;
+  padding: 10px;
+  color: white !important;
+  position: absolute;
+  font-size: 11px !important;
+  text-align: center;
+  letter-spacing: 1px;
+  display: table-cell;
+  vertical-align: middle;
+  right: 20px;
+  top: 0;
+  bottom: 0;
+  width: 70px;
+  height: 14px;
+  margin: auto;
+  border-radius: 4px;
+  border: 1px solid #bbbbbb;
+}
+#new-post:hover {
+  background-color: #6868ff;
 }
 #header a i {
   font-size: 25px;
