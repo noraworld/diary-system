@@ -7,8 +7,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <header>
+    <div id="header" class="clearfix">
+      <ul id="homeicon">
+        <li><a href="/"><span class="icon-calendar"></span></a></li>
+      </ul>
+
+      <ul>
+        <li><a href="http://noraworld.jp">Home</a></li>
+        <li><a href="http://blog.noraworld.jp">Blog</a></li>
+        <li><%= link_to 'Diary', '/' %></li>
+        <li><a href="https://twitter.com/noraworlds" target="_blank"><span class="icon-twitter"></span></a></li>
+        <li><a href="https://www.instagram.com/noraworlds" target="_blank"><span class="icon-instagram"></span></a></li>
+        <li><a href="https://github.com/noraworld" target="_blank"><span class="icon-github"></span></a></li>
+        <li><a href="http://qiita.com/noraworld" target="_blank"><span class="icon-search"></span></a></li>
+      </ul>
+    </div>
+  </header>
 
 <%= yield %>
 
+  <footer id="footer" class="clearfix">
+    <section id="copyright">Copyright &copy; 2016 <%= link_to 'Noraworld Diary', '/' %>. All rights reserved.</section>
+  </footer>
 </body>
 </html>
