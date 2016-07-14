@@ -6,4 +6,4 @@
 
 <%# link_to 'Back', root_path %>
 <%# link_to 'Edit', date + '/edit' %>
-<%# link_to 'Destroy', @article, method: :delete, data: {confirm: '本当に削除しますか?'} %>
+<%= link_to 'Destroy', '/destroy' + date, method: :delete, data: {confirm: '本当に削除しますか?'} %>

@@ -56,7 +56,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
+    @article = Article.find_by(year: params[:year], month: params[:month], day: params[:day])
     @article.destroy
 
     redirect_to root_path
