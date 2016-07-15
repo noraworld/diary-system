@@ -186,6 +186,13 @@ $post-link-over-post-day: 1;
   display: inline-block;
 }
 
+#textarea {
+  text-align: center;
+  > #post-content {
+    resize: none;
+    outline: none;
+  }
+}
 #post-content {
   width: 1200px;
   min-height: 600px;
