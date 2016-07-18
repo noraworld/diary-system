@@ -10,18 +10,18 @@
   <header>
     <div id="header" class="clearfix">
       <ul id="homeicon">
-        <li><a href="/"><span class="icon-calendar"></span></a></li>
+        <li><a href="/" tabindex="-1"><span class="icon-calendar"></span></a></li>
       </ul>
 
       <ul>
 
-        <li><a href="http://noraworld.jp">Home</a></li>
-        <li><a href="http://blog.noraworld.jp">Blog</a></li>
-        <li><%= link_to 'Diary', '/' %></li>
-        <li><a href="https://twitter.com/noraworlds" target="_blank"><span class="icon-twitter"></span></a></li>
-        <li><a href="https://www.instagram.com/noraworlds" target="_blank"><span class="icon-instagram"></span></a></li>
-        <li><a href="https://github.com/noraworld" target="_blank"><span class="icon-github"></span></a></li>
-        <li><a href="http://qiita.com/noraworld" target="_blank"><span class="icon-search"></span></a></li>
+        <li><a href="http://noraworld.jp" tabindex="-1">Home</a></li>
+        <li><a href="http://blog.noraworld.jp" tabindex="-1">Blog</a></li>
+        <li><%= link_to 'Diary', '/', { :tabindex => -1 } %></li>
+        <li><a href="https://twitter.com/noraworlds" target="_blank" tabindex="-1"><span class="icon-twitter"></span></a></li>
+        <li><a href="https://www.instagram.com/noraworlds" target="_blank" tabindex="-1"><span class="icon-instagram"></span></a></li>
+        <li><a href="https://github.com/noraworld" target="_blank" tabindex="-1"><span class="icon-github"></span></a></li>
+        <li><a href="http://qiita.com/noraworld" target="_blank" tabindex="-1"><span class="icon-search"></span></a></li>
 
         <% if current_user  != nil %>
           <span id="config" class="icon-cog"></span>
@@ -34,14 +34,13 @@
               <% when 'show' %>
               <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
               <li class="menulist"><%= link_to 'Edit post', '/edit' + date, { :class => 'menulink' } %></li>
-              <% when 'new' %>
+              <% when 'new', 'create' %>
               <li class="menulist"><span class="menulink" id="publish-link">Publish post</span></li>
-              <% when 'edit' %>
+              <% when 'edit', 'update' %>
               <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
               <li class="menulist"><span class="menulink" id="update-link">Update post</span></li>
               <li class="menulist"><%= link_to 'Delete post', '/destroy' + date, { :class => 'menulink', :id => 'delete-link', method: :delete, data: {confirm: 'Are you sure you want to delete?'} } %></li>
               <% end %>
-
             </ul>
           </div>
         <% end %>
@@ -53,7 +52,7 @@
   <%= yield %>
 
   <footer id="footer" class="clearfix">
-    <section id="copyright">Copyright &copy; 2016 <%= link_to 'Noraworld Diary', '/' %>. All rights reserved.</section>
+    <section id="copyright">Copyright &copy; 2016 <%= link_to 'Noraworld Diary', '/', { :tabindex => -1 } %>. All rights reserved.</section>
   </footer>
 </body>
 </html>

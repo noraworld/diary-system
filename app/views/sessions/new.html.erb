@@ -1,10 +1,18 @@
-<%= form_for(:session, url: login_path) do |f| %>
-
-  <%= f.label :username %>
-  <%= f.text_field :username %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.submit %>
+<% if flash[:alert] %>
+<div id="failed-message">
+  <%= flash[:alert] %>
+</div>
 <% end %>
+
+<div id="sign-in-form-wrap">
+<%= form_for(:session, url: login_path, html: { id: 'sign-in-form' }) do |f| %>
+
+  <p id="sign-in">Sign in</p>
+
+  <%= f.text_field :username, { :class => 'session-field', :placeholder => 'Username', :tabindex => 1 } %>
+  <%= f.password_field :password, { :class => 'session-field', :placeholder => 'Password', :tabindex => 2 } %>
+
+  <%= f.submit('SIGN IN', { :id => 'sign-in-button', :tabindex => -1 }) %>
+
+<% end %>
+</div>

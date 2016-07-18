@@ -1,6 +1,12 @@
+<% if flash[:notice] %>
+  <div id="success-message">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <div id="calendar-outline">
   <% if current_user == nil %>
-    <%= link_to 'ログイン', login_path %>
+    <%= link_to 'Sign in', login_path %>
   <% end %>
   <div id="calendar-header">
     <%# 去年へのリンク %>

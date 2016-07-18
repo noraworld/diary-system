@@ -1,3 +1,67 @@
 // Place all the styles related to the sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#sign-in-form-wrap {
+  width: 700px;
+  min-height: 660px;
+  margin: 0 auto;
+}
+#sign-in-form {
+  text-align: center;
+  width: 400px;
+  margin: 0 auto;
+  padding: 50px 100px;
+  border-radius: 10px;
+  background-color: #f9f9ff;
+  border: 1px solid #eeeeee;
+}
+#sign-in {
+  display: inline-block;
+  width: 332px;
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #606060;
+}
+.session-field {
+  width: 332px;
+  height: 44px;
+  font-size: 18px;
+  margin: 10px 0;
+  padding: 10px 15px;
+  border: 1px solid #eeeeee;
+  outline: none;
+  border-radius: 3px;
+  font-family: 'Open Sans';
+  color: #707070;
+  font-weight: 100;
+  box-sizing: border-box;
+}
+.session-field:focus {
+  border-color: skyblue;
+}
+#sign-in-button {
+  width: 332px;
+  height: 44px;
+  font-size: 11px;
+  font-weight: 100;
+  font-family: 'Open Sans';
+  letter-spacing: 1.5px;
+  outline: none;
+  margin: 10px 0;
+  color: #ffffff;
+  background-color: #5ba4e5;
+  border: 1px solid #308ddf;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#sign-in-button:active {
+  opacity: 0.8;
+}
+
+::selection {
+  background: #b4d6f3;
+}
+::-moz-selection {
+  background: #b4d6f3;
+}

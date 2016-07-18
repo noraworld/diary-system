@@ -7,6 +7,7 @@ $normal-font-color: #444444;
 * {
   padding: 0;
   margin: 0;
+  outline: none;
 }
 body {
   font-family: 'Open Sans';
@@ -21,6 +22,27 @@ a:visited {
 }
 a:hover {
   color: orange;
+}
+
+#success-message {
+  width: 1230px;
+  margin: 0 auto 20px;
+  padding: 15px 30px;
+  color: #ffffff;
+  background-color: #5ba4e5;
+  border: 1px solid #308ddf;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+#failed-message {
+  width: 1230px;
+  margin: 0 auto 20px;
+  padding: 15px 30px;
+  color: #ffffff;
+  background-color: #f95858;
+  border: 1px solid #df3e3e;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 $calendar-angulus-radius: 10px;
@@ -186,28 +208,34 @@ $post-link-over-post-day: 1;
   display: inline-block;
 }
 
+@mixin note($color) {
+  background-image: -webkit-linear-gradient(left, $color 10px, transparent 10px), -webkit-linear-gradient(right, $color 10px, transparent 10px), -webkit-linear-gradient($color 30px, #ccc 30px, #ccc 31px, $color 31px);
+  background-image: -moz-linear-gradient(left, $color 10px, transparent 10px), -moz-linear-gradient(right, $color 10px, transparent 10px), -moz-linear-gradient($color 30px, #ccc 30px, #ccc 31px, $color 31px);
+  background-image: -ms-linear-gradient(left, $color 10px, transparent 10px), -ms-linear-gradient(right, $color 10px, transparent 10px), -ms-linear-gradient($color 30px, #ccc 30px, #ccc 31px, $color 31px);
+  background-image: -o-linear-gradient(left, $color 10px, transparent 10px), -o-linear-gradient(right, $color 10px, transparent 10px), -o-linear-gradient($color 30px, #ccc 30px, #ccc 31px, $color 31px);
+  background-image: linear-gradient(left, $color 10px, transparent 10px), linear-gradient(right, $color 10px, transparent 10px), linear-gradient($color 30px, #ccc 30px, #ccc 31px, $color 31px);
+}
 #textarea {
   text-align: center;
-  > #post-content {
+  #post-content {
     resize: none;
     outline: none;
+    @include note(#e7e7ff);
   }
 }
 #post-content {
-  width: 1200px;
-  min-height: 600px;
+  width: 1230px;
+  min-height: 650px;
   margin: 0 auto;
   font-size: 15px;
   line-height: 31px;
   padding: 31px;
+  box-sizing: border-box;
   box-shadow: 0.2em 0.2em 0.5em black;
-  background-image: -webkit-linear-gradient(left, white 10px, transparent 10px), -webkit-linear-gradient(right, white 10px, transparent 10px), -webkit-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
-  background-image: -moz-linear-gradient(left, white 10px, transparent 10px), -moz-linear-gradient(right, white 10px, transparent 10px), -moz-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
-  background-image: -ms-linear-gradient(left, white 10px, transparent 10px), -ms-linear-gradient(right, white 10px, transparent 10px), -ms-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
-  background-image: -o-linear-gradient(left, white 10px, transparent 10px), -o-linear-gradient(right, white 10px, transparent 10px), -o-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
-  background-image: linear-gradient(left, white 10px, transparent 10px), linear-gradient(right, white 10px, transparent 10px), linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
+  @include note(#ffffe7);
   background-size: 100% 100%, 100% 100%, 100% 31px;
   border: 1px solid #ccc;
+  border-radius: 4px;
 }
 #post-button {
   display: none;

@@ -36,8 +36,9 @@ class ArticlesController < ApplicationController
     @article.day   = Time.now.in_time_zone('Tokyo').strftime('%d').to_i
 
     if @article.save
-      redirect_to root_path
+      redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month), notice: 'Published successfully!'
     else
+      flash.now[:alert] = 'Published failed...'
       render 'new'
     end
   end
@@ -50,8 +51,9 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
 
     if @article.update(article_params)
-      redirect_to root_path
+      redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month), notice: 'Updated successfully!'
     else
+      flash.now[:alert] = 'Updated failed...'
       render 'edit'
     end
   end
@@ -60,7 +62,7 @@ class ArticlesController < ApplicationController
     @article = Article.find_by(year: params[:year], month: params[:month], day: params[:day])
     @article.destroy
 
-    redirect_to root_path
+    redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month), notice: 'Deleted successfully!'
   end
 
   private

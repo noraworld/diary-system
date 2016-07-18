@@ -30,7 +30,7 @@ header {
   text-decoration: none;
 }
 #header a:hover {
-  color: #6868ff;
+  color: #7cc0ff;
 }
 #config {
   color: #222222;
@@ -53,9 +53,10 @@ header {
   top: 55px;
   right: 20px;
   width: 120px;
+  padding: 5px 0;
   z-index: 100000;
   background-color: #fff;
-  border: 1px solid grey;
+  border: 1px solid #cccccc;
   border-radius: 4px;
   visibility: hidden;
 }
@@ -86,9 +87,6 @@ header {
   background-color: #df3e3e;
 }
 
-#header a i {
-  font-size: 25px;
-}
 #header ul {
   list-style: none;
   float: right;
@@ -114,7 +112,11 @@ header {
   text-align: center;
 }
 #copyright a {
+  text-decoration: none;
   color: #8c8cff;
+}
+#copyright a:hover {
+  text-decoration: underline;
 }
 
 .clearfix {
