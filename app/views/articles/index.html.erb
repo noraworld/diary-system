@@ -1,4 +1,9 @@
 <div id="calendar-outline">
+  <% if current_user == nil %>
+    <%= link_to 'ログイン', login_path %>
+  <% else %>
+    <%= link_to 'ログアウト', logout_path, method: :delete %>
+  <% end %>
   <div id="calendar-header">
     <%# 去年へのリンク %>
     <% prev_year_calendar = format('%04d', Date.new(@year, @month).prev_year.year).to_s + '/' + format('%02d', Date.new(@year, @month).month).to_s %>

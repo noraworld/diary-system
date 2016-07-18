@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_action :signed_in?, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     # rootにアクセスしたときは@yearは今年
@@ -65,5 +66,11 @@ class ArticlesController < ApplicationController
   private
     def article_params
       params.require(:article).permit(:text)
+    end
+
+    def signed_in?
+      if current_user == nil
+        redirect_to login_path
+      end
     end
 end
