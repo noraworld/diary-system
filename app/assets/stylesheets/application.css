@@ -32,28 +32,60 @@ header {
 #header a:hover {
   color: #6868ff;
 }
-#new-post {
-  background-color: #62a6ea;
-  padding: 10px;
-  color: white !important;
+#config {
+  color: #222222;
   position: absolute;
-  font-size: 11px !important;
+  font-size: 22px;
+  height: 22px;
   text-align: center;
   letter-spacing: 1px;
-  display: table-cell;
-  vertical-align: middle;
-  right: 20px;
+  right: 50px;
   top: 0;
   bottom: 0;
-  width: 70px;
-  height: 14px;
   margin: auto;
+  display: table-cell;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+#header #listbox {
+  position: absolute;
+  top: 55px;
+  right: 20px;
+  width: 120px;
+  z-index: 100000;
+  background-color: #fff;
+  border: 1px solid grey;
   border-radius: 4px;
-  border: 1px solid #bbbbbb;
+  visibility: hidden;
 }
-#new-post:hover {
-  background-color: #6868ff;
+#header #listbox .menulist {
+  margin: 0;
+  padding: 0 !important;
+  width: 120px;
 }
+#header #listbox .menulist .menulink {
+  display: block;
+  width: 100%;
+  color: #444444;
+  font-size: 14px;
+  padding: 10px;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+#header #listbox .menulist .menulink:hover {
+  background-color: #62a6ea;
+  color: #ffffff;
+  cursor: pointer;
+}
+#header #listbox .menulist #delete-link:hover {
+  background-color: #df3e3e;
+}
+
 #header a i {
   font-size: 25px;
 }

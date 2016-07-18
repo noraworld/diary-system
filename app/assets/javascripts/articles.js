@@ -12,4 +12,8 @@ $(function() {
     }, {duration: 50, complete: function() {$(this).css('border', '2px solid rgba(255, 255, 255, 0)'); }});
   });
 
+  $('#publish-link, #update-link').on('click', function() {
+    $('#post-button').click();
+  });
+
 });
