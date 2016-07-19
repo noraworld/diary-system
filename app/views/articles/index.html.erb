@@ -37,14 +37,14 @@
     <%# 曜日(Sun, Mon, Tue, Wed, Thu, Fri, Sat)を表示 %>
     <tr>
       <% 7.times do |wday| %>
-        <td id="day-of-week"><p><%= to_day_of_week(wday, 3) %></p></td>
+        <td id="day-of-week" class="<%= to_day_of_week(wday, 3).downcase! %>"><p><%= to_day_of_week(wday, 3) %></p></td>
       <% end %>
     </tr>
 
     <%# 1日までの空白のボックスを表示 %>
     <% empty_day = 0 %>
     <% while empty_day < Date.new(@year, @month, 1).wday %>
-      <td class="day-box"></td>
+      <td class="day-box <%= to_day_of_week(empty_day, 3).downcase! %>"></td>
       <% empty_day += 1 %>
     <% end %>
 
@@ -53,32 +53,35 @@
       <% day += 1 %>
       <%# 次の更新日までリンクなしの数字(日付)を出力 %>
       <% while day < post_day %>
-        <% if Date.new(@year, @month, day).wday == 0 %><tr><% end %>
-        <td class="day-box"><p class="day"><%= day %></p></td>
-        <% if Date.new(@year, @month, day).wday == 6 %></tr><% end %>
+        <% week = Date.new(@year, @month, day).wday %>
+        <% if week == 0 %><tr><% end %>
+        <td class="day-box <%= to_day_of_week(week, 3).downcase! %>"><p class="day"><%= day %></p></td>
+        <% if week == 6 %></tr><% end %>
         <% day += 1 %>
       <% end %>
 
       <%# 更新日はリンクつきの数字(日付)を出力 %>
       <% date = '/' + format('%04d', article.year) + '/' + format('%02d', article.month) + '/' + format('%02d', article.day) %>
-      <% if Date.new(@year, @month, day).wday == 0 %><tr><% end %>
-      <td class="day-box post-box"><%= link_to '', date, {:class => 'post-link'} %><p class="day post-day"><%= post_day %></p></td>
-      <% if Date.new(@year, @month, day).wday == 6 %></tr><% end %>
+      <% week = Date.new(@year, @month, day).wday %>
+      <% if week == 0 %><tr><% end %>
+      <td class="day-box post-box <%= to_day_of_week(week, 3).downcase! %>"><%= link_to '', date, {:class => 'post-link'} %><p class="day post-day"><%= post_day %></p></td>
+      <% if week == 6 %></tr><% end %>
     <% end %>
 
     <% day += 1 %>
     <%# その月の最終更新日から月末までリンクなしの数字(日付)を出力 %>
     <% while day <= Date.new(@year, @month).end_of_month.day.to_i %>
-      <% if Date.new(@year, @month, day).wday == 0 %><tr><% end %>
-      <td class="day-box"><p class="day"><%= day %></p></td>
-      <% if Date.new(@year, @month, day).wday == 6 %></tr><% end %>
+      <% week = Date.new(@year, @month, day).wday %>
+      <% if week == 0 %><tr><% end %>
+      <td class="day-box <%= to_day_of_week(week, 3).downcase! %>"><p class="day"><%= day %></p></td>
+      <% if week == 6 %></tr><% end %>
       <% day += 1 %>
     <% end %>
 
     <%# 月末日以降の空白のボックスを表示 %>
     <% empty_day = Date.new(@year, @month, day-1).wday.to_i + 1 %>
     <% while empty_day < 7 %>
-      <td class="day-box"></td>
+      <td class="day-box <%= to_day_of_week(empty_day, 3).downcase! %>"></td>
       <% empty_day += 1 %>
     <% end %>
     </tbody></table></div>

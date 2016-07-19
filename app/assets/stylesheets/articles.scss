@@ -131,7 +131,6 @@ tr:last-child td:last-child {
 #day-of-week {
   width: 150px;
   height: 50px;
-  background-color: #dd453e;
 }
 #day-of-week > p {
   color: white;
@@ -140,13 +139,31 @@ tr:last-child td:last-child {
   position: relative;
   width: 150px;
   height: 100px;
-  background-color: #ff906a;
   border: 2px solid rgba(255, 255, 255, 0);
+}
+
+#day-of-week.sun {
+  background-color: #dd453e;
+}
+#day-of-week.mon, #day-of-week.tue, #day-of-week.wed, #day-of-week.thu, #day-of-week.fri {
+  background-color: #ff890f;
+}
+#day-of-week.sat {
+  background-color: #22bac1;
+}
+.day-box.sun {
+  background-color: #ff938c;
+}
+.day-box.mon, .day-box.tue, .day-box.wed, .day-box.thu, .day-box.fri {
+  background-color: #ffab54;
+}
+.day-box.sat {
+  background-color: #a1d4ea;
 }
 
 $post-box-z-index: 1;
 .post-box {
-  transition-duration: 0.1s;
+  transition-duration: 0.2s;
   z-index: $post-box-z-index;
 }
 .post-box:hover {
