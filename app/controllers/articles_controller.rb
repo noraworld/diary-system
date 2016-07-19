@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month), notice: 'Published successfully!'
     else
-      flash.now[:alert] = 'Published failed...'
+      flash.now[:alert] = 'Publish failed...'
       render 'new'
     end
   end

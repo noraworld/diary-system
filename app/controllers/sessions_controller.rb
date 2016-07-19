@@ -1,9 +1,10 @@
 class SessionsController < ApplicationController
   def new
     if current_user
-      redirect_to root_path
+      redirect_to root_path, notice: 'Already signed in :)'
+    else
+      @user = User.new
     end
-    @user = User.new
   end
 
   def create

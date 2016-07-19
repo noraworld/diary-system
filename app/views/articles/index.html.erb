@@ -25,8 +25,7 @@
     <h1 id=next-year><%= link_to '', '/' + next_year_calendar %></h1>
     <%# 今月のカレンダーではないときに今月のカレンダーへのリンク(root)が表示される %>
     <% this_month = '/' + Time.now.in_time_zone('Tokyo').strftime('%Y').to_s + '/' + Time.now.in_time_zone('Tokyo').strftime('%m').to_s %>
-    <% if request.path_info == '/' || request.path_info == this_month %>
-    <% else %>
+    <% unless request.path_info == '/' || request.path_info == this_month %>
     <%= link_to 'TODAY', this_month, {:id => 'today-button'} %>
     <% end %>
   </div>
