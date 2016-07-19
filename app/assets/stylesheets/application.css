@@ -14,6 +14,31 @@
  *= require_self
  */
 
+@font-face {
+  font-family: 'Open Sans Light';
+  src: url('fonts/fonts/OpenSans-Light.ttf');
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+body {
+  font-family: 'Open Sans Light';
+  color: $normal-font-color;
+}
+
+a:link {
+  color: skyblue;
+}
+a:visited {
+  color: skyblue;
+}
+a:hover {
+  color: orange;
+}
+
 header {
   background-color: rgba(255, 255, 255, 0.92);
   box-shadow: 0 0.0625em 0.3125em rgba(0, 0, 0, 0.25);
@@ -70,6 +95,7 @@ header {
   width: 100%;
   color: #444444;
   font-size: 14px;
+  letter-spacing: 0.5px;
   padding: 10px;
   box-sizing: border-box;
   -webkit-user-select: none;

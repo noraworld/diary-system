@@ -4,28 +4,9 @@
 
 $normal-font-color: #444444;
 
-* {
-  padding: 0;
-  margin: 0;
-  outline: none;
-}
-body {
-  font-family: 'Open Sans';
-  color: $normal-font-color;
-}
-
-a:link {
-  color: skyblue;
-}
-a:visited {
-  color: skyblue;
-}
-a:hover {
-  color: orange;
-}
-
 #success-message {
   width: 1230px;
+  letter-spacing: 0.5px;
   margin: 0 auto 20px;
   padding: 15px 30px;
   color: #ffffff;
@@ -36,6 +17,7 @@ a:hover {
 }
 #failed-message {
   width: 1230px;
+  letter-spacing: 0.5px;
   margin: 0 auto 20px;
   padding: 15px 30px;
   color: #ffffff;
@@ -163,11 +145,11 @@ tr:last-child td:last-child {
 
 $post-box-z-index: 1;
 .post-box {
-  transition-duration: 0.2s;
+  // transition-duration: 0.2s;
   z-index: $post-box-z-index;
 }
 .post-box:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
   border: 2px solid #ffffff;
   z-index: $post-box-z-index + 1;
 }
