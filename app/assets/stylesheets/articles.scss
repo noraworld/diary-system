@@ -143,6 +143,18 @@ tr:last-child td:last-child {
   background-color: #ff906a;
   border: 2px solid rgba(255, 255, 255, 0);
 }
+
+$post-box-z-index: 1;
+.post-box {
+  transition-duration: 0.1s;
+  z-index: $post-box-z-index;
+}
+.post-box:hover {
+  transform: scale(1.2);
+  border: 2px solid #ffffff;
+  z-index: $post-box-z-index + 1;
+}
+
 $post-link-over-post-day: 1;
 .post-link {
   position: relative;
