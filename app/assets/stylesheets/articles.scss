@@ -123,6 +123,12 @@ tr:last-child td:last-child {
   height: 100px;
   border: 2px solid rgba(255, 255, 255, 0);
 }
+.day {
+  font-family: 'Open Sans Regular';
+}
+.day.post-day {
+  font-family: 'Open Sans Light';
+}
 
 #day-of-week.sun {
   background-color: #dd453e;
@@ -145,12 +151,14 @@ tr:last-child td:last-child {
 
 $post-box-z-index: 1;
 .post-box {
-  // transition-duration: 0.2s;
+  transition-property: border transform;
+  transition-duration: 0.07s;
+  border: 2px solid rgba(255, 255, 255, 0);
   z-index: $post-box-z-index;
 }
 .post-box:hover {
   transform: scale(1.15);
-  border: 2px solid #ffffff;
+  border: 2px solid rgba(255, 255, 255, 1);
   z-index: $post-box-z-index + 1;
 }
 

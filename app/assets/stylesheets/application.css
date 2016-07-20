@@ -18,6 +18,10 @@
   font-family: 'Open Sans Light';
   src: url('fonts/fonts/OpenSans-Light.ttf');
 }
+@font-face {
+  font-family: 'Open Sans Regular';
+  src: url('fonts/fonts/OpenSans-Regular');
+}
 
 * {
   padding: 0;
