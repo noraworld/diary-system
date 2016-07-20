@@ -2,8 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$normal-font-color: #444444;
-
 #success-message {
   width: 1230px;
   letter-spacing: 0.5px;
@@ -258,4 +256,100 @@ $post-link-over-post-day: 1;
 }
 #post-button {
   display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  html {
+    font-size: 62.5%;
+  }
+  header {
+    width: 100%;
+    margin-bottom: 2px !important;
+  }
+  #header {
+    width: 100% !important;
+  }
+  #homeicon li, #right-header li {
+    padding: 8px 20px !important;
+  }
+  #right-header {
+    display: none;
+  }
+  footer {
+    width: 100%;
+    margin-top: 2px !important;
+  }
+  #calendar-outline {
+    width: 100%;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+  }
+  #calendar-header {
+    font-size: 1.2rem;
+  }
+  #prev-year, #prev-month, #next-month, #next-year {
+    width: 2.7rem;
+    height: 2.7rem;
+    a {
+      width: 2.7rem;
+      height: 2.7rem;
+    }
+    a:after {
+      font-size: 0.8rem;
+    }
+  }
+  #prev-year, #prev-month {
+    margin-right: 10px;
+  }
+  #next-month, #next-year {
+    margin-left: 10px;
+  }
+  #year, #month {
+    width: 7rem;
+  }
+  #today-button {
+    display: none;
+  }
+  table {
+    border-collapse: collapse;
+  }
+  .day-box, #day-of-week {
+    border: 1px solid grey;
+    box-sizing: border-box;
+    border-radius: 0;
+    height: 6rem;
+  }
+  tr:first-child td:first-child {
+    border-top-left-radius: 0;
+  }
+  tr:first-child td:last-child {
+    border-top-right-radius: 0;
+  }
+  tr:last-child td:first-child {
+    border-bottom-left-radius: 0;
+  }
+  tr:last-child td:last-child {
+    border-bottom-right-radius: 0;
+  }
+  #day-of-week p {
+    width: 44px;
+    margin: 0 auto;
+  }
+  .day, .post-day {
+    font-size: 12px;
+    top: 0;
+    left: 3px;
+  }
+  .post-day:after {
+    display: inline-block;
+    font-size: 12px;
+  }
+
+  #post-content {
+    width: 95%;
+    word-break: break-all;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }

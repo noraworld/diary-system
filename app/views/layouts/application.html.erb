@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Diary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <% if current_user %>
@@ -16,7 +17,7 @@
         <li><a href="/" tabindex="-1"><span class="icon-calendar"></span></a></li>
       </ul>
 
-      <ul>
+      <ul id="right-header">
 
         <li><a href="http://noraworld.jp" tabindex="-1">Home</a></li>
         <li><a href="http://blog.noraworld.jp" tabindex="-1">Blog</a></li>

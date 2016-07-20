@@ -5,9 +5,9 @@
 <% end %>
 
 <div id="calendar-outline">
-  <% if current_user == nil %>
-    <%= link_to 'Sign in', login_path %>
-  <% end %>
+  <%# if current_user == nil %>
+    <%# link_to 'Sign in', login_path %>
+  <%# end %>
   <div id="calendar-header">
     <%# 去年へのリンク %>
     <% prev_year_calendar = format('%04d', Date.new(@year, @month).prev_year.year).to_s + '/' + format('%02d', Date.new(@year, @month).month).to_s %>
