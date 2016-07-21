@@ -167,14 +167,10 @@ $post-link-over-post-day: 1;
   width: 100%;
   height: 100%;
   text-decoration: none;
-  // 日付(pタグ)よりもリンクが上に来るようにする
-  // 日付にマウスオーバーしたときにその部分が
-  // リンクにならない現象を防ぐため
   z-index: $post-link-over-post-day + 1;
 }
 .post-day {
   color: white;
-  // リンクがあれば日付(pタグ)はそれより下に来るようにする
   z-index: $post-link-over-post-day;
 }
 .post-day:after {
