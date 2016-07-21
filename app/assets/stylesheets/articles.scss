@@ -304,12 +304,18 @@ $post-link-over-post-day: 1;
   #next-month, #next-year {
     margin-left: 10px;
   }
+
   #year, #month {
-    width: 7rem;
+    font-size: 2.5rem;
+    margin: 0 0.5rem;
   }
-  #today-button {
-    display: none;
+  #year {
+    width: 6rem;
   }
+  #month {
+    width: 5rem;
+  }
+
   table {
     border-collapse: collapse;
   }
@@ -317,7 +323,12 @@ $post-link-over-post-day: 1;
     border: 1px solid grey;
     box-sizing: border-box;
     border-radius: 0;
-    height: 8rem;
+  }
+  .day-box {
+    height: 9rem;
+  }
+  #day-of-week {
+    height: 5rem;
   }
   tr:first-child td:first-child {
     border-top-left-radius: 0;
