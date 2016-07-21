@@ -256,24 +256,7 @@ $post-link-over-post-day: 1;
 }
 
 @media only screen and (max-width: 500px) {
-  html {
-    font-size: 62.5%;
-  }
-  header {
-    width: 100%;
-    margin-bottom: 0px !important;
-    border-bottom: 1px solid #dddddd;
-  }
-  #header {
-    width: 100% !important;
-  }
-  header li {
-    padding: 1.4rem 3rem !important;
-  }
-  footer {
-    width: 100%;
-    margin-top: 2px !important;
-  }
+
   #calendar-outline {
     width: 100%;
     padding: 0;

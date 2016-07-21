@@ -160,6 +160,21 @@ header {
 
 @media only screen and (max-width: 500px) {
 
+  html {
+    font-size: 62.5%;
+  }
+
+  header {
+    width: 100%;
+    margin-bottom: 0px !important;
+    border-bottom: 1px solid #dddddd;
+  }
+  #header {
+    width: 100% !important;
+  }
+  header li {
+    padding: 1.4rem 3rem !important;
+  }
   #header span {
     font-size: 25px;
   }
@@ -193,6 +208,10 @@ header {
     margin-right: 20px;
   }
 
+  footer {
+    width: 100%;
+    margin-top: 2px !important;
+  }
   #footer {
     color: #87ceeb;
   }
@@ -200,4 +219,5 @@ header {
     color: #87ceeb;
     text-decoration: underline;
   }
+
 }
