@@ -253,6 +253,7 @@ $post-link-over-post-day: 1;
   background-size: 100% 100%, 100% 100%, 100% 31px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  text-align: justify;
 }
 #post-button {
   display: none;
@@ -264,13 +265,14 @@ $post-link-over-post-day: 1;
   }
   header {
     width: 100%;
-    margin-bottom: 2px !important;
+    margin-bottom: 0px !important;
+    border-bottom: 1px solid #dddddd;
   }
   #header {
     width: 100% !important;
   }
-  #homeicon li, #right-header li {
-    padding: 8px 20px !important;
+  header li {
+    padding: 15px 20px !important;
   }
   #right-header {
     display: none;
@@ -318,7 +320,7 @@ $post-link-over-post-day: 1;
     border: 1px solid grey;
     box-sizing: border-box;
     border-radius: 0;
-    height: 6rem;
+    height: 8rem;
   }
   tr:first-child td:first-child {
     border-top-left-radius: 0;
@@ -346,10 +348,22 @@ $post-link-over-post-day: 1;
     font-size: 12px;
   }
 
+  .post-box {
+    transition-property: none;
+    transition-duration: 0;
+  }
+  .post-box:hover {
+    transform: none;
+    border: inherit;
+  }
+
   #post-content {
-    width: 95%;
+    width: 100%;
     word-break: break-all;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
   }
 }

@@ -13,3 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree ./common
+
+$(function() {
+  $('#hamburger li span').on('click', function() {
+    $('.hamburger-menu').toggle();
+  });
+})

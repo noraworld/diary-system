@@ -59,6 +59,9 @@ header {
   font-size: 20px;
   text-decoration: none;
 }
+#header span {
+  font-size: 20px;
+}
 #header a:hover {
   color: #7cc0ff;
 }
@@ -153,4 +156,41 @@ header {
 .clearfix {
   clear: both;
   overflow: auto;
+}
+
+@media only screen and (max-width: 500px) {
+
+  .hamburger-menu {
+    display: none;
+  }
+  .hamburger-menu ul {
+    float: none !important;
+  }
+  .hamburger-menu ul li {
+    width: 100%;
+    padding: 0 !important;
+    background-color: #eeeeee;
+    border-top: 1px solid #cccccc;
+  }
+  .hamburger-menu ul li:last-child {
+    border-bottom: 1px solid #cccccc;
+  }
+  .hamburger-menu ul li a {
+    display: block;
+    width: 100%;
+    padding: 8px 30px;
+    box-sizing: border-box;
+    color: #25507b !important;
+  }
+  .hamburger-menu ul li span {
+    margin-right: 10px;
+  }
+
+  #footer {
+    color: #87ceeb;
+  }
+  #copyright a {
+    color: #87ceeb;
+    text-decoration: underline;
+  }
 }
