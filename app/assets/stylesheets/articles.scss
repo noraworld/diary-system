@@ -189,7 +189,7 @@ $post-link-over-post-day: 1;
 }
 
 #today-button {
-  background-color: #62a6ea;
+  background-color: #468fd8;
   padding: 10px;
   color: white !important;
   position: absolute;
@@ -207,7 +207,16 @@ $post-link-over-post-day: 1;
   text-decoration: none;
 }
 #today-button:hover {
-  background-color: #6868ff;
+  background-color: #2f80d0;
+}
+#today-button:active {
+  box-shadow:0px 0px 25px 8px #1e68b1 inset;
+}
+#today-button span {
+  font-size: 12px;
+}
+#today-button span:before {
+  margin-right: 4px;
 }
 
 #calendar-wrap, #calendar-header {

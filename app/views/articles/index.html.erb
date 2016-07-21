@@ -31,7 +31,9 @@
     <%# 今月のカレンダーではないときに今月のカレンダーへのリンク(root)が表示される %>
     <% this_month = '/' + Time.now.in_time_zone('Tokyo').strftime('%Y').to_s + '/' + Time.now.in_time_zone('Tokyo').strftime('%m').to_s %>
     <% unless request.path_info == '/' || request.path_info == this_month || request.smart_phone? %>
-    <%= link_to 'TODAY', this_month, {:id => 'today-button'} %>
+    <%= link_to(this_month, { :id => 'today-button' }) do %>
+      <span class="icon-today">TODAY</span>
+    <% end %>
     <% end %>
   </div>
 
