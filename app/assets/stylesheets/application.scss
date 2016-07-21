@@ -160,6 +160,9 @@ header {
 
 @media only screen and (max-width: 500px) {
 
+  #hamburger li span {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
   .hamburger-menu {
     display: none;
   }
