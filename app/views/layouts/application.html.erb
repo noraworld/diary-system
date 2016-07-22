@@ -17,7 +17,6 @@
         <li><a href="/" tabindex="-1"><span class="icon-calendar"></span></a></li>
       </ul>
 
-      <% if request.smart_phone? %>
       <ul id="hamburger">
         <li><span class="icon-menu"></span></li>
       </ul>
@@ -31,9 +30,8 @@
           <li><a href="http://qiita.com/noraworld" target="_blank"><span class="icon-search"></span>Qiita</a></li>
         </ul>
       </div>
-      <% end %>
 
-      <% unless request.smart_phone? %>
+      <% unless request.smart_phone? && !request.tablet? %>
       <ul id="right-header">
         <li><a href="http://noraworld.jp" tabindex="-1">Home</a></li>
         <li><a href="http://blog.noraworld.jp" tabindex="-1">Blog</a></li>
