@@ -136,24 +136,24 @@ header {
   display: none;
 }
 
+$footer-color: #3f2e2e;
 #footer {
   position: relative;
   margin-top: 20px;
   padding: 15px 0;
   font-size: 11px;
-  color: #8c8cff;
+  color: $footer-color;
   background-color: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 -0.0625em 0.3125em rgba(0, 0, 0, 0.3);
+  box-shadow: 0 -0.3625em 0.3125em rgba(0, 0, 0, 0.15);
 }
 #copyright {
   text-align: center;
 }
 #copyright a {
   text-decoration: none;
-  color: #8c8cff;
-}
-#copyright a:hover {
+  color: $footer-color;
   text-decoration: underline;
+  font-weight: bold;
 }
 
 .clearfix {
@@ -263,13 +263,6 @@ header {
   footer {
     width: 100%;
     margin-top: 2px !important;
-  }
-  #footer {
-    color: #87ceeb;
-  }
-  #copyright a {
-    color: #87ceeb;
-    text-decoration: underline;
   }
 
 }

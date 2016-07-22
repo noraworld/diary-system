@@ -246,8 +246,9 @@ $post-link-over-post-day: 1;
   }
 }
 #post-content {
-  width: 1230px;
-  min-height: 650px;
+  width: 100%;
+  max-width: 1230px;
+  min-height: 800px;
   margin: 0 auto;
   font-size: 15px;
   line-height: 31px;
