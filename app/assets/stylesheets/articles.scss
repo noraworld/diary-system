@@ -149,8 +149,8 @@ tr:last-child td:last-child {
 
 $post-box-z-index: 1;
 .post-box {
-  transition-property: border transform;
-  transition-duration: 0.07s;
+  // transition-property: border transform;
+  // transition-duration: 0.07s;
   border: 2px solid rgba(255, 255, 255, 0);
   z-index: $post-box-z-index;
 }
@@ -382,8 +382,8 @@ $post-link-over-post-day: 1;
   }
 
   .post-box {
-    transition-property: none;
-    transition-duration: 0;
+    // transition-property: none;
+    // transition-duration: 0;
   }
   .post-box:hover {
     transform: none;
