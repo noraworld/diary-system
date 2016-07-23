@@ -31,9 +31,9 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
 
-    @article.year  = Time.now.in_time_zone('Tokyo').strftime('%Y').to_i
-    @article.month = Time.now.in_time_zone('Tokyo').strftime('%m').to_i
-    @article.day   = Time.now.in_time_zone('Tokyo').strftime('%d').to_i
+    @article.year  = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_i
+    @article.month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_i
+    @article.day   = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%d').to_i
 
     if @article.save
       redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month), notice: 'Published successfully!'
