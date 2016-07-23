@@ -36,7 +36,7 @@ class ArticlesController < ApplicationController
     @article.day   = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%d').to_i
 
     if @article.save
-      redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month), notice: 'Published successfully!'
+      redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Published successfully!'
     else
       flash.now[:alert] = 'Publish failed...'
       render 'new'
@@ -51,7 +51,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
 
     if @article.update(article_params)
-      redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month), notice: 'Updated successfully!'
+      redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Updated successfully!'
     else
       flash.now[:alert] = 'Updated failed...'
       render 'edit'

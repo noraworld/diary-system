@@ -1,5 +1,9 @@
+<% if flash[:notice] %>
+  <div id="success-message">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <div id="post-content">
   <%= qiita_markdown(@article.text) %>
 </div>
-
-<% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
