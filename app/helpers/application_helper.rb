@@ -1,5 +1,10 @@
 module ApplicationHelper
 
+  def qiita_markdown(markdown)
+    processor = Qiita::Markdown::Processor.new
+    processor.call(markdown)[:output].to_s.html_safe
+  end
+
   # 数値の月表記を英語の月表記に変換する
   # month: 変換する月(integer), short: 先頭から何文字まで表示するか
   # return -> 英語の月表記(string)

@@ -1,5 +1,5 @@
 <div id="post-content">
-  <%= simple_format(linebreak_to_br(@article.text)) %>
+  <%= qiita_markdown(@article.text) %>
 </div>
 
 <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
