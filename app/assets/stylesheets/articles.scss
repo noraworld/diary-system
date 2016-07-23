@@ -260,7 +260,20 @@ $post-link-over-post-day: 1;
   border: 1px solid #ccc;
   border-radius: 4px;
   text-align: justify;
+
+  p {
+    margin-top: 31px;
+    margin-bottom: 0;
+  }
+
 }
+#post-content > *:first-child {
+  margin-top: 0 !important;
+}
+#post-content h1+ol, #post-content h1+p, #post-content h1+ul, #post-content h2+ol, #post-content h2+p, #post-content h2+ul, #post-content h3+ol, #post-content h3+p, #post-content h3+ul, #post-content h4+ol, #post-content h4+p, #post-content h4+ul, #post-content h5+ol, #post-content h5+p, #post-content h5+ul, #post-content h6+ol, #post-content h6+p, #post-content h6+ul {
+  margin-top: 0;
+}
+
 #post-button {
   display: none;
 }
