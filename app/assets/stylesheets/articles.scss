@@ -12,6 +12,7 @@
   border: 1px solid #308ddf;
   border-radius: 4px;
   box-sizing: border-box;
+  position: relative;
 }
 #failed-message {
   width: 1230px;
@@ -23,6 +24,12 @@
   border: 1px solid #df3e3e;
   border-radius: 4px;
   box-sizing: border-box;
+  position: relative;
+}
+#success-message #times, #failed-message #times {
+  right: 1.5rem;
+  cursor: pointer;
+  position: absolute;
 }
 
 $calendar-angulus-radius: 10px;

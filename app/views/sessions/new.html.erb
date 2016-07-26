@@ -1,6 +1,6 @@
 <% if flash[:alert] %>
 <div id="failed-message">
-  <%= flash[:alert] %>
+  <%= flash[:alert] %><span id="times">&times;</span>
 </div>
 <% end %>
 
@@ -16,3 +16,5 @@
 
 <% end %>
 </div>
+
+<%= javascript_include_tag 'particular/close_alert_message.js' %>
