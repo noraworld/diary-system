@@ -381,6 +381,11 @@ $post-link-over-post-day: 1;
 
 @media screen and (min-width: 501px) and (max-width: 800px) {
 
+  #success-message, #failed-message {
+    width: 100%;
+    font-size: 1.4rem;
+  }
+
   html {
     font-size: 70%;
   }
@@ -417,6 +422,16 @@ $post-link-over-post-day: 1;
 }
 
 @media screen and (max-width: 500px) {
+
+  #success-message, #failed-message {
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
+    font-size: 1.4rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+  }
 
   #calendar-outline {
     width: 100%;

@@ -64,3 +64,34 @@
 ::-moz-selection {
   background: #b4d6f3;
 }
+
+@media screen and (min-width: 501px) and (max-width: 800px) {
+
+  #sign-in-form-wrap {
+    width: 100%;
+    padding: 5rem 0;
+  }
+  #sign-in-form {
+    width: 100%;
+    padding: 2rem 0;
+    box-sizing: border-box;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+
+  #sign-in-form-wrap {
+    width: 100%;
+    padding: 5rem 0;
+  }
+  #sign-in-form {
+    width: 100%;
+    padding: 2rem 0;
+    box-sizing: border-box;
+  }
+  #sign-in-form * {
+    width: 95%;
+  }
+
+}
