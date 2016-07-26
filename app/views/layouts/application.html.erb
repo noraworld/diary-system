@@ -28,6 +28,22 @@
           <li><a href="https://www.instagram.com/noraworlds" target="_blank"><span class="icon-instagram"></span>Instagram</a></li>
           <li><a href="https://github.com/noraworld" target="_blank"><span class="icon-github"></span>GitHub</a></li>
           <li><a href="http://qiita.com/noraworld" target="_blank"><span class="icon-search"></span>Qiita</a></li>
+          <% if current_user %>
+          <% case controller.action_name %>
+          <% when 'index' %>
+          <li><%= link_to '/new' do %><span class="icon-cog"></span>New post<% end %></li>
+          <li><%= link_to logout_path, method: :delete do %><span class="icon-cog"></span>Logout<% end %></li>
+          <% when 'show' %>
+          <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
+          <li><%= link_to '/edit' + date do %><span class="icon-cog"></span>Edit post<% end %></li>
+          <% when 'new', 'create' %>
+          <li><a href="#" id="publish-link"><span class="icon-cog"></span>Publish post</a></li>
+          <% when 'edit', 'update' %>
+          <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
+          <li><a href="#" id="update-link"><span class="icon-cog"></span>Update post</a></li>
+          <li><%= link_to '/destroy' + date, { method: :delete, data: {confirm: 'Are you sure you want to delete?'} } do %><span class="icon-today"></span>Delete post</li><% end %>
+          <% end %>
+          <% end %>
         </ul>
       </div>
 
