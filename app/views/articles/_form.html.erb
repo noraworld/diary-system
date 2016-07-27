@@ -1,4 +1,4 @@
-<%= form_for @article do |f| %>
+<%= form_for(:article, url: @post_url) do |f| %>
   <% if flash[:alert] %>
   <div id="failed-message">
     <%= flash[:alert] %><span id="times">&times;</span>

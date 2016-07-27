@@ -26,6 +26,7 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @post_url = '/new'
   end
 
   def create
@@ -45,10 +46,11 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find_by(year: params[:year], month: params[:month], day: params[:day])
+    @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
   end
 
   def update
-    @article = Article.find(params[:id])
+    @article = Article.find_by(year: params[:year], month: params[:month], day: params[:day])
 
     if @article.update(article_params)
       redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Updated successfully!'

@@ -6,12 +6,13 @@ Rails.application.routes.draw do
   post   'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  get '/:year/:month'                 => 'articles#index',    constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/}
-  get '/:year/:month/:day'            => 'articles#show',     constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
-  get '/edit/:year/:month/:day'       => 'articles#edit',     constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
+  get    '/:year/:month'              => 'articles#index',   constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/}
+  get    '/:year/:month/:day'         => 'articles#show',    constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
+  get    '/edit/:year/:month/:day'    => 'articles#edit',    constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
   delete '/destroy/:year/:month/:day' => 'articles#destroy', constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
-  get 'new' => 'articles#new'
-  resources :articles
+  get    '/new'                       => 'articles#new'
+  post   '/new'                       => 'articles#create'
+  post   '/:year/:month/:day'         => 'articles#update',  constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
