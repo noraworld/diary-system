@@ -2,12 +2,20 @@ class UploadsController < ApplicationController
   before_action :signed_in?
 
   def upload
-    data = params[:upload]
-    File.open('public/images/' + data[:datafile].original_filename, 'wb') do |f|
-      f.write(data[:datafile].read)
+    # dropzone.jsで使用するパラメータと一致していないといけない
+    data  = params[:data]
+    year  = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_s
+    month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_s
+    path  = 'public/images/' + year + '/' + month + '/'
+
+    # public/images/year/month ディレクトリがなければ作成する
+    FileUtils.mkdir_p(path) unless FileTest.exist?(path)
+
+    File.open(path + data[:file].original_filename, 'wb') do |f|
+      f.write(data[:file].read)
     end
 
-    redirect_to :back
+    render :nothing => true, :status => 200
   end
 
   private

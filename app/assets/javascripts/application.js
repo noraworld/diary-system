@@ -12,10 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require dropzone
 //= require_tree ./common
 
 $(function() {
+
   $('#hamburger li span').on('click', function() {
     $('.hamburger-menu').toggle();
   });
+
 })

@@ -1,6 +1,7 @@
-<%= form_tag({:controller => 'uploads', :action => 'upload'}, multipart: true) do %>
-  <%= file_field :upload, :datafile %>
-  <%= submit_tag 'Upload' %>
+<%= form_tag({:controller => 'uploads', :action => 'upload'}, :remote => true, :id => 'upload-dropzone', :class => 'dropzone', multipart: true) do %>
+  <div class="fallback">
+    <%= file_field_tag('data[file]') %>
+  </div>
 <% end %>
 
 <%= form_for(:article, url: @post_url) do |f| %>

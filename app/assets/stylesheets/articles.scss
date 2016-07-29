@@ -237,6 +237,22 @@ $post-link-over-post-day: 1;
   display: inline-block;
 }
 
+.dropzone {
+  border: 2px dashed #b4bcc2;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 1230px;
+  padding-left: 80px;
+  padding-right: 80px;
+  box-sizing: border-box;
+  margin: 20px auto;
+  color: #808080;
+  font-size: 16px;
+  .picture-icon {
+    font-size: 28px;
+  }
+}
+
 @mixin note($color) {
   background-image: -webkit-linear-gradient(left, $color 10px, transparent 10px), -webkit-linear-gradient(right, $color 10px, transparent 10px), -webkit-linear-gradient($color 30px, #ccc 30px, #ccc 31px, $color 31px);
   background-image: -moz-linear-gradient(left, $color 10px, transparent 10px), -moz-linear-gradient(right, $color 10px, transparent 10px), -moz-linear-gradient($color 30px, #ccc 30px, #ccc 31px, $color 31px);
