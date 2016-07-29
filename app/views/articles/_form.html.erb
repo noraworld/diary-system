@@ -1,9 +1,3 @@
-<%= form_tag({:controller => 'uploads', :action => 'upload'}, :remote => true, :id => 'upload-dropzone', :class => 'dropzone', multipart: true) do %>
-  <div class="fallback">
-    <%= file_field_tag('data[file]') %>
-  </div>
-<% end %>
-
 <%= form_for(:article, url: @post_url) do |f| %>
   <% if flash[:alert] %>
   <div id="failed-message">
@@ -15,7 +9,12 @@
     <%= f.text_area :text, {:id => 'post-content'} %>
     <%= f.submit({:id => 'post-button'}) %>
   </div>
+<% end %>
 
+<%= form_tag({:controller => 'uploads', :action => 'upload'}, :remote => true, :id => 'upload-dropzone', :class => 'dropzone', multipart: true) do %>
+  <div class="fallback">
+    <%= file_field_tag('data[file]') %>
+  </div>
 <% end %>
 
 <%= javascript_include_tag 'particular/post_button_click.js' %>

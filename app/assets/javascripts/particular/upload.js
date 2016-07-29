@@ -25,7 +25,7 @@ $(function() {
         var year = date.getFullYear() + ''
         var month = ('0' + (date.getMonth() + 1)).slice(-2);
 
-        textarea.val(textarea.val() + '![' + filename + '](/images/' + year + '/' + month + '/' + file.name + ')');
+        textarea.val(textarea.val() + '![' + filename + '](/images/' + year + '/' + month + '/' + file.name + ')\n\n');
       });
     },
   });

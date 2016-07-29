@@ -289,6 +289,10 @@ $post-link-over-post-day: 1;
     margin-bottom: 0;
   }
 
+  img {
+    max-width: 100%;
+  }
+
 }
 #post-content > *:first-child {
   margin-top: 0 !important;
