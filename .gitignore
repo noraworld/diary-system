@@ -19,3 +19,6 @@
 # Ignore secret files.
 /config/secrets.yml
 /.env
+
+# Ignore temp files.
+/public/images/2016

@@ -265,6 +265,9 @@ $post-link-over-post-day: 1;
   #post-content {
     resize: none;
     outline: none;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 3px;
+    padding-bottom: 3px;
     @include note(#e7e7ff);
   }
 }
