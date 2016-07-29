@@ -1,57 +1,60 @@
 @font-face {
-    font-family: 'icomoon';
-    src:    url('fonts/icomoon/icomoon.eot?vwusrf');
-    src:    url('fonts/icomoon/icomoon.eot?vwusrf#iefix') format('embedded-opentype'),
-        url('fonts/icomoon/icomoon.ttf?vwusrf') format('truetype'),
-        url('fonts/icomoon/icomoon.woff?vwusrf') format('woff'),
-        url('fonts/icomoon/icomoon.svg?vwusrf#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon/icomoon.eot?90lk1p');
+  src:  url('fonts/icomoon/icomoon.eot?90lk1p#iefix') format('embedded-opentype'),
+    url('fonts/icomoon/icomoon.ttf?90lk1p') format('truetype'),
+    url('fonts/icomoon/icomoon.woff?90lk1p') format('woff'),
+    url('fonts/icomoon/icomoon.svg?90lk1p#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 [class^="icon-"], [class*=" icon-"] {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'icomoon' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .icon-today:before {
-    content: "\e900";
+  content: "\e900";
 }
 .icon-home:before {
-    content: "\e908";
+  content: "\e908";
 }
 .icon-search:before {
-    content: "\e904";
+  content: "\e904";
 }
 .icon-quill:before {
-    content: "\e909";
+  content: "\e909";
+}
+.icon-file-picture:before {
+  content: "\e90a";
 }
 .icon-calendar:before {
-    content: "\e901";
+  content: "\e901";
 }
 .icon-cog:before {
-    content: "\e906";
+  content: "\e906";
 }
 .icon-menu:before {
-    content: "\e907";
+  content: "\e907";
 }
 .icon-instagram:before {
-    content: "\e905";
+  content: "\e905";
 }
 .icon-twitter:before {
-    content: "\e902";
+  content: "\e902";
 }
 .icon-github:before {
-    content: "\e903";
+  content: "\e903";
 }
 
