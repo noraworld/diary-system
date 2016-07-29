@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get    '/new'                       => 'articles#new'
   post   '/new'                       => 'articles#create'
   post   '/:year/:month/:day'         => 'articles#update',  constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
+  post '/upload' => 'uploads#upload'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,3 +1,8 @@
+<%= form_tag({:controller => 'uploads', :action => 'upload'}, multipart: true) do %>
+  <%= file_field :upload, :datafile %>
+  <%= submit_tag 'Upload' %>
+<% end %>
+
 <%= form_for(:article, url: @post_url) do |f| %>
   <% if flash[:alert] %>
   <div id="failed-message">
