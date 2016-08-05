@@ -17,7 +17,8 @@ $(function() {
     init: function() {
       this.on('addedfile', function(file) {
         var textarea = $('#post-content');
-        var filename = file.name.match(/(.*)(?:\.([^.]+$))/)[1];
+        var filename = file.name.match(/(.*)(?:\.([^.]+$))/)[1].toLowerCase();
+        var filepath = file.name.toLowerCase();
 
         var date = new Date();
         // 5時間前(午前5時までは前の日の日付で保存される)
@@ -25,8 +26,11 @@ $(function() {
         var year = date.getFullYear() + ''
         var month = ('0' + (date.getMonth() + 1)).slice(-2);
 
-        textarea.val(textarea.val() + '![' + filename + '](/images/' + year + '/' + month + '/' + file.name + ')\n\n');
+        textarea.val(textarea.val() + '![' + filename + '](/images/' + year + '/' + month + '/' + filepath + ')\n\n');
       });
+    },
+    renameFilename: function(filename) {
+      return filename.toLowerCase();
     },
   });
 
