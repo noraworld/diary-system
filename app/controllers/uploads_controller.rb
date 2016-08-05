@@ -1,6 +1,8 @@
 class UploadsController < ApplicationController
   before_action :signed_in?
 
+  require 'filemagic'
+
   def upload
     # dropzone.jsで使用するパラメータと一致していないといけない
     data  = params[:data]
@@ -11,8 +13,18 @@ class UploadsController < ApplicationController
     # public/images/year/month ディレクトリがなければ作成する
     FileUtils.mkdir_p(path) unless FileTest.exist?(path)
 
+    content = data[:file].read
+
+    # 画像ファイルじゃない場合はアップロードしない
+    fm = FileMagic.new()
+    unless fm.buffer(content) =~ /^(PNG|JPEG|GIF) /
+      render :nothing => true, :status => 406
+      return
+    end
+
+    # 画像ファイルをアップロードする
     File.open(path + data[:file].original_filename, 'wb') do |f|
-      f.write(data[:file].read)
+      f.write(content)
     end
 
     render :nothing => true, :status => 200
