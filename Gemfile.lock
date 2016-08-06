@@ -141,6 +141,7 @@ GEM
     rdoc (4.2.2)
       json (~> 1.4)
     ref (2.0.0)
+    rmagick (2.15.4)
     ruby-filemagic (0.7.1)
     rugged (0.25.0b4)
     sanitize (4.1.0)
@@ -198,6 +199,7 @@ DEPENDENCIES
   jquery-rails
   qiita-markdown
   rails (= 4.2.6)
+  rmagick
   ruby-filemagic
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

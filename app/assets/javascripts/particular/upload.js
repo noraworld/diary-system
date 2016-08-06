@@ -8,6 +8,7 @@ $(function() {
     params: {
       'data[document_id]': 123
     },
+    acceptedFiles: 'image/*',
     dictDefaultMessage: '<span class="icon-file-picture picture-icon"></span><br><span>Drag and drop or<br>click to upload image file</span>',
     dictResponseError: 'Failed to upload. Please try again.',
     // headers: {
@@ -15,7 +16,7 @@ $(function() {
       // 'X-CSRF-Token': $('#upload-dropzone input').eq(1).attr('value')
     // }
     init: function() {
-      this.on('addedfile', function(file) {
+      this.on('success', function(file) {
         var textarea = $('#post-content');
         var filename = file.name.match(/(.*)(?:\.([^.]+$))/)[1].toLowerCase();
         var filepath = file.name.toLowerCase();

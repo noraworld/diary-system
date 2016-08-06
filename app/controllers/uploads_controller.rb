@@ -2,6 +2,7 @@ class UploadsController < ApplicationController
   before_action :signed_in?
 
   require 'filemagic'
+  require 'RMagick'
 
   def upload
     # dropzone.jsで使用するパラメータと一致していないといけない
@@ -22,10 +23,14 @@ class UploadsController < ApplicationController
       return
     end
 
+    # RMagickをバイナリから読み取る
+    img = Magick::Image.from_blob(content).shift
+    # 画像が大きい場合はリサイズする
+    img = img.resize_to_fit(600, 1200) if img.columns > 600
+    # スマホでアップロードされた画像がパソコンで横向き表示にならないようにする
+    img.auto_orient!
     # 画像ファイルをアップロードする
-    File.open(path + data[:file].original_filename, 'wb') do |f|
-      f.write(content)
-    end
+    img.write(path + data[:file].original_filename)
 
     render :nothing => true, :status => 200
   end
