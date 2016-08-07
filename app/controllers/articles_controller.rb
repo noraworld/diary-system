@@ -21,7 +21,7 @@ class ArticlesController < ApplicationController
     year  = params[:year].to_i
     month = params[:month].to_i
     day   = params[:day].to_i
-    @article = Article.find_by(year: year, month: month, day: day)
+    @article = Article.find_by!(year: year, month: month, day: day)
   end
 
   def new
@@ -45,12 +45,12 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find_by(year: params[:year], month: params[:month], day: params[:day])
+    @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
     @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
   end
 
   def update
-    @article = Article.find_by(year: params[:year], month: params[:month], day: params[:day])
+    @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
 
     if @article.update(article_params)
       redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Updated successfully!'
@@ -61,7 +61,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find_by(year: params[:year], month: params[:month], day: params[:day])
+    @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
     @article.destroy
 
     redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month), notice: 'Deleted successfully!'
