@@ -26,7 +26,7 @@ class UploadsController < ApplicationController
     # RMagickをバイナリから読み取る
     img = Magick::Image.from_blob(content).shift
     # 画像が大きい場合はリサイズする
-    img = img.resize_to_fit(600, 1200) if img.columns > 600
+    img = img.resize_to_fit(800, 1200) if img.columns > 800
     # スマホでアップロードされた画像がパソコンで横向き表示にならないようにする
     img.auto_orient!
     # 画像ファイルをアップロードする
