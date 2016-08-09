@@ -1,6 +1,6 @@
 <%= form_for(:article, url: @post_url) do |f| %>
   <% if flash[:alert] %>
-  <div id="failed-message">
+  <div id="failed-message" class="form-message">
     <%= flash[:alert] %><span id="times">&times;</span>
   </div>
   <% end %>

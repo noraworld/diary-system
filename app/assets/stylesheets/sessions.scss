@@ -68,12 +68,13 @@
 @media screen and (min-width: 501px) and (max-width: 800px) {
 
   #sign-in-form-wrap {
-    width: 100%;
-    padding: 5rem 0;
+    width: 95%;
+    padding: 0;
   }
   #sign-in-form {
     width: 100%;
-    padding: 2rem 0;
+    max-width: 700px;
+    padding: 2rem 5rem;
     box-sizing: border-box;
   }
 
@@ -89,6 +90,7 @@
     width: 100%;
     padding: 2rem 0;
     box-sizing: border-box;
+    border-radius: 0;
   }
   #sign-in-form * {
     width: 95%;

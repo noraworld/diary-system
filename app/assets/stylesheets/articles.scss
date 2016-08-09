@@ -3,7 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #success-message {
-  width: 1230px;
   letter-spacing: 0.5px;
   margin: 0 auto 20px;
   padding: 15px 30px;
@@ -15,7 +14,6 @@
   position: relative;
 }
 #failed-message {
-  width: 1230px;
   letter-spacing: 0.5px;
   margin: 0 auto 20px;
   padding: 15px 30px;
@@ -30,6 +28,23 @@
   right: 1.5rem;
   cursor: pointer;
   position: absolute;
+}
+
+.index-message {
+  max-width: 1230px;
+  width: 95%;
+}
+.show-message {
+  max-width: 900px;
+  width: 95%;
+}
+.form-message {
+  max-width: 900px;
+  width: 95%;
+}
+.sessions-message {
+  max-width: 600px;
+  width: 95%;
 }
 
 $calendar-angulus-radius: 10px;
@@ -277,13 +292,13 @@ $rule-margin-left-and-right: 1.3rem;
   }
 }
 #post-content {
-  width: 100%;
+  width: 95%;
   max-width: 900px;
   min-height: 800px;
   margin: 0 auto;
   font-size: 15px;
   line-height: 31px;
-  padding: 0.6rem 2rem;
+  padding: 2rem;
   box-sizing: border-box;
   box-shadow: 0 0 1px #999;
   @include note(#fcfcfc);
@@ -298,7 +313,7 @@ $rule-margin-left-and-right: 1.3rem;
     margin-bottom: 0;
   }
 
-  img {
+  img:not(.emoji) {
     max-width: 600px;
     width: 100%;
     margin: 0 auto;
@@ -307,6 +322,12 @@ $rule-margin-left-and-right: 1.3rem;
     padding: 10px;
     box-shadow: 0 0 4px #999;
     background-color: #ffffff;
+  }
+
+  ul {
+    padding-left: 1em;
+    text-indent: -1em;
+    list-style-position: inside;
   }
 
 }
@@ -425,7 +446,7 @@ $rule-margin-left-and-right: 1.3rem;
 @media screen and (min-width: 501px) and (max-width: 800px) {
 
   #success-message, #failed-message {
-    width: 100%;
+    width: 95%;
     font-size: 1.4rem;
   }
 
