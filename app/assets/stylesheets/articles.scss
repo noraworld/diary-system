@@ -241,7 +241,7 @@ $post-link-over-post-day: 1;
   border: 2px dashed #b4bcc2;
   border-radius: 8px;
   width: 95%;
-  max-width: 1230px;
+  max-width: 900px;
   padding-left: 80px;
   padding-right: 80px;
   box-sizing: border-box;
@@ -253,12 +253,16 @@ $post-link-over-post-day: 1;
   }
 }
 
+
+$rule-space: 22px;
+$rule-color: rgba(0, 0, 0, 0.1);
+$rule-margin-left-and-right: 1.3rem;
 @mixin note($color) {
-  background-image: -webkit-linear-gradient(left, $color 10px, transparent 10px), -webkit-linear-gradient(right, $color 10px, transparent 10px), -webkit-linear-gradient($color 30px, #ccc 30px, #ccc 31px, $color 31px);
-  background-image: -moz-linear-gradient(left, $color 10px, transparent 10px), -moz-linear-gradient(right, $color 10px, transparent 10px), -moz-linear-gradient($color 30px, #ccc 30px, #ccc 31px, $color 31px);
-  background-image: -ms-linear-gradient(left, $color 10px, transparent 10px), -ms-linear-gradient(right, $color 10px, transparent 10px), -ms-linear-gradient($color 30px, #ccc 30px, #ccc 31px, $color 31px);
-  background-image: -o-linear-gradient(left, $color 10px, transparent 10px), -o-linear-gradient(right, $color 10px, transparent 10px), -o-linear-gradient($color 30px, #ccc 30px, #ccc 31px, $color 31px);
-  background-image: linear-gradient(left, $color 10px, transparent 10px), linear-gradient(right, $color 10px, transparent 10px), linear-gradient($color 30px, #ccc 30px, #ccc 31px, $color 31px);
+  background-image: -webkit-linear-gradient(left, $color $rule-margin-left-and-right, transparent $rule-margin-left-and-right), -webkit-linear-gradient(right, $color $rule-margin-left-and-right, transparent $rule-margin-left-and-right), -webkit-linear-gradient($color $rule-space, $rule-color $rule-space, $rule-color $rule-space+1, $color $rule-space+1);
+  background-image: -moz-linear-gradient(left, $color $rule-margin-left-and-right, transparent $rule-margin-left-and-right), -moz-linear-gradient(right, $color $rule-margin-left-and-right, transparent $rule-margin-left-and-right), -moz-linear-gradient($color $rule-space, $rule-color $rule-space, $rule-color $rule-space+1, $color $rule-space+1);
+  background-image: -ms-linear-gradient(left, $color $rule-margin-left-and-right, transparent $rule-margin-left-and-right), -ms-linear-gradient(right, $color $rule-margin-left-and-right, transparent $rule-margin-left-and-right), -ms-linear-gradient($color $rule-space, $rule-color $rule-space, $rule-color $rule-space+1, $color $rule-space+1);
+  background-image: -o-linear-gradient(left, $color $rule-margin-left-and-right, transparent $rule-margin-left-and-right), -o-linear-gradient(right, $color $rule-margin-left-and-right, transparent $rule-margin-left-and-right), -o-linear-gradient($color $rule-space, $rule-color $rule-space, $rule-color $rule-space+1, $color $rule-space+1);
+  background-image: linear-gradient(left, $color $rule-margin-left-and-right, transparent $rule-margin-left-and-right), linear-gradient(right, $color $rule-margin-left-and-right, transparent $rule-margin-left-and-right), linear-gradient($color $rule-space, $rule-color $rule-space, $rule-color $rule-space+1, $color $rule-space+1);
 }
 #textarea {
   text-align: center;
@@ -269,24 +273,25 @@ $post-link-over-post-day: 1;
     outline: none;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 0;
-    @include note(#e7e7ff);
+    background-image: none;
   }
 }
 #post-content {
   width: 100%;
-  max-width: 1230px;
+  max-width: 900px;
   min-height: 800px;
   margin: 0 auto;
   font-size: 15px;
   line-height: 31px;
-  padding: 31px;
+  padding: 0.6rem 2rem;
   box-sizing: border-box;
-  box-shadow: 0.2em 0.2em 0.5em black;
-  @include note(#ffffe7);
-  background-size: 100% 100%, 100% 100%, 100% 31px;
+  box-shadow: 0 0 1px #999;
+  @include note(#fcfcfc);
+  background-size: 100% 100%, 100% 100%, 100% $rule-space+1;
   border: 1px solid #ccc;
   border-radius: 4px;
   text-align: justify;
+  word-break: break-all;
 
   p {
     margin-top: 31px;
@@ -294,7 +299,14 @@ $post-link-over-post-day: 1;
   }
 
   img {
-    max-width: 100%;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+    box-sizing: border-box;
+    padding: 10px;
+    box-shadow: 0 0 4px #999;
+    background-color: #ffffff;
   }
 
 }
@@ -450,6 +462,11 @@ $post-link-over-post-day: 1;
     width: 5rem;
   }
 
+  #post-content {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
 }
 
 @media screen and (max-width: 500px) {
@@ -553,11 +570,18 @@ $post-link-over-post-day: 1;
 
   #post-content {
     width: 100%;
-    word-break: break-all;
-    padding-left: 2rem;
-    padding-right: 2rem;
     border: none;
-    min-height: 30rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    min-height: 50rem;
     box-shadow: none;
   }
+  #textarea {
+    border: 1px solid grey;
+    border-radius: 5px;
+    #post-content {
+      min-height: 30rem;
+    }
+  }
+
 }
