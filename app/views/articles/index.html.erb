@@ -8,10 +8,10 @@
   <div id="calendar-header">
     <%# 去年へのリンク %>
     <% prev_year_calendar = format('%04d', Date.new(@year, @month).prev_year.year).to_s + '/' + format('%02d', Date.new(@year, @month).month).to_s %>
-    <h1 id=prev-year><%= link_to '', '/' + prev_year_calendar %></h1>
+    <h1 id=prev-year><%= link_to '', '/' + prev_year_calendar unless format('%04d', Date.new(@year, @month).year).to_i <= 2000 %></h1>
     <%# 先月へのリンク %>
     <% prev_month_calendar = format('%04d', Date.new(@year, @month).prev_month.year).to_s + '/' + format('%02d', Date.new(@year, @month).prev_month.month).to_s %>
-    <h1 id=prev-month><%= link_to '', '/' + prev_month_calendar %></h1>
+    <h1 id=prev-month><%= link_to '', '/' + prev_month_calendar unless format('%04d', Date.new(@year, @month).year).to_i <= 2000 && format('%04d', Date.new(@year, @month).month).to_i === 1 %></h1>
     <%# 月を表示 %>
     <h1 id="year"><%= @year %></h1>
     <% unless request.smart_phone? %>
@@ -21,11 +21,11 @@
     <% end %>
     <%# 来月へのリンク %>
     <% next_month_calendar = format('%04d', Date.new(@year, @month).next_month.year).to_s + '/' + format('%02d', Date.new(@year, @month).next_month.month).to_s %>
-    <h1 id="next-month"><%= link_to '', '/' + next_month_calendar %></h1>
+    <h1 id="next-month"><%= link_to '', '/' + next_month_calendar unless format('%04d', Date.new(@year, @month).year).to_i >= 2099 && format('%04d', Date.new(@year, @month).month).to_i === 12 %></h1>
     <%# 来年へのリンク %>
     <% next_year_calendar = format('%04d', Date.new(@year, @month).next_year.year).to_s + '/' + format('%02d', Date.new(@year, @month).month).to_s %>
-    <h1 id=next-year><%= link_to '', '/' + next_year_calendar %></h1>
-    <%# 今月のカレンダーではないときに今月のカレンダーへのリンク(root)が表示される %>
+    <h1 id=next-year><%= link_to '', '/' + next_year_calendar unless format('%04d', Date.new(@year, @month).year).to_i >= 2099 %></h1>
+    <%# 今月のカレンダーではないときに今月のカレンダーへのリンクが表示される %>
     <% this_month = '/' + Time.now.in_time_zone('Tokyo').strftime('%Y').to_s + '/' + Time.now.in_time_zone('Tokyo').strftime('%m').to_s %>
     <% unless request.path_info == '/' || request.path_info == this_month || request.smart_phone? || request.tablet? %>
     <%= link_to(this_month, { :id => 'today-button' }) do %>
