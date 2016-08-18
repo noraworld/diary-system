@@ -25,6 +25,15 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    year  = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_i
+    month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_i
+    day   = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%d').to_i
+    article = Article.find_by(year: year, month: month, day: day)
+    if article
+      redirect_to root_path, notice: 'Already published today!'
+      return
+    end
+
     @article = Article.new
     @post_url = '/new'
   end
