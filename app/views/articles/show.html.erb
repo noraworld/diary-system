@@ -1,3 +1,5 @@
+<% @page_title = params[:year] + '/' + params[:month] + '/' + params[:day] %>
+
 <% if flash[:notice] %>
   <div id="success-message" class="show-message">
     <%= flash[:notice] %><span id="times">&times;</span>

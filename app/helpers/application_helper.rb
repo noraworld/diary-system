@@ -1,5 +1,15 @@
 module ApplicationHelper
 
+  # ページごとにタイトルを変更する
+  def page_title
+    if @page_title
+      title = @page_title
+    else
+      title = 'Noraworld Diary'
+    end
+  end
+
+  # Qiita::Markdownを使用する
   def qiita_markdown(markdown)
     processor = Qiita::Markdown::Processor.new
     processor.call(markdown)[:output].to_s.html_safe

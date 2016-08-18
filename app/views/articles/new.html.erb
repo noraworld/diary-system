@@ -1,1 +1,2 @@
+<% @page_title = 'New post - ' + (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_s + '/' + (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_s + '/' + (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%d').to_s %>
 <%= render 'form' %>
