@@ -279,6 +279,7 @@ $rule-margin-left-and-right: 1.3rem;
   background-image: -o-linear-gradient(left, $color $rule-margin-left-and-right, transparent $rule-margin-left-and-right), -o-linear-gradient(right, $color $rule-margin-left-and-right, transparent $rule-margin-left-and-right), -o-linear-gradient($color $rule-space, $rule-color $rule-space, $rule-color $rule-space+1, $color $rule-space+1);
   background-image: linear-gradient(left, $color $rule-margin-left-and-right, transparent $rule-margin-left-and-right), linear-gradient(right, $color $rule-margin-left-and-right, transparent $rule-margin-left-and-right), linear-gradient($color $rule-space, $rule-color $rule-space, $rule-color $rule-space+1, $color $rule-space+1);
 }
+
 #textarea {
   text-align: center;
   width: 95%;
@@ -328,6 +329,26 @@ $rule-margin-left-and-right: 1.3rem;
     padding-left: 1em;
     text-indent: -1em;
     list-style-position: inside;
+  }
+
+  hr {
+    margin: 10rem 0;
+    border-top: 1px dashed #bbbbbb;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    height: 0;
+  }
+  hr:after {
+    content: '\e90c';
+    font-family: 'icomoon';
+    font-size: 20px;
+    color: #bbbbbb;
+    display: inline-block;
+    position: relative;
+    top: -15px;
+    left: 40px;
+    transform: rotate(90deg);
   }
 
 }
