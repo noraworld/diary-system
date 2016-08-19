@@ -21,4 +21,4 @@ $(function() {
     $('.hamburger-menu').toggle();
   });
 
-})
+});

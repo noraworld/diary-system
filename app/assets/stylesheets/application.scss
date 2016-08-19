@@ -12,7 +12,8 @@
  *
  *= require dropzone/basic
  *= require dropzone/dropzone
- *= require_tree .
+ *= require icon.css
+ *= require_tree ./common
  *= require_self
  */
 

@@ -1,0 +1,31 @@
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+@media screen and (min-width: 501px) {
+
+  #footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+
+  body {
+    overflow: auto;
+  }
+
+}

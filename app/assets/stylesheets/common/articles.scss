@@ -256,6 +256,7 @@ $post-link-over-post-day: 1;
   border: 2px dashed #b4bcc2;
   border-radius: 8px;
   width: 95%;
+  height: 23vh;
   max-width: 900px;
   padding-left: 80px;
   padding-right: 80px;
@@ -267,7 +268,6 @@ $post-link-over-post-day: 1;
     font-size: 28px;
   }
 }
-
 
 $rule-space: 22px;
 $rule-color: rgba(0, 0, 0, 0.1);
@@ -283,16 +283,23 @@ $rule-margin-left-and-right: 1.3rem;
 #textarea {
   text-align: center;
   width: 95%;
+  min-height: 55vh;
+  max-height: 55vh;
   margin: 10px auto;
   #post-content {
+    min-height: 55vh;
+    max-height: 55vh;
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    // font-size: 16px;
+    // line-height: 25px;
     resize: none;
     outline: none;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 0;
     background-image: none;
   }
 }
 #post-content {
+  font-family: 'Open Sans Regular';
   width: 95%;
   max-width: 900px;
   min-height: 800px;
@@ -622,8 +629,11 @@ $rule-margin-left-and-right: 1.3rem;
     border: 1px solid grey;
     border-radius: 5px;
     #post-content {
-      min-height: 30rem;
+      padding-bottom: 0.1rem;
     }
+  }
+  .dropzone {
+    height: auto;
   }
 
 }
