@@ -134,7 +134,7 @@ header {
 #homeicon {
   float: left !important;
 }
-#hamburger, .hamburger-menu {
+#hamburger, .hamburger-menu, .hamburger-menu ul li {
   display: none;
 }
 
@@ -185,6 +185,7 @@ $footer-color: #3f2e2e;
     float: none !important;
   }
   .hamburger-menu ul li {
+    display: block;
     width: 100%;
     padding: 0 !important;
     background-color: #eeeeee;
@@ -243,6 +244,7 @@ $footer-color: #3f2e2e;
     float: none !important;
   }
   .hamburger-menu ul li {
+    display: block;
     width: 100%;
     padding: 0 !important;
     background-color: #eeeeee;
