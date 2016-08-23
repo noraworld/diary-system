@@ -4,6 +4,7 @@
   <title><%= page_title %></title>
   <meta name="description" content="Noraworld Diary is a simple and personal diary for me. Everyday events, foods, thoughts and other miscellaneous contents.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <%= favicon_link_tag('/favicon.png') %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <% if current_user %>
@@ -34,17 +35,17 @@
           <% if current_user %>
           <% case controller.action_name %>
           <% when 'index' %>
-          <li><%= link_to '/new' do %><span class="icon-cog"></span>New post<% end %></li>
-          <li><%= link_to logout_path, method: :delete do %><span class="icon-cog"></span>Logout<% end %></li>
+          <li><%= link_to '/new' do %><span class="icon-plus"></span>New post<% end %></li>
+          <li><%= link_to logout_path, method: :delete do %><span class="icon-switch"></span>Logout<% end %></li>
           <% when 'show' %>
           <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
-          <li><%= link_to '/edit' + date do %><span class="icon-cog"></span>Edit post<% end %></li>
+          <li><%= link_to '/edit' + date do %><span class="icon-pencil"></span>Edit post<% end %></li>
           <% when 'new', 'create' %>
-          <li><a href="#" id="publish-link"><span class="icon-cog"></span>Publish post</a></li>
+          <li><a href="#" id="publish-link"><span class="icon-upload"></span>Publish post</a></li>
           <% when 'edit', 'update' %>
           <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
-          <li><a href="#" id="update-link"><span class="icon-cog"></span>Update post</a></li>
-          <li><%= link_to '/destroy' + date, { method: :delete, data: {confirm: 'Are you sure you want to delete?'} } do %><span class="icon-today"></span>Delete post</li><% end %>
+          <li><a href="#" id="update-link"><span class="icon-loop2"></span>Update post</a></li>
+          <li><%= link_to '/destroy' + date, { :id => 'delete-link', method: :delete, data: {confirm: 'Are you sure you want to delete?'} } do %><span class="icon-fire"></span>Delete post</li><% end %>
           <% end %>
           <% end %>
         </ul>
