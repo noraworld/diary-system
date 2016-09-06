@@ -11,7 +11,7 @@ module ApplicationHelper
 
   # Qiita::Markdownを使用する
   def qiita_markdown(markdown)
-    processor = Qiita::Markdown::Processor.new
+    processor = Qiita::Markdown::Processor.new(hostname: ENV['HOST_NAME'])
     processor.call(markdown)[:output].to_s.html_safe
   end
 
