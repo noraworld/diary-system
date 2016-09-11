@@ -44,6 +44,7 @@ class ArticlesController < ApplicationController
     @article.year  = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_i
     @article.month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_i
     @article.day   = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%d').to_i
+    @article.date  = Date.new(@article.year, @article.month, @article.day)
 
     if @article.save
       redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Published successfully!'
