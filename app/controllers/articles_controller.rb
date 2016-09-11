@@ -22,6 +22,8 @@ class ArticlesController < ApplicationController
     month = params[:month].to_i
     day   = params[:day].to_i
     @article = Article.find_by!(year: year, month: month, day: day)
+    @prev_article = Article.select('year, month, day').where('date < ?', @article.date).order('date DESC').first
+    @next_article = Article.select('year, month, day').where('date > ?', @article.date).order('date ASC').first
   end
 
   def new

@@ -6,6 +6,11 @@
   </div>
 <% end %>
 
+<% prev_article_link = '/' + format('%04d', @prev_article.year) + '/' + format('%02d', @prev_article.month) + '/' + format('%02d', @prev_article.day) if @prev_article %>
+<% next_article_link = '/' + format('%04d', @next_article.year) + '/' + format('%02d', @next_article.month) + '/' + format('%02d', @next_article.day) if @next_article %>
+<%= link_to 'prev', prev_article_link if prev_article_link %>
+<%= link_to 'next', next_article_link if next_article_link %>
+
 <div id="post-content">
   <%= qiita_markdown(@article.text) %>
 </div>
