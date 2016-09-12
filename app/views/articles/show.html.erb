@@ -6,6 +6,15 @@
   </div>
 <% end %>
 
+<div id="date-description" class="clearfix">
+  <span><%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %></span>
+  <% unless request.smart_phone? && !request.tablet? %>
+  <%= link_to 'Go to this month calendar', '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month), {:id => 'this-month-link'} %>
+  <% else %>
+  <%= link_to 'this month', '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month), {:id => 'this-month-link'} %>
+  <% end %>
+</div>
+
 <div id="post-content">
   <%= qiita_markdown(@article.text) %>
 </div>

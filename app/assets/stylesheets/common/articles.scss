@@ -269,6 +269,21 @@ $post-link-over-post-day: 1;
   }
 }
 
+#date-description {
+  font-size: 15px;
+  width: 95%;
+  max-width: 900px;
+  box-sizing: border-box;
+  margin: 0 auto 20px;
+  padding: 15px 2rem;
+  background-color: #f9f9ff;
+  border: 1px solid #e0e0ff;
+  border-radius: 5px
+}
+#this-month-link {
+  float: right;
+}
+
 $rule-space: 22px;
 $rule-color: rgba(0, 0, 0, 0.1);
 $rule-margin-left-and-right: 1.3rem;
@@ -700,6 +715,12 @@ $rule-margin-left-and-right: 1.3rem;
   }
   .dropzone {
     height: auto;
+  }
+
+  #date-description {
+    margin: 0 auto;
+    width: 100%;
+    border-radius: 0;
   }
 
 }
