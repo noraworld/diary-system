@@ -331,7 +331,7 @@ $rule-margin-left-and-right: 1.3rem;
   text-align: justify;
   word-break: break-all;
 
-  p {
+  p, iframe {
     margin-top: 31px;
     margin-bottom: 0;
   }
@@ -482,9 +482,30 @@ $rule-margin-left-and-right: 1.3rem;
     .vg { color: #008080 } /* Name.Variable.Global */
     .vi { color: #008080 } /* Name.Variable.Instance */
     .il { color: #009999 } /* Literal.Number.Integer.Long */
-
   }
 }
+
+.video-player-wrapper {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto 62px;
+}
+.video-player-wrapper:before {
+  content: "";
+  display: block;
+  padding-top: 56.25%;
+}
+.video-player-wrapper iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+
 
 // 画面横幅が十分大きいディスプレイのみ左右に prev_post, next_post ボタンを表示
 @media screen and (min-width: 1050px) {
@@ -551,6 +572,8 @@ $rule-margin-left-and-right: 1.3rem;
   }
 }
 
+
+// タブレットサイズ
 @media screen and (min-width: 501px) and (max-width: 800px) {
 
   #success-message, #failed-message {
@@ -598,6 +621,8 @@ $rule-margin-left-and-right: 1.3rem;
 
 }
 
+
+// スマホサイズ
 @media screen and (max-width: 500px) {
 
   #success-message, #failed-message {
