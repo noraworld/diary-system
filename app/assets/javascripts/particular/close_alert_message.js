@@ -7,11 +7,15 @@ $(function() {
     });
   });
   // Press esc key to close.
-  $(window).on('keydown', function(event) {
-    if ( !($('#times').length) ) {
+  window.addEventListener('keydown', function(event) {
+    if ((document.activeElement.nodeName === 'INPUT'
+    || document.activeElement.nodeName === 'TEXTAREA'
+    || document.activeElement.getAttribute('type') === 'text')
+    || document.activeElement.isContentEditable === true
+    || !($('#times').length) ) {
       return false;
     }
-    if (event.key === 'Escape') {
+    else if (event.key === 'Escape') {
       $('#times').parent().fadeOut(600, function() {
         $(this).remove();
       });
