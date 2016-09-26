@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@mixin margin-top-and-bottom($size) {
+  margin-top: $size;
+  margin-bottom: $size;
+}
+
 #success-message {
   letter-spacing: 0.5px;
   margin: 0 auto 20px;
@@ -331,7 +336,34 @@ $rule-margin-left-and-right: 1.3rem;
   text-align: justify;
   word-break: break-all;
 
-  p, iframe {
+  h1 {
+    // default: 30px;
+    font-size: 26px;
+    @include margin-top-and-bottom(20px);
+  }
+  h2 {
+    // default: 22.5px;
+    font-size: 22px;
+    @include margin-top-and-bottom(8px)
+  }
+  h3 {
+    // default: 17.55px;
+    font-size: 18px;
+  }
+  h4 {
+    // default: 15px;
+    font-size: 14px;
+  }
+  h5 {
+    // default: 12.45px;
+    font-size: 12px;
+  }
+  h6 {
+    // default: 10.05px;
+    font-size: 10px;
+  }
+
+  p, iframe, ul, ol {
     margin-top: 31px;
     margin-bottom: 0;
   }
@@ -347,7 +379,7 @@ $rule-margin-left-and-right: 1.3rem;
     background-color: #ffffff;
   }
 
-  ul {
+  ul, ol {
     padding-left: 1em;
     text-indent: -1em;
     list-style-position: inside;
