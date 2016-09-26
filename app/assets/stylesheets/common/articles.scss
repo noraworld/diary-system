@@ -413,7 +413,6 @@ $rule-margin-left-and-right: 1.3rem;
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
     font-size: 90%;
     padding: 2px 4px;
-    @include margin-left-and-right(3px);
     color: #4a4a4a;
     background-color: #e7e7e7;
     border-radius: 3px;
