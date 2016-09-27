@@ -343,28 +343,44 @@ $rule-margin-left-and-right: 1.3rem;
   h1 {
     // default: 30px;
     font-size: 26px;
-    @include margin-top-and-bottom(20px);
+    margin-top: 50px;
+    margin-bottom: 15px;
+    font-weight: normal;
   }
   h2 {
     // default: 22.5px;
     font-size: 22px;
-    @include margin-top-and-bottom(8px)
+    margin-top: 40px;
+    margin-bottom: 15px;
+    font-weight: normal;
   }
   h3 {
     // default: 17.55px;
     font-size: 18px;
+    margin-top: 31px;
+    margin-bottom: 10px;
+    font-weight: normal;
   }
   h4 {
     // default: 15px;
     font-size: 14px;
+    margin-top: 31px;
+    margin-bottom: 5px;
+    font-weight: normal;
   }
   h5 {
     // default: 12.45px;
     font-size: 12px;
+    margin-top: 31px;
+    margin-bottom: 5px;
+    font-weight: normal;
   }
   h6 {
     // default: 10.05px;
     font-size: 10px;
+    margin-top: 31px;
+    margin-bottom: 5px;
+    font-weight: normal;
   }
 
   p, iframe, ul, ol {
@@ -418,9 +434,25 @@ $rule-margin-left-and-right: 1.3rem;
     border-radius: 3px;
   }
 
+  blockquote {
+    color: #555;
+    font-style: italic;
+    border-left: solid 4px #ddd;
+    padding: 0.8em;
+    margin-left: 0.8em;
+    margin-right: 0;
+    @include margin-top-and-bottom(1em);
+    background-color: #f7f7f7;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
 }
-#post-content > *:first-child {
+#post-content > *:first-child, #post-content blockquote > *:first-child {
   margin-top: 0 !important;
+}
+#post-content h1+h2, #post-content h2+h3, #post-content h3+h4, #post-content h4+h5, #post-content h5+h6 {
+  margin-top: 10px;
 }
 #post-content h1+ol, #post-content h1+p, #post-content h1+ul, #post-content h2+ol, #post-content h2+p, #post-content h2+ul, #post-content h3+ol, #post-content h3+p, #post-content h3+ul, #post-content h4+ol, #post-content h4+p, #post-content h4+ul, #post-content h5+ol, #post-content h5+p, #post-content h5+ul, #post-content h6+ol, #post-content h6+p, #post-content h6+ul {
   margin-top: 0;
@@ -569,6 +601,11 @@ $rule-margin-left-and-right: 1.3rem;
     font-weight: bold;
     color: white;
     cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
   }
   #prev-post:hover, #next-post:hover {
     opacity: 0.8;
