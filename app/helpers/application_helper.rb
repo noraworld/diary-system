@@ -3,7 +3,7 @@ module ApplicationHelper
   # ページごとにタイトルを変更する
   def page_title
     if @page_title
-      title = @page_title
+      title = @page_title.to_s + ' - Noraworld Diary'
     else
       title = 'Noraworld Diary'
     end
