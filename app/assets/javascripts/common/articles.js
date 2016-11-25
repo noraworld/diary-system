@@ -6,8 +6,15 @@ $(function() {
   // YouTubeの埋め込みタグをdivで囲む
   $('iframe').wrap('<div class="video-player-wrapper">');
 
-  // *.noraworld.jpは現在のタブで開きリファラを有効にする
-  var domain = location.hostname.match(/^(.*?)([a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})[\:[0-9]*]?([\/].*?)?$/i)[2];
-  $('a[href*="' + domain + '"]').removeAttr('target rel');
+  // 自分が所有するドメインは現在のタブで開きリファラを有効にする
+  var myDomain = [
+    'noraworld.jp',
+    'noraworld.blog',
+    'diary.noraworld.jp'
+  ];
+  for (var i = 0; i < myDomain.length; i++) {
+    $('a[href*="http://'  + myDomain[i] + '"]').removeAttr('target rel');
+    $('a[href*="https://' + myDomain[i] + '"]').removeAttr('target rel');
+  }
 
 });
