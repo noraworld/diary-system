@@ -9,6 +9,7 @@ $(function() {
   // 自分が所有するドメインは現在のタブで開きリファラを有効にする
   var myDomain = [
     'noraworld.jp',
+    'blog.noraworld.jp',
     'noraworld.blog',
     'diary.noraworld.jp'
   ];
