@@ -1,10 +1,10 @@
 # Diary
-Simple diary system. Unlike a blog, this system is suitable for writing everyday life, events, thoughts and other miscellaneous contents.
+Simple diary application. Unlike a blog, this application is suitable for writing everyday life, events, thoughts and other miscellaneous contents daily in a sense of diary.
 
-This system is actually used by me. If you are interested in, please visit [Noraworld Diary](https://diary.noraworld.jp).
+This application is actually used by me. If you are interested in, please visit [Noraworld Diary](https://diary.noraworld.jp).
 
 ## Version
-This system works successfully under the following environments.
+This application works successfully under the following environments.
 
 * Ruby on Rails 4.2.6
 * Ruby 2.0.0p353
