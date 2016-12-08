@@ -28,7 +28,9 @@ SECRET_KEY_BASE='random string'
 ### Unicorn Socket
 `UNICORN_SOCKET` is socket file path of Unicorn for production environment. Basically, this file is located `RAILS_ROOT/tmp/unicorn.sock`, so the path is like `/home/USERNAME/diary/tmp/unicorn.sock`.
 
-**NOTICE:** You should install Unicorn before using it. If you only use in development environment, this environment is unnecessary.
+**NOTICE:** You should install Unicorn before using it.
+
+If you only use in development environment, this environment is unnecessary.
 
 ### Unicorn PID
 `UNICORN_PID` is same as `UNICORN_SOCKET`. The path is like `/home/USERNAME/diary/tmp/unicorn.pid`.
