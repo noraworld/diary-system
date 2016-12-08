@@ -21,13 +21,19 @@ UNICORN_PID='unicorn pid file path'
 RAILS_ENVIRONMENT='development or production'
 ```
 
-* `HOST_NAME` is your site URL like `diary.noraworld.jp`. You can use local IP address like `192.168.33.10` or provisional host name using `/etc/hosts` file for development environment.
+### Hostname
+`HOST_NAME` is your site URL like `diary.noraworld.jp`. You can use local IP address like `192.168.33.10` or provisional host name using `/etc/hosts` file for development environment.
 
-* `UNICORN_SOCKET` is socket file path of Unicorn for production environment. Basically, this file is located `RAILS_ROOT/tmp/unicorn.sock`, so the path is like `/home/USERNAME/diary/tmp/unicorn.sock`. **NOTICE:** You should install Unicorn before using it. If you only use in development environment, this environment is unnecessary.
+### Unicorn Socket
+`UNICORN_SOCKET` is socket file path of Unicorn for production environment. Basically, this file is located `RAILS_ROOT/tmp/unicorn.sock`, so the path is like `/home/USERNAME/diary/tmp/unicorn.sock`.
 
-* `UNICORN_PID` is same as `UNICORN_SOCKET`. The path is like `/home/USERNAME/diary/tmp/unicorn.pid`.
+**NOTICE:** You should install Unicorn before using it. If you only use in development environment, this environment is unnecessary.
 
-* `RAILS_ENVIRONMENT` is `development` or `production`. You can select either with your environment.
+### Unicorn PID
+`UNICORN_PID` is same as `UNICORN_SOCKET`. The path is like `/home/USERNAME/diary/tmp/unicorn.pid`.
+
+### Rails Environment
+`RAILS_ENVIRONMENT` is `development` or `production`. You can select either with your environment.
 
 ## License
 All codes of this repository are available under the MIT license. See the [LICENSE](https://github.com/noraworld/diary.noraworld.jp/blob/master/LICENSE) for more information.
