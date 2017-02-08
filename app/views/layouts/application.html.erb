@@ -15,53 +15,54 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <header>
-    <div id="header" class="clearfix">
-      <ul id="homeicon">
-        <li><a href="/" tabindex="-1"><span class="icon-calendar"></span></a></li>
-      </ul>
-
-      <ul id="hamburger">
-        <li><span class="icon-menu"></span></li>
-      </ul>
-      <div class="hamburger-menu">
-        <ul>
-          <li><a href="https://noraworld.jp"><span class="icon-home"></span>Portfolio</a></li>
-          <li><a href="https://noraworld.blog"><span class="icon-quill"></span>Blog</a></li>
-          <li><a href="https://twitter.com/noraworld_jp" target="_blank"><span class="icon-twitter"></span>Twitter</a></li>
-          <li><a href="https://www.instagram.com/noraworld_jp" target="_blank"><span class="icon-instagram"></span>Instagram</a></li>
-          <li><a href="https://github.com/noraworld" target="_blank"><span class="icon-github"></span>GitHub</a></li>
-          <li><a href="http://qiita.com/noraworld" target="_blank"><span class="icon-search"></span>Qiita</a></li>
-          <% if current_user %>
-          <% case controller.action_name %>
-          <% when 'index' %>
-          <li><%= link_to '/new' do %><span class="icon-plus"></span>New post<% end %></li>
-          <li><%= link_to logout_path, method: :delete do %><span class="icon-switch"></span>Logout<% end %></li>
-          <% when 'show' %>
-          <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
-          <li><%= link_to '/edit' + date do %><span class="icon-pencil"></span>Edit post<% end %></li>
-          <% when 'new', 'create' %>
-          <li><a href="#" id="publish-link"><span class="icon-upload"></span>Publish post</a></li>
-          <% when 'edit', 'update' %>
-          <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
-          <li><a href="#" id="update-link"><span class="icon-loop2"></span>Update post</a></li>
-          <li><%= link_to '/destroy' + date, { :id => 'delete-link', method: :delete, data: {confirm: 'Are you sure you want to delete?'} } do %><span class="icon-fire"></span>Delete post</li><% end %>
-          <% end %>
-          <% end %>
+  <div class="container">
+    <header>
+      <div id="header" class="clearfix">
+        <ul id="homeicon">
+          <li><a href="/" tabindex="-1"><span class="icon-calendar"></span></a></li>
         </ul>
-      </div>
 
-      <% unless request.smart_phone? && !request.tablet? %>
-      <ul id="right-header">
-        <li><a href="https://noraworld.jp" tabindex="-1">Home</a></li>
-        <li><a href="https://noraworld.blog" tabindex="-1">Blog</a></li>
-        <li><%= link_to 'Diary', '/', { :tabindex => -1 } %></li>
-        <li><a href="https://twitter.com/noraworld_jp" target="_blank" tabindex="-1"><span class="icon-twitter"></span></a></li>
-        <li><a href="https://www.instagram.com/noraworld_jp" target="_blank" tabindex="-1"><span class="icon-instagram"></span></a></li>
-        <li><a href="https://github.com/noraworld" target="_blank" tabindex="-1"><span class="icon-github"></span></a></li>
-        <li><a href="http://qiita.com/noraworld" target="_blank" tabindex="-1"><span class="icon-search"></span></a></li>
+        <ul id="hamburger">
+          <li><span class="icon-menu"></span></li>
+        </ul>
+        <div class="hamburger-menu">
+          <ul>
+            <li><a href="https://noraworld.jp"><span class="icon-home"></span>Portfolio</a></li>
+            <li><a href="https://noraworld.blog"><span class="icon-quill"></span>Blog</a></li>
+            <li><a href="https://twitter.com/noraworld_jp" target="_blank"><span class="icon-twitter"></span>Twitter</a></li>
+            <li><a href="https://www.instagram.com/noraworld_jp" target="_blank"><span class="icon-instagram"></span>Instagram</a></li>
+            <li><a href="https://github.com/noraworld" target="_blank"><span class="icon-github"></span>GitHub</a></li>
+            <li><a href="http://qiita.com/noraworld" target="_blank"><span class="icon-search"></span>Qiita</a></li>
+            <% if current_user %>
+            <% case controller.action_name %>
+            <% when 'index' %>
+            <li><%= link_to '/new' do %><span class="icon-plus"></span>New post<% end %></li>
+            <li><%= link_to logout_path, method: :delete do %><span class="icon-switch"></span>Logout<% end %></li>
+            <% when 'show' %>
+            <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
+            <li><%= link_to '/edit' + date do %><span class="icon-pencil"></span>Edit post<% end %></li>
+            <% when 'new', 'create' %>
+            <li><a href="#" id="publish-link"><span class="icon-upload"></span>Publish post</a></li>
+            <% when 'edit', 'update' %>
+            <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
+            <li><a href="#" id="update-link"><span class="icon-loop2"></span>Update post</a></li>
+            <li><%= link_to '/destroy' + date, { :id => 'delete-link', method: :delete, data: {confirm: 'Are you sure you want to delete?'} } do %><span class="icon-fire"></span>Delete post</li><% end %>
+            <% end %>
+            <% end %>
+          </ul>
+        </div>
 
-        <% if current_user %>
+        <% unless request.smart_phone? && !request.tablet? %>
+        <ul id="right-header">
+          <li><a href="https://noraworld.jp" tabindex="-1">Home</a></li>
+          <li><a href="https://noraworld.blog" tabindex="-1">Blog</a></li>
+          <li><%= link_to 'Diary', '/', { :tabindex => -1 } %></li>
+          <li><a href="https://twitter.com/noraworld_jp" target="_blank" tabindex="-1"><span class="icon-twitter"></span></a></li>
+          <li><a href="https://www.instagram.com/noraworld_jp" target="_blank" tabindex="-1"><span class="icon-instagram"></span></a></li>
+          <li><a href="https://github.com/noraworld" target="_blank" tabindex="-1"><span class="icon-github"></span></a></li>
+          <li><a href="http://qiita.com/noraworld" target="_blank" tabindex="-1"><span class="icon-search"></span></a></li>
+
+          <% if current_user %>
           <a id="config" class="icon-cog"></a>
           <div id="listbox">
             <ul>
@@ -81,16 +82,17 @@
               <% end %>
             </ul>
           </div>
-        <% end %>
-      </ul>
-      <% end %><%# スマホではヘッダー右側のリンク一覧を表示させない %>
-    </div>
-  </header>
+          <% end %>
+        </ul>
+        <% end %><%# スマホではヘッダー右側のリンク一覧を表示させない %>
+      </div>
+    </header>
 
-  <%= yield %>
+    <%= yield %>
 
-  <footer id="footer" class="clearfix">
-    <section id="copyright">Copyright &copy; 2016 <%= link_to 'Noraworld Diary', '/', { :tabindex => -1 } %>. All rights reserved.</section>
-  </footer>
+    <footer id="footer" class="clearfix">
+      <section id="copyright">Copyright &copy; 2016-<%= Time.now.in_time_zone('Tokyo').strftime('%Y').to_s %> <%= link_to 'Noraworld Diary', '/', { :tabindex => -1 } %>. All rights reserved.</section>
+    </footer>
+  </div>
 </body>
 </html>
