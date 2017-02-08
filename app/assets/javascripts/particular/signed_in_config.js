@@ -22,4 +22,13 @@ $(function() {
     $('#config').css('opacity', 1);
   });
 
+  $('body').on('keydown', function(event) {
+    if (event.key === 'Escape') {
+      if ($('#listbox').css('visibility') !== 'hidden') {
+        $('#listbox').css('visibility', 'hidden');
+        $('#config').css('opacity', 1);
+      }
+    }
+  });
+
 });
