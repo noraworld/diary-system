@@ -25,6 +25,10 @@
   font-family: 'Open Sans Regular';
   src: url('fonts/fonts/OpenSans-Regular.ttf');
 }
+@font-face {
+  font-family: 'Open Sans Bold';
+  src: url('fonts/fonts/OpenSans-Bold.ttf');
+}
 
 * {
   padding: 0;
@@ -151,16 +155,22 @@ $footer-color: #3f2e2e;
   font-size: 11px;
   color: $footer-color;
   background-color: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 -0.3625em 0.3125em rgba(0, 0, 0, 0.15);
+  box-shadow: 0 -0.0625em 0.3125em rgba(0, 0, 0, 0.25);
 }
 #copyright {
   text-align: center;
+  color: #3f2e2e;
+  font-family: 'Open Sans Regular';
+  font-size: 10px;
 }
 #copyright a {
   text-decoration: none;
   color: $footer-color;
-  text-decoration: underline;
+  font-family: 'Open Sans Bold';
   font-weight: bold;
+}
+#copyright a:hover {
+  border-bottom: #3f2e2e 1px solid;
 }
 
 .clearfix {
