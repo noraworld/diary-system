@@ -648,7 +648,7 @@ $rule-margin-left-and-right: 1.3rem;
     margin-top: 20px;
     border-top: 1px solid #cccccc;
     border-bottom: 1px solid #cccccc;
-    background-color: #eeeeee;
+    background-color: #dddddd;
   }
   #prev-next-post #prev-post, #prev-next-post #next-post {
     display: inline-block;
@@ -669,11 +669,13 @@ $rule-margin-left-and-right: 1.3rem;
     float: left;
     margin: 0;
     border-right: 0.5px solid #cccccc;
+    background-color: #eeeeee;
   }
   #prev-next-post #next-post {
     float: right;
     margin: 0;
     border-left: 0.5px solid #cccccc;
+    background-color: #eeeeee;
   }
   #prev-next-post #prev-post:before {
     content: "prev";
