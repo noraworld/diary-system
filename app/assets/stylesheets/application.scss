@@ -158,6 +158,11 @@ $footer-color: #3f2e2e;
   background-color: rgba(255, 255, 255, 0.92);
   box-shadow: 0 -0.0625em 0.3125em rgba(0, 0, 0, 0.25);
 }
+@media screen and (max-width: 1049px) {
+  #footer {
+    margin-top: 0;
+  }
+}
 #copyright {
   text-align: center;
   color: #3f2e2e;
@@ -285,7 +290,7 @@ $footer-color: #3f2e2e;
 
   footer {
     width: 100%;
-    margin-top: 2px !important;
+    /*margin-top: 2px !important;*/
   }
 
 }
