@@ -37,9 +37,15 @@
 }
 
 $normal-font-color: #444444;
+
+html {
+  position: relative;
+  min-height: 100%;
+}
 body {
   font-family: 'Open Sans Light';
   color: $normal-font-color;
+  margin-bottom: 60px;
 }
 
 a:link {
@@ -150,7 +156,10 @@ header {
 
 $footer-color: #3f2e2e;
 #footer {
-  position: relative;
+  /*position: relative;*/
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   margin-top: 20px;
   padding: 15px 0;
   font-size: 11px;
