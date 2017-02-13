@@ -5,13 +5,13 @@ class ArticlesController < ApplicationController
     # rootにアクセスしたときは@yearは今年
     @year = params[:year].to_i
     if @year === 0
-      @year = Time.now.in_time_zone('Tokyo').strftime('%Y').to_i
+      @year = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_i
     end
 
     # rootにアクセスしたときは@monthは今月
     @month = params[:month].to_i
     if @month === 0
-      @month = Time.now.in_time_zone('Tokyo').strftime('%m').to_i
+      @month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_i
     end
 
     @articles = Article.order('day').where(year: @year).where(month: @month)
