@@ -322,9 +322,15 @@ $post-link-over-post-day: 1;
 }
 #date-description #date {
   display: inline-block;
-  width: 60%;
+  width: 80%;
   height: 100%;
   padding: 15px 0;
+}
+#date-description #date.no-prev-post {
+  float: right;
+}
+#date-description #date.no-next-post {
+  float: left;
 }
 
 $rule-space: 22px;
@@ -919,6 +925,9 @@ $rule-margin-left-and-right: 1.3rem;
   }
   #date-description #prev-post, #date-description #next-post {
     width: 20%;
+  }
+  #date-description #date {
+    width: 60%;
   }
 
 }

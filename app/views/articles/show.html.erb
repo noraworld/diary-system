@@ -9,9 +9,17 @@
 <% end %>
 
 <div id="date-description" class="clearfix">
+  <%# prev-post, next-post, date の順番は重要。一番古いポストのときに date に float: right をかけたとき、順番がおかしくなるのを防ぐため %>
   <% if prev_article_link %><a href="<%= prev_article_link %>" id="prev-post"><span class="icon-arrow-left"></span></a><% end %>
-  <span id="date"><%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %></span>
   <% if next_article_link %><a href="<%= next_article_link %>" id="next-post"><span class="icon-arrow-right"></span></a><% end %>
+
+  <% if prev_article_link && !next_article_link %>
+  <span id="date" class="no-next-post"><%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %></span>
+  <% elsif !prev_article_link && next_article_link %>
+  <span id="date" class="no-prev-post"><%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %></span>
+  <% else %>
+  <span id="date"><%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %></span>
+  <% end %>
 </div>
 
 <div id="post-content">
