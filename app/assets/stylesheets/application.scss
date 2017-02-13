@@ -236,7 +236,6 @@ $footer-color: #3f2e2e;
   header {
     width: 100%;
     margin-bottom: 0px !important;
-    border-bottom: 1px solid #dddddd;
   }
   #header {
     width: 100% !important;
@@ -249,6 +248,10 @@ $footer-color: #3f2e2e;
   }
   #right-header {
     display: none;
+  }
+
+  #calendar-header {
+    border-top: 1px solid #cccccc;
   }
 
   #homeicon li a, #hamburger li span {
@@ -271,7 +274,7 @@ $footer-color: #3f2e2e;
     border-top: 1px solid #cccccc;
   }
   .hamburger-menu ul li:last-child {
-    border-bottom: 1px solid #cccccc;
+    /*border-bottom: 1px solid #cccccc;*/
   }
   .hamburger-menu ul li a {
     display: block;
