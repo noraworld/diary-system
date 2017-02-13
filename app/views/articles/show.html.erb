@@ -27,17 +27,9 @@
 
 <div id="prev-next-post" class="clearfix">
   <% if prev_article_link %>
-    <a href="<%= prev_article_link %>" id="prev-post">
-      <% if request.smart_phone? && !request.tablet? %>
-        <span class="icon-arrow-left2 icon"></span>
-      <% end %>
-    </a>
+    <a href="<%= prev_article_link %>" id="prev-post"><span class="icon-arrow-left2 icon"></span></a>
   <% end %>
   <% if next_article_link %>
-    <a href="<%= next_article_link %>" id="next-post">
-      <% if request.smart_phone? && !request.tablet? %>
-        <span class="icon-arrow-right2 icon"></span>
-      <% end %>
-    </a>
+    <a href="<%= next_article_link %>" id="next-post"><span class="icon-arrow-right2 icon"></span></a>
   <% end %>
 </div>
