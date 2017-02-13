@@ -292,22 +292,22 @@ $post-link-over-post-day: 1;
 #this-month-link {
   float: right;
 }
-#date-description.sp {
+#date-description {
   text-align: center;
 }
-#date-description.sp #prev-post, #date-description #next-post {
+#date-description #prev-post, #date-description #next-post {
   text-decoration: none;
   color: #25507b;
   /*background-color: #eaeaff;*/
   /*font-size: 20px;*/
 }
-#date-description.sp #prev-post {
+#date-description #prev-post {
   float: left;
 }
-#date-description.sp #next-post {
+#date-description #next-post {
   float: right;
 }
-#date-description.sp #prev-post, #date-description #next-post, #date-description.sp #date {
+#date-description #prev-post, #date-description #next-post, #date-description #date {
   /*font-size: 18px;*/
 }
 
@@ -658,7 +658,8 @@ $rule-margin-left-and-right: 1.3rem;
     margin: 20px auto;
     border-radius: 5px;
     border: 1px solid #e0e0ff;
-    background-color: #e0e0ff;
+    /*background-color: #e0e0ff;*/
+    background-color: #eeeeee;
     box-sizing: border-box;
   }
   #prev-next-post #prev-post, #prev-next-post #next-post {
@@ -896,28 +897,25 @@ $rule-margin-left-and-right: 1.3rem;
     border-radius: 0;
     padding: 0;
   }
-  #date-description.sp #prev-post, #date-description.sp #next-post {
+  #date-description #prev-post, #date-description #next-post {
     width: 20%;
     height: 100%;
     padding: 15px 0;
     box-sizing: border-box;
   }
-  #date-description.sp #prev-post {
+  #date-description #prev-post {
     border-right: 1px solid #e0e0ff;
     border-left: none;
   }
-  #date-description.sp #next-post {
+  #date-description #next-post {
     border-left: 1px solid #e0e0ff;
     border-right: none;
   }
-  #date-description.sp #date {
+  #date-description #date {
     display: inline-block;
     width: 60%;
     height: 100%;
     padding: 15px 0;
-  }
-  #date-description.pc {
-    padding: 15px;
   }
 
 }

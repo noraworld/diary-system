@@ -8,18 +8,11 @@
   </div>
 <% end %>
 
-<% if request.smart_phone? && !request.tablet? %>
-  <div id="date-description" class="clearfix sp">
-    <% if prev_article_link %><a href="<%= prev_article_link %>" id="prev-post"><span class="icon-arrow-left"></span></a><% end %>
-    <span id="date"><%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %></span>
-    <% if next_article_link %><a href="<%= next_article_link %>" id="next-post"><span class="icon-arrow-right"></span></a><% end %>
-  </div>
-<% else %>
-  <div id="date-description" class="clearfix pc">
-    <span id="date"><%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %></span>
-    <%= link_to 'Go to this month calendar', '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month), {:id => 'this-month-link'} %>
-  </div>
-<% end %>
+<div id="date-description" class="clearfix">
+  <% if prev_article_link %><a href="<%= prev_article_link %>" id="prev-post"><span class="icon-arrow-left"></span></a><% end %>
+  <span id="date"><%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %></span>
+  <% if next_article_link %><a href="<%= next_article_link %>" id="next-post"><span class="icon-arrow-right"></span></a><% end %>
+</div>
 
 <div id="post-content">
   <%= qiita_markdown(@article.text) %>
