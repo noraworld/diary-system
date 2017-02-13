@@ -26,6 +26,18 @@
 </div>
 
 <div id="prev-next-post" class="clearfix">
-  <%= link_to '', prev_article_link, {:id => 'prev-post'} if prev_article_link %>
-  <%= link_to '', next_article_link, {:id => 'next-post'} if next_article_link %>
+  <% if prev_article_link %>
+    <a href="<%= prev_article_link %>" id="prev-post">
+      <% if request.smart_phone? && !request.tablet? %>
+        <span class="icon-arrow-left2 icon"></span>
+      <% end %>
+    </a>
+  <% end %>
+  <% if next_article_link %>
+    <a href="<%= next_article_link %>" id="next-post">
+      <% if request.smart_phone? && !request.tablet? %>
+        <span class="icon-arrow-right2 icon"></span>
+      <% end %>
+    </a>
+  <% end %>
 </div>
