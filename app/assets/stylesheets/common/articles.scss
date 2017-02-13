@@ -287,7 +287,7 @@ $post-link-over-post-day: 1;
   padding: 15px 2rem;
   background-color: #f9f9ff;
   border: 1px solid #e0e0ff;
-  border-radius: 5px
+  border-radius: 5px;
 }
 #this-month-link {
   float: right;
@@ -295,11 +295,20 @@ $post-link-over-post-day: 1;
 #date-description.sp {
   text-align: center;
 }
+#date-description.sp #prev-post, #date-description #next-post {
+  text-decoration: none;
+  color: #25507b;
+  /*background-color: #eaeaff;*/
+  /*font-size: 20px;*/
+}
 #date-description.sp #prev-post {
   float: left;
 }
 #date-description.sp #next-post {
   float: right;
+}
+#date-description.sp #prev-post, #date-description #next-post, #date-description.sp #date {
+  /*font-size: 18px;*/
 }
 
 $rule-space: 22px;
@@ -872,6 +881,25 @@ $rule-margin-left-and-right: 1.3rem;
     margin: 0 auto;
     width: 100%;
     border-radius: 0;
+    padding: 0;
+  }
+  #date-description.sp #prev-post, #date-description.sp #next-post {
+    width: 20%;
+    height: 100%;
+    padding: 15px 0;
+    box-sizing: border-box;
+  }
+  #date-description.sp #prev-post {
+    border-right: 1px solid #e0e0ff;
+  }
+  #date-description.sp #next-post {
+    border-left: 1px solid #e0e0ff;
+  }
+  #date-description.sp #date {
+    display: inline-block;
+    width: 60%;
+    height: 100%;
+    padding: 15px 0;
   }
 
 }

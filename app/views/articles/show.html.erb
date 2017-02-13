@@ -10,9 +10,9 @@
 
 <% if request.smart_phone? && !request.tablet? %>
   <div id="date-description" class="clearfix sp">
-    <%= link_to 'prev', prev_article_link, {:id => 'prev-post'} if prev_article_link %>
+    <% if prev_article_link %><a href="<%= prev_article_link %>" id="prev-post"><span class="icon-arrow-left"></span></a><% end %>
     <span id="date"><%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %></span>
-    <%= link_to 'next', next_article_link, {:id => 'next-post'} if next_article_link %>
+    <% if next_article_link %><a href="<%= next_article_link %>" id="next-post"><span class="icon-arrow-right"></span></a><% end %>
   </div>
 <% else %>
   <div id="date-description" class="clearfix pc">
