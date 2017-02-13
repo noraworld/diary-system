@@ -294,18 +294,33 @@ $post-link-over-post-day: 1;
 }
 #date-description {
   text-align: center;
+  padding: 0;
 }
 #date-description #prev-post, #date-description #next-post {
   text-decoration: none;
   color: #25507b;
+  width: 10%;
+  height: 100%;
+  padding: 15px 0;
+  box-sizing: border-box;
   /*background-color: #eaeaff;*/
   /*font-size: 20px;*/
 }
 #date-description #prev-post {
   float: left;
+  border-right: 1px solid #e0e0ff;
+  border-left: none;
 }
 #date-description #next-post {
   float: right;
+  border-left: 1px solid #e0e0ff;
+  border-right: none;
+}
+#date-description #date {
+  display: inline-block;
+  width: 60%;
+  height: 100%;
+  padding: 15px 0;
 }
 #date-description #prev-post, #date-description #next-post, #date-description #date {
   /*font-size: 18px;*/
@@ -895,27 +910,9 @@ $rule-margin-left-and-right: 1.3rem;
     margin: 0 auto;
     width: 100%;
     border-radius: 0;
-    padding: 0;
   }
   #date-description #prev-post, #date-description #next-post {
     width: 20%;
-    height: 100%;
-    padding: 15px 0;
-    box-sizing: border-box;
-  }
-  #date-description #prev-post {
-    border-right: 1px solid #e0e0ff;
-    border-left: none;
-  }
-  #date-description #next-post {
-    border-left: 1px solid #e0e0ff;
-    border-right: none;
-  }
-  #date-description #date {
-    display: inline-block;
-    width: 60%;
-    height: 100%;
-    padding: 15px 0;
   }
 
 }
