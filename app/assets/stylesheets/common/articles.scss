@@ -653,18 +653,19 @@ $rule-margin-left-and-right: 1.3rem;
 @media screen and (max-width: 1049px) {
   #prev-next-post {
     display: block;
-    width: 100%;
-    margin-top: 20px;
-    border-top: 1px solid #e0e0ff;
-    border-bottom: 1px solid #e0e0ff;
+    max-width: 900px;
+    width: 95%;
+    margin: 20px auto;
+    border-radius: 5px;
+    border: 1px solid #e0e0ff;
     background-color: #e0e0ff;
   }
   #prev-next-post #prev-post, #prev-next-post #next-post {
     display: inline-block;
     font-size: 18px;
     font-weight: bold;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     width: 50%;
     box-sizing: border-box;
     height: 100%;
@@ -708,6 +709,9 @@ $rule-margin-left-and-right: 1.3rem;
 @media screen and (max-width: 500px) {
   #prev-next-post {
     margin-top: 0;
+    margin-bottom: 0;
+    width: 100%;
+    border-radius: 0;
   }
   #prev-next-post #prev-post, #prev-next-post #next-post {
     padding-top: 10px;
