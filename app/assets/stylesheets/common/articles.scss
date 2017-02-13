@@ -659,6 +659,7 @@ $rule-margin-left-and-right: 1.3rem;
     border-radius: 5px;
     border: 1px solid #e0e0ff;
     background-color: #e0e0ff;
+    box-sizing: border-box;
   }
   #prev-next-post #prev-post, #prev-next-post #next-post {
     display: inline-block;
@@ -903,9 +904,11 @@ $rule-margin-left-and-right: 1.3rem;
   }
   #date-description.sp #prev-post {
     border-right: 1px solid #e0e0ff;
+    border-left: none;
   }
   #date-description.sp #next-post {
     border-left: 1px solid #e0e0ff;
+    border-right: none;
   }
   #date-description.sp #date {
     display: inline-block;
