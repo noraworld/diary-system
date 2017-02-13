@@ -27,10 +27,12 @@
 </div>
 
 <div id="prev-next-post" class="clearfix">
-  <% if prev_article_link %>
-    <a href="<%= prev_article_link %>" id="prev-post"><span class="icon-arrow-left2 icon"></span></a>
-  <% end %>
-  <% if next_article_link %>
-    <a href="<%= next_article_link %>" id="next-post"><span class="icon-arrow-right2 icon"></span></a>
+  <% if prev_article_link && !next_article_link %>
+  <a href="<%= prev_article_link %>" id="prev-post" class="no-next-post"><span class="icon-arrow-left2 icon"></span></a>
+  <% elsif !prev_article_link && next_article_link %>
+  <a href="<%= next_article_link %>" id="next-post" class="no-prev-post"><span class="icon-arrow-right2 icon"></span></a>
+  <% elsif prev_article_link && next_article_link %>
+  <a href="<%= prev_article_link %>" id="prev-post"><span class="icon-arrow-left2 icon"></span></a>
+  <a href="<%= next_article_link %>" id="next-post"><span class="icon-arrow-right2 icon"></span></a>
   <% end %>
 </div>

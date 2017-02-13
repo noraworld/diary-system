@@ -679,14 +679,16 @@ $rule-margin-left-and-right: 1.3rem;
     width: 95%;
     margin: 20px auto;
     border-radius: 5px;
-    border: 1px solid #e0e0ff;
-    background-color: #eeeeee;
+    /*border: 1px solid #e0e0ff;*/
+    border: 1px solid #d8d8d8;
+    /*background-color: #f9f9ff;*/
+    background-color: #f7f7fb;
     box-sizing: border-box;
   }
   #prev-next-post #prev-post, #prev-next-post #next-post {
     display: inline-block;
     font-size: 18px;
-    font-weight: bold;
+    /*font-weight: bold;*/
     padding-top: 10px;
     padding-bottom: 10px;
     width: 50%;
@@ -707,14 +709,22 @@ $rule-margin-left-and-right: 1.3rem;
   #prev-next-post #prev-post {
     float: left;
     margin: 0;
-    border-right: 0.5px solid #e0e0ff;
+    /*border-right: 0.5px solid #e0e0ff;*/
+    border-right: 0.5px solid #d8d8d8;
     background-color: #f9f9ff;
+  }
+  #prev-next-post #prev-post.no-next-post {
+    border-right: 1px solid #d8d8d8;
   }
   #prev-next-post #next-post {
     float: right;
     margin: 0;
-    border-left: 0.5px solid #e0e0ff;
+    /*border-left: 0.5px solid #e0e0ff;*/
+    border-left: 0.5px solid #d8d8d8;
     background-color: #f9f9ff;
+  }
+  #prev-next-post #next-post.no-prev-post {
+    border-left: 1px solid #d8d8d8;
   }
   #prev-next-post #prev-post:after {
     content: "prev";
