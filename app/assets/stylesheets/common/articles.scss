@@ -422,6 +422,10 @@ $rule-margin-left-and-right: 1.3rem;
     background-color: #ffffff;
   }
 
+  img.emoji {
+    vertical-align: text-top;
+  }
+
   ul, ol {
     padding-left: 1.5em;
     /*text-indent: -1em;*/
