@@ -5,4 +5,9 @@ require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
 
-load 'tasks/emoji.rake'
+# Not work. Emoji rake task failed.
+# Emoji images will be downloaded by
+# running this rask.
+# Emoji images have already been downloaded,
+# so you don't have to run this task anyway.
+# load 'tasks/emoji.rake'
