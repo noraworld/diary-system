@@ -3,13 +3,16 @@ Simple diary application. Unlike a blog, this application is suitable for writin
 
 This application is actually used by me. If you are interested in, please visit [Noraworld Diary](https://diary.noraworld.jp).
 
-## Version
-This application works successfully under the following environments.
+## Setup
+You should create new user to post your diary.
 
-* Ruby on Rails 4.2.6
-* Ruby 2.0.0p353
+```Ruby
+$ rails console
+irb(main):001:0> User.create!(:username => "example", :password => "password")
+irb(main):002:0> exit
+```
 
-In terms of the RubyGems dependencies, see [Gemfile](https://github.com/noraworld/diary.noraworld.jp/blob/master/Gemfile).
+You can now log in with username `example` and password `password` in `/login` page. In production environment, run `RAILS_ENV=production rails console` instead of `rails console`. **The above command execution screen should not be seen by others in production environment** because it contains your secret password.
 
 ## Environment Variables
 The environment variables are under the control of `.env` file. Create `.env` file under Rails application directory and append the environment variables below to `.env` file.
