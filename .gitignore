@@ -17,7 +17,6 @@
 /tmp
 
 # Ignore secret files.
-/config/secrets.yml
 /.env
 
 # Ignore temp files.
