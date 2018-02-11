@@ -19,16 +19,16 @@
     <header>
       <div id="header" class="clearfix">
         <ul id="left-header">
-          <li><a href="/" tabindex="-1"><span class="icon-calendar"></span></a></li>
+          <li class="left-edge"><a href="/" tabindex="-1"><span class="icon-calendar"></span></a></li>
           <li>
-            <%= form_tag('/search', method: 'get', enforce_utf8: false) do %>
+            <%= form_tag('/search', method: 'get', enforce_utf8: false, :id => 'search-form') do %>
               <%= text_field_tag(:q, "#{params[:q]}", :placeholder => 'Search', :id => 'search') %>
             <% end %>
           </li>
         </ul>
 
         <ul id="hamburger">
-          <li><span class="icon-menu"></span></li>
+          <li class="right-edge"><span class="icon-menu"></span></li>
         </ul>
         <div class="hamburger-menu">
           <ul>

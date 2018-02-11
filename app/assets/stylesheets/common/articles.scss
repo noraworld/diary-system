@@ -541,7 +541,7 @@ $rule-margin-left-and-right: 1.3rem;
   width: 95%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 80px 0;
+  padding: 80px 40px;
   text-align: center;
   font-size: 16px;
   line-height: 35px;
@@ -553,9 +553,14 @@ $rule-margin-left-and-right: 1.3rem;
   box-sizing: border-box;
 }
 
+#search-form {
+  width: 225px;
+}
 #search {
   display: block;
-  width: 100%;
+  // padding によるはみ出しを防ぐために
+  // 微妙な割合になってしまう
+  width: 88.5%;
   height: 24px;
   padding: 6px 12px;
   font-size: 14px;

@@ -199,7 +199,7 @@ $footer-color: #3f2e2e;
   }
 }
 
-@media screen and (min-width: 501px) and (max-width: 650px) {
+@media screen and (min-width: 501px) and (max-width: 825px) {
 
   #right-header {
     display: none;
@@ -251,7 +251,13 @@ $footer-color: #3f2e2e;
     width: 100% !important;
   }
   header li {
-    padding: 1.4rem 3rem !important;
+    padding: 1.4rem 1rem !important;
+  }
+  header .left-edge {
+    padding-left: 2rem !important;
+  }
+  header .right-edge {
+    padding-right: 2rem !important;
   }
   #header span {
     font-size: 25px;
@@ -309,4 +315,16 @@ $footer-color: #3f2e2e;
     box-shadow: none;
   }
 
+}
+
+// 検索窓を追加したことにより
+// さらに横幅が小さい端末では
+// 検索窓を小さくするように設定
+@media screen and (max-width: 360px) {
+  #search-form {
+    width: 170px;
+  }
+  #search {
+    width: 84.5%;
+  }
 }
