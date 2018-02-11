@@ -40,7 +40,7 @@
             <li><a href="http://qiita.com/noraworld" target="_blank"><span class="icon-search"></span>Qiita</a></li>
             <% if current_user %>
             <% case controller.action_name %>
-            <% when 'index' %>
+            <% when 'index', 'search' %>
             <li><%= link_to '/new' do %><span class="icon-plus"></span>New post<% end %></li>
             <li><%= link_to logout_path, method: :delete do %><span class="icon-switch"></span>Logout<% end %></li>
             <% when 'show' %>
@@ -72,7 +72,7 @@
           <div id="listbox">
             <ul>
               <% case controller.action_name %>
-              <% when 'index' %>
+              <% when 'index', 'search' %>
               <li class="menulist"><%= link_to 'New post', '/new', { :class => 'menulink' } %></li>
               <li class="menulist"><%= link_to 'Sign out', logout_path, { :class => 'menulink', method: :delete } %></li>
               <% when 'show' %>
