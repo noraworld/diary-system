@@ -516,6 +516,64 @@ $rule-margin-left-and-right: 1.3rem;
   }
 }
 
+#search-result-content {
+  font-family: 'Open Sans Regular';
+  width: 95%;
+  max-width: 900px;
+  margin: 20px auto 0;
+  font-size: 15px;
+  line-height: 31px;
+  padding: 2rem;
+  box-sizing: border-box;
+  box-shadow: 0 0 1px #999;
+  @include note(#fcfcfc);
+  background-size: 100% 100%, 100% 100%, 100% $rule-space+1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: justify;
+  word-break: break-all;
+}
+#search-result-contents #search-result-content:first-child {
+  margin-top: 0;
+}
+#search-error-message {
+  font-family: 'BlinkMacSystemFont', 'Open Sans Light';
+  width: 95%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 0;
+  text-align: center;
+  font-size: 16px;
+  line-height: 35px;
+  letter-spacing: 0.5px;
+  color: #000000;
+  background-color: #fafbfc;
+  border: 1px solid #e1e4e8;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#search {
+  display: block;
+  width: 100%;
+  height: 24px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  font-family: "BlinkMacSystemFont", "Open Sans Light";
+}
+#search:focus {
+  border-color: #66afe9;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 2px rgba(102,175,233,.6);
+}
+
 .code-frame {
   border-radius: 3px;
   margin: 16px 0;

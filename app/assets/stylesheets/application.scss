@@ -147,7 +147,7 @@ header {
   float: left;
   padding: 20px 20px;
 }
-#homeicon {
+#left-header {
   float: left !important;
 }
 #hamburger, .hamburger-menu, .hamburger-menu ul li {
@@ -264,7 +264,7 @@ $footer-color: #3f2e2e;
     border-top: 1px solid #cccccc;
   }
 
-  #homeicon li a, #hamburger li span {
+  #left-header li a, #hamburger li span {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
   #hamburger {

@@ -15,6 +15,12 @@ module ApplicationHelper
     processor.call(markdown)[:output].to_s.html_safe
   end
 
+  def qiita_markdown_summary(markdown)
+    # length は omission の文字列を含むので、omission の文字列の長さだけ length を増やす
+    processor = Qiita::Markdown::SummaryProcessor.new(truncate: { length: 104, omission: ' ...' }, hostname: ENV['HOST_NAME'])
+    strip_tags(processor.call(markdown)[:output].to_s)
+  end
+
   # 数値の月表記を英語の月表記に変換する
   # month: 変換する月(integer), short: 先頭から何文字まで表示するか
   # return -> 英語の月表記(string)

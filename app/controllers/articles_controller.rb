@@ -79,14 +79,39 @@ class ArticlesController < ApplicationController
     redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month), notice: 'Deleted successfully!'
   end
 
-  private
-    def article_params
-      params.require(:article).permit(:text)
+  def search
+    @error_message = ''
+
+    if params[:q].blank?
+      @error_message = 'The query string must not be empty.'
+      return
     end
 
-    def signed_in?
-      if current_user == nil
-        redirect_to login_path
-      end
+    # maximum_characters は本当は定数にしたいけど
+    # Ruby ではなぜかメソッド内で定数を定義できないので
+    # とりあえず変数で定義しておく
+    maximum_characters = 128
+    if params[:q].length >= maximum_characters
+      @error_message = "The query string is too long. The maximum number of characters are #{maximum_characters}."
+      return
     end
+
+    @results = Article.where('text LIKE(?)', '%' + params[:q] + '%')
+
+    if @results.empty?
+      @error_message = "No matches for \"#{params[:q]}\"."
+    end
+  end
+
+  private
+
+  def article_params
+    params.require(:article).permit(:text)
+  end
+
+  def signed_in?
+    if current_user == nil
+      redirect_to login_path
+    end
+  end
 end
