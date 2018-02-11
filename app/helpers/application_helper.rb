@@ -17,7 +17,7 @@ module ApplicationHelper
 
   def qiita_markdown_summary(markdown)
     # length は omission の文字列を含むので、omission の文字列の長さだけ length を増やす
-    processor = Qiita::Markdown::SummaryProcessor.new(truncate: { length: 104, omission: ' ...' }, hostname: ENV['HOST_NAME'])
+    processor = Qiita::Markdown::SummaryProcessor.new(truncate: { length: 204, omission: ' ...' }, hostname: ENV['HOST_NAME'])
     strip_tags(processor.call(markdown)[:output].to_s)
   end
 

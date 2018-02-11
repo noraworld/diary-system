@@ -518,12 +518,12 @@ $rule-margin-left-and-right: 1.3rem;
 
 #search-result-content {
   font-family: 'Open Sans Regular';
-  width: 95%;
+  width: 87%;
   max-width: 900px;
   margin: 20px auto 0;
   font-size: 15px;
   line-height: 31px;
-  padding: 2rem;
+  padding: 1rem 2rem 1rem 2rem;
   box-sizing: border-box;
   box-shadow: 0 0 1px #999;
   @include note(#fcfcfc);
@@ -532,25 +532,73 @@ $rule-margin-left-and-right: 1.3rem;
   border-radius: 4px;
   text-align: justify;
   word-break: break-all;
+  display: block;
+  text-decoration: none;
+  color: #444444;
+}
+#search-result-content:hover {
+  transform: scale(1.02);
 }
 #search-result-contents #search-result-content:first-child {
   margin-top: 0;
 }
+
+#search-result-content #post-date {
+    background: #666;
+    color: #fff;
+    padding: 7px 0 7px 35px;
+    margin: 0 -16px 10px -48px;
+    height: 31px;
+    position: relative;
+    display: block;
+    text-decoration: none;
+}
+#search-result-content #post-date:before {
+    width: 0;
+    height: 0;
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-style: solid;
+    border-width: 0 15px 15px 0;
+    border-color: transparent;
+    border-right-color: #000;
+}
+// これを有効にするとリボンの右端をギザギザにできるけど
+// Firefox や Safari では若干ずれる
+// さらに Safari ではレンダリングが汚い
+// #search-result-content #post-date:after {
+//     width: 0;
+//     height: 0;
+//     content: "";
+//     position: absolute;
+//     top: 0px;
+//     left: 98%;
+//     border-width: 23.5px 20px;
+//     border-style: solid;
+//     border-color: #666;
+//     border-right-color: transparent;
+// }
+
 #search-error-message {
-  font-family: 'BlinkMacSystemFont', 'Open Sans Light';
-  width: 95%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
+  width: 87%;
   max-width: 900px;
   margin: 0 auto;
   padding: 80px 40px;
   text-align: center;
   font-size: 16px;
-  line-height: 35px;
+  line-height: 23px;
   letter-spacing: 0.5px;
   color: #000000;
   background-color: #fafbfc;
   border: 1px solid #e1e4e8;
   border-radius: 4px;
   box-sizing: border-box;
+}
+#search-error-message .reason {
+  margin-top: 15px;
 }
 
 #search-form {
@@ -572,7 +620,7 @@ $rule-margin-left-and-right: 1.3rem;
   border-radius: 4px;
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-  font-family: "BlinkMacSystemFont", "Open Sans Light";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
 }
 #search:focus {
   border-color: #66afe9;
@@ -873,6 +921,9 @@ $rule-margin-left-and-right: 1.3rem;
     padding-bottom: 1rem;
   }
 
+  #search-result-content #post-date {
+    margin: 0 -7px 10px -38px;
+  }
 }
 
 
@@ -1017,4 +1068,16 @@ $rule-margin-left-and-right: 1.3rem;
     width: 60%;
   }
 
+  #search-result-content #post-date {
+    margin: 0 -10px 10px -31px;
+  }
+  #search-result-content #post-date:before {
+    border-width: 0 10px 10px 0;
+  }
+  #search-result-contents #search-result-content:first-child, #search-error-message {
+    margin-top: 20px;
+  }
+  #search-result-content {
+    line-height: 26px;
+  }
 }

@@ -1,17 +1,17 @@
 <% if @error_message.empty? %>
 <div id="search-result-contents">
   <% @results.each do |result| %>
-  <div id="search-result-content">
+  <% post_link = '/' + format('%04d', result.year) + '/' + format('%02d', result.month) + '/' + format('%02d', result.day) %>
+  <a id="search-result-content" href="<%= post_link %>">
     <% post_date = format('%04d', result.year) + ' / ' + format('%02d', result.month) + ' / ' + format('%02d', result.day) %>
-    <% post_link = '/' + format('%04d', result.year) + '/' + format('%02d', result.month) + '/' + format('%02d', result.day) %>
-    <p><%= link_to post_date, post_link %></p>
+    <p id=post-date><%= post_date %></p>
     <p><%= qiita_markdown_summary(result.text) %></p>
-  </div>
+  </a>
   <% end %>
 </div>
 <% else %>
 <div id="search-error-message">
   <h2>Search Failed</h2>
-  <p><%= @error_message %></p>
+  <p class="reason"><%= @error_message %></p>
 </div>
 <% end %>
