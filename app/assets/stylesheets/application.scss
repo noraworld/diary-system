@@ -150,6 +150,11 @@ header {
 #left-header {
   float: left !important;
 }
+#left-header, #right-header, #hamburger {
+  height: 78px;
+  display: flex;
+  align-items: center;
+}
 #hamburger, .hamburger-menu, .hamburger-menu ul li {
   display: none;
 }
@@ -206,7 +211,7 @@ $footer-color: #3f2e2e;
   }
 
   #hamburger {
-    display: block;
+    display: flex;
   }
   .hamburger-menu {
     display: none;
@@ -274,7 +279,7 @@ $footer-color: #3f2e2e;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
   #hamburger {
-    display: block;
+    display: flex;
   }
   .hamburger-menu {
     display: none;
