@@ -11,6 +11,14 @@
   margin-right: $size;
 }
 
+$general-max-width: 750px;
+$img-max-width: 525px;
+$general-width-percent: 85%;
+$date-description-prev-next-post-width: 15%;
+// iPad の縦幅は 1024px なので、それ以上にすると
+// タブレットでは、画面左右の丸い矢印が出なくなる
+$prev-next-post-threshold: 1050px;
+
 #success-message {
   letter-spacing: 0.5px;
   margin: 0 auto 20px;
@@ -44,12 +52,12 @@
   width: 95%;
 }
 .show-message {
-  max-width: 900px;
-  width: 95%;
+  max-width: $general-max-width;
+  width: $general-width-percent;
 }
 .form-message {
-  max-width: 900px;
-  width: 95%;
+  max-width: $general-max-width;
+  width: $general-width-percent;
 }
 .sessions-message {
   max-width: 600px;
@@ -264,9 +272,9 @@ $post-link-over-post-day: 1;
 .dropzone {
   border: 2px dashed #b4bcc2;
   border-radius: 8px;
-  width: 95%;
+  width: $general-width-percent;
   // height: 23vh;
-  max-width: 900px;
+  max-width: $general-max-width;
   padding-left: 50px;
   padding-right: 50px;
   box-sizing: border-box;
@@ -281,8 +289,8 @@ $post-link-over-post-day: 1;
 
 #date-description {
   font-size: 15px;
-  width: 95%;
-  max-width: 900px;
+  width: $general-width-percent;
+  max-width: $general-max-width;
   box-sizing: border-box;
   margin: 0 auto 20px;
   padding: 15px 2rem;
@@ -300,7 +308,7 @@ $post-link-over-post-day: 1;
 #date-description #prev-post, #date-description #next-post {
   text-decoration: none;
   color: #25507b;
-  width: 10%;
+  width: $date-description-prev-next-post-width;
   height: 100%;
   padding: 15px 0;
   box-sizing: border-box;
@@ -323,7 +331,7 @@ $post-link-over-post-day: 1;
 }
 #date-description #date {
   display: inline-block;
-  width: 80%;
+  width: 100% - $date-description-prev-next-post-width - $date-description-prev-next-post-width;
   height: 100%;
   padding: 15px 0;
 }
@@ -347,13 +355,13 @@ $rule-margin-left-and-right: 1.3rem;
 
 #post-content {
   font-family: 'Open Sans Regular';
-  width: 95%;
-  max-width: 900px;
+  width: $general-width-percent;
+  max-width: $general-max-width;
   min-height: 600px;
   margin: 0 auto;
   font-size: 15px;
   line-height: 31px;
-  padding: 2rem;
+  padding: 1.3rem 2.2rem 1rem;
   box-sizing: border-box;
   box-shadow: 0 0 1px #999;
   @include note(#fcfcfc);
@@ -361,7 +369,7 @@ $rule-margin-left-and-right: 1.3rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   text-align: justify;
-  word-break: break-all;
+  // word-break: break-all;
 
   h1 {
     // default: 30px;
@@ -412,7 +420,7 @@ $rule-margin-left-and-right: 1.3rem;
   }
 
   img:not(.emoji) {
-    max-width: 700px;
+    max-width: $img-max-width;
     width: 100%;
     margin: 0 auto;
     display: block;
@@ -496,7 +504,7 @@ $rule-margin-left-and-right: 1.3rem;
 
 #textarea {
   text-align: center;
-  width: 95%;
+  width: $general-width-percent;
   // min-height: 55vh;
   // max-height: 55vh;
   /*min-height: 500px;*/
@@ -513,13 +521,14 @@ $rule-margin-left-and-right: 1.3rem;
     outline: none;
     -webkit-overflow-scrolling: touch;
     background-image: none;
+    width: 100%;
   }
 }
 
 #search-result-content {
   font-family: 'Open Sans Regular';
-  width: 87%;
-  max-width: 900px;
+  width: $general-width-percent;
+  max-width: $general-max-width;
   margin: 20px auto 0;
   font-size: 15px;
   line-height: 31px;
@@ -531,7 +540,7 @@ $rule-margin-left-and-right: 1.3rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   text-align: justify;
-  word-break: break-all;
+  // word-break: break-all;
   display: block;
   text-decoration: none;
   color: #444444;
@@ -583,8 +592,8 @@ $rule-margin-left-and-right: 1.3rem;
 
 #search-error-message {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
-  width: 87%;
-  max-width: 900px;
+  width: $general-width-percent;
+  max-width: $general-max-width;
   margin: 0 auto;
   padding: 80px 40px;
   text-align: center;
@@ -596,6 +605,7 @@ $rule-margin-left-and-right: 1.3rem;
   border: 1px solid #e1e4e8;
   border-radius: 4px;
   box-sizing: border-box;
+  word-wrap: break-word;
 }
 #search-error-message .reason {
   margin-top: 15px;
@@ -749,7 +759,7 @@ $rule-margin-left-and-right: 1.3rem;
 }
 
 // 画面横幅が十分大きいディスプレイのみ左右に prev_post, next_post ボタンを表示
-@media screen and (min-width: 1050px) {
+@media screen and (min-width: $prev-next-post-threshold) {
   #prev-next-post #prev-post, #prev-next-post #next-post {
     position: fixed;
     top: 0;
@@ -788,11 +798,11 @@ $rule-margin-left-and-right: 1.3rem;
   }
 }
 // それ以外は記事の一番下にリンクを表示
-@media screen and (max-width: 1049px) {
+@media screen and (max-width: $prev-next-post-threshold - 1) {
   #prev-next-post {
     display: block;
-    max-width: 900px;
-    width: 95%;
+    max-width: $general-max-width;
+    width: $general-width-percent;
     margin: 20px auto;
     border-radius: 5px;
     /*border: 1px solid #e0e0ff;*/
@@ -879,7 +889,7 @@ $rule-margin-left-and-right: 1.3rem;
 @media screen and (min-width: 501px) and (max-width: 800px) {
 
   #success-message, #failed-message {
-    width: 95%;
+    width: $general-width-percent;
     font-size: 1.4rem;
   }
 

@@ -69,7 +69,7 @@ header {
   position: relative;
 }
 #header {
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0 auto;
 }
 #header a {
@@ -207,6 +207,22 @@ $footer-color: #3f2e2e;
     display: none;
   }
 }
+
+// post-content の max-width が 700px の場合、
+// 画面の横幅が 824px を下回ると max-width ではなくなりはじめる
+// @media screen and (max-width: 823px) {
+  // If you enable this, <br> is ignored when it's not max width.
+  // しかし、これを有効にすると、改行の直前に句読点がない場合は
+  // 一つのパラグラフが句読点のないものになってしまう
+  // そもそもポエム形式はやめて、一文一パラグラフ形式にしたほうが見栄えがいいかもしれない
+  // br {
+  //   content: "";
+  // }
+  // br:after {
+  //   content: "";
+  //   margin-left: -0.259em;
+  // }
+// }
 
 @media screen and (min-width: 501px) and (max-width: 825px) {
 
