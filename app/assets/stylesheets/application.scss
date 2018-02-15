@@ -147,6 +147,10 @@ header {
   float: left;
   padding: 20px 20px;
 }
+#header li a {
+  display: flex;
+  align-items: center;
+}
 #left-header {
   float: left !important;
 }
