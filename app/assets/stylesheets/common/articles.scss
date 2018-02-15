@@ -612,8 +612,28 @@ $rule-margin-left-and-right: 1.3rem;
 }
 
 #search-form {
+  position: relative;
   width: 225px;
 }
+#search-button {
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  width: 15%;
+  height: calc(100% - 6px);
+  font-size: 16px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  background: none;
+}
+#search-button:before {
+  color: #757575;
+}
+#search-button:hover:before {
+  color: #555555;
+}
+
 #search {
   display: block;
   // padding によるはみ出しを防ぐために
