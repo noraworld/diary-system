@@ -24,5 +24,11 @@ module Diary
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Get rid of field_with_errors appearing when form error occurs.
+    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+      %Q(#{html_tag}).html_safe
+    end
+
   end
 end

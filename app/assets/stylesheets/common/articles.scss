@@ -513,8 +513,11 @@ $rule-margin-left-and-right: 1.3rem;
     // min-height: 55vh;
     // max-height: 55vh;
     /*min-height: 500px;*/
-    padding: 1.5rem 2rem 0;
-    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    // padding: 1.5rem 2rem 0;
+    padding: 1.3rem 2.2rem 1rem;
+    // font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-family: 'Open Sans Regular';
+    text-align: initial;
     // font-size: 16px;
     // line-height: 25px;
     resize: none;
@@ -1075,8 +1078,11 @@ $rule-margin-left-and-right: 1.3rem;
     border: 1px solid grey;
     border-radius: 5px;
     height: 100%;
+    width: 95%;
     #post-content {
       padding-bottom: 0.1rem;
+      padding-left: 1.12rem;
+      padding-right: 1.12rem;
       height: 100%;
       min-height: 100%;
       max-height: 100%;
@@ -1084,6 +1090,7 @@ $rule-margin-left-and-right: 1.3rem;
   }
   .dropzone {
     height: auto;
+    width: 95%;
   }
 
   #date-description {
