@@ -350,6 +350,15 @@ $footer-color: #3f2e2e;
     width: 170px;
   }
   #search {
-    width: 84.5%;
+    width: 80%;
+    padding-right: 20px;
+  }
+  #search:focus {
+    width: 71.5%;
+    padding-right: 34.5px;
+  }
+  #search-button {
+    width: 20%;
+    background: linear-gradient(to left, white 85%, rgba(255, 255, 255, 0));
   }
 }

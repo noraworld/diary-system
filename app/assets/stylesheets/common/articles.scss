@@ -628,7 +628,7 @@ $rule-margin-left-and-right: 1.3rem;
   border: none;
   border-radius: 0 4px 4px 0;
   cursor: pointer;
-  background: none;
+  background: linear-gradient(to left, rgba(255, 255, 255, 1) 90%, rgba(255, 255, 255, 0));
 }
 #search-button:before {
   color: #757575;
@@ -641,9 +641,9 @@ $rule-margin-left-and-right: 1.3rem;
   display: block;
   // padding によるはみ出しを防ぐために
   // 微妙な割合になってしまう
-  width: 88.5%;
+  width: 80%;
   height: 24px;
-  padding: 6px 12px;
+  padding: 6px 31px 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
   color: #555;
@@ -658,6 +658,8 @@ $rule-margin-left-and-right: 1.3rem;
 #search:focus {
   border-color: #66afe9;
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 2px rgba(102,175,233,.6);
+  width: 78%;
+  padding-right: 35.5px;
 }
 
 .code-frame {
