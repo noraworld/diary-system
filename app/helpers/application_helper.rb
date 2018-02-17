@@ -26,6 +26,23 @@ module ApplicationHelper
     end
   end
 
+  # Copyright の年を適切に表示させる
+  def copyright_year
+    now = Time.now.in_time_zone('Tokyo').strftime('%Y').to_s
+
+    if ENV['LAUNCHED_SINCE']
+      since = ENV['LAUNCHED_SINCE'].to_s
+    else
+      since = Time.now.in_time_zone('Tokyo').strftime('%Y').to_s
+    end
+
+    if since.to_i < now.to_i
+      since + '-' + now
+    else
+      now
+    end
+  end
+
   # Qiita::Markdownを使用する
   def qiita_markdown(markdown)
     processor = Qiita::Markdown::Processor.new(hostname: ENV['HOST_NAME'], script: true)
