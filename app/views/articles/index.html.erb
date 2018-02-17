@@ -1,3 +1,8 @@
+<% unless @route %>
+  <% @page_title       = @year.to_s + ' ' + to_english_month(@month).to_s %>
+  <% @page_description = false %>
+<% end %>
+
 <% if flash[:notice] %>
   <div id="success-message" class="index-message">
     <%= flash[:notice] %><span id="times">&times;</span>

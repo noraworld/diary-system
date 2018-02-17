@@ -19,6 +19,8 @@ The environment variables are under the control of `.env` file. Create `.env` fi
 
 ```Ruby
 HOST_NAME='your site URL'
+SITE_TITLE='your site title'
+SITE_DESCRIPTION='your site description'
 UNICORN_SOCKET='unicorn socket file path'
 UNICORN_PID='unicorn pid file path'
 RAILS_ENVIRONMENT='development or production'
@@ -28,10 +30,16 @@ SECRET_KEY_BASE='random string'
 ### Hostname
 `HOST_NAME` is your site URL like `diary.noraworld.jp`. You can use local IP address like `192.168.33.10` or provisional host name using `/etc/hosts` file for development environment.
 
+### Site Title
+`SITE_TITLE` is your site title like `Noraworld Diary`.
+
+### Site Description
+`SITE_DESCRIPTION` is your site description like `Noraworld Diary is a simple and personal diary for noraworld`. This description is used as a search engine description.
+
 ### Unicorn Socket
 `UNICORN_SOCKET` is socket file path of Unicorn for production environment. Basically, this file is located `RAILS_ROOT/tmp/unicorn.sock`, so the path is like `/home/USERNAME/diary/tmp/unicorn.sock`.
 
-**NOTICE:** You should install Unicorn before using it.
+**NOTICE:** You should install Unicorn before using it. Simply run `bundle install` to install Unicorn.
 
 If you only use in development environment, this environment is unnecessary.
 

@@ -2,6 +2,12 @@ class ArticlesController < ApplicationController
   before_action :signed_in?, only: [:new, :create, :edit, :update, :destroy]
 
   def index
+    if params[:year].to_i == 0 && params[:month].to_i == 0
+      @route = true
+    else
+      @route = false
+    end
+
     # rootにアクセスしたときは@yearは今年
     @year = params[:year].to_i
     if @year === 0

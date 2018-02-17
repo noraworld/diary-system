@@ -2,10 +2,27 @@ module ApplicationHelper
 
   # ページごとにタイトルを変更する
   def page_title
-    if @page_title
-      title = @page_title.to_s + ' - Noraworld Diary'
+    if @page_title && ENV['SITE_TITLE']
+      @page_title.to_s + ' - ' + ENV['SITE_TITLE'].to_s
+    elsif @page_title && !ENV['SITE_TITLE']
+      @page_title.to_s + ' - ' + request.domain
+    elsif !@page_title && ENV['SITE_TITLE']
+      ENV['SITE_TITLE']
+    elsif !@page_title && !ENV['SITE_TITLE']
+      request.domain
+    end
+  end
+
+  # トップページにはサイトの説明文、記事の詳細には、記事内容の要約を meta description に設定する
+  def page_description
+    if @page_description == false
+      false
+    elsif @page_description
+      @page_description.to_s
+    elsif ENV['SITE_DESCRIPTION']
+      ENV['SITE_DESCRIPTION'].to_s
     else
-      title = 'Noraworld Diary'
+      false
     end
   end
 
@@ -15,10 +32,12 @@ module ApplicationHelper
     processor.call(markdown)[:output].to_s.html_safe
   end
 
+  # 検索結果や meta description に表示させる 200 文字程度の要約
   def qiita_markdown_summary(markdown)
     # length は omission の文字列を含むので、omission の文字列の長さだけ length を増やす
     processor = Qiita::Markdown::SummaryProcessor.new(truncate: { length: 204, omission: ' ...' }, hostname: ENV['HOST_NAME'])
-    strip_tags(processor.call(markdown)[:output].to_s)
+    # 1 つ以上の改行は 1 つのスペースに置き換える。さらに、ポエム式記述法で、改行直前に句読点がある場合は、置き換えたスペースを省略する。
+    strip_tags(processor.call(markdown)[:output].to_s).gsub(/\n+/, ' ').gsub('、 ', '、').gsub('。 ', '。')
   end
 
   # 数値の月表記を英語の月表記に変換する
