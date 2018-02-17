@@ -86,7 +86,8 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    @error_message = ''
+    @error_message  = ''
+    @failed_keyword = ''
 
     if params[:q].blank?
       @error_message = 'The query string must not be empty.'
@@ -97,7 +98,7 @@ class ArticlesController < ApplicationController
     # Ruby ではなぜかメソッド内で定数を定義できないので
     # とりあえず変数で定義しておく
     maximum_characters = 128
-    if params[:q].length >= maximum_characters
+    if params[:q].length > maximum_characters
       @error_message = "The query string is too long. The maximum number of characters are #{maximum_characters}."
       return
     end
@@ -105,7 +106,8 @@ class ArticlesController < ApplicationController
     @results = Article.where('text LIKE(?)', '%' + params[:q] + '%')
 
     if @results.empty?
-      @error_message = "No matches for \"#{params[:q]}\"."
+      @error_message  = 'No matches for'
+      @failed_keyword = "#{params[:q]}"
     end
   end
 

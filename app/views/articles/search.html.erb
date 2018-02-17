@@ -3,7 +3,11 @@
   <% @page_description = "Search results of `#{params[:q]}`." %>
 <% else %>
   <% @page_title       = 'Search Failed' %>
-  <% @page_description = "#{@error_message.gsub(/"/, "`")} Please try another keyword." %>
+  <% if @failed_keyword.empty? %>
+    <% @page_description = "#{@error_message} Please try another keyword." %>
+  <% else %>
+    <% @page_description = "#{@error_message} `#{@failed_keyword}`. Please try another keyword." %>
+  <% end %>
 <% end %>
 
 <% if @error_message.empty? %>
@@ -20,6 +24,10 @@
 <% else %>
 <div id="search-error-message">
   <h2>Search Failed</h2>
-  <p class="reason"><%= @error_message %></p>
+  <% if @failed_keyword.empty? %>
+    <p class="reason"><%= @error_message %></p>
+  <% else %>
+    <p class="reason"><%= @error_message %> "<b><%= @failed_keyword %></b>".</p>
+  <% end %>
 </div>
 <% end %>
