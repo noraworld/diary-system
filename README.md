@@ -22,8 +22,8 @@ HOST_NAME='application site’s URL'
 SITE_TITLE='application site’s title'
 SITE_DESCRIPTION='application site’s description'
 LAUNCHED_SINCE='year you have launched the application'
-
 RAILS_ENVIRONMENT='development or production'
+
 SECRET_KEY_BASE='random string'
 UNICORN_SOCKET='unicorn socket file path'
 UNICORN_PID='unicorn pid file path'
@@ -36,7 +36,7 @@ UNICORN_PID='unicorn pid file path'
 `SITE_TITLE` is the application site's title like `Noraworld Diary`.
 
 ### Site Description
-`SITE_DESCRIPTION` is the application site's description like `Noraworld Diary is a simple and personal diary for noraworld`. This description is used as a search engine description.
+`SITE_DESCRIPTION` is the application site's description like `Noraworld Diary is a simple and personal diary for noraworld`. This description is used as a search engine description. It's recommended to make shorter than 150 characters.
 
 ### Launched Since
 `LAUNCHED_SINCE` is the year that you've launched the application. This value is used for copyright year in footer. For example, if it was 2018 this year and you've launched the application in 2016, the copyright becomes like `Copyright © 2016-2018`.
