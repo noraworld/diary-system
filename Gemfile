@@ -35,7 +35,7 @@ gem 'unicorn'
 # Additional packages here
 gem 'jpmobile'
 gem 'github-linguist'
-gem 'qiita-markdown'
+gem 'qiita-markdown', '>= 0.15.0'
 gem 'gemoji'
 gem 'dropzonejs-rails'
 gem 'ruby-filemagic'

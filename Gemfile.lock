@@ -35,6 +35,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     arel (6.0.4)
     bcrypt (3.1.11)
     binding_of_caller (0.8.0)
@@ -59,22 +61,22 @@ GEM
     dropzonejs-rails (0.8.2)
       rails (> 3.1)
     erubis (2.7.0)
-    escape_utils (1.2.1)
+    escape_utils (1.1.1)
     execjs (2.7.0)
     ffi (1.9.21)
     gemoji (3.0.0)
-    github-linguist (6.0.1)
-      charlock_holmes (~> 0.7.5)
-      escape_utils (~> 1.2.0)
+    github-linguist (4.8.18)
+      charlock_holmes (~> 0.7.3)
+      escape_utils (~> 1.1.0)
       mime-types (>= 1.19)
-      rugged (>= 0.25.1)
+      rugged (>= 0.23.0b)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     greenmat (3.2.2.3)
     html-pipeline (2.7.1)
       activesupport (>= 2)
       nokogiri (>= 1.4)
-    i18n (0.9.4)
+    i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -87,7 +89,7 @@ GEM
     json (1.8.6)
     kgio (2.11.2)
     libv8 (3.16.14.19)
-    loofah (2.1.1)
+    loofah (2.2.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.0)
@@ -104,17 +106,17 @@ GEM
       mini_portile2 (~> 2.3.0)
     nokogumbo (1.5.0)
       nokogiri
+    public_suffix (3.0.2)
     pygments.rb (1.2.1)
       multi_json (>= 1.0.0)
-    qiita-markdown (0.10.0)
-      activesupport
+    qiita-markdown (0.24.0)
+      addressable
       gemoji
-      github-linguist
-      greenmat (>= 3.2.0.2, < 4)
+      github-linguist (~> 4.0)
+      greenmat (= 3.2.2.3)
       html-pipeline (~> 2.0)
       mem
-      pygments.rb
-      rugged (>= 0.21.1b2)
+      pygments.rb (~> 1.0)
       sanitize
     rack (1.6.8)
     rack-test (0.6.3)
@@ -214,7 +216,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jpmobile
   jquery-rails
-  qiita-markdown
+  qiita-markdown (>= 0.15.0)
   rails (= 4.2.10)
   rmagick
   ruby-filemagic
