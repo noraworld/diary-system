@@ -295,7 +295,7 @@ $footer-color: #3f2e2e;
     border-top: 1px solid #cccccc;
   }
 
-  #left-header li a, #hamburger li span {
+  #left-header li a, #hamburger li span, #left-header li #search-form #search-button {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
   #hamburger {
