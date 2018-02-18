@@ -64,18 +64,61 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
-    @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
+    if ENV['RAILS_ENV'] == 'production'
+      @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
+      @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
+    # 開発環境ではポストしていない日に新たに記事を追加して編集することができるようにする
+    elsif ENV['RAILS_ENV'] == 'development'
+      begin
+        @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
+      rescue
+        @article = Article.new
+        @article.year  = params[:year].to_i
+        @article.month = params[:month].to_i
+        @article.day   = params[:day].to_i
+        @article.date  = Date.new(@article.year, @article.month, @article.day)
+      end
+
+      @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
+    end
   end
 
   def update
-    @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
+    if ENV['RAILS_ENV'] == 'production'
+      @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
 
-    if @article.update(article_params)
-      redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Updated successfully!'
-    else
-      flash.now[:alert] = 'Updated failed...'
-      render 'edit'
+      if @article.update(article_params)
+        redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Updated successfully!'
+      else
+        flash.now[:alert] = 'Updated failed...'
+        render 'edit'
+      end
+    # 開発環境ではポストしていない日に新たに記事を追加して編集することができるようにする
+    elsif ENV['RAILS_ENV'] == 'development'
+      begin
+        @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
+
+        if @article.update(article_params)
+          redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Updated successfully!'
+        else
+          flash.now[:alert] = 'Updated failed...'
+          render 'edit'
+        end
+      rescue
+        @article = Article.new(article_params)
+
+        @article.year  = params[:year].to_i
+        @article.month = params[:month].to_i
+        @article.day   = params[:day].to_i
+        @article.date  = Date.new(@article.year, @article.month, @article.day)
+
+        if @article.save
+          redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Appended successfully!'
+        else
+          flash.now[:alert] = 'Append failed...'
+          render 'edit'
+        end
+      end
     end
   end
 
