@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   post   '/upload' => 'uploads#upload'
   get    '/search' => 'articles#search'
 
+  get    '/sample' => 'articles#show'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
