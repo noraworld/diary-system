@@ -15,6 +15,8 @@ $general-max-width: 750px;
 $img-max-width: 525px;
 $general-width-percent: 85%;
 $date-description-prev-next-post-width: 15%;
+$post-content-table-border-outside: 1px solid #c3c9d0;
+$post-content-table-border-inside:  1px solid #e1e4e8;
 // iPad の縦幅は 1024px なので、それ以上にすると
 // タブレットでは、画面左右の丸い矢印が出なくなる
 $prev-next-post-threshold: 1050px;
@@ -65,19 +67,19 @@ $prev-next-post-threshold: 1050px;
 }
 
 $calendar-angulus-radius: 10px;
-td {
+#calendar td {
   border-radius: 4px;
 }
-tr:first-child td:first-child {
+#calendar tr:first-child td:first-child {
   border-top-left-radius: $calendar-angulus-radius;
 }
-tr:first-child td:last-child {
+#calendar tr:first-child td:last-child {
   border-top-right-radius: $calendar-angulus-radius;
 }
-tr:last-child td:first-child {
+#calendar tr:last-child td:first-child {
   border-bottom-left-radius: $calendar-angulus-radius;
 }
-tr:last-child td:last-child {
+#calendar tr:last-child td:last-child {
   border-bottom-right-radius: $calendar-angulus-radius;
 }
 
@@ -413,7 +415,7 @@ $rule-margin-left-and-right: 1.3rem;
     font-weight: normal;
   }
 
-  p, iframe, ul, ol {
+  p, iframe, ul, ol, dl, table {
     margin-top: 31px;
     margin-bottom: 0;
   }
@@ -479,6 +481,73 @@ $rule-margin-left-and-right: 1.3rem;
       width: 20px;
       height: 20px;
       vertical-align: middle;
+    }
+  }
+
+  dl {
+    dt {
+      font-weight: bold;
+      font-style: oblique;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
+      margin-top: 10px;
+    }
+    dd {
+      padding-left: 1.5em;
+    }
+  }
+  dl dt:first-child {
+    margin-top: 0;
+  }
+
+  table {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
+    font-size: 16px;
+    display: block;
+    overflow: auto;
+    margin: 1.5em 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: transparent;
+    border: none;
+
+    tr:nth-child(odd) {
+      background-color: #fafbfc;
+    }
+    tr:nth-child(even) {
+      background-color: #fff;
+    }
+
+    thead {
+      border-top:   $post-content-table-border-outside;
+      border-right: $post-content-table-border-outside;
+      border-left:  $post-content-table-border-outside;
+    }
+    tbody {
+      border-right:  $post-content-table-border-outside;
+      border-bottom: $post-content-table-border-outside;
+      border-left:   $post-content-table-border-outside;
+    }
+
+    th {
+      font-weight: 700;
+      background-color: #fff;
+      padding: 8px 10px;
+
+      border-right:  $post-content-table-border-inside;
+      border-bottom: $post-content-table-border-inside;
+    }
+    td {
+      padding: 8px 10px;
+
+      border-right:  $post-content-table-border-inside;
+      border-bottom: $post-content-table-border-inside;
+    }
+
+    tr th:last-child, tr td:last-child {
+      border-right:  none;
+    }
+    tr:last-child td {
+      border-bottom: none;
     }
   }
 
@@ -554,7 +623,13 @@ $rule-margin-left-and-right: 1.3rem;
 #post-content h1+h2, #post-content h2+h3, #post-content h3+h4, #post-content h4+h5, #post-content h5+h6 {
   margin-top: 10px;
 }
-#post-content h1+ol, #post-content h1+p, #post-content h1+ul, #post-content h2+ol, #post-content h2+p, #post-content h2+ul, #post-content h3+ol, #post-content h3+p, #post-content h3+ul, #post-content h4+ol, #post-content h4+p, #post-content h4+ul, #post-content h5+ol, #post-content h5+p, #post-content h5+ul, #post-content h6+ol, #post-content h6+p, #post-content h6+ul, #post-content blockquote+* {
+#post-content h1+ol, #post-content h1+p, #post-content h1+ul, #post-content h1+dl,
+#post-content h2+ol, #post-content h2+p, #post-content h2+ul, #post-content h2+dl,
+#post-content h3+ol, #post-content h3+p, #post-content h3+ul, #post-content h3+dl,
+#post-content h4+ol, #post-content h4+p, #post-content h4+ul, #post-content h4+dl,
+#post-content h5+ol, #post-content h5+p, #post-content h5+ul, #post-content h5+dl,
+#post-content h6+ol, #post-content h6+p, #post-content h6+ul, #post-content h6+dl,
+#post-content blockquote+* {
   margin-top: 0;
 }
 
@@ -1076,7 +1151,7 @@ $rule-margin-left-and-right: 1.3rem;
     width: 5rem;
   }
 
-  table {
+  #calendar {
     border-collapse: collapse;
   }
   .day-box, #day-of-week {
@@ -1090,16 +1165,19 @@ $rule-margin-left-and-right: 1.3rem;
   #day-of-week {
     height: 5rem;
   }
-  tr:first-child td:first-child {
+  #calendar td {
+    border-radius: 0;
+  }
+  #calendar tr:first-child td:first-child {
     border-top-left-radius: 0;
   }
-  tr:first-child td:last-child {
+  #calendar tr:first-child td:last-child {
     border-top-right-radius: 0;
   }
-  tr:last-child td:first-child {
+  #calendar tr:last-child td:first-child {
     border-bottom-left-radius: 0;
   }
-  tr:last-child td:last-child {
+  #calendar tr:last-child td:last-child {
     border-bottom-right-radius: 0;
   }
   #day-of-week p {
