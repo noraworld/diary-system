@@ -17,6 +17,7 @@ $general-width-percent: 85%;
 $date-description-prev-next-post-width: 15%;
 $post-content-table-border-outside: 1px solid #c3c9d0;
 $post-content-table-border-inside:  1px solid #e1e4e8;
+$system-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
 // iPad の縦幅は 1024px なので、それ以上にすると
 // タブレットでは、画面左右の丸い矢印が出なくなる
 $prev-next-post-threshold: 1050px;
@@ -487,8 +488,8 @@ $rule-margin-left-and-right: 1.3rem;
   dl {
     dt {
       font-weight: bold;
-      font-style: oblique;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
+      // font-style: oblique;
+      font-family: $system-font;
       margin-top: 10px;
     }
     dd {
@@ -500,7 +501,7 @@ $rule-margin-left-and-right: 1.3rem;
   }
 
   table {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
+    font-family: $system-font;
     font-size: 16px;
     display: block;
     overflow: auto;
@@ -574,6 +575,9 @@ $rule-margin-left-and-right: 1.3rem;
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
   }
+  .footnotes hr {
+    margin-bottom: 0;
+  }
 
   code {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -586,16 +590,24 @@ $rule-margin-left-and-right: 1.3rem;
 
   blockquote {
     font-family: Helvetica, メイリオ, Meiryo, 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN';
-    color: #555;
     font-style: oblique;
-    border-left: solid 4px #ddd;
-    padding: 0.8em;
-    margin-left: 0.8em;
-    margin-right: 0;
-    @include margin-top-and-bottom(1em);
+
+    color: #555;
     background-color: #f7f7f7;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+
+    padding: 0.8em;
+    margin: 1em 0.8em;
+
+    border-width: 1px 1px 1px 4px;
+    border-style: solid;
+    border-color: #e2e2e2 #e2e2e2 #e2e2e2 #ddd;
+
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+
+    blockquote {
+      margin: 0.8em 0;
+    }
   }
 
   summary {
@@ -614,6 +626,12 @@ $rule-margin-left-and-right: 1.3rem;
 
   .footnotes {
     font-size: 12px;
+  }
+  .footnotes ol li p {
+    margin-top: 8px;
+  }
+  .footnotes ol, .footnotes ol li:first-child p {
+    margin-top: 18px;
   }
 
 }
@@ -732,7 +750,7 @@ $rule-margin-left-and-right: 1.3rem;
 // }
 
 #search-error-message {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
+  font-family: $system-font;
   width: $general-width-percent;
   max-width: $general-max-width;
   margin: 0 auto;
@@ -791,7 +809,7 @@ $rule-margin-left-and-right: 1.3rem;
   border-radius: 4px;
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
+  font-family: $system-font;
 }
 #search:focus {
   border-color: #66afe9;
@@ -817,7 +835,7 @@ $rule-margin-left-and-right: 1.3rem;
     background-color: rgba(0, 0, 0, 0.07);
     font-size: 14px;
     font-weight: bold;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
+    font-family: $system-font;
   }
 
   .highlight {
@@ -919,6 +937,18 @@ $rule-margin-left-and-right: 1.3rem;
   bottom: 0;
   left: 0;
   margin: auto;
+}
+twitterwidget {
+  margin: 0 auto !important;
+  margin-top: 31px !important;
+}
+#post-content h1+twitterwidget,
+#post-content h2+twitterwidget,
+#post-content h3+twitterwidget,
+#post-content h4+twitterwidget,
+#post-content h5+twitterwidget,
+#post-content h6+twitterwidget {
+  margin-top: 0 !important;
 }
 
 // 画面横幅が十分大きいディスプレイのみ左右に prev_post, next_post ボタンを表示
