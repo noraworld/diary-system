@@ -6,11 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-text = File.read(Rails.root.join('SAMPLE.md'))
-
+text  = File.read(Rails.root.join('SAMPLE.md'))
 year  = 2000
 month = 1
 day   = 1
 date  = Date.new(year, month, day)
-
-Article.create(text: text, year: year, month: month, day: day, date: date)
+kind  = 'sample'
+SampleArticle.create(text: text, year: year, month: month, day: day, date: date, kind: kind)

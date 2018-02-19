@@ -28,22 +28,7 @@ class ArticlesController < ApplicationController
     month = params[:month].to_i
     day   = params[:day].to_i
 
-    # This is for a sample page.
-    # Request:
-    #   GET /2000/01/01 HTTP/1.1
-    # Response:
-    #   HTTP/1.1 302 Found
-    #   Location: http://example.com/sample
-    if year == 2000 && month == 1 && day == 1
-      redirect_to '/sample'
-      return
-    end
-
-    unless request.path_info == '/sample'
-      @article = Article.find_by!(year: year, month: month, day: day)
-    else
-      @article = Article.find_by!(year: 2000, month: 1, day: 1)
-    end
+    @article = Article.find_by!(year: year, month: month, day: day)
 
     @prev_article = Article.select('year, month, day').where('date < ?', @article.date).order('date DESC').first
     @next_article = Article.select('year, month, day').where('date > ?', @article.date).order('date ASC').first

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160911204656) do
+ActiveRecord::Schema.define(version: 20180219045753) do
 
   create_table "articles", force: :cascade do |t|
     t.text     "text",       null: false
@@ -24,6 +24,19 @@ ActiveRecord::Schema.define(version: 20160911204656) do
   end
 
   add_index "articles", ["year", "month", "day"], name: "date_unique", unique: true
+
+  create_table "sample_articles", force: :cascade do |t|
+    t.text     "text"
+    t.integer  "year"
+    t.integer  "month"
+    t.integer  "day"
+    t.date     "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "kind"
+  end
+
+  add_index "sample_articles", ["year", "month", "day"], name: "sample_articles_date_unique", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
