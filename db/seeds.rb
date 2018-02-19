@@ -12,4 +12,8 @@ month = 1
 day   = 1
 date  = Date.new(year, month, day)
 kind  = 'sample'
+sample = SampleArticle.find_by(kind: kind)
+if sample
+  sample.destroy
+end
 SampleArticle.create(text: text, year: year, month: month, day: day, date: date, kind: kind)
