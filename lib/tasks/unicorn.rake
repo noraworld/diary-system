@@ -4,7 +4,7 @@ namespace :unicorn do
   desc "Start unicorn"
   task(:start) {
     config      = Rails.root.join('config', 'unicorn.rb')
-    environment = ENV['RAILS_ENVIRONMENT'] || 'development'
+    environment = ENV['RAILS_ENVIRONMENT'] || ENV['RAILS_ENV'] || 'development'
     sh "unicorn -c #{config} -E #{environment} -D"
   }
 

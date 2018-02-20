@@ -66,11 +66,12 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    if ENV['RAILS_ENV'] == 'production'
+    environment = ENV['RAILS_ENVIRONMENT'] || ENV['RAILS_ENV'] || 'development'
+    if environment == 'production'
       @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
       @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
     # 開発環境ではポストしていない日に新たに記事を追加して編集することができるようにする
-    elsif ENV['RAILS_ENV'] == 'development'
+  elsif environment == 'development'
       begin
         @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
       rescue
@@ -86,7 +87,8 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    if ENV['RAILS_ENV'] == 'production'
+    environment = ENV['RAILS_ENVIRONMENT'] || ENV['RAILS_ENV'] || 'development'
+    if environment == 'production'
       @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
 
       if @article.update(article_params)
@@ -96,7 +98,7 @@ class ArticlesController < ApplicationController
         render 'edit'
       end
     # 開発環境ではポストしていない日に新たに記事を追加して編集することができるようにする
-    elsif ENV['RAILS_ENV'] == 'development'
+  elsif environment == 'development'
       begin
         @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
 

@@ -1,4 +1,4 @@
-<% @page_title       = format('%04d', @article.year).to_s + '/' + format('%02d', @article.month).to_s + '/' + format('%02d', @article.day).to_s %>
+<% @page_title       = format('%04d', @article.year).to_s + ' / ' + format('%02d', @article.month).to_s + ' / ' + format('%02d', @article.day).to_s %>
 <% @page_description = qiita_markdown_summary(@article.text) %>
 
 <% prev_article_link = '/' + format('%04d', @prev_article.year) + '/' + format('%02d', @prev_article.month) + '/' + format('%02d', @prev_article.day) if @prev_article %>
