@@ -87,7 +87,7 @@ $calendar-angulus-radius: 10px;
 #calendar-outline {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 10px;
+  padding: 0 10px 10px 10px;
   background-color: #e3f2f5;
   border: 5px solid #e2e2e2;
   border-radius: 10px;
@@ -96,59 +96,46 @@ $calendar-angulus-radius: 10px;
 
 #year {
   display: inline-block;
-  width: 80px;
+  margin: 0 1rem;
+  // width: 80px;
 }
 #prev-year, #next-year, #prev-month, #next-month {
   width: 38px;
   height: 38px;
   a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 38px;
     height: 38px;
     background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 4px;
-    display: table;
+    border-radius: 100%;
     text-decoration: none;
   }
-  a:after {
-    font-size: 20px;
-    color: white;
-    display: table-cell;
-    vertical-align: middle;
-  }
 }
-#prev-year a:after {
-  content: '<<';
+
+#prev-year a span, #prev-month a span, #next-month a span, #next-year a span {
+  font-size: 20px;
+  margin: 0 -6px;
+  color: #fff;
 }
-#prev-month a:after {
-  content: '<';
-}
-#next-month a:after {
-  content: '>';
-}
-#next-year a:after {
-  content: '>>';
-}
+
 #prev-year, #next-year {
   display: inline-block;
 }
-#prev-year {
-  margin-right: 75px;
+#prev-year, #prev-month, #next-year {
+  margin-right: 3rem;
 }
-#next-year {
-  margin-left: 75px;
+#next-year, #next-month, #prev-year {
+  margin-left: 3rem;
 }
 #month {
   display: inline-block;
-  width: 200px;
+  margin: 0 1rem;
+  // width: 200px;
 }
 #prev-month, #next-month {
   display: inline-block;
-}
-#prev-month {
-  margin-right: 75px;
-}
-#next-month {
-  margin-left: 75px;
 }
 #day-of-week {
   width: 150px;
@@ -162,12 +149,6 @@ $calendar-angulus-radius: 10px;
   width: 150px;
   height: 100px;
   border: 2px solid rgba(255, 255, 255, 0);
-}
-.day {
-  font-family: 'Open Sans Regular';
-}
-.day.post-day {
-  font-family: 'Open Sans Light';
 }
 
 #day-of-week.sun {
@@ -212,7 +193,7 @@ $post-link-over-post-day: 1;
   z-index: $post-link-over-post-day + 1;
 }
 .post-day {
-  color: white;
+  // color: #fff;
   z-index: $post-link-over-post-day;
 }
 .post-day:after {
@@ -223,8 +204,8 @@ $post-link-over-post-day: 1;
 }
 .day {
   position: absolute;
-  top: 5px;
-  left: 10px;
+  top: 10px;
+  left: 15px;
   font-size: 18px;
   display: inline-block;
   margin: 0;
@@ -262,11 +243,17 @@ $post-link-over-post-day: 1;
 }
 
 #calendar-wrap, #calendar-header {
+  font-family: $system-font;
+  // font-weight: bold;
   text-align: center;
 }
 #calendar-header {
-  padding-top: 10px;
-  padding-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $system-font;
+  font-size: 14px;
+  padding: 20px 0;
 }
 #calendar {
   display: inline-block;
@@ -1095,22 +1082,27 @@ twitterwidget {
       font-size: 0.8rem;
     }
   }
-  #prev-year, #prev-month {
-    margin-right: 10%;
+  #prev-year, #prev-month, #next-year {
+    margin-right: 3rem;
   }
-  #next-month, #next-year {
-    margin-left: 10%;
+  #next-month, #next-year, #prev-year {
+    margin-left: 3rem;
   }
 
   #year, #month {
-    font-size: 2.5rem;
-    margin: 0 0.5rem;
+    // font-size: 2.5rem;
+    // margin: 0 0.5rem;
   }
   #year {
-    width: 6rem;
+    // width: 6rem;
   }
   #month {
-    width: 5rem;
+    // width: 5rem;
+  }
+  .day {
+    top: 7px;
+    left: 7px;
+    font-size: 15px;
   }
 
   #post-content {
@@ -1157,22 +1149,30 @@ twitterwidget {
       font-size: 0.8rem;
     }
   }
-  #prev-year, #prev-month {
-    margin-right: 1.5rem;
+  #next-month, #next-year, #year, #month, #prev-year {
+    margin-left: 2.2rem;
   }
-  #next-month, #next-year {
-    margin-left: 1.5rem;
+  #prev-month, #prev-year, #year, #month, #next-year {
+    margin-right: 2.2rem;
+  }
+  #year {
+    margin-left: 0;
+    margin-right: 1.1rem;
+  }
+  #month {
+    margin-right: 0;
+    margin-left: 1.1rem;
   }
 
   #year, #month {
-    font-size: 2.5rem;
-    margin: 0 0.5rem;
+    // font-size: 2.5rem;
+    // margin: 0 0.5rem;
   }
   #year {
-    width: 6rem;
+    // width: 6rem;
   }
   #month {
-    width: 5rem;
+    // width: 5rem;
   }
 
   #calendar {
@@ -1210,8 +1210,8 @@ twitterwidget {
   }
   .day, .post-day {
     font-size: 12px;
-    top: 0;
-    left: 3px;
+    top: 6px;
+    left: 8px;
   }
   .post-day:after {
     display: inline-block;
@@ -1283,5 +1283,25 @@ twitterwidget {
   }
   #search-result-content {
     line-height: 26px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #calendar-header {
+    font-size: 1rem;
+  }
+  #next-month, #next-year, #year, #month, #prev-year {
+    margin-left: 1.8rem;
+  }
+  #prev-month, #prev-year, #year, #month, #next-year {
+    margin-right: 1.8rem;
+  }
+  #year {
+    margin-left: 0;
+    margin-right: 0.9rem;
+  }
+  #month {
+    margin-right: 0;
+    margin-left: 0.9rem;
   }
 }

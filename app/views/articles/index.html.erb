@@ -13,23 +13,35 @@
   <div id="calendar-header">
     <%# 去年へのリンク %>
     <% prev_year_calendar = format('%04d', Date.new(@year, @month).prev_year.year).to_s + '/' + format('%02d', Date.new(@year, @month).month).to_s %>
-    <h1 id=prev-year><%= link_to '', '/' + prev_year_calendar unless format('%04d', Date.new(@year, @month).year).to_i <= 2000 %></h1>
+    <h1 id=prev-year>
+    <% unless format('%04d', Date.new(@year, @month).year).to_i <= 2000 %>
+      <a href="<%= '/' + prev_year_calendar %>"><span class="icon-keyboard_arrow_left"></span><span class="icon-keyboard_arrow_left"></span></a>
+    <% end %>
+    </h1>
     <%# 先月へのリンク %>
     <% prev_month_calendar = format('%04d', Date.new(@year, @month).prev_month.year).to_s + '/' + format('%02d', Date.new(@year, @month).prev_month.month).to_s %>
-    <h1 id=prev-month><%= link_to '', '/' + prev_month_calendar unless format('%04d', Date.new(@year, @month).year).to_i <= 2000 && format('%04d', Date.new(@year, @month).month).to_i === 1 %></h1>
+    <h1 id=prev-month>
+    <% unless format('%04d', Date.new(@year, @month).year).to_i <= 2000 && format('%04d', Date.new(@year, @month).month).to_i === 1 %>
+      <a href="<%= '/' + prev_month_calendar %>"><span class="icon-keyboard_arrow_left"></span></a>
+    <% end %>
+    </h1>
     <%# 月を表示 %>
     <h1 id="year"><%= @year %></h1>
-    <% unless request.smart_phone? %>
-    <h1 id="month"><%= to_english_month(@month) %></h1>
-    <% else %>
     <h1 id="month"><%= to_english_month(@month, 3) %></h1>
-    <% end %>
     <%# 来月へのリンク %>
     <% next_month_calendar = format('%04d', Date.new(@year, @month).next_month.year).to_s + '/' + format('%02d', Date.new(@year, @month).next_month.month).to_s %>
-    <h1 id="next-month"><%= link_to '', '/' + next_month_calendar unless format('%04d', Date.new(@year, @month).year).to_i >= 2099 && format('%04d', Date.new(@year, @month).month).to_i === 12 %></h1>
+    <h1 id="next-month">
+      <% unless format('%04d', Date.new(@year, @month).year).to_i >= 2099 && format('%04d', Date.new(@year, @month).month).to_i === 12 %>
+      <a href="<%= '/' + next_month_calendar %>"><span class="icon-keyboard_arrow_right"></span></a>
+      <% end %>
+    </h1>
     <%# 来年へのリンク %>
     <% next_year_calendar = format('%04d', Date.new(@year, @month).next_year.year).to_s + '/' + format('%02d', Date.new(@year, @month).month).to_s %>
-    <h1 id=next-year><%= link_to '', '/' + next_year_calendar unless format('%04d', Date.new(@year, @month).year).to_i >= 2099 %></h1>
+    <h1 id=next-year>
+      <% unless format('%04d', Date.new(@year, @month).year).to_i >= 2099 %>
+      <a href="<%= '/' + next_year_calendar %>"><span class="icon-keyboard_arrow_right"></span><span class="icon-keyboard_arrow_right"></span></a>
+      <% end %>
+    </h1>
   </div>
 
   <div id="calendar-inner-box">
