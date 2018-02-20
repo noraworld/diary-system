@@ -30,13 +30,6 @@
     <%# 来年へのリンク %>
     <% next_year_calendar = format('%04d', Date.new(@year, @month).next_year.year).to_s + '/' + format('%02d', Date.new(@year, @month).month).to_s %>
     <h1 id=next-year><%= link_to '', '/' + next_year_calendar unless format('%04d', Date.new(@year, @month).year).to_i >= 2099 %></h1>
-    <%# 今月のカレンダーではないときに今月のカレンダーへのリンクが表示される %>
-    <% this_month = '/' + Time.now.in_time_zone('Tokyo').strftime('%Y').to_s + '/' + Time.now.in_time_zone('Tokyo').strftime('%m').to_s %>
-    <% unless request.path_info == '/' || request.path_info == this_month || request.smart_phone? || request.tablet? %>
-    <%= link_to(this_month, { :id => 'today-button' }) do %>
-      <span class="icon-today">TODAY</span>
-    <% end %>
-    <% end %>
   </div>
 
   <div id="calendar-inner-box">
