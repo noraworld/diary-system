@@ -434,7 +434,7 @@ $rule-margin-left-and-right: 1.3rem;
     margin-right: 5px;
   }
   a[target="_blank"]:after {
-    content: ' \e912  ';  // The spaces are needed.
+    content: ' \ea7e  ';  // The spaces are needed.
     font-family: 'icomoon';
     letter-spacing: -4px;
   }
@@ -560,21 +560,22 @@ $rule-margin-left-and-right: 1.3rem;
     border-right: none;
     height: 0;
   }
-  hr:after {
-    content: '\e90c';
-    font-family: 'icomoon';
-    font-size: 20px;
-    color: #959690;
-    display: inline-block;
-    position: relative;
-    top: -15px;
-    left: 40px;
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-  }
+  // 水平線にはさみのアイコンを入れるやつ。もう要らないかも
+  // hr:after {
+  //   content: '\e90c';
+  //   font-family: 'icomoon';
+  //   font-size: 20px;
+  //   color: #959690;
+  //   display: inline-block;
+  //   position: relative;
+  //   top: -15px;
+  //   left: 40px;
+  //   -webkit-transform: rotate(90deg);
+  //   -moz-transform: rotate(90deg);
+  //   -o-transform: rotate(90deg);
+  //   -ms-transform: rotate(90deg);
+  //   transform: rotate(90deg);
+  // }
   .footnotes hr {
     margin-bottom: 0;
   }
