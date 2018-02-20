@@ -651,10 +651,6 @@ $rule-margin-left-and-right: 1.3rem;
   margin-top: 0;
 }
 
-#post-button, #prev-next-post #prev-post .icon, #prev-next-post #next-post .icon {
-  display: none;
-}
-
 #post-content ul > li {
   list-style-type: disc;
 }
@@ -954,6 +950,9 @@ twitterwidget {
 // 画面横幅が十分大きいディスプレイのみ左右に prev_post, next_post ボタンを表示
 @media screen and (min-width: $prev-next-post-threshold) {
   #prev-next-post #prev-post, #prev-next-post #next-post {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -982,12 +981,6 @@ twitterwidget {
   }
   #prev-next-post #next-post {
     right: 20px;
-  }
-  #prev-next-post #prev-post:before {
-    content: "←";
-  }
-  #prev-next-post #next-post:before {
-    content: "→";
   }
 }
 // それ以外は記事の一番下にリンクを表示
