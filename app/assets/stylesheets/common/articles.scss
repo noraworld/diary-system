@@ -108,7 +108,7 @@ $calendar-angulus-radius: 10px;
     justify-content: center;
     width: 38px;
     height: 38px;
-    background-color: #409cd2;
+    background-color: #0f3c69;
     border-radius: 100%;
     text-decoration: none;
   }
@@ -116,6 +116,7 @@ $calendar-angulus-radius: 10px;
 
 #prev-year a span, #prev-month a span, #next-month a span, #next-year a span {
   font-size: 20px;
+  font-weight: bold;
   margin: 0 -6px;
   color: #fff;
 }
@@ -1083,11 +1084,11 @@ twitterwidget {
   }
 
   #prev-year, #prev-month, #next-month, #next-year {
-    width: 2.7rem;
-    height: 2.7rem;
+    width: 3.0rem;
+    height: 3.0rem;
     a {
-      width: 2.7rem;
-      height: 2.7rem;
+      width: 3.0rem;
+      height: 3.0rem;
     }
     a:after {
       font-size: 0.8rem;
@@ -1157,6 +1158,10 @@ twitterwidget {
     a {
       width: 2.7rem;
       height: 2.7rem;
+      span {
+        font-size: 16px;
+        font-weight: normal;
+      }
     }
     a:after {
       font-size: 0.8rem;
