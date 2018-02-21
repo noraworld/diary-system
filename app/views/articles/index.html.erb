@@ -78,7 +78,7 @@
       <% date = '/' + format('%04d', article.year) + '/' + format('%02d', article.month) + '/' + format('%02d', article.day) %>
       <% week = Date.new(@year, @month, day).wday %>
       <% if week == 0 %><tr><% end %>
-      <td class="day-box post-box <%= to_day_of_week(week, 3).downcase! %>"><%= link_to '', date, {:class => 'post-link'} %><p class="day post-day"><%= post_day %></p></td>
+      <td class="day-box post-box <%= to_day_of_week(week, 3).downcase! %>"><a href="<%= date %>" class="post-link"><p class="day post-day"><%= post_day %><span class="icon-circle"></span></p></a></td>
       <% if week == 6 %></tr><% end %>
     <% end %>
 

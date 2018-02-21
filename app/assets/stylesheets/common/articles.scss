@@ -192,13 +192,14 @@ $post-link-over-post-day: 1;
   text-decoration: none;
   z-index: $post-link-over-post-day + 1;
 }
+.post-link:link {
+  color: #444444;
+}
 .post-day {
   // color: #fff;
   z-index: $post-link-over-post-day;
 }
-.post-day:after {
-  content: '●';
-  font-size: 18px;
+.post-link span {
   color: #dd453e;
   margin-left: 5px;
 }
@@ -206,9 +207,11 @@ $post-link-over-post-day: 1;
   position: absolute;
   top: 10px;
   left: 15px;
-  font-size: 18px;
   display: inline-block;
   margin: 0;
+}
+.day, .post-link span {
+  font-size: 18px;
 }
 
 #today-button {
@@ -1102,6 +1105,8 @@ twitterwidget {
   .day {
     top: 7px;
     left: 7px;
+  }
+  .day, .post-link span {
     font-size: 15px;
   }
 
@@ -1209,9 +1214,11 @@ twitterwidget {
     margin: 0 auto;
   }
   .day, .post-day {
-    font-size: 12px;
     top: 6px;
     left: 8px;
+  }
+  .day, .post-link span {
+    font-size: 12px;
   }
   .post-day:after {
     display: inline-block;

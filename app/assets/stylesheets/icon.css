@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon/icomoon.eot?c6m1em');
-  src:  url('fonts/icomoon/icomoon.eot?c6m1em#iefix') format('embedded-opentype'),
-    url('fonts/icomoon/icomoon.ttf?c6m1em') format('truetype'),
-    url('fonts/icomoon/icomoon.woff?c6m1em') format('woff'),
-    url('fonts/icomoon/icomoon.svg?c6m1em#icomoon') format('svg');
+  src:  url('fonts/icomoon/icomoon.eot?m88uex');
+  src:  url('fonts/icomoon/icomoon.eot?m88uex#iefix') format('embedded-opentype'),
+    url('fonts/icomoon/icomoon.ttf?m88uex') format('truetype'),
+    url('fonts/icomoon/icomoon.woff?m88uex') format('woff'),
+    url('fonts/icomoon/icomoon.svg?m88uex#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-circle:before {
+  content: "\e906";
+}
 .icon-keyboard_arrow_right:before {
   content: "\e903";
 }
@@ -32,6 +35,15 @@
 }
 .icon-instagram:before {
   content: "\e902";
+}
+.icon-home:before {
+  content: "\e901";
+}
+.icon-house:before {
+  content: "\e901";
+}
+.icon-building:before {
+  content: "\e901";
 }
 .icon-search:before {
   content: "\e900";
