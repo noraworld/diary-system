@@ -193,7 +193,7 @@ $post-link-over-post-day: 1;
   text-decoration: none;
   z-index: $post-link-over-post-day + 1;
 }
-.post-link:link {
+.post-link:link, .post-link:visited, .post-link:hover, .post-link:active {
   color: #444444;
 }
 .post-day {
