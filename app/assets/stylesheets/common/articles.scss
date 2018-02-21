@@ -642,6 +642,14 @@ $rule-margin-left-and-right: 1.3rem;
   margin-top: 0;
 }
 
+// display: none が複数箇所にあるのはよくないので
+// display: none はすべてここに集約している
+// なので、ここを丸ごと消すと、すべての要素の display: none が
+// 消えてしまうことに注意する
+#post-button {
+  display: none;
+}
+
 #post-content ul > li {
   list-style-type: disc;
 }
