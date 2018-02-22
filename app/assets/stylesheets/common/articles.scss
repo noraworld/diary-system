@@ -14,6 +14,11 @@
 $general-max-width: 750px;
 $img-max-width: 600px;
 $img-max-height: 750px;
+// img の width を auto にすると画面サイズが小さくなったときにはみ出るので
+// はみ出る直前で max-width を 100% にする
+// post-content や $img-max-width のサイズを変更した場合は
+// $img-overflow-screen-width の値も変更する必要がある
+$img-overflow-screen-width: 766px;
 $general-width-percent: 85%;
 $date-description-prev-next-post-width: 15%;
 $post-content-table-border-outside: 1px solid #c3c9d0;
@@ -1070,6 +1075,13 @@ twitterwidget {
   #prev-next-post #prev-post, #prev-next-post #next-post {
     padding-top: 10px;
     padding-bottom: 10px;
+  }
+}
+
+// 画像がはみ出るときは max-width を 100% にする
+@media screen and (max-width: $img-overflow-screen-width) {
+  #post-content img:not(.emoji) {
+    max-width: 100%;
   }
 }
 
