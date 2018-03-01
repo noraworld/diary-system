@@ -14,24 +14,20 @@
 // 水平線をギザギザにする関数
 @mixin make-jagged-border($sc, $ec, $sx, $sy) {
   background:
-    // ギザギザの境界にボーダーが入っていないバージョン
-    // linear-gradient(
-    //   45deg,
-    //   $sc 33.333%,
-    //   $ec 33.333%,
-    //   $ec 66.667%,
-    //   $sc 66.667%
-    // ),
-    // linear-gradient(
-    //   -45deg,
-    //   $sc 33.333%,
-    //   $ec 33.333%,
-    //   $ec 66.667%,
-    //   $sc 66.667%
-    // );
-
-    // ギザギザの境界にボーダーが入っているバージョン
-    linear-gradient(45deg, #fff 63.333%, #ccc 69.333%, #fff 66.667%, transparent 66.667%), linear-gradient(-45deg, #fff 63.333%, #ccc 33.333%, #fff 66.667%, transparent 66.667%);
+    linear-gradient(
+      45deg,
+      $ec 63.333%,
+      $post-content-border-color 69.333%,
+      $ec 66.667%,
+      $sc 66.667%
+    ),
+    linear-gradient(
+      -45deg,
+      $ec 63.333%,
+      $post-content-border-color 33.333%,
+      $ec 66.667%,
+      $sc 66.667%
+    );
   background-size: $sx $sy;
 }
 // linear-gradient(45deg, #fff 63.333%, black 69.333%, #fff 66.667%, transparent 66.667%), linear-gradient(-45deg, #fff 63.333%, black 33.333%, #fff 66.667%, transparent 66.667%)
@@ -49,6 +45,7 @@ $date-description-prev-next-post-width: 15%;
 $post-content-table-border-outside: 1px solid #c3c9d0;
 $post-content-table-border-inside:  1px solid #e1e4e8;
 $post-content-padding-left-and-right: 2.2rem;
+$post-content-border-color: #ccc;
 $system-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
 // iPad の縦幅は 1024px なので、それ以上にすると
 // タブレットでは、画面左右の丸い矢印が出なくなる
@@ -393,7 +390,7 @@ $rule-margin-left-and-right: 1.3rem;
   box-shadow: 0 0 1px #999;
   @include note(#fcfcfc);
   background-size: 100% 100%, 100% 100%, 100% $rule-space+1;
-  border: 1px solid #ccc;
+  border: 1px solid $post-content-border-color;
   border-radius: 4px;
   word-wrap: break-word;
 
@@ -757,7 +754,7 @@ $rule-margin-left-and-right: 1.3rem;
   box-shadow: 0 0 1px #999;
   @include note(#fcfcfc);
   background-size: 100% 100%, 100% 100%, 100% $rule-space+1;
-  border: 1px solid #ccc;
+  border: 1px solid $post-content-border-color;
   border-radius: 4px;
   text-align: justify;
   display: block;
