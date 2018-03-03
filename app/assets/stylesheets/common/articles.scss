@@ -394,46 +394,46 @@ $rule-margin-left-and-right: 1.3rem;
   word-wrap: break-word;
 
   h1 {
-    // default: 30px;
-    font-size: 26px;
+    // font-family: 'Open Sans Bold';
+    font-size: 26px;  // default: 30px;
+    font-weight: normal;
     margin-top: 50px;
     margin-bottom: 15px;
-    font-weight: normal;
   }
   h2 {
-    // default: 22.5px;
-    font-size: 22px;
+    // font-family: 'Open Sans Bold';
+    font-size: 24px;  // default: 22.5px;
+    font-weight: normal;
     margin-top: 40px;
     margin-bottom: 15px;
-    font-weight: normal;
   }
   h3 {
-    // default: 17.55px;
-    font-size: 18px;
+    // font-family: 'Open Sans Bold';
+    font-size: 22px;  // default: 17.55px;
+    font-weight: normal;
     margin-top: 31px;
     margin-bottom: 10px;
-    font-weight: normal;
   }
   h4 {
-    // default: 15px;
-    font-size: 14px;
+    // font-family: 'Open Sans Bold';
+    font-size: 20px;  // default: 15px;
+    font-weight: normal;
     margin-top: 31px;
     margin-bottom: 5px;
-    font-weight: normal;
   }
   h5 {
-    // default: 12.45px;
-    font-size: 12px;
+    font-family: 'Open Sans Bold';
+    font-size: 18px;  // default: 12.45px;
+    font-weight: normal;
     margin-top: 31px;
     margin-bottom: 5px;
-    font-weight: normal;
   }
   h6 {
-    // default: 10.05px;
-    font-size: 10px;
+    font-family: 'Open Sans Bold';
+    font-size: 16px;  // default: 10.05px;
+    font-weight: normal;
     margin-top: 31px;
     margin-bottom: 5px;
-    font-weight: normal;
   }
 
   p, iframe, ul, ol, dl, table {
