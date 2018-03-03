@@ -695,9 +695,15 @@ $rule-margin-left-and-right: 1.3rem;
 
   .footnotes {
     font-size: 12px;
-  }
-  .footnotes ol li p {
-    margin-top: 8px;
+
+    ol li p {
+      margin-top: 0.75rem;
+      line-height: 20px;
+
+      a {
+        border-bottom: none;
+      }
+    }
   }
   .footnotes ol, .footnotes ol li:first-child p {
     margin-top: $post-content-padding-bottom;
