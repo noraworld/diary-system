@@ -44,6 +44,7 @@ $date-description-prev-next-post-width: 15%;
 $post-content-table-border-outside: 1px solid #c3c9d0;
 $post-content-table-border-inside:  1px solid #e1e4e8;
 $post-content-padding-left-and-right: 2.2rem;
+$post-content-padding-bottom: 1rem;
 $post-content-border-color: #ccc;
 $system-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
 // iPad の縦幅は 1024px なので、それ以上にすると
@@ -384,7 +385,7 @@ $rule-margin-left-and-right: 1.3rem;
   margin: 0 auto;
   font-size: 15px;
   line-height: 31px;
-  padding: 1.3rem $post-content-padding-left-and-right 1rem;
+  padding: 1.3rem $post-content-padding-left-and-right $post-content-padding-bottom;
   box-sizing: border-box;
   box-shadow: 0 0 1px #999;
   @include note(#fcfcfc);
@@ -627,8 +628,22 @@ $rule-margin-left-and-right: 1.3rem;
   //   transform: rotate(90deg);
   // }
 
-  .footnotes hr {
-    margin-bottom: 0;
+  .footnotes {
+    hr {
+      margin-bottom: 0;
+      height: 1px;
+
+      &:before, &:after {
+        background: none;
+        border-radius: 2.5px;
+        border-bottom: 1px dashed #ccc;
+
+        // 離れ小島になった注釈を作りたいとき用
+        // これを適用する際は height を変更することを忘れずに
+        // border-bottom: 1px solid #ccc;
+        // box-shadow: 0px 3px 4px -4px #999;
+      }
+    }
   }
 
   code {
@@ -683,7 +698,7 @@ $rule-margin-left-and-right: 1.3rem;
     margin-top: 8px;
   }
   .footnotes ol, .footnotes ol li:first-child p {
-    margin-top: 18px;
+    margin-top: $post-content-padding-bottom;
   }
 
 }
@@ -728,7 +743,7 @@ $rule-margin-left-and-right: 1.3rem;
     // max-height: 55vh;
     /*min-height: 500px;*/
     // padding: 1.5rem 2rem 0;
-    padding: 1.3rem $post-content-padding-left-and-right 1rem;
+    padding: 1.3rem $post-content-padding-left-and-right $post-content-padding-bottom;
     // font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
     font-family: 'Open Sans Regular';
     text-align: initial;
@@ -1189,7 +1204,7 @@ twitterwidget {
 
   #post-content {
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: $post-content-padding-bottom;
   }
 
   #search-result-content #post-date {
@@ -1323,7 +1338,7 @@ twitterwidget {
     width: 100%;
     border-radius: 4px;
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: $post-content-padding-bottom;
     // min-height: 50rem;
     height: 100%;
 
