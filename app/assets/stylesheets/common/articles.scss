@@ -440,7 +440,7 @@ $rule-margin-left-and-right: 1.3rem;
     margin-bottom: 5px;
   }
 
-  p, iframe, ul, ol, dl, table {
+  p, ul, ol, dl, table {
     margin-top: 31px;
     margin-bottom: 0;
   }
@@ -998,38 +998,79 @@ $rule-margin-left-and-right: 1.3rem;
   }
 }
 
+// iframe 全般
+// Twitter の埋め込みタグは
+// Chrome, Firefox だと twitterwidget
+// Safari だと iframe になる
+iframe, twitterwidget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  border: none;
+  border-radius: 4px;
+  margin-top: 31px !important;
+  margin-bottom: 0 !important;
+}
+// YouTube などの iframe
 .video-player-wrapper {
-  position: relative;
-  max-width: 640px;
-  margin: 0 auto 62px;
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto 62px;
 }
 .video-player-wrapper:before {
-  content: "";
-  display: block;
-  padding-top: 56.25%;
+    content: "";
+    display: block;
+    padding-top: 56.25%;
 }
 .video-player-wrapper iframe {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
-twitterwidget {
-  margin: 0 auto !important;
-  margin-top: 31px !important;
-}
-#post-content h1+twitterwidget,
-#post-content h2+twitterwidget,
-#post-content h3+twitterwidget,
-#post-content h4+twitterwidget,
-#post-content h5+twitterwidget,
-#post-content h6+twitterwidget {
+// Mastodon の iframe だけなぜか
+// iframe が p タグで囲まれている
+#post-content p iframe {
   margin-top: 0 !important;
 }
+
+// .video-player-wrapper {
+//   position: relative;
+//   max-width: 640px;
+//   margin: 0 auto 62px;
+// }
+// .video-player-wrapper:before {
+//   content: "";
+//   display: block;
+//   padding-top: 56.25%;
+// }
+// .video-player-wrapper iframe {
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   left: 0;
+//   margin: auto;
+// }
+// twitterwidget {
+//   margin: 0 auto !important;
+//   margin-top: 31px !important;
+// }
+// #post-content h1+twitterwidget,
+// #post-content h2+twitterwidget,
+// #post-content h3+twitterwidget,
+// #post-content h4+twitterwidget,
+// #post-content h5+twitterwidget,
+// #post-content h6+twitterwidget {
+//   margin-top: 0 !important;
+// }
 
 // 画面横幅が十分大きいディスプレイのみ左右に prev_post, next_post ボタンを表示
 @media screen and (min-width: $prev-next-post-threshold) {
