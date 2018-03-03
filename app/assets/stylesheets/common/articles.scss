@@ -45,12 +45,15 @@ $post-content-table-border-outside: 1px solid #c3c9d0;
 $post-content-table-border-inside:  1px solid #e1e4e8;
 $post-content-padding-left-and-right: 2.2rem;
 $post-content-padding-bottom: 1rem;
+$post-content-padding-top: 1.3rem;
+$post-content-padding-top-tablet: 1rem;
 $post-content-border-color: #ccc;
 $system-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
 // iPad の縦幅は 1024px なので、それ以上にすると
 // タブレットでは、画面左右の丸い矢印が出なくなる
 $prev-next-post-threshold: 1050px;
 $hr-color: #fff;
+$hr-before-after-height: 10px;
 
 #success-message {
   letter-spacing: 0.5px;
@@ -385,7 +388,7 @@ $rule-margin-left-and-right: 1.3rem;
   margin: 0 auto;
   font-size: 15px;
   line-height: 31px;
-  padding: 1.3rem $post-content-padding-left-and-right $post-content-padding-bottom;
+  padding: $post-content-padding-top $post-content-padding-left-and-right $post-content-padding-bottom;
   box-sizing: border-box;
   box-shadow: 0 0 1px #999;
   @include note(#fcfcfc);
@@ -589,7 +592,7 @@ $rule-margin-left-and-right: 1.3rem;
     // post-content の border と box-shadow を隠すための微調整変数
     $tweak-px-for-post-content-border-and-shadow: 3px;
     width: calc(100% + #{$post-content-padding-left-and-right * 2} + #{$tweak-px-for-post-content-border-and-shadow * 2 + 1});
-    margin: 4rem calc(#{$post-content-padding-left-and-right * -1} - #{$tweak-px-for-post-content-border-and-shadow});
+    margin: calc(#{$post-content-padding-top} + #{$hr-before-after-height}) calc(#{$post-content-padding-left-and-right * -1} - #{$tweak-px-for-post-content-border-and-shadow});
 
     // filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
 
@@ -599,14 +602,14 @@ $rule-margin-left-and-right: 1.3rem;
       position: absolute;
       width: calc(100% - #{$tweak-px-for-post-content-border-and-shadow});
       left: 1px;  // 超微調整
-      height: 10px;
+      height: $hr-before-after-height;
       @include make-jagged-border(transparent, $hr-color, 20px, 40px);
     }
     &:before {
-      top: -10px;
+      top: ($hr-before-after-height * -1);
     }
     &:after {
-      bottom: -10px;
+      bottom: ($hr-before-after-height * -1);
       transform: scale(1, -1);
     }
   }
@@ -743,7 +746,7 @@ $rule-margin-left-and-right: 1.3rem;
     // max-height: 55vh;
     /*min-height: 500px;*/
     // padding: 1.5rem 2rem 0;
-    padding: 1.3rem $post-content-padding-left-and-right $post-content-padding-bottom;
+    padding: $post-content-padding-top $post-content-padding-left-and-right $post-content-padding-bottom;
     // font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
     font-family: 'Open Sans Regular';
     text-align: initial;
@@ -1203,7 +1206,7 @@ twitterwidget {
   }
 
   #post-content {
-    padding-top: 1rem;
+    padding-top: $post-content-padding-top-tablet;
     padding-bottom: $post-content-padding-bottom;
   }
 
@@ -1337,7 +1340,7 @@ twitterwidget {
   #post-content {
     width: 100%;
     border-radius: 4px;
-    padding-top: 1rem;
+    padding-top: $post-content-padding-top-tablet;
     padding-bottom: $post-content-padding-bottom;
     // min-height: 50rem;
     height: 100%;
