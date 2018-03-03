@@ -722,7 +722,7 @@ $rule-margin-left-and-right: 1.3rem;
 #post-content h4+ol, #post-content h4+p, #post-content h4+ul, #post-content h4+dl,
 #post-content h5+ol, #post-content h5+p, #post-content h5+ul, #post-content h5+dl,
 #post-content h6+ol, #post-content h6+p, #post-content h6+ul, #post-content h6+dl,
-#post-content blockquote + *:not(hr), #post-content script + *:not(hr), #post-content hr + *
+#post-content blockquote + *:not(hr), #post-content blockquote + script + *:not(hr), #post-content hr + *
 {
   margin-top: 0;
 }
