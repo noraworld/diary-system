@@ -98,7 +98,7 @@ class ArticlesController < ApplicationController
         render 'edit'
       end
     # 開発環境ではポストしていない日に新たに記事を追加して編集することができるようにする
-  elsif environment == 'development'
+    elsif environment == 'development'
       begin
         @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
 
@@ -151,11 +151,29 @@ class ArticlesController < ApplicationController
       return
     end
 
-    @results = Article.where('text LIKE(?)', '%' + params[:q] + '%')
+    @page = params[:page] || 1
+    unless @page.to_s =~ /^[0-9]+$/ && @page.to_s != '0'
+      @error_message = 'A positive integer without the plus sign is expected in the page parameter.'
+      return
+    end
+    @page = @page.to_i
+
+    quantities = 10
+    @results = Article.where('text LIKE(?)', '%' + params[:q] + '%').offset((@page - 1) * quantities).limit(quantities)
+
+    hitcount = Article.where('text LIKE(?)', '%' + params[:q] + '%').count
+    @number_of_pages = hitcount.to_i / quantities.to_i
+    if hitcount.to_i % quantities.to_i != 0
+      @number_of_pages += 1
+    end
 
     if @results.empty?
-      @error_message  = 'No matches for'
-      @failed_keyword = "#{params[:q]}"
+      if @page > @number_of_pages
+        @error_message = 'There are no search results anymore.'
+      else
+        @error_message  = 'No matches for'
+        @failed_keyword = "#{params[:q]}"
+      end
     end
   end
 

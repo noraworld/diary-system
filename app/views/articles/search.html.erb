@@ -1,13 +1,13 @@
 <% if @error_message.empty? %>
-  <% @page_title       = "#{params[:q]}" %>
-  <% @page_description = "Search results of `#{params[:q]}`." %>
+<% @page_title       = "#{params[:q]}" %>
+<% @page_description = "Search results of `#{params[:q]}`." %>
 <% else %>
-  <% @page_title       = 'Search Failed' %>
-  <% if @failed_keyword.empty? %>
-    <% @page_description = "#{@error_message} Please try another keyword." %>
-  <% else %>
-    <% @page_description = "#{@error_message} `#{@failed_keyword}`. Please try another keyword." %>
-  <% end %>
+<% @page_title       = 'Search Failed' %>
+<% if @failed_keyword.empty? %>
+<% @page_description = "#{@error_message} Please try another keyword." %>
+<% else %>
+<% @page_description = "#{@error_message} `#{@failed_keyword}`. Please try another keyword." %>
+<% end %>
 <% end %>
 
 <% if @error_message.empty? %>
@@ -21,13 +21,18 @@
   </a>
   <% end %>
 </div>
+
+<% if @number_of_pages >= 2 %>
+<%= render 'paginator' %>
+<% end %>
+
 <% else %>
 <div id="search-error-message">
   <h2>Search Failed</h2>
   <% if @failed_keyword.empty? %>
-    <p class="reason"><%= @error_message %></p>
+  <p class="reason"><%= @error_message %></p>
   <% else %>
-    <p class="reason"><%= @error_message %> "<b><%= @failed_keyword %></b>".</p>
+  <p class="reason"><%= @error_message %> "<b><%= @failed_keyword %></b>".</p>
   <% end %>
 </div>
 <% end %>

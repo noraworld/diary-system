@@ -1,0 +1,81 @@
+<%# 今表示しているページの周辺のページを何個分まで表示させるか (周辺ページ数と呼ぶことにする) %>
+<% number_of_surrounding_pages = 2 %>
+
+<div id="paginator">
+  <%# 周辺ページ数が大きすぎて範囲を超える場合は ellipsis なしで全ページ分のリンクを表示させる %>
+  <% if @page + number_of_surrounding_pages > @number_of_pages - 2 && @page - number_of_surrounding_pages < 3 %>
+  <% 1.upto(@number_of_pages) do |n| %>
+  <div class="page <%= n %>">
+    <% if n == @page %>
+    <span><%= n %></span>
+    <% else %>
+    <a href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
+    <% end %>
+  </div>
+  <% end %>
+
+  <%# 今表示しているページが小さく、大きいほうの ellipsis のみで良い場合 %>
+  <% elsif @page >= 1 && @page <= number_of_surrounding_pages + 2 %>
+  <% 1.upto(@page + number_of_surrounding_pages) do |n| %>
+  <div class="page <%= n %>">
+    <% if n == @page %>
+    <span><%= n %></span>
+    <% else %>
+    <a href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
+    <% end %>
+  </div>
+  <% end %>
+  <div class="ellipsis">
+    <span>...</span>
+  </div>
+  <div class="page <%= @number_of_pages %>">
+    <a href="/search?q=<%= params[:q] %>&page=<%= @number_of_pages %>"><%= @number_of_pages %></a>
+  </div>
+
+  <%# 今表示しているページが大きくも小さくもなく、両方の ellipsis が必要な場合 %>
+  <% elsif @page >= number_of_surrounding_pages + 3 && @page <= @number_of_pages - (number_of_surrounding_pages + 2) %>
+  <div class="page 1">
+    <a href="/search?q=<%= params[:q] %>&page=1">1</a>
+  </div>
+  <div class="ellipsis">
+    <span>...</span>
+  </div>
+  <% (@page - number_of_surrounding_pages).upto(@page + number_of_surrounding_pages) do |n| %>
+  <div class="page <%= n %>">
+    <% if n == @page %>
+    <span><%= n %></span>
+    <% else %>
+    <a href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
+    <% end %>
+  </div>
+  <% end %>
+  <div class="ellipsis">
+    <span>...</span>
+  </div>
+  <div class="page <%= @number_of_pages %>">
+    <a href="/search?q=<%= params[:q] %>&page=<%= @number_of_pages %>"><%= @number_of_pages %></a>
+  </div>
+
+  <%# 今表示しているページが大きく、小さいほうの ellipsis のみで良い場合 %>
+  <% elsif @page >= @number_of_pages - (number_of_surrounding_pages + 1) && @page <= @number_of_pages %>
+  <div class="page 1">
+    <a href="/search?q=<%= params[:q] %>&page=1">1</a>
+  </div>
+  <div class="ellipsis">
+    <span>...</span>
+  </div>
+  <% (@page - number_of_surrounding_pages).upto(@number_of_pages) do |n| %>
+  <div class="page <%= n %>">
+    <% if n == @page %>
+    <span><%= n %></span>
+    <% else %>
+    <a href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
+    <% end %>
+  </div>
+  <% end %>
+
+  <%# 上記に該当しない場合。ページ番号が負数であるか、ページ数より大きい場合 %>
+  <% else %>
+  <%# Something is wrong! Maybe params[:page] is less than 1 or greater than the number of page. %>
+  <% end %>
+</div>
