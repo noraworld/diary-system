@@ -779,10 +779,10 @@ $rule-margin-left-and-right: 1.3rem;
   background-size: 100% 100%, 100% 100%, 100% $rule-space+1;
   border: 1px solid $post-content-border-color;
   border-radius: 4px;
-  text-align: justify;
   display: block;
   text-decoration: none;
   color: #444444;
+  word-wrap: break-word;
 }
 #search-result-content:hover {
   transform: scale(1.02);
@@ -896,6 +896,73 @@ $rule-margin-left-and-right: 1.3rem;
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 2px rgba(102,175,233,.6);
   width: 78%;
   padding-right: 35.5px;
+}
+
+#paginator {
+  font-family: $system-font;
+  font-size: 0;
+  font-weight: lighter;
+  width: $general-width-percent;
+  max-width: $general-max-width;
+  margin: 20px auto 0;
+  padding: 1rem 0;
+  text-align: center;
+  box-sizing: border-box;
+
+  .page-box, .ellipsis-box {
+    font-size: 18px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #dadada;
+    cursor: default;
+
+    .page, .ellipsis {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    a {
+      text-decoration: none;
+      color: #444;
+    }
+    a:hover {
+      color: #fff;
+    }
+  }
+
+  .page-box.current, .ellipsis-box {
+    background: #eee;
+  }
+  .page-box.current {
+    border-bottom: 2px solid darkorange;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
+  .page-box:not(.current) {
+    background: #fefefe;
+  }
+  .page-box:not(.current):hover {
+    background: #2990ff;
+  }
+
+  > :nth-child(odd) {
+    border-left: none;
+    border-right: none;
+  }
+  > :first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left: 1px solid #dadada;
+  }
+  > :last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-right: 1px solid #dadada;
+  }
 }
 
 .code-frame {
@@ -1420,6 +1487,14 @@ iframe, twitterwidget {
   }
   #search-result-content {
     line-height: 26px;
+  }
+
+  #paginator {
+    .page-box, .ellipsis-box {
+      font-size: 14px;
+      width: 28px;
+      height: 28px;
+    }
   }
 }
 
