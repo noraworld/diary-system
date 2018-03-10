@@ -1,9 +1,11 @@
 <%# 今表示しているページの周辺のページを何個分まで表示させるか (周辺ページ数と呼ぶことにする) %>
 <% number_of_surrounding_pages = 2 %>
+<%# 端のページ (1 ページ目と最終ページ) 付近のページを何個分まで表示させるか %>
+<% number_of_side_pages = 2 %>
 
 <div id="paginator">
   <%# 周辺ページ数が大きすぎて範囲を超える場合は ellipsis なしで全ページ分のリンクを表示させる %>
-  <% if @page + number_of_surrounding_pages > @number_of_pages - 2 && @page - number_of_surrounding_pages < 3 %>
+  <% if @page + number_of_surrounding_pages > @number_of_pages - (number_of_side_pages + 2) && @page - (number_of_surrounding_pages + number_of_side_pages) < 3 %>
   <% 1.upto(@number_of_pages) do |n| %>
   <% if n == @page %>
   <div class="page-box <%= n %> current">
@@ -17,8 +19,13 @@
   <% end %>
 
   <%# 今表示しているページが小さく、大きいほうの ellipsis のみで良い場合 %>
-  <% elsif @page >= 1 && @page <= number_of_surrounding_pages + 2 %>
-  <% 1.upto(@page + number_of_surrounding_pages) do |n| %>
+  <% elsif @page >= 1 && @page <= number_of_side_pages + number_of_surrounding_pages + 2 %>
+  <% if @page + number_of_surrounding_pages <= number_of_side_pages + number_of_surrounding_pages + 1 %>
+  <% number_of_left_side_pages = number_of_side_pages + number_of_surrounding_pages + 1 %>
+  <% else %>
+  <% number_of_left_side_pages = @page + number_of_surrounding_pages %>
+  <% end %>
+  <% 1.upto(number_of_left_side_pages) do |n| %>
   <% if n == @page %>
   <div class="page-box <%= n %> current">
     <span class="page <%= n %> current"><%= n %></span>
@@ -32,15 +39,19 @@
   <div class="ellipsis-box">
     <span class="ellipsis">...</span>
   </div>
-  <div class="page-box <%= @number_of_pages %>">
-    <a class="page <%= @number_of_pages %>" href="/search?q=<%= params[:q] %>&page=<%= @number_of_pages %>"><%= @number_of_pages %></a>
+  <% (@number_of_pages - (number_of_side_pages - 1)).upto(@number_of_pages) do |n| %>
+  <div class="page-box <%= n %>">
+    <a class="page <%= n %>" href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
   </div>
+  <% end %>
 
   <%# 今表示しているページが大きくも小さくもなく、両方の ellipsis が必要な場合 %>
-  <% elsif @page >= number_of_surrounding_pages + 3 && @page <= @number_of_pages - (number_of_surrounding_pages + 2) %>
-  <div class="page-box 1">
-    <a class="page 1" href="/search?q=<%= params[:q] %>&page=1">1</a>
+  <% elsif @page >= number_of_side_pages + number_of_surrounding_pages + 3 && @page <= @number_of_pages - (number_of_side_pages + number_of_surrounding_pages + 2) %>
+  <% 1.upto(number_of_side_pages) do |n| %>
+  <div class="page-box <%= n %>">
+    <a class="page <%= n %>" href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
   </div>
+  <% end %>
   <div class="ellipsis-box">
     <span class="ellipsis">...</span>
   </div>
@@ -58,19 +69,28 @@
   <div class="ellipsis-box">
     <span class="ellipsis">...</span>
   </div>
-  <div class="page-box <%= @number_of_pages %>">
-    <a class="page <%= @number_of_pages %>" href="/search?q=<%= params[:q] %>&page=<%= @number_of_pages %>"><%= @number_of_pages %></a>
+  <% (@number_of_pages - (number_of_side_pages - 1)).upto(@number_of_pages) do |n| %>
+  <div class="page-box <%= n %>">
+    <a class="page <%= n %>" href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
   </div>
+  <% end %>
 
   <%# 今表示しているページが大きく、小さいほうの ellipsis のみで良い場合 %>
-  <% elsif @page >= @number_of_pages - (number_of_surrounding_pages + 1) && @page <= @number_of_pages %>
-  <div class="page-box 1">
-    <a class="page 1" href="/search?q=<%= params[:q] %>&page=1">1</a>
+  <% elsif @page >= @number_of_pages - (number_of_side_pages + number_of_surrounding_pages + 1) && @page <= @number_of_pages %>
+  <% 1.upto(number_of_side_pages) do |n| %>
+  <div class="page-box <%= n %>">
+    <a class="page <%= n %>" href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
   </div>
+  <% end %>
   <div class="ellipsis-box">
     <span class="ellipsis">...</span>
   </div>
-  <% (@page - number_of_surrounding_pages).upto(@number_of_pages) do |n| %>
+  <% if @page - number_of_surrounding_pages >= @number_of_pages - (number_of_side_pages + number_of_surrounding_pages) %>
+  <% number_of_right_side_pages = @number_of_pages - (number_of_side_pages + number_of_surrounding_pages) %>
+  <% else %>
+  <% number_of_right_side_pages = @page - number_of_surrounding_pages %>
+  <% end %>
+  <% (number_of_right_side_pages).upto(@number_of_pages) do |n| %>
   <% if n == @page %>
   <div class="page-box <%= n %> current">
     <span class="page <%= n %> current"><%= n %></span>
