@@ -168,7 +168,7 @@ class ArticlesController < ApplicationController
     end
 
     if @results.empty?
-      if @page > @number_of_pages
+      if hitcount != 0 && @page > @number_of_pages
         @error_message = 'There are no search results anymore.'
       else
         @error_message  = 'No matches for'
