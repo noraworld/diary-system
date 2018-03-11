@@ -426,14 +426,14 @@ $rule-margin-left-and-right: 1.3rem;
     margin-bottom: 5px;
   }
   h5 {
-    font-family: 'Open Sans Bold';
+    // font-family: 'Open Sans Bold';
     font-size: 18px;  // default: 12.45px;
     font-weight: normal;
     margin-top: 31px;
     margin-bottom: 5px;
   }
   h6 {
-    font-family: 'Open Sans Bold';
+    // font-family: 'Open Sans Bold';
     font-size: 16px;  // default: 10.05px;
     font-weight: normal;
     margin-top: 31px;
@@ -443,6 +443,11 @@ $rule-margin-left-and-right: 1.3rem;
   p, ul, ol, dl, table {
     margin-top: 31px;
     margin-bottom: 0;
+  }
+
+  strong {
+    font-family: 'Open Sans Bold';
+    font-weight: bold;
   }
 
   a {
@@ -465,6 +470,7 @@ $rule-margin-left-and-right: 1.3rem;
   a[rel="footnote"] {
     border-bottom: none;
     text-decoration: underline;
+    margin: 0 3px;
   }
 
   img:not(.emoji) {
@@ -639,7 +645,7 @@ $rule-margin-left-and-right: 1.3rem;
       &:before, &:after {
         background: none;
         border-radius: 2.5px;
-        border-bottom: 1px dashed #ccc;
+        border-bottom: 1px dashed #777;
 
         // 離れ小島になった注釈を作りたいとき用
         // これを適用する際は height を変更することを忘れずに
@@ -700,7 +706,7 @@ $rule-margin-left-and-right: 1.3rem;
       margin-top: 0.75rem;
       line-height: 20px;
 
-      a {
+      a:last-child {
         border-bottom: none;
       }
     }
