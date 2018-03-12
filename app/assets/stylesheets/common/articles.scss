@@ -1087,9 +1087,12 @@ iframe, twitterwidget {
   margin-right: auto;
   max-width: 100%;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   margin-top: 31px !important;
   margin-bottom: 0 !important;
+}
+iframe[class="mastodon-embed"] {
+  border: 1px solid #acb2b7;
 }
 // YouTube などの iframe
 .video-player-wrapper {
