@@ -15,4 +15,17 @@ $(function() {
     $('iframe[src*="https://' + videoDomains[i] + '"]').wrap('<div class="video-player-wrapper">');
   }
 
+  $('a[href^="#"]').on('click', function(event) {
+    event.preventDefault();
+
+    var target     = $(this.hash);
+    var offset     = -10;
+    var position   = target.offset().top + offset;
+    var properties = {scrollTop: position};
+    var duration   = 500;
+    var easing     = 'swing';
+
+    $('html, body').stop().animate(properties, duration, easing);
+  });
+
 });
