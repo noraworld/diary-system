@@ -1092,7 +1092,8 @@ iframe, twitterwidget {
   margin-bottom: 0 !important;
 }
 iframe[class="mastodon-embed"] {
-  border: 1px solid #acb2b7;
+  // border: 1px solid #acb2b7;
+  border: 1px solid #e1e8ee;  // This color is same as Twitter's.
 }
 // YouTube などの iframe
 .video-player-wrapper {
