@@ -155,6 +155,9 @@ header {
   display: flex;
   align-items: center;
 }
+#hamburger-icon {
+  cursor: pointer;
+}
 #hamburger, .hamburger-menu, .hamburger-menu ul li {
   display: none;
 }

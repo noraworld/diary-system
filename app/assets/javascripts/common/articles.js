@@ -15,7 +15,7 @@ $(function() {
     $('iframe[src*="https://' + videoDomains[i] + '"]').wrap('<div class="video-player-wrapper">');
   }
 
-  $('a[href^="#"]').on('click', function(event) {
+  $('#post-content a[href^="#"]').on('click', function(event) {
     event.preventDefault();
 
     var target     = $(this.hash);
