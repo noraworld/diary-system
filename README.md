@@ -15,15 +15,19 @@ irb(main):002:0> exit
 You can now log in with username `example` and password `password` in `/login` page. In production environment, run `RAILS_ENV=production rails console` instead of `rails console`. **The above command execution screen should not be seen by others in production environment** because it contains your secret password.
 
 ## Environment Variables
-The environment variables are under the control of `.env` file. Create `.env` file under Rails application directory and append the environment variables below to `.env` file.
+The environment variables are under the control of `.env` file. Copy `.env.sample` and rename it as `.env`. Then replace the environment variables with your own environment.
+
+```bash
+$ cp .env.sample .env
+```
 
 ```Ruby
 HOST_NAME='application site’s URL'
 SITE_TITLE='application site’s title'
 SITE_DESCRIPTION='application site’s description'
 LAUNCHED_SINCE='year you have launched the application'
-RAILS_ENVIRONMENT='development or production'
 
+RAILS_ENVIRONMENT='development or production'
 SECRET_KEY_BASE='random string'
 UNICORN_SOCKET='unicorn socket file path'
 UNICORN_PID='unicorn pid file path'
