@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -21,9 +20,8 @@ ActiveRecord::Schema.define(version: 20180219045753) do
     t.integer  "month",      null: false
     t.integer  "day",        null: false
     t.date     "date",       null: false
+    t.index ["year", "month", "day"], name: "date_unique", unique: true
   end
-
-  add_index "articles", ["year", "month", "day"], name: "date_unique", unique: true
 
   create_table "sample_articles", force: :cascade do |t|
     t.text     "text"
@@ -34,9 +32,8 @@ ActiveRecord::Schema.define(version: 20180219045753) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "kind"
+    t.index ["year", "month", "day"], name: "sample_articles_date_unique", unique: true
   end
-
-  add_index "sample_articles", ["year", "month", "day"], name: "sample_articles_date_unique", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
