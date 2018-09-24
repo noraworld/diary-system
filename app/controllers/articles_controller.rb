@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
-  before_action :signed_in?, only: [:new, :create, :edit, :update, :destroy]
+  before_action :signed_in?, only: %i[new create edit update destroy]
 
   def index
-    if params[:year].to_i == 0 && params[:month].to_i == 0
-      @route = true
-    else
-      @route = false
-    end
+    @route = if params[:year].to_i == 0 && params[:month].to_i == 0
+               true
+             else
+               false
+             end
 
     # rootにアクセスしたときは@yearは今年
     @year = params[:year].to_i
@@ -71,10 +73,10 @@ class ArticlesController < ApplicationController
       @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
       @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
     # 開発環境ではポストしていない日に新たに記事を追加して編集することができるようにする
-  elsif environment == 'development'
+    elsif environment == 'development'
       begin
         @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
-      rescue
+      rescue StandardError
         @article = Article.new
         @article.year  = params[:year].to_i
         @article.month = params[:month].to_i
@@ -108,7 +110,7 @@ class ArticlesController < ApplicationController
           flash.now[:alert] = 'Updated failed...'
           render 'edit'
         end
-      rescue
+      rescue StandardError
         @article = Article.new(article_params)
 
         @article.year  = params[:year].to_i
@@ -163,16 +165,14 @@ class ArticlesController < ApplicationController
 
     hitcount = Article.where('text LIKE(?)', '%' + params[:q] + '%').count
     @number_of_pages = hitcount.to_i / quantities.to_i
-    if hitcount.to_i % quantities.to_i != 0
-      @number_of_pages += 1
-    end
+    @number_of_pages += 1 if hitcount.to_i % quantities.to_i != 0
 
     if @results.empty?
       if hitcount != 0 && @page > @number_of_pages
         @error_message = 'There are no search results anymore.'
       else
         @error_message  = 'No matches for'
-        @failed_keyword = "#{params[:q]}"
+        @failed_keyword = params[:q].to_s
       end
     end
   end
@@ -184,8 +184,6 @@ class ArticlesController < ApplicationController
   end
 
   def signed_in?
-    if current_user == nil
-      redirect_to login_path
-    end
+    redirect_to login_path if current_user.nil?
   end
 end

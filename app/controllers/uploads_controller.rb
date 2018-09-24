@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UploadsController < ApplicationController
   before_action :signed_in?
 
@@ -17,9 +19,9 @@ class UploadsController < ApplicationController
     content = data[:file].read
 
     # 画像ファイルじゃない場合はアップロードしない
-    fm = FileMagic.new()
-    unless fm.buffer(content) =~ /^(PNG|JPEG|GIF) /
-      render :body => nil, :status => 406
+    fm = FileMagic.new
+    unless /^(PNG|JPEG|GIF) /.match?(fm.buffer(content))
+      render body: nil, status: :not_acceptable
       return
     end
 
@@ -32,13 +34,12 @@ class UploadsController < ApplicationController
     # 画像ファイルをアップロードする
     img.write(path + data[:file].original_filename)
 
-    render :body => nil, :status => 200
+    render body: nil, status: :ok
   end
 
   private
-    def signed_in?
-      if current_user == nil
-        redirect_to login_path
-      end
-    end
+
+  def signed_in?
+    redirect_to login_path if current_user.nil?
+  end
 end

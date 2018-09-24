@@ -1,5 +1,6 @@
-module ApplicationHelper
+# frozen_string_literal: true
 
+module ApplicationHelper
   # ページごとにタイトルを変更する
   def page_title
     if @page_title && ENV['SITE_TITLE']
@@ -30,11 +31,11 @@ module ApplicationHelper
   def copyright_year
     now = Time.now.in_time_zone('Tokyo').strftime('%Y').to_s
 
-    if ENV['LAUNCHED_SINCE']
-      since = ENV['LAUNCHED_SINCE'].to_s
-    else
-      since = Time.now.in_time_zone('Tokyo').strftime('%Y').to_s
-    end
+    since = if ENV['LAUNCHED_SINCE']
+              ENV['LAUNCHED_SINCE'].to_s
+            else
+              Time.now.in_time_zone('Tokyo').strftime('%Y').to_s
+            end
 
     if since.to_i < now.to_i
       since + '-' + now
@@ -60,82 +61,75 @@ module ApplicationHelper
   # 数値の月表記を英語の月表記に変換する
   # month: 変換する月(integer), short: 先頭から何文字まで表示するか
   # return -> 英語の月表記(string)
-  def to_english_month (month, short = nil)
-
+  def to_english_month(month, short = nil)
     month = month.to_i
 
-    case month
-    when 1
-      english_month = 'January'
-    when 2
-      english_month = 'February'
-    when 3
-      english_month = 'March'
-    when 4
-      english_month = 'April'
-    when 5
-      english_month = 'May'
-    when 6
-      english_month = 'June'
-    when 7
-      english_month = 'July'
-    when 8
-      english_month = 'August'
-    when 9
-      english_month = 'September'
-    when 10
-      english_month = 'October'
-    when 11
-      english_month = 'November'
-    when 12
-      english_month = 'December'
-    else
-      english_month = 'Error!'
-    end
+    english_month = case month
+                    when 1
+                      'January'
+                    when 2
+                      'February'
+                    when 3
+                      'March'
+                    when 4
+                      'April'
+                    when 5
+                      'May'
+                    when 6
+                      'June'
+                    when 7
+                      'July'
+                    when 8
+                      'August'
+                    when 9
+                      'September'
+                    when 10
+                      'October'
+                    when 11
+                      'November'
+                    when 12
+                      'December'
+                    else
+                      'Error!'
+                    end
 
     # 先頭からshortに設定された数値までを表示する
-    if (short.is_a?(Integer))
-      english_month = english_month[0..(short-1)]
-    end
+    english_month = english_month[0..(short - 1)] if short.is_a?(Integer)
 
-    return english_month
+    english_month
   end
 
-  def to_day_of_week (wday, short = nil)
-
+  def to_day_of_week(wday, short = nil)
     wday = wday.to_i
 
-    case wday
-    when 0
-      wday = 'Sunday'
-    when 1
-      wday = 'Monday'
-    when 2
-      wday = 'Tuesday'
-    when 3
-      wday = 'Wednesday'
-    when 4
-      wday = 'Thursday'
-    when 5
-      wday = 'Friday'
-    when 6
-      wday = 'Saturday'
-    else
-      wday = 'Error!'
-    end
+    wday = case wday
+           when 0
+             'Sunday'
+           when 1
+             'Monday'
+           when 2
+             'Tuesday'
+           when 3
+             'Wednesday'
+           when 4
+             'Thursday'
+           when 5
+             'Friday'
+           when 6
+             'Saturday'
+           else
+             'Error!'
+           end
 
-    if (short.is_a?(Integer))
-      wday = wday[0..(short-1)]
-    end
+    wday = wday[0..(short - 1)] if short.is_a?(Integer)
 
-    return wday
+    wday
   end
 
   # 改行コードをbrタグに変換する
   # text: 変換するテキスト(text)
   # return -> brタグつきのテキスト(text)
   def linebreak_to_br(text)
-    text.gsub(/\r\n|\r|\n/, "<br>")
+    text.gsub(/\r\n|\r|\n/, '<br>')
   end
-
 end

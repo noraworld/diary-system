@@ -1,5 +1,6 @@
-source 'https://rubygems.org'
+# frozen_string_literal: true
 
+source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.2.1'
@@ -33,15 +34,15 @@ gem 'unicorn'
 # gem 'capistrano-rails', group: :development
 
 # Additional packages here
-gem 'jpmobile'
-gem 'github-linguist'
-gem 'qiita-markdown', '0.26.0'
-gem 'gemoji'
-gem 'dropzonejs-rails'
-gem 'ruby-filemagic'
-gem 'rmagick'
-gem 'dotenv-rails'
 gem 'bootsnap', require: false
+gem 'dotenv-rails'
+gem 'dropzonejs-rails'
+gem 'gemoji'
+gem 'github-linguist'
+gem 'jpmobile'
+gem 'qiita-markdown', '0.26.0'
+gem 'rmagick'
+gem 'ruby-filemagic'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -56,6 +57,6 @@ group :development do
   gem 'web-console'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
   gem 'rubocop', require: false
+  gem 'spring'
 end
