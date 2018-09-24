@@ -1,0 +1,11 @@
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'test/**/*'
+    - 'Rakefile'
+    - 'config.ru'
+
+Rails:
+  Enabled: true
