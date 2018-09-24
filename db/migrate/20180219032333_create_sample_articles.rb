@@ -1,4 +1,4 @@
-class CreateSampleArticles < ActiveRecord::Migration
+class CreateSampleArticles < ActiveRecord::Migration[4.2]
   def change
     create_table :sample_articles do |t|
       t.text :text
