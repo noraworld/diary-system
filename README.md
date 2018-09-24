@@ -4,15 +4,18 @@ Simple diary application. Unlike a blog, this application is suitable for writin
 This application is actually used by me. If you are interested in, please visit [Noraworld Diary](https://diary.noraworld.jp).
 
 ## Setup
-You should create new user to post your diary.
+You should create a new user to post your diary.
 
-```Ruby
-$ rails console
-irb(main):001:0> User.create!(:username => "example", :password => "password")
-irb(main):002:0> exit
+```
+$ bundle exec rails diary:create_user
+Create a new user
+username: alice
+password: (Not shown)
+
+Created a new user: alice
 ```
 
-You can now log in with username `example` and password `password` in `/login` page. In production environment, run `RAILS_ENV=production rails console` instead of `rails console`. **The above command execution screen should not be seen by others in production environment** because it contains your secret password.
+You can now sign in with username and password that you set up in `/login` page. In production environment, run `RAILS_ENV=production bundle exec rails diary:create_user` instead of `bundle exec rails diary:create_user`.
 
 ## Environment Variables
 The environment variables are under the control of `.env` file. Copy `.env.sample` and rename it as `.env`. Then replace the environment variables with your own environment.
