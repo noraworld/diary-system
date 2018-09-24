@@ -19,7 +19,7 @@ class UploadsController < ApplicationController
     # 画像ファイルじゃない場合はアップロードしない
     fm = FileMagic.new()
     unless fm.buffer(content) =~ /^(PNG|JPEG|GIF) /
-      render :nothing => true, :status => 406
+      render :body => nil, :status => 406
       return
     end
 
@@ -32,7 +32,7 @@ class UploadsController < ApplicationController
     # 画像ファイルをアップロードする
     img.write(path + data[:file].original_filename)
 
-    render :nothing => true, :status => 200
+    render :body => nil, :status => 200
   end
 
   private
