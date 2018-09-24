@@ -90,6 +90,10 @@ GEM
       thor (>= 0.14, < 2.0)
     kgio (2.11.2)
     libv8 (3.16.14.19)
+    listen (3.1.5)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
+      ruby_dep (~> 1.2)
     loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -156,6 +160,7 @@ GEM
     ref (2.0.0)
     rmagick (2.16.0)
     ruby-filemagic (0.7.2)
+    ruby_dep (1.5.0)
     rugged (0.27.4)
     sanitize (4.6.6)
       crass (~> 1.0.2)
@@ -220,6 +225,7 @@ DEPENDENCIES
   jbuilder
   jpmobile
   jquery-rails
+  listen
   qiita-markdown (= 0.26.0)
   rails (= 5.1)
   rmagick
