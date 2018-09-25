@@ -139,6 +139,7 @@ GEM
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     public_suffix (3.0.3)
+    puma (3.12.0)
     pygments.rb (1.2.1)
       multi_json (>= 1.0.0)
     qiita-markdown (0.26.0)
@@ -266,6 +267,7 @@ DEPENDENCIES
   listen
   pry-byebug
   pry-rails
+  puma
   qiita-markdown (= 0.26.0)
   rails (= 5.2.1)
   rmagick
