@@ -27,9 +27,8 @@ $(function() {
         var year = date.getFullYear() + '';
         var month = ('0' + (date.getMonth() + 1)).slice(-2);
         var image = '![' + filename + '](/images/' + year + '/' + month + '/' + filepath + ')';
-        var sentence = getInsertionSentence(image);
 
-        textarea.val(sentence);
+        insertImageTag(image);
       });
     },
     renameFilename: function(filename) {
@@ -42,7 +41,7 @@ $(function() {
   });
 
   // insert a image string to cursor position
-  function getInsertionSentence(image) {
+  function insertImageTag(image) {
     var textarea = document.querySelector('#post-content');
 
     // release selection if some letters in textarea are selected
@@ -56,14 +55,11 @@ $(function() {
     var before = sentence.substr(0, pos);
     var after = sentence.substr(pos, len);
 
-    var sentence = before + image + after;
+    var sentence = before + image + '\n\n' + after;
+    textarea.value = sentence;
+    textarea.selectionStart = textarea.selectionEnd = (before + image + '\n\n').length;
 
-    // append a new line if the cursor position locates at the last line
-    if (pos === len) {
-      sentence += '\n\n';
-    }
-
-    return sentence;
+    return true;
   }
 
   function getRandomizedHexadecimal(randomizedHexadecimalLength) {
