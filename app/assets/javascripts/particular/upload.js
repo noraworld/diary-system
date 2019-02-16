@@ -18,8 +18,8 @@ $(function() {
     init: function() {
       this.on('success', function(file) {
         var textarea = $('#post-content');
-        var filename = file.name.match(/(.*)(?:\.([^.]+$))/)[1].toLowerCase();
-        var filepath = file.name.toLowerCase();
+        var filename = file.upload.filename.match(/(.*)(?:\.([^.]+$))/)[1];
+        var filepath = file.upload.filename;
 
         var date = new Date();
         // 5時間前(午前5時までは前の日の日付で保存される)
@@ -33,7 +33,11 @@ $(function() {
       });
     },
     renameFilename: function(filename) {
-      return filename.toLowerCase();
+      var fileExtension = filename.match(/(.*)(?:\.([^.]+$))/)[2].toLowerCase();
+      var length = 16;
+
+      // example: '34c1da733b52350e.png'
+      return getRandomizedHexadecimal(length) + '.' + fileExtension;
     },
   });
 
@@ -60,6 +64,18 @@ $(function() {
     }
 
     return sentence;
+  }
+
+  function getRandomizedHexadecimal(randomizedHexadecimalLength) {
+    hexSeed = '0123456789abcdef';
+    hexSeedLength = hexSeed.length
+    randomizedHexadecimal = '';
+
+    for (var i = 0; i < randomizedHexadecimalLength; i++) {
+      randomizedHexadecimal += hexSeed[Math.floor(Math.random() * hexSeedLength)];
+    }
+
+    return randomizedHexadecimal;
   }
 
 });
