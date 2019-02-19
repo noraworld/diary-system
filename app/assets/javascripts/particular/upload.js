@@ -55,9 +55,20 @@ $(function() {
     var before = sentence.substr(0, pos);
     var after = sentence.substr(pos, len);
 
-    var sentence = before + image + '\n\n' + after;
+    var sentence = before + image;
+    if (pos == len) {
+      sentence += '\n\n';
+    }
+    sentence += after;
+
     textarea.value = sentence;
-    textarea.selectionStart = textarea.selectionEnd = (before + image + '\n\n').length;
+
+    if (pos == len) {
+      textarea.selectionStart = textarea.selectionEnd = (before + image + '\n\n').length;
+    }
+    else {
+      textarea.selectionStart = textarea.selectionEnd = (before + image).length;
+    }
 
     return true;
   }
