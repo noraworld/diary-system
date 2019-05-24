@@ -1,0 +1,16 @@
+<% if @templates.count == 0 %>
+<p>No templates found</p>
+<a href="/templates/new">Create a new template</a>
+<% else %>
+<a href="/templates/new">Create a new template</a>
+<% @templates.each do |template| %>
+<div>
+  <p><%= template.name %></p>
+  <p><%= template.title %></p>
+  <p><%= template.body %></p>
+  <p><%= template.sort %></p>
+  <p><a href="/templates/<%= template.name %>">edit</a></p>
+  <p><%= link_to "/templates/#{template.name}", { method: :delete, data: { confirm: 'Are you sure you want to delete?' } } do %>delete<% end %></p>
+</div>
+<% end %>
+<% end %>

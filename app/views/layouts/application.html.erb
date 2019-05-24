@@ -45,6 +45,8 @@
             <% case controller.action_name %>
             <% when 'index', 'search' %>
             <li><%= link_to '/new' do %><span class="icon-plus"></span>New post<% end %></li>
+            <li><%= link_to '/template/new' do %><span class="icon-plus"></span>New template<% end %></li>
+            <li><%= link_to '/template' do %><span class="icon-plus"></span>Template list<% end %></li>
             <li><%= link_to logout_path, method: :delete do %><span class="icon-switch"></span>Logout<% end %></li>
             <% when 'show' %>
             <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
@@ -52,9 +54,11 @@
             <% when 'new', 'create' %>
             <li><a href="#" id="publish-link"><span class="icon-upload"></span>Publish post</a></li>
             <% when 'edit', 'update' %>
+            <% if controller.controller_name == 'articles' %>
             <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
             <li><a href="#" id="update-link"><span class="icon-loop2"></span>Update post</a></li>
             <li><%= link_to '/destroy' + date, { :id => 'delete-link', method: :delete, data: {confirm: 'Are you sure you want to delete?'} } do %><span class="icon-fire"></span>Delete post</li><% end %>
+            <% end %>
             <% end %>
             <% end %>
           </ul>
@@ -77,6 +81,8 @@
               <% case controller.action_name %>
               <% when 'index', 'search' %>
               <li class="menulist"><%= link_to 'New post', '/new', { :class => 'menulink' } %></li>
+              <li class="menulist"><%= link_to 'New template', '/templates/new', { :class => 'menulink' } %></li>
+              <li class="menulist"><%= link_to 'Template list', '/templates', { :class => 'menulink' } %></li>
               <li class="menulist"><%= link_to 'Sign out', logout_path, { :class => 'menulink', method: :delete } %></li>
               <% when 'show' %>
               <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
@@ -84,9 +90,11 @@
               <% when 'new', 'create' %>
               <li class="menulist"><a class="menulink" id="publish-link">Publish post</a></li>
               <% when 'edit', 'update' %>
+              <% if controller.controller_name == 'articles' %>
               <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
               <li class="menulist"><a class="menulink" id="update-link">Update post</a></li>
               <li class="menulist"><%= link_to 'Delete post', '/destroy' + date, { :class => 'menulink', :id => 'delete-link', method: :delete, data: {confirm: 'Are you sure you want to delete?'} } %></li>
+              <% end %>
               <% end %>
             </ul>
           </div>

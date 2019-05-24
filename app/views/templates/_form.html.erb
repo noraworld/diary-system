@@ -1,0 +1,21 @@
+<%= form_for(:template, url: @post_template_url) do |f| %>
+  <% if flash[:alert] %>
+  <div id="failed-message" class="form-message">
+    <%= flash[:alert] %><span id="times">&times;</span>
+  </div>
+  <% end %>
+
+  <%= form_tag('/templates/new', method: 'post', enforce_utf8: false, :id => '') do %>
+    <%= f.text_field :name, :placeholder => 'Name', :id => '' %>
+    <%= f.text_field :title, :placeholder => 'Title', :id => '' %>
+    <%= f.text_area :body, {:id => '', :placeholder => 'Body'} %>
+    <%= f.text_field :sort, :placeholder => 'Order', :id => '' %>
+    <%= f.submit({:id => ''}) %>
+  <% end %>
+
+<% end %>
+
+<%= stylesheet_link_tag    'particular/edit_only.css', media: 'all' %>
+<%= javascript_include_tag 'particular/post_button_click.js' %>
+<%= javascript_include_tag 'particular/warn_without_saving.js' %>
+<%= javascript_include_tag 'particular/no_scroll.js' %>
