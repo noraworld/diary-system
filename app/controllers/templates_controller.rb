@@ -4,7 +4,7 @@ class TemplatesController < ApplicationController
   before_action :signed_in?
 
   def index
-    @templates = Template.all.order('sort ASC')
+    @templates = Template.all.order('position ASC')
   end
 
   def new
@@ -46,7 +46,7 @@ class TemplatesController < ApplicationController
   private
 
   def template_params
-    params.require(:template).permit(:name, :title, :body, :sort)
+    params.require(:template).permit(:name, :title, :body, :position)
   end
 
   def signed_in?

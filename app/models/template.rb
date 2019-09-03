@@ -6,7 +6,7 @@ class Template < ApplicationRecord
   validates :title,
             presence: true
 
-  validates :sort,
+  validates :position,
             presence: true,
             uniqueness: true,
             numericality: {

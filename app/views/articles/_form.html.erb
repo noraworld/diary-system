@@ -11,7 +11,7 @@
         <p><%= t.title %></p>
         <p><%= tf.text_field :title, { type: 'hidden', value: t.title } %></p>
         <p><%= tf.text_area :body %></p>
-        <p><%= tf.text_field :position, { type: 'hidden', value: t.sort } %></p>
+        <p><%= tf.text_field :position, { type: 'hidden', value: t.position } %></p>
       <% end %>
     <% end %>
   <% elsif controller.action_name == 'edit' %>

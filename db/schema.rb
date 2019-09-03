@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_03_015813) do
+ActiveRecord::Schema.define(version: 2019_09_03_023157) do
 
   create_table "articles", force: :cascade do |t|
     t.text "text", null: false
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2019_09_03_015813) do
   create_table "templates", force: :cascade do |t|
     t.string "title", null: false
     t.text "body"
-    t.integer "sort", null: false
+    t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", null: false
