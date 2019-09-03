@@ -42,7 +42,7 @@ class ArticlesController < ApplicationController
     day   = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%d').to_i
     article = Article.find_by(year: year, month: month, day: day)
 
-    @templates = Template.all
+    @templates = Template.all.order('position ASC')
 
     if article
       redirect_to root_path, notice: 'Already published today!'
