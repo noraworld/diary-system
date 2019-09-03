@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-
-  get 'templated_articles/create'
-  get 'templated_articles/update'
   root 'articles#index'
 
   get    'login'  => 'sessions#new'
@@ -26,8 +23,6 @@ Rails.application.routes.draw do
   get    '/templates/:name' => 'templates#edit'
   post   '/templates/:name' => 'templates#update'
   delete '/templates/:name' => 'templates#destroy'
-
-  post   '/templated_posts/:id' => 'templated_articles#create'
 
   get    '/sample' => 'sample_articles#show'
 end
