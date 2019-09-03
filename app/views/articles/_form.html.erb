@@ -5,20 +5,19 @@
   </div>
   <% end %>
 
-  <% if @templates %>
+  <% if @templates && controller.action_name == 'new' %>
     <% @templates.each do |t| %>
       <%= f.fields_for :templated_articles do |tf| %>
         <p><%= t.title %></p>
         <p><%= tf.text_field :title %></p>
         <p><%= tf.text_area :body %></p>
-        <p><%= tf.text_field :position %></p>
+        <p><%= tf.text_field :position, { type: 'hidden', value: t.sort } %></p>
       <% end %>
     <% end %>
-  <% else %>
+  <% elsif controller.action_name == 'edit' %>
     <%= f.fields_for :templated_articles do |tf| %>
       <p><%= tf.text_field :title %></p>
       <p><%= tf.text_area :body %></p>
-      <p><%= tf.text_field :position %></p>
     <% end %>
   <% end %>
 
