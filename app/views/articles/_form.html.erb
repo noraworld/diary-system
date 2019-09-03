@@ -1,4 +1,4 @@
-<%= form_with(model: @article, url: @post_url) do |f| %>
+<%= form_with(model: @article, url: @post_url) do |article_form| %>
   <% if flash[:alert] %>
   <div id="failed-message" class="form-message">
     <%= flash[:alert] %><span id="times">&times;</span>
@@ -6,24 +6,24 @@
   <% end %>
 
   <% if @templates && controller.action_name == 'new' %>
-    <% @templates.each do |t| %>
-      <%= f.fields_for :templated_articles do |tf| %>
-        <p><%= t.title %></p>
-        <p><%= tf.text_field :title, { type: 'hidden', value: t.title } %></p>
-        <p><%= tf.text_area :body, { placeholder: t.body } %></p>
-        <p><%= tf.text_field :position, { type: 'hidden', value: t.position } %></p>
+    <% @templates.each do |template| %>
+      <%= article_form.fields_for :templated_articles do |templated_article_form| %>
+        <p><%= template.title %></p>
+        <p><%= templated_article_form.text_field :title, { type: 'hidden', value: template.title } %></p>
+        <p><%= templated_article_form.text_area :body, { placeholder: template.body } %></p>
+        <p><%= templated_article_form.text_field :position, { type: 'hidden', value: template.position } %></p>
       <% end %>
     <% end %>
   <% elsif controller.action_name == 'edit' %>
-    <%= f.fields_for :templated_articles do |tf| %>
-      <p><%= tf.object.title %></p>
-      <p><%= tf.text_area :body %></p>
+    <%= article_form.fields_for :templated_articles do |templated_article_form| %>
+      <p><%= templated_article_form.object.title %></p>
+      <p><%= templated_article_form.text_area :body %></p>
     <% end %>
   <% end %>
 
   <div id="textarea">
-    <%= f.text_area :text, {:id => 'post-content', :placeholder => 'Write your diary'} %>
-    <%= f.submit({:id => 'post-button'}) %>
+    <%= article_form.text_area :text, {:id => 'post-content', :placeholder => 'Write your diary'} %>
+    <%= article_form.submit({:id => 'post-button'}) %>
   </div>
 <% end %>
 
