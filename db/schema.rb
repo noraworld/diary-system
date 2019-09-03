@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_03_023157) do
+ActiveRecord::Schema.define(version: 2019_09_03_033449) do
 
   create_table "articles", force: :cascade do |t|
     t.text "text", null: false
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2019_09_03_023157) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", null: false
+    t.index ["position"], name: "templates_position_unique", unique: true
   end
 
   create_table "users", force: :cascade do |t|
