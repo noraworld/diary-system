@@ -8,7 +8,6 @@ class TemplatesController < ApplicationController
   end
 
   def new
-    @template = Template.new
     @post_template_url = '/templates/new'
   end
 

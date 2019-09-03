@@ -42,17 +42,20 @@ class ArticlesController < ApplicationController
     day   = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%d').to_i
     article = Article.find_by(year: year, month: month, day: day)
 
+    @templates = Template.all
+
     if article
       redirect_to root_path, notice: 'Already published today!'
       return
     end
 
     @article = Article.new
+    @article.templated_articles.build
     @post_url = '/new'
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = Article.new(article_and_templated_articles_params)
 
     @article.year  = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_i
     @article.month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_i
@@ -93,7 +96,7 @@ class ArticlesController < ApplicationController
     if environment == 'production'
       @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
 
-      if @article.update(article_params)
+      if @article.update(update_article_and_templated_articles_params)
         redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Updated successfully!'
       else
         flash.now[:alert] = 'Updated failed...'
@@ -104,7 +107,7 @@ class ArticlesController < ApplicationController
       begin
         @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
 
-        if @article.update(article_params)
+        if @article.update(update_article_and_templated_articles_params)
           redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Updated successfully!'
         else
           flash.now[:alert] = 'Updated failed...'
@@ -181,6 +184,14 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:text)
+  end
+
+  def article_and_templated_articles_params
+    params.require(:article).permit(:text, templated_articles_attributes: [:title, :body, :position])
+  end
+
+  def update_article_and_templated_articles_params
+    params.require(:article).permit(:text, templated_articles_attributes: [:title, :body, :position, :_destroy, :id])
   end
 
   def signed_in?

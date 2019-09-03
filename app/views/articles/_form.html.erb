@@ -1,8 +1,25 @@
-<%= form_for(:article, url: @post_url) do |f| %>
+<%= form_with(model: @article, url: @post_url) do |f| %>
   <% if flash[:alert] %>
   <div id="failed-message" class="form-message">
     <%= flash[:alert] %><span id="times">&times;</span>
   </div>
+  <% end %>
+
+  <% if @templates %>
+    <% @templates.each do |t| %>
+      <%= f.fields_for :templated_articles do |tf| %>
+        <p><%= t.title %></p>
+        <p><%= tf.text_field :title %></p>
+        <p><%= tf.text_area :body %></p>
+        <p><%= tf.text_field :position %></p>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= f.fields_for :templated_articles do |tf| %>
+      <p><%= tf.text_field :title %></p>
+      <p><%= tf.text_area :body %></p>
+      <p><%= tf.text_field :position %></p>
+    <% end %>
   <% end %>
 
   <div id="textarea">

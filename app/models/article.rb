@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Article < ApplicationRecord
+  has_many :templated_articles, dependent: :destroy
+  accepts_nested_attributes_for :templated_articles, allow_destroy: true
+
   # 日記本文が空白はダメ
   validates :text,
             presence: true

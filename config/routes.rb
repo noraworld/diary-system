@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'templated_articles/create'
+  get 'templated_articles/update'
   root 'articles#index'
 
   get    'login'  => 'sessions#new'
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
   get    '/new'                       => 'articles#new'
   post   '/new'                       => 'articles#create'
   post   '/:year/:month/:day'         => 'articles#update',  constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
+  patch  '/:year/:month/:day'         => 'articles#update',  constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
   get    '/search'                    => 'articles#search'
 
   post   '/upload' => 'uploads#upload'
@@ -23,6 +26,8 @@ Rails.application.routes.draw do
   get    '/templates/:name' => 'templates#edit'
   post   '/templates/:name' => 'templates#update'
   delete '/templates/:name' => 'templates#destroy'
+
+  post   '/templated_posts/:id' => 'templated_articles#create'
 
   get    '/sample' => 'sample_articles#show'
 end
