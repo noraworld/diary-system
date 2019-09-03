@@ -71,63 +71,18 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    environment = ENV['RAILS_ENVIRONMENT'] || ENV['RAILS_ENV'] || 'development'
-    if environment == 'production'
-      @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
-      @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
-    # 開発環境ではポストしていない日に新たに記事を追加して編集することができるようにする
-    elsif environment == 'development'
-      begin
-        @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
-      rescue StandardError
-        @article = Article.new
-        @article.year  = params[:year].to_i
-        @article.month = params[:month].to_i
-        @article.day   = params[:day].to_i
-        @article.date  = Date.new(@article.year, @article.month, @article.day)
-      end
-
-      @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
-    end
+    @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
+    @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
   end
 
   def update
-    environment = ENV['RAILS_ENVIRONMENT'] || ENV['RAILS_ENV'] || 'development'
-    if environment == 'production'
-      @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
+    @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
 
-      if @article.update(update_article_and_templated_articles_params)
-        redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Updated successfully!'
-      else
-        flash.now[:alert] = 'Updated failed...'
-        render 'edit'
-      end
-    # 開発環境ではポストしていない日に新たに記事を追加して編集することができるようにする
-    elsif environment == 'development'
-      begin
-        @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
-
-        if @article.update(update_article_and_templated_articles_params)
-          redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Updated successfully!'
-        else
-          flash.now[:alert] = 'Updated failed...'
-          render 'edit'
-        end
-      rescue StandardError
-        @article = Article.new(article_params)
-
-        @article.year  = params[:year].to_i
-        @article.month = params[:month].to_i
-        @article.day   = params[:day].to_i
-        @article.date  = Date.new(@article.year, @article.month, @article.day)
-
-        if @article.save
-          redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Appended successfully!'
-        else
-          flash.now[:alert] = 'Append failed...'
-          render 'edit'
-        end
-      end
+    if @article.update(update_article_and_templated_articles_params)
+      redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Updated successfully!'
+    else
+      flash.now[:alert] = 'Updated failed...'
+      render 'edit'
     end
   end
 
