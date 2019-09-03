@@ -55,7 +55,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_and_templated_articles_params)
+    @article = Article.new(article_params)
 
     @article.year  = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_i
     @article.month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_i
@@ -78,7 +78,7 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
 
-    if @article.update(update_article_and_templated_articles_params)
+    if @article.update(update_article_params)
       redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Updated successfully!'
     else
       flash.now[:alert] = 'Updated failed...'
@@ -138,14 +138,10 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:text)
-  end
-
-  def article_and_templated_articles_params
     params.require(:article).permit(:text, templated_articles_attributes: [:title, :body, :position])
   end
 
-  def update_article_and_templated_articles_params
+  def update_article_params
     params.require(:article).permit(:text, templated_articles_attributes: [:title, :body, :position, :_destroy, :id])
   end
 
