@@ -27,8 +27,8 @@
 <div id="templated-posts-content">
   <% @article.templated_articles.order('position ASC').each do |templated_article| %>
     <% if templated_article.body.present? %>
-      <h3><%= templated_article.title %></h3>
-      <div><%= qiita_markdown(templated_article.body) %></div>
+      <h3 id="templated-post-title"><%= templated_article.title %></h3>
+      <div id="templated-post-body"><%= qiita_markdown(templated_article.body) %></div>
     <% end %>
   <% end %>
 </div>

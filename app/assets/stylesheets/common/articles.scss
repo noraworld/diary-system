@@ -733,6 +733,11 @@ $rule-margin-left-and-right: 1.3rem;
   margin-top: 0;
 }
 
+#templated-post-body {
+  @extend #post-content;
+  min-height: auto;
+}
+
 // display: none が複数箇所にあるのはよくないので
 // display: none はすべてここに集約している
 // なので、ここを丸ごと消すと、すべての要素の display: none が
@@ -752,6 +757,7 @@ $rule-margin-left-and-right: 1.3rem;
   // max-height: 55vh;
   /*min-height: 500px;*/
   margin: 10px auto;
+
   #post-content {
     // min-height: 55vh;
     // max-height: 55vh;
@@ -768,6 +774,11 @@ $rule-margin-left-and-right: 1.3rem;
     -webkit-overflow-scrolling: touch;
     background-image: none;
     width: 100%;
+  }
+
+  #templated-post-content {
+    @extend #post-content;
+    min-height: 200px;
   }
 }
 

@@ -18,10 +18,13 @@
   <% elsif controller.action_name == 'edit' %>
     <%= article_form.fields_for :templated_articles do |templated_article_form| %>
       <p><%= templated_article_form.object.title %></p>
-      <p><%= templated_article_form.text_area :body %></p>
+      <div id="textarea"><%= templated_article_form.text_area :body, { id: 'templated-post-content' } %></div>
     <% end %>
   <% end %>
 
+  <% if @templates.present? || (controller.action_name == 'edit' && @article.templated_articles.present?) %>
+    <div>Main diary</div>
+  <% end %>
   <div id="textarea">
     <%= article_form.text_area :text, {:id => 'post-content', :placeholder => 'Write your diary'} %>
     <%= article_form.submit({:id => 'post-button'}) %>
