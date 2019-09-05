@@ -9,21 +9,21 @@
   <% if @templates && controller.action_name == 'new' %>
     <% @templates.each do |template| %>
       <%= article_form.fields_for :templated_articles do |templated_article_form| %>
-        <p><%= template.title %></p>
-        <p><%= templated_article_form.text_field :title, { type: 'hidden', value: template.title } %></p>
-        <p><%= templated_article_form.text_area :body, { value: template.body, placeholder: "Write #{template.title}" } %></p>
-        <p><%= templated_article_form.text_field :position, { type: 'hidden', value: template.position } %></p>
+        <div id="templated-post-title"><%= template.title %></div>
+        <div><%= templated_article_form.text_field :title, { type: 'hidden', value: template.title } %></div>
+        <div id="textarea"><%= templated_article_form.text_area :body, { value: template.body, placeholder: "Write #{template.title}", id: 'templated-post-body' } %></div>
+        <div><%= templated_article_form.text_field :position, { type: 'hidden', value: template.position } %></div>
       <% end %>
     <% end %>
   <% elsif controller.action_name == 'edit' %>
     <%= article_form.fields_for :templated_articles do |templated_article_form| %>
-      <p><%= templated_article_form.object.title %></p>
-      <div id="textarea"><%= templated_article_form.text_area :body, { id: 'templated-post-content' } %></div>
+      <div id="templated-post-title"><%= templated_article_form.object.title %></div>
+      <div id="textarea"><%= templated_article_form.text_area :body, { placeholder: "Write #{templated_article_form.object.title}", id: 'templated-post-body' } %></div>
     <% end %>
   <% end %>
 
   <% if @templates.present? || (controller.action_name == 'edit' && @article.templated_articles.present?) %>
-    <div>Main diary</div>
+    <div id="main-post-title">Main diary</div>
   <% end %>
   <div id="textarea">
     <%= article_form.text_area :text, {:id => 'post-content', :placeholder => 'Write your diary'} %>

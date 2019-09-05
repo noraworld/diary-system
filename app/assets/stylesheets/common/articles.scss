@@ -733,9 +733,19 @@ $rule-margin-left-and-right: 1.3rem;
   margin-top: 0;
 }
 
+#templated-post-title, #main-post-title {
+  margin: 27px auto 7px;
+  text-align: center;
+  max-width: $general-max-width - 20px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
 #templated-post-body {
   @extend #post-content;
-  min-height: auto;
+  min-height: 125px;
 }
 
 // display: none が複数箇所にあるのはよくないので
@@ -756,7 +766,7 @@ $rule-margin-left-and-right: 1.3rem;
   // min-height: 55vh;
   // max-height: 55vh;
   /*min-height: 500px;*/
-  margin: 10px auto;
+  margin: 10px auto 20px;
 
   #post-content {
     // min-height: 55vh;
@@ -776,9 +786,9 @@ $rule-margin-left-and-right: 1.3rem;
     width: 100%;
   }
 
-  #templated-post-content {
+  #templated-post-body {
     @extend #post-content;
-    min-height: 200px;
+    min-height: 150px;
   }
 }
 
