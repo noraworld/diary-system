@@ -11,7 +11,7 @@
       <%= article_form.fields_for :templated_articles do |templated_article_form| %>
         <p><%= template.title %></p>
         <p><%= templated_article_form.text_field :title, { type: 'hidden', value: template.title } %></p>
-        <p><%= templated_article_form.text_area :body, { placeholder: template.body } %></p>
+        <p><%= templated_article_form.text_area :body, { value: template.body, placeholder: "Write #{template.title}" } %></p>
         <p><%= templated_article_form.text_field :position, { type: 'hidden', value: template.position } %></p>
       <% end %>
     <% end %>
