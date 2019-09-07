@@ -49,6 +49,7 @@ $post-content-padding-top: 1.3rem;
 $post-content-padding-top-tablet: 1rem;
 $post-content-border-color: #ccc;
 $system-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
+$post-content-font: YuGothic, $system-font, 'Open Sans Regular';
 // iPad の縦幅は 1024px なので、それ以上にすると
 // タブレットでは、画面左右の丸い矢印が出なくなる
 $prev-next-post-threshold: 1050px;
@@ -381,7 +382,7 @@ $rule-margin-left-and-right: 1.3rem;
 }
 
 #post-content {
-  font-family: 'Open Sans Regular';
+  font-family: $post-content-font;
   width: $general-width-percent;
   max-width: $general-max-width;
   min-height: 600px;
@@ -398,7 +399,6 @@ $rule-margin-left-and-right: 1.3rem;
   word-wrap: break-word;
 
   h1 {
-    // font-family: 'Open Sans Bold';
     font-size: 20px;  // default: 30px;
     font-weight: normal;
     margin-top: 50px;
@@ -416,7 +416,6 @@ $rule-margin-left-and-right: 1.3rem;
     }
   }
   h2 {
-    // font-family: 'Open Sans Bold';
     font-size: 18px;  // default: 22.5px;
     font-weight: normal;
     margin-top: 40px;
@@ -434,7 +433,6 @@ $rule-margin-left-and-right: 1.3rem;
     }
   }
   h3 {
-    // font-family: 'Open Sans Bold';
     font-size: 16px;  // default: 17.55px;
     font-weight: normal;
     margin-top: 31px;
@@ -452,21 +450,18 @@ $rule-margin-left-and-right: 1.3rem;
     }
   }
   h4 {
-    // font-family: 'Open Sans Bold';
     font-size: 15px;  // default: 15px;
     font-weight: bold;
     margin-top: 31px;
     margin-bottom: 5px;
   }
   h5 {
-    // font-family: 'Open Sans Bold';
     font-size: 14.25px;  // default: 12.45px;
     font-weight: bold;
     margin-top: 31px;
     margin-bottom: 5px;
   }
   h6 {
-    // font-family: 'Open Sans Bold';
     font-size: 13.5px;  // default: 10.05px;
     font-weight: bold;
     margin-top: 31px;
@@ -479,7 +474,7 @@ $rule-margin-left-and-right: 1.3rem;
   }
 
   strong {
-    font-family: 'Open Sans Bold';
+    font-family: $post-content-font;
     font-weight: bold;
   }
 
@@ -808,7 +803,7 @@ $rule-margin-left-and-right: 1.3rem;
     // padding: 1.5rem 2rem 0;
     padding: $post-content-padding-top $post-content-padding-left-and-right $post-content-padding-bottom;
     // font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-family: 'Open Sans Regular';
+    font-family: $post-content-font;
     text-align: initial;
     // font-size: 16px;
     // line-height: 25px;
@@ -829,7 +824,7 @@ $rule-margin-left-and-right: 1.3rem;
   padding-bottom: 10px;
 }
 #search-result-content {
-  font-family: 'Open Sans Regular';
+  font-family: $post-content-font;
   width: $general-width-percent;
   max-width: $general-max-width;
   margin: 20px auto 0;
