@@ -399,43 +399,76 @@ $rule-margin-left-and-right: 1.3rem;
 
   h1 {
     // font-family: 'Open Sans Bold';
-    font-size: 26px;  // default: 30px;
+    font-size: 20px;  // default: 30px;
     font-weight: normal;
     margin-top: 50px;
     margin-bottom: 15px;
+    padding-left: 12px;
+    position: relative;
+
+    &:before {
+      content: '';
+      width: 3.5px;
+      height: 100%;
+      background: #62a6ea;
+      position: absolute;
+      left: 0;
+    }
   }
   h2 {
     // font-family: 'Open Sans Bold';
-    font-size: 24px;  // default: 22.5px;
+    font-size: 18px;  // default: 22.5px;
     font-weight: normal;
     margin-top: 40px;
     margin-bottom: 15px;
+    padding-left: 10px;
+    position: relative;
+
+    &:before {
+      content: '';
+      width: 2.5px;
+      height: 100%;
+      background: #62a6ea;
+      position: absolute;
+      left: 0;
+    }
   }
   h3 {
     // font-family: 'Open Sans Bold';
-    font-size: 22px;  // default: 17.55px;
+    font-size: 16px;  // default: 17.55px;
     font-weight: normal;
     margin-top: 31px;
     margin-bottom: 10px;
+    padding-left: 9px;
+    position: relative;
+
+    &:before {
+      content: '';
+      width: 2.5px;
+      height: 100%;
+      background: #62a6ea;
+      position: absolute;
+      left: 0;
+    }
   }
   h4 {
     // font-family: 'Open Sans Bold';
-    font-size: 20px;  // default: 15px;
-    font-weight: normal;
+    font-size: 15px;  // default: 15px;
+    font-weight: bold;
     margin-top: 31px;
     margin-bottom: 5px;
   }
   h5 {
     // font-family: 'Open Sans Bold';
-    font-size: 18px;  // default: 12.45px;
-    font-weight: normal;
+    font-size: 14.25px;  // default: 12.45px;
+    font-weight: bold;
     margin-top: 31px;
     margin-bottom: 5px;
   }
   h6 {
     // font-family: 'Open Sans Bold';
-    font-size: 16px;  // default: 10.05px;
-    font-weight: normal;
+    font-size: 13.5px;  // default: 10.05px;
+    font-weight: bold;
     margin-top: 31px;
     margin-bottom: 5px;
   }
