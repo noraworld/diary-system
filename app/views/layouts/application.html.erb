@@ -107,7 +107,7 @@
     <%= yield %>
 
     <footer id="footer" class="clearfix">
-      <section id="copyright">Copyright &copy; <%= copyright_year %> <%= link_to ENV['SITE_TITLE'] || ENV['HOST_NAME'] || request.domain, '/', { :tabindex => -1 } %>. All rights reserved.</section>
+      <section id="copyright">Copyright &copy; <%= copyright_year %> <%= link_to site_title, '/', { :tabindex => -1 } %>. All rights reserved.</section>
     </footer>
   </div>
 </body>

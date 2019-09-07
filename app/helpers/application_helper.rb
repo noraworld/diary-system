@@ -1,15 +1,25 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  def site_title
+    if ENV['SITE_TITLE'].present?
+      ENV['SITE_TITLE']
+    elsif ENV['HOST_NAME'].present?
+      ENV['HOST_NAME']
+    else
+      request.domain
+    end
+  end
+
   # ページごとにタイトルを変更する
   def page_title
-    if @page_title && ENV['SITE_TITLE']
+    if @page_title.present? && ENV['SITE_TITLE'].present?
       @page_title.to_s + ' - ' + ENV['SITE_TITLE'].to_s
-    elsif @page_title && !ENV['SITE_TITLE']
+    elsif @page_title.present? && ENV['SITE_TITLE'].blank?
       @page_title.to_s + ' - ' + request.domain
-    elsif !@page_title && ENV['SITE_TITLE']
+    elsif @page_title.blank? && ENV['SITE_TITLE'].present?
       ENV['SITE_TITLE']
-    elsif !@page_title && !ENV['SITE_TITLE']
+    elsif @page_title.blank? && ENV['SITE_TITLE'].blank?
       request.domain
     end
   end
@@ -18,9 +28,9 @@ module ApplicationHelper
   def page_description
     if @page_description == false
       false
-    elsif @page_description
+    elsif @page_description.present?
       @page_description.to_s
-    elsif ENV['SITE_DESCRIPTION']
+    elsif ENV['SITE_DESCRIPTION'].present?
       ENV['SITE_DESCRIPTION'].to_s
     else
       false
@@ -31,7 +41,7 @@ module ApplicationHelper
   def copyright_year
     now = Time.now.in_time_zone('Tokyo').strftime('%Y').to_s
 
-    since = if ENV['LAUNCHED_SINCE']
+    since = if ENV['LAUNCHED_SINCE'].present? && ENV['LAUNCHED_SINCE'].to_i != 0
               ENV['LAUNCHED_SINCE'].to_s
             else
               Time.now.in_time_zone('Tokyo').strftime('%Y').to_s
