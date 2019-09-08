@@ -6,7 +6,6 @@
   <% end %>
 
   <%= form_tag('/templates/new', method: 'post', enforce_utf8: false, :id => '') do %>
-    <%= f.text_field :name, placeholder: 'Enter the name. This field is used for edit page URL.', id: '' %>
     <%= f.text_field :title, placeholder: 'Enter the title. This field is used for template title.', id: '' %>
     <%= f.text_area :body, { id: '', placeholder: 'Enter the body. This field is used for placeholder when posting to TemplatedArticle.' } %>
     <%= f.text_field :position, placeholder: 'Enter the order. This field is used for in what order it should show.', id: '' %>

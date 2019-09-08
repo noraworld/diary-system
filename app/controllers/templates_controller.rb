@@ -13,6 +13,7 @@ class TemplatesController < ApplicationController
 
   def create
     @template = Template.new(template_params)
+    @template.uuid = SecureRandom.hex
 
     if @template.save
       redirect_to '/templates'
@@ -22,12 +23,12 @@ class TemplatesController < ApplicationController
   end
 
   def edit
-    @template = Template.find_by!(name: params[:name])
-    @post_template_url = "/templates/#{params[:name]}"
+    @template = Template.find_by!(uuid: params[:uuid])
+    @post_template_url = "/templates/#{params[:uuid]}"
   end
 
   def update
-    @template = Template.find_by!(name: params[:name])
+    @template = Template.find_by!(uuid: params[:uuid])
 
     if @template.update(template_params)
       redirect_to "/templates"
@@ -37,7 +38,7 @@ class TemplatesController < ApplicationController
   end
 
   def destroy
-    @template = Template.find_by!(name: params[:name])
+    @template = Template.find_by!(uuid: params[:uuid])
     @template.destroy
 
     redirect_to "/templates"
@@ -46,7 +47,7 @@ class TemplatesController < ApplicationController
   private
 
   def template_params
-    params.require(:template).permit(:name, :title, :body, :position)
+    params.require(:template).permit(:title, :body, :position)
   end
 
   def signed_in?

@@ -1,5 +1,5 @@
 class Template < ApplicationRecord
-  validates :name,
+  validates :uuid,
             presence: true,
             uniqueness: true
 

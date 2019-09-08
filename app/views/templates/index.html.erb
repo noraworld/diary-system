@@ -5,12 +5,11 @@
 <a href="/templates/new">Create a new template</a>
 <% @templates.each do |template| %>
 <div>
-  <p><%= template.name %></p>
   <p><%= template.title %></p>
   <p><%= template.body %></p>
   <p><%= template.position %></p>
-  <p><a href="/templates/<%= template.name %>">edit</a></p>
-  <p><%= link_to "/templates/#{template.name}", { method: :delete, data: { confirm: 'Are you sure you want to delete?' } } do %>delete<% end %></p>
+  <p><a href="/templates/<%= template.uuid %>">edit</a></p>
+  <p><%= link_to "/templates/#{template.uuid}", { method: :delete, data: { confirm: 'Are you sure you want to delete?' } } do %>delete<% end %></p>
 </div>
 <% end %>
 <% end %>

@@ -20,9 +20,9 @@ Rails.application.routes.draw do
   get    '/templates'       => 'templates#index'
   get    '/templates/new'   => 'templates#new'
   post   '/templates/new'   => 'templates#create'
-  get    '/templates/:name' => 'templates#edit'
-  post   '/templates/:name' => 'templates#update'
-  delete '/templates/:name' => 'templates#destroy'
+  get    '/templates/:uuid' => 'templates#edit'
+  post   '/templates/:uuid' => 'templates#update'
+  delete '/templates/:uuid' => 'templates#destroy'
 
   get    '/sample' => 'sample_articles#show'
 end

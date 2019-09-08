@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_03_035827) do
+ActiveRecord::Schema.define(version: 2019_09_08_083413) do
 
   create_table "articles", force: :cascade do |t|
     t.text "text", null: false
@@ -51,8 +51,9 @@ ActiveRecord::Schema.define(version: 2019_09_03_035827) do
     t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name", null: false
+    t.string "uuid", null: false
     t.index ["position"], name: "templates_position_unique", unique: true
+    t.index ["uuid"], name: "templates_uuid_unique", unique: true
   end
 
   create_table "users", force: :cascade do |t|
