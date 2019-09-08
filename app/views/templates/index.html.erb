@@ -1,15 +1,26 @@
 <% if @templates.count == 0 %>
-<p>No templates found</p>
-<a href="/templates/new">Create a new template</a>
+  <div id="template-contents">
+    <p>No templates found</p>
+    <div class="clearfix"><a href="/templates/new" id="new-template-link">Create a new template</a></div>
+  </div>
 <% else %>
-<a href="/templates/new">Create a new template</a>
-<% @templates.each do |template| %>
-<div>
-  <p><%= template.title %></p>
-  <p><%= template.body %></p>
-  <p><%= template.position %></p>
-  <p><a href="/templates/<%= template.uuid %>">edit</a></p>
-  <p><%= link_to "/templates/#{template.uuid}", { method: :delete, data: { confirm: 'Are you sure you want to delete?' } } do %>delete<% end %></p>
-</div>
-<% end %>
+  <div id="template-contents">
+    <div class="clearfix"><a href="/templates/new" id="new-template-link">Create a new template</a></div>
+
+    <% @templates.each do |template| %>
+      <div id="template-content">
+        <div id="template-title-edit-delete">
+          <div id="template-title"><%= template.title %></div>
+          <div id="template-edit"><a href="/templates/<%= template.uuid %>"><span class="icon-pencil"></a></div>
+          <div id="template-delete"><%= link_to "/templates/#{template.uuid}", { method: :delete, data: { confirm: 'Are you sure you want to delete?' } } do %><span class="icon-fire"></span><% end %></div>
+        </div>
+
+        <% if template.body.present? %>
+          <textarea readonly id="template-body"><%= template.body %></textarea>
+        <% else %>
+          <textarea readonly id="template-body" class="no-template-body">The template body is empty.</textarea>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 <% end %>

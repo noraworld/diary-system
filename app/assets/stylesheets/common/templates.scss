@@ -1,0 +1,90 @@
+// Place all the styles related to the templates controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$system-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
+$template-content-font: YuGothic, $system-font, 'Open Sans Regular';
+
+#template-contents {
+  font-family: $template-content-font;
+  width: 85%;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+#new-template-link {
+  float: right;
+  color: #444444;
+
+  &:hover {
+    color: #808080;
+  }
+}
+
+#template-content:nth-of-type(2) {
+  margin-top: 20px;
+}
+
+#template-content {
+  margin-top: 40px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  #template-title-edit-delete {
+    position: relative;
+  }
+
+  #template-title {
+    width: 80%;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+    border-right: 1px solid #8a8a8a;
+  }
+
+  #template-edit, #template-delete {
+    position: absolute;
+    top: 0;
+    font-size: 18px;
+    a {
+      text-decoration: none;
+      color: #444444;
+    }
+    a:hover {
+      color: #808080;
+    }
+  }
+  #template-edit {
+    right: 42px;
+  }
+  #template-delete {
+    right: 10px;
+  }
+
+  #template-body {
+    resize: vertical;
+    height: 200px;
+    min-height: 200px;
+    max-height: 600px;
+    width: 100%;
+    padding: 1.3rem 2.2rem 1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    color: #505050;
+    background-color: #f7f7f7;
+    box-sizing: border-box;
+  }
+
+  #template-body.no-template-body {
+    resize: none;
+    color: #9a9a9a;
+    height: 100px;
+    min-height: 100px;
+  }
+}
