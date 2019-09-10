@@ -1,17 +1,17 @@
-<%= form_for(:template, url: @post_template_url) do |f| %>
+<%= form_for(:template, url: @post_template_url, html: { id: 'template-form' }) do |f| %>
   <% if flash[:alert] %>
   <div id="failed-message" class="form-message">
     <%= flash[:alert] %><span id="times">&times;</span>
   </div>
   <% end %>
 
-  <%= form_tag('/templates/new', method: 'post', enforce_utf8: false, :id => '') do %>
-    <%= f.text_field :title, placeholder: 'Enter the title. This field is used for template title.', id: '' %>
-    <%= f.text_area :body, { id: '', placeholder: 'Enter the body. This field is used for placeholder when posting to TemplatedArticle.' } %>
-    <%= f.text_field :position, placeholder: 'Enter the order. This field is used for in what order it should show.', id: '' %>
-    <%= f.submit({ id: '' }) %>
-  <% end %>
+  <div id="template-form-title">
+    <%= @template_form_title %>
+    <%= f.submit({ id: 'template-post-button', value: 'SAVE TEMPLATE' }) %>
+  </div>
 
+  <%= f.text_field :title, placeholder: 'Enter the title. This field is used for template title.', id: 'template-title' %>
+  <%= f.text_area :body, { id: 'template-body', placeholder: 'Enter the body. This field is used for placeholder when posting to TemplatedArticle.' } %>
 <% end %>
 
 <%= stylesheet_link_tag    'particular/edit_only.css', media: 'all' %>

@@ -9,11 +9,14 @@ class TemplatesController < ApplicationController
 
   def new
     @post_template_url = '/templates/new'
+    @template_form_title = 'Create a new template'
   end
 
   def create
     @template = Template.new(template_params)
+    @template_form_title = 'Create a new template'
     @template.uuid = SecureRandom.hex
+    @template.position = Template.maximum(:position) + 1
 
     if @template.save
       redirect_to '/templates'
@@ -25,10 +28,12 @@ class TemplatesController < ApplicationController
   def edit
     @template = Template.find_by!(uuid: params[:uuid])
     @post_template_url = "/templates/#{params[:uuid]}"
+    @template_form_title = 'Edit the template'
   end
 
   def update
     @template = Template.find_by!(uuid: params[:uuid])
+    @template_form_title = 'Edit the template'
 
     if @template.update(template_params)
       redirect_to "/templates"
