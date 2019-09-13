@@ -10,8 +10,8 @@
     <%= f.submit({ id: 'template-post-button', value: 'SAVE TEMPLATE' }) %>
   </div>
 
-  <%= f.text_field :title, placeholder: 'Enter the title. This field is used for template title.', id: 'template-title' %>
-  <%= f.text_area :body, { id: 'template-body', placeholder: 'Enter the body. This field is used for placeholder when posting to TemplatedArticle.' } %>
+  <%= f.text_field :title, id: 'template-title', placeholder: 'This field is required. The value of this field will be the template title directly.' %>
+  <%= f.text_area :body, { id: 'template-body',  placeholder: 'This field is optional. The value of this field will be filled in to the template post body.' } %>
 <% end %>
 
 <%= stylesheet_link_tag    'particular/edit_only.css', media: 'all' %>

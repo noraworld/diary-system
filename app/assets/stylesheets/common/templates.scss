@@ -15,7 +15,7 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
   border: 1px solid #ccc;
   font-size: 15px;
   box-sizing: border-box;
-  padding: 1.3rem 2.2rem 1rem;
+  padding: 1rem 1.4rem;
 }
 
 #template-contents {
@@ -57,6 +57,7 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
     box-sizing: border-box;
     font-size: 16px;
     border-right: 1px solid #8a8a8a;
+    word-wrap: break-word;
   }
 
   #template-edit, #template-delete {
@@ -94,7 +95,6 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
 }
 
 #template-form {
-  font-family: $template-content-font;
   width: 85%;
   max-width: 750px;
   margin: 0 auto;
@@ -112,12 +112,13 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
   }
 
   #template-title {
+    font-family: $template-content-font;
     display: block;
     width: 100%;
     box-sizing: border-box;
-    height: 40px;
-    padding: 6px 12px;
-    font-size: 14px;
+    height: 45px;
+    padding: 0.4rem 1.4rem;
+    font-size: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin: 15px 0 0 0;
