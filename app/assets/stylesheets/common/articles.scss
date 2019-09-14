@@ -782,21 +782,12 @@ $rule-margin-left-and-right: 1.3rem;
   min-height: 125px;
 }
 
-// display: none が複数箇所にあるのはよくないので
-// display: none はすべてここに集約している
-// なので、ここを丸ごと消すと、すべての要素の display: none が
-// 消えてしまうことに注意する
-#post-button {
-  display: none;
-}
-
 #post-content ul > li {
   list-style-type: disc;
 }
 
 #textarea {
   text-align: center;
-  width: $general-width-percent;
   // min-height: 55vh;
   // max-height: 55vh;
   /*min-height: 500px;*/
@@ -825,6 +816,42 @@ $rule-margin-left-and-right: 1.3rem;
     resize: vertical;
     min-height: 150px;
     max-height: $post-content-min-height;
+  }
+}
+
+#post-form {
+  width: $general-width-percent;
+  max-width: 750px;
+  margin: 0 auto;
+
+  #template-form-title {
+    font-family: $post-content-font;
+    text-align: center;
+    margin: 30px 0 0 0;
+    position: relative;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+
+    #post-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 130px;
+      height: 100%;
+      font-size: 11px;
+      font-weight: 100;
+      font-family: 'Open Sans Light';
+      letter-spacing: 1.5px;
+      outline: none;
+      color: #ffffff;
+      background-color: #5ba4e5;
+      border: 1px solid #308ddf;
+      border-radius: 4px;
+      cursor: pointer;
+    }
   }
 }
 

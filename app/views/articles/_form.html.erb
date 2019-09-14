@@ -1,10 +1,15 @@
 <%# TODO: Fix undefined method `articles_path' when articles.body is blank %>
-<%= form_with(model: @article, url: @post_url) do |article_form| %>
+<%= form_with(model: @article, url: @post_url, id: 'post-form') do |article_form| %>
   <% if flash[:alert] %>
   <div id="failed-message" class="form-message">
     <%= flash[:alert] %><span id="times">&times;</span>
   </div>
   <% end %>
+
+  <div id="template-form-title">
+    <%= @form_title %>
+    <%= article_form.submit({ id: 'post-button', value: 'SAVE ARTICLE' }) %>
+  </div>
 
   <% if @templates && controller.action_name == 'new' %>
     <% @templates.each do |template| %>
@@ -27,7 +32,6 @@
   <% end %>
   <div id="textarea">
     <%= article_form.text_area :text, {:id => 'post-content', :placeholder => 'Write your diary'} %>
-    <%= article_form.submit({:id => 'post-button'}) %>
   </div>
 <% end %>
 
@@ -38,6 +42,5 @@
 <% end %>
 
 <%= stylesheet_link_tag    'particular/edit_only.css', media: 'all' %>
-<%= javascript_include_tag 'particular/post_button_click.js' %>
 <%= javascript_include_tag 'particular/warn_without_saving.js' %>
 <%= javascript_include_tag 'particular/no_scroll.js' %>

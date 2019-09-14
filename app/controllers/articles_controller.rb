@@ -45,13 +45,14 @@ class ArticlesController < ApplicationController
     @templates = Template.all.order('position ASC')
 
     if article
-      redirect_to root_path, notice: 'Already published today!'
+      redirect_to "/edit/#{format('%02d', year)}/#{format('%02d', month)}/#{format('%02d', day)}"
       return
     end
 
     @article = Article.new
     @article.templated_articles.build
     @post_url = '/new'
+    @form_title = 'Create a new diary'
   end
 
   def create
@@ -73,6 +74,7 @@ class ArticlesController < ApplicationController
   def edit
     @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
     @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
+    @form_title = 'Edit the diary'
   end
 
   def update
