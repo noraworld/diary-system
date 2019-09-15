@@ -295,7 +295,29 @@ $post-link-over-post-day: 1;
   justify-content: center;
   font-family: $system-font;
   font-size: 14px;
-  padding: 20px 0;
+  margin: 20px 0;
+  position: relative;
+
+  #todays-diary-button {
+    position: absolute;
+    right: 15px;
+    height: 100%;
+    background: black;
+    padding: 0 15px;
+    border-radius: 4px;
+    background-color: #5ba4e5;
+    border: 1px solid #308ddf;
+    cursor: pointer;
+
+    #todays-diary-link {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+    }
+  }
 }
 #calendar {
   display: inline-block;
@@ -785,18 +807,27 @@ $rule-margin-left-and-right: 1.3rem;
   list-style-type: disc;
 }
 
-#edit-link-wrapper {
-  font-family: $post-content-font;
+#post-edit-and-delete-link-wrapper {
+  font-family: $system-font;
   max-width: 750px;
   margin: 0 auto 15px;
-}
+  text-align: right;
 
-#edit-link {
-  float: right;
-  color: #444444;
+  #edit-link, #delete-link {
+    color: #444444;
+    padding: 0 7px 0 0;
 
-  &:hover {
-    color: #808080;
+    &:hover {
+      color: #808080;
+    }
+  }
+
+  #delete-link {
+    color: #ff0000;
+
+    &:hover {
+      color: #ff7676;
+    }
   }
 }
 

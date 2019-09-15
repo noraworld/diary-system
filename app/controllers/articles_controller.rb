@@ -23,6 +23,15 @@ class ArticlesController < ApplicationController
     end
 
     @articles = Article.order('day').where(year: @year).where(month: @month)
+
+    article = find_todays_article
+    if article
+      @todays_diary_title = 'Edit today’s diary'
+      @todays_diary_url = build_edit_path(article.year, article.month, article.day)
+    else
+      @todays_diary_title = 'Create a new diary'
+      @todays_diary_url = new_path
+    end
   end
 
   def show
@@ -37,15 +46,11 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    year  = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_i
-    month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_i
-    day   = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%d').to_i
-    article = Article.find_by(year: year, month: month, day: day)
-
     @templates = Template.all.order('position ASC')
 
+    article = find_todays_article
     if article
-      redirect_to "/edit/#{format('%02d', year)}/#{format('%02d', month)}/#{format('%02d', day)}"
+      redirect_to build_edit_path(article.year, article.month, article.day)
       return
     end
 
@@ -98,7 +103,9 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
-    @article.destroy
+
+    # production 環境では日記を削除するケースはほぼないので安全のために削除しない
+    @article.destroy if Rails.env.development?
 
     redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month), notice: 'Deleted successfully!'
   end
@@ -146,6 +153,17 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+  def find_todays_article
+    year  = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_i
+    month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_i
+    day   = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%d').to_i
+    Article.find_by(year: year, month: month, day: day)
+  end
+
+  def build_edit_path(year, month, day)
+    "/edit/#{format('%02d', year)}/#{format('%02d', month)}/#{format('%02d', day)}"
+  end
 
   def article_params
     params.require(:article).permit(:text, templated_articles_attributes: [:title, :body, :position])

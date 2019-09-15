@@ -42,6 +42,9 @@
       <a href="<%= '/' + next_year_calendar %>"><span class="icon-keyboard_arrow_right"></span><span class="icon-keyboard_arrow_right"></span></a>
       <% end %>
     </h1>
+    <% if current_user %>
+      <div id="todays-diary-button"><a href="<%= @todays_diary_url %>" id="todays-diary-link"><%= @todays_diary_title %></a></div>
+    <% end %>
   </div>
 
   <div id="calendar-inner-box">
