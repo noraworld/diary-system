@@ -74,7 +74,7 @@ $(function() {
   }
 
   // jQuery 版フラグメントスクロール
-  $('#post-content a[href^="#"]').on('click', function(event) {
+  $('#post-content a[href^="#"], #templated-post-body a[href^="#"]').on('click', function(event) {
     const position = $(this.hash).offset().top + getOffset();
 
     scrollWithAnimation(event, position);
