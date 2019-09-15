@@ -480,18 +480,30 @@ $rule-margin-left-and-right: 1.3rem;
     font-weight: bold;
     margin-top: 31px;
     margin-bottom: 5px;
+    position: relative;
   }
   h5 {
     font-size: 14.25px;  // default: 12.45px;
     font-weight: bold;
     margin-top: 31px;
     margin-bottom: 5px;
+    position: relative;
   }
   h6 {
     font-size: 13.5px;  // default: 10.05px;
     font-weight: bold;
     margin-top: 31px;
     margin-bottom: 5px;
+    position: relative;
+  }
+  h1 a i, h2 a i, h3 a i, h4 a i, h5 a i, h6 a i {
+    position: absolute;
+    font-size: 14px;
+    left: -23px;
+    height: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
   }
 
   p, ul, ol, dl, table {
