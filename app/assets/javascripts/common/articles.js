@@ -15,6 +15,43 @@ $(function() {
     $('iframe[src*="https://' + videoDomains[i] + '"]').wrap('<div class="video-player-wrapper">');
   }
 
+  headlines = '#post-content h1, '        +
+              '#post-content h2, '        +
+              '#post-content h3, '        +
+              '#post-content h4, '        +
+              '#post-content h5, '        +
+              '#post-content h6, '        +
+              '#templated-post-body h1, ' +
+              '#templated-post-body h2, ' +
+              '#templated-post-body h3, ' +
+              '#templated-post-body h4, ' +
+              '#templated-post-body h5, ' +
+              '#templated-post-body h6'
+
+  headlinesAndFragmentAnchors = headlines                     +
+                                ', '                          +
+                                '#post-content h1 a, '        +
+                                '#post-content h2 a, '        +
+                                '#post-content h3 a, '        +
+                                '#post-content h4 a, '        +
+                                '#post-content h5 a, '        +
+                                '#post-content h6 a, '        +
+                                '#templated-post-body h1 a, ' +
+                                '#templated-post-body h2 a, ' +
+                                '#templated-post-body h3 a, ' +
+                                '#templated-post-body h4 a, ' +
+                                '#templated-post-body h5 a, ' +
+                                '#templated-post-body h6 a'
+
+  $(headlines).find('a').css('display', 'none');
+
+  $(headlinesAndFragmentAnchors).hover(function() {
+    $(this).find('a').css('display', '');
+  },
+  function() {
+    $(this).find('a').css('display', 'none');
+  });
+
   // MEMO: jQuery 版フラグメントスクロールだとなぜか日本語のフラグメント識別子 (日本語の headline) に対しては
   // Syntax error, unrecognized expression になってしまうので
   // jQuery なしのバージョンでも同じ動作を行う

@@ -441,6 +441,7 @@ $rule-margin-left-and-right: 1.3rem;
       left: 0;
     }
   }
+
   h2 {
     font-size: 18px;  // default: 22.5px;
     font-weight: normal;
@@ -458,6 +459,7 @@ $rule-margin-left-and-right: 1.3rem;
       left: 0;
     }
   }
+
   h3 {
     font-size: 16px;  // default: 17.55px;
     font-weight: normal;
@@ -475,6 +477,7 @@ $rule-margin-left-and-right: 1.3rem;
       left: 0;
     }
   }
+
   h4 {
     font-size: 15px;  // default: 15px;
     font-weight: bold;
@@ -482,6 +485,7 @@ $rule-margin-left-and-right: 1.3rem;
     margin-bottom: 5px;
     position: relative;
   }
+
   h5 {
     font-size: 14.25px;  // default: 12.45px;
     font-weight: bold;
@@ -489,6 +493,7 @@ $rule-margin-left-and-right: 1.3rem;
     margin-bottom: 5px;
     position: relative;
   }
+
   h6 {
     font-size: 13.5px;  // default: 10.05px;
     font-weight: bold;
@@ -496,14 +501,25 @@ $rule-margin-left-and-right: 1.3rem;
     margin-bottom: 5px;
     position: relative;
   }
-  h1 a i, h2 a i, h3 a i, h4 a i, h5 a i, h6 a i {
+
+  h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     position: absolute;
-    font-size: 14px;
-    left: -23px;
-    height: 75%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    width: 31px;
+    height: 100%;
+    left: -31px;
+    border: none;
+
+    &:hover {
+      border: none;
+    }
+
+    i {
+      font-size: 14px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   p, ul, ol, dl, table {
