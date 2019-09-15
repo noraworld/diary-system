@@ -1,4 +1,3 @@
-<%# TODO: Fix undefined method `articles_path' when articles.body is blank %>
 <%= form_with(model: @article, url: @post_url, id: 'post-form') do |article_form| %>
   <% if flash[:alert] %>
   <div id="failed-message" class="form-message">
