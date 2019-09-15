@@ -10,6 +10,10 @@
   </div>
 <% end %>
 
+<% if current_user %>
+  <div id="edit-link-wrapper" class="clearfix"><a href="<%= edit_path %>" id="edit-link">Edit the diary</a></div>
+<% end %>
+
 <div id="date-description" class="clearfix">
   <%# prev-post, next-post, date の順番は重要。一番古いポストのときに date に float: right をかけたとき、順番がおかしくなるのを防ぐため %>
   <% if prev_article_link %><a href="<%= prev_article_link %>" id="prev-post"><span class="icon-arrow-left"></span></a><% end %>

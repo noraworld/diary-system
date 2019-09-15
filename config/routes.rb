@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get    '/:year/:month'              => 'articles#index',   constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/}
   get    '/:year/:month/:day'         => 'articles#show',    constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
-  get    '/edit/:year/:month/:day'    => 'articles#edit',    constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
+  get    '/edit/:year/:month/:day'    => 'articles#edit',    constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}, as: 'edit'
   delete '/destroy/:year/:month/:day' => 'articles#destroy', constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
   get    '/new'                       => 'articles#new'
   post   '/new'                       => 'articles#create'

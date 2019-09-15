@@ -66,6 +66,11 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Published successfully!'
     else
+      @templates = Template.all.order('position ASC')
+      @article.templated_articles.build
+      @post_url = '/new'
+      @form_title = 'Create a new diary'
+
       flash.now[:alert] = 'Publish failed...'
       render 'new'
     end
@@ -83,6 +88,9 @@ class ArticlesController < ApplicationController
     if @article.update(update_article_params)
       redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Updated successfully!'
     else
+      @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
+      @form_title = 'Edit the diary'
+
       flash.now[:alert] = 'Updated failed...'
       render 'edit'
     end

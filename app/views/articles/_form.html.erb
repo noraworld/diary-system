@@ -6,7 +6,7 @@
   </div>
   <% end %>
 
-  <div id="template-form-title">
+  <div id="form-title">
     <%= @form_title %>
     <%= article_form.submit({ id: 'post-button', value: 'SAVE ARTICLE' }) %>
   </div>
@@ -20,14 +20,22 @@
         <div><%= templated_article_form.text_field :position, { type: 'hidden', value: template.position } %></div>
       <% end %>
     <% end %>
-  <% elsif controller.action_name == 'edit' %>
+  <% elsif controller.action_name == 'create' %>
+    <%= article_form.fields_for :templated_articles do |templated_article_form| %>
+      <% next if templated_article_form.object.title.blank? %>
+      <div id="templated-post-title"><%= templated_article_form.object.title %></div>
+      <div><%= templated_article_form.text_field :title, { type: 'hidden', value: templated_article_form.object.title } %></div>
+      <div id="textarea"><%= templated_article_form.text_area :body, { placeholder: "Write #{templated_article_form.object.title}", id: 'templated-post-body' } %></div>
+      <div><%= templated_article_form.text_field :position, { type: 'hidden', value: templated_article_form.object.position } %></div>
+    <% end %>
+  <% elsif controller.action_name == 'edit' || controller.action_name == 'update' %>
     <%= article_form.fields_for :templated_articles do |templated_article_form| %>
       <div id="templated-post-title"><%= templated_article_form.object.title %></div>
       <div id="textarea"><%= templated_article_form.text_area :body, { placeholder: "Write #{templated_article_form.object.title}", id: 'templated-post-body' } %></div>
     <% end %>
   <% end %>
 
-  <% if @templates.present? || (controller.action_name == 'edit' && @article.templated_articles.present?) %>
+  <% if @templates.present? || ((controller.action_name == 'edit' || controller.action_name == 'update') && @article.templated_articles.present?) %>
     <div id="main-post-title">Main diary</div>
   <% end %>
   <div id="textarea">
