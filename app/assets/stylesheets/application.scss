@@ -17,6 +17,9 @@
  *= require_self
  */
 
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 @font-face {
   font-family: 'Open Sans Light';
   src: url('fonts/fonts/OpenSans-Light.ttf');

@@ -44,6 +44,7 @@ gem 'qiita-markdown', '0.26.0'
 gem 'rmagick'
 gem 'ruby-filemagic'
 gem 'puma'
+gem 'font-awesome-sass'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
