@@ -6,6 +6,7 @@
   <% end %>
 
   <div id="template-form-title">
+    <a href="<%= @back_link_url %>"><i id="back-link" class="fas fa-arrow-left"></i></a>
     <%= @template_form_title %>
     <%= f.submit({ id: 'template-post-button', value: 'SAVE TEMPLATE' }) %>
   </div>

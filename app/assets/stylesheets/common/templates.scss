@@ -109,6 +109,19 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
     justify-content: center;
     align-items: center;
     font-size: 17px;
+
+    #back-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #444444;
+      font-size: 19px;
+    }
   }
 
   #template-title {

@@ -912,6 +912,19 @@ $rule-margin-left-and-right: 1.3rem;
     border-image: linear-gradient(90deg, #f3f3f3, #bbbbbb, #f3f3f3);
     border-image-slice: 1;
 
+    #back-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #444444;
+      font-size: 19px;
+    }
+
     #post-button {
       position: absolute;
       top: 0;

@@ -10,6 +10,7 @@ class TemplatesController < ApplicationController
   def new
     @post_template_url = '/templates/new'
     @template_form_title = 'Create a new template'
+    @back_link_url = templates_index_path
   end
 
   def create
@@ -21,6 +22,10 @@ class TemplatesController < ApplicationController
     if @template.save
       redirect_to '/templates'
     else
+      @post_template_url = '/templates/new'
+      @template_form_title = 'Create a new template'
+      @back_link_url = templates_index_path
+
       render 'new'
     end
   end
@@ -29,6 +34,7 @@ class TemplatesController < ApplicationController
     @template = Template.find_by!(uuid: params[:uuid])
     @post_template_url = "/templates/#{params[:uuid]}"
     @template_form_title = 'Edit the template'
+    @back_link_url = templates_index_path
   end
 
   def update
@@ -38,6 +44,10 @@ class TemplatesController < ApplicationController
     if @template.update(template_params)
       redirect_to "/templates"
     else
+      @post_template_url = "/templates/#{params[:uuid]}"
+      @template_form_title = 'Edit the template'
+      @back_link_url = templates_index_path
+
       render 'edit'
     end
   end

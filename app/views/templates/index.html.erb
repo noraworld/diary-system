@@ -12,7 +12,7 @@
         <div id="template-title-edit-delete">
           <div id="template-title"><%= template.title %></div>
           <div id="template-edit"><a href="/templates/<%= template.uuid %>"><span class="icon-pencil"></a></div>
-          <div id="template-delete"><%= link_to "/templates/#{template.uuid}", { method: :delete, data: { confirm: 'Are you sure you want to delete?' } } do %><span class="icon-fire"></span><% end %></div>
+          <div id="template-delete"><%= link_to "/templates/#{template.uuid}", { method: :delete, data: { confirm: 'Are you sure you want to delete this template?' } } do %><span class="icon-fire"></span><% end %></div>
         </div>
 
         <% if template.body.present? %>

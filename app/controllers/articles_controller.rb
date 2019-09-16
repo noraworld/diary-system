@@ -58,6 +58,7 @@ class ArticlesController < ApplicationController
     @article.templated_articles.build
     @post_url = '/new'
     @form_title = 'Create a new diary'
+    @back_link_url = root_path
   end
 
   def create
@@ -75,6 +76,7 @@ class ArticlesController < ApplicationController
       @article.templated_articles.build
       @post_url = '/new'
       @form_title = 'Create a new diary'
+      @back_link_url = root_path
 
       flash.now[:alert] = 'Publish failed...'
       render 'new'
@@ -85,6 +87,7 @@ class ArticlesController < ApplicationController
     @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
     @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
     @form_title = 'Edit the diary'
+    @back_link_url = show_path
   end
 
   def update
@@ -95,6 +98,7 @@ class ArticlesController < ApplicationController
     else
       @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
       @form_title = 'Edit the diary'
+      @back_link_url = show_path
 
       flash.now[:alert] = 'Updated failed...'
       render 'edit'
