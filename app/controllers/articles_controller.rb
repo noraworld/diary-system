@@ -69,7 +69,7 @@ class ArticlesController < ApplicationController
     @article.date  = Date.new(@article.year, @article.month, @article.day)
 
     if @article.save
-      redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Published successfully!'
+      redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day)
     else
       @templates = Template.all.order('position ASC')
       @article.templated_articles.build
@@ -91,7 +91,7 @@ class ArticlesController < ApplicationController
     @article = Article.find_by!(year: params[:year], month: params[:month], day: params[:day])
 
     if @article.update(update_article_params)
-      redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day), notice: 'Updated successfully!'
+      redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day)
     else
       @post_url = '/' + params[:year] + '/' + params[:month] + '/' + params[:day]
       @form_title = 'Edit the diary'
@@ -107,7 +107,7 @@ class ArticlesController < ApplicationController
     # production 環境では日記を削除するケースはほぼないので安全のために削除しない
     @article.destroy if Rails.env.development?
 
-    redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month), notice: 'Deleted successfully!'
+    redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month)
   end
 
   def search
