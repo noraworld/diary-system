@@ -59,6 +59,39 @@ class TemplatesController < ApplicationController
     redirect_to "/templates"
   end
 
+  def sort
+    from = params[:from].to_i - 1
+    to   = params[:to].to_i   - 1
+
+    templates = Template.all.order('position ASC')
+
+    last_template_position = templates[to].position
+    templates[to].position = 0
+    templates[to].save
+
+    first_template_position = templates[from].position
+    templates[from].position = last_template_position
+    templates[from].save
+
+    current_template_position = nil
+    stored_template_position = nil
+    (from + 1).upto(to) do |num|
+      current_template_position = templates[num].position
+
+      if stored_template_position.present?
+        templates[num].position = stored_template_position
+      else
+        templates[num].position = first_template_position
+      end
+
+      stored_template_position = current_template_position
+
+      templates[num].save
+    end
+
+    render body: "from: #{params[:from]}, to: #{params[:to]}", status: :ok
+  end
+
   private
 
   def template_params

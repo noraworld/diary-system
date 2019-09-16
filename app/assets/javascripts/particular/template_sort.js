@@ -3,8 +3,9 @@ $(function() {
     handle: '.draggable',
     animation: 150,
     onUpdate: function(event) {
-      console.log('old was ' + event.oldDraggableIndex);
-      console.log('new is ' + event.newDraggableIndex);
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/templates/sort?from=' + event.oldDraggableIndex + '&to=' + event.newDraggableIndex);
+      xhr.send();
     }
   });
 });

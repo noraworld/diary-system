@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get    '/templates'       => 'templates#index', as: 'templates_index'
   get    '/templates/new'   => 'templates#new'
   post   '/templates/new'   => 'templates#create'
+  get    '/templates/sort'  => 'templates#sort'
   get    '/templates/:uuid' => 'templates#edit'
   post   '/templates/:uuid' => 'templates#update'
   delete '/templates/:uuid' => 'templates#destroy'
