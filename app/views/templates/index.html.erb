@@ -7,8 +7,8 @@
   <div id="template-contents">
     <div class="clearfix"><a href="/templates/new" id="new-template-link">Create a new template</a></div>
 
-    <% @templates.each do |template| %>
-      <div id="template-content">
+    <% @templates.each_with_index do |template, index| %>
+      <div id="template-content-<%= index + 1 %>" class="template-content draggable">
         <div id="template-title-edit-delete">
           <div id="template-title"><%= template.title %></div>
           <div id="template-edit"><a href="/templates/<%= template.uuid %>"><span class="icon-pencil"></a></div>
@@ -24,3 +24,6 @@
     <% end %>
   </div>
 <% end %>
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+<%= javascript_include_tag 'particular/template_sort.js' %>
