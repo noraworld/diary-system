@@ -533,12 +533,12 @@ $rule-margin-left-and-right: 1.3rem;
   }
 
   a {
-    color: #000080;
+    color: #000080 !important;
     text-decoration: none;
     border-bottom: 1px dashed #000080;
   }
   a:hover {
-    color: #048dbd;
+    color: #048dbd !important;
     border-bottom: 1px dashed #048dbd;
   }
   a[target="_blank"] {
