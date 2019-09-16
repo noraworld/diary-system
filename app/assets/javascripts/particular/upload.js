@@ -17,7 +17,6 @@ $(function() {
     // }
     init: function() {
       this.on('success', function(file) {
-        var textarea = $('#post-content');
         var filename = file.upload.filename.match(/(.*)(?:\.([^.]+$))/)[1];
         var filepath = file.upload.filename;
 
@@ -32,26 +31,39 @@ $(function() {
       });
     },
     renameFilename: function(filename) {
-      var fileExtension = filename.match(/(.*)(?:\.([^.]+$))/)[2].toLowerCase();
-      var length = 16;
+      const fileExtension = filename.match(/(.*)(?:\.([^.]+$))/)[2].toLowerCase();
+      const length = 64;
 
-      // example: '34c1da733b52350e.png'
+      // example: '53426c97b1c3f65fb3ef9f669604a0b2fcce89f48c464dcb4ff68cc8d5ad322e.png'
       return getRandomizedHexadecimal(length) + '.' + fileExtension;
     },
   });
 
   // insert a image string to cursor position
   function insertImageTag(image) {
-    var textarea = document.querySelector('#post-content');
+    var activeTextarea = [];
 
-    // release selection if some letters in textarea are selected
-    if (textarea.selectionStart !== textarea.selectionEnd) {
-      textarea.selectionEnd = textarea.selectionStart;
+    if (activeElementBeforeClickingDropzone
+    &&  activeElementBeforeClickingDropzone.getAttribute('class') === 'templated-post-body'
+    ||  activeElementBeforeClickingDropzone.getAttribute('id')    === 'post-content') {
+      activeTextarea = activeElementBeforeClickingDropzone;
+    }
+    else if (document.activeElement.getAttribute('class') === 'templated-post-body'
+    ||       document.activeElement.getAttribute('id')    === 'post-content') {
+      activeTextarea = document.activeElement;
+    }
+    else {
+      activeTextarea = document.querySelector('#post-content');
     }
 
-    var sentence = textarea.value;
+    // release selection if some letters in active textarea are selected
+    if (activeTextarea.selectionStart !== activeTextarea.selectionEnd) {
+      activeTextarea.selectionEnd = activeTextarea.selectionStart;
+    }
+
+    var sentence = activeTextarea.value;
     var len = sentence.length;
-    var pos = textarea.selectionStart;
+    var pos = activeTextarea.selectionStart;
     var before = sentence.substr(0, pos);
     var after = sentence.substr(pos, len);
 
@@ -61,13 +73,13 @@ $(function() {
     }
     sentence += after;
 
-    textarea.value = sentence;
+    activeTextarea.value = sentence;
 
     if (pos == len) {
-      textarea.selectionStart = textarea.selectionEnd = (before + image + '\n\n').length;
+      activeTextarea.selectionStart = activeTextarea.selectionEnd = (before + image + '\n\n').length;
     }
     else {
-      textarea.selectionStart = textarea.selectionEnd = (before + image).length;
+      activeTextarea.selectionStart = activeTextarea.selectionEnd = (before + image).length;
     }
 
     return true;
@@ -84,5 +96,10 @@ $(function() {
 
     return randomizedHexadecimal;
   }
+
+  var activeElementBeforeClickingDropzone = null;
+  document.querySelector('#upload-dropzone').addEventListener('mouseover', function() {
+    activeElementBeforeClickingDropzone = document.activeElement;
+  });
 
 });
