@@ -149,16 +149,14 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
     top: 0;
     right: 0;
     width: 130px;
-    height: 100%;
-    font-size: 11px;
-    font-weight: 100;
-    font-family: 'Open Sans Light';
-    letter-spacing: 1.5px;
-    outline: none;
+    height: 35px;
+    font-size: 14px;
     color: #ffffff;
+    padding: 0 15px;
+    border-radius: 4px;
     background-color: #5ba4e5;
     border: 1px solid #308ddf;
-    border-radius: 4px;
+    outline: none;
     cursor: pointer;
   }
 }

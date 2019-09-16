@@ -8,7 +8,7 @@
   <div id="form-title">
     <a href="<%= @back_link_url %>"><i id="back-link" class="fas fa-arrow-left"></i></a>
     <%= @form_title %>
-    <%= article_form.submit({ id: 'post-button', value: 'SAVE ARTICLE' }) %>
+    <%= article_form.submit({ id: 'post-button' }) %>
   </div>
 
   <% if @templates && controller.action_name == 'new' %>
