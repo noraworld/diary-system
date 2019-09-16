@@ -63,50 +63,62 @@ class TemplatesController < ApplicationController
     from = params[:from].to_i - 1
     to   = params[:to].to_i   - 1
 
-    templates = Template.all.order('position ASC')
+    error_flag = false
+    ActiveRecord::Base.transaction do
+      templates = Template.all.order('position ASC')
 
-    dest_template_position = templates[to].position
-    templates[to].position = 0
-    templates[to].save
+      dest_template_position = templates[to].position
+      templates[to].position = 0
+      templates[to].save!
 
-    src_template_position = templates[from].position
-    templates[from].position = dest_template_position
-    templates[from].save
+      src_template_position = templates[from].position
+      templates[from].position = dest_template_position
+      templates[from].save!
 
-    current_template_position = nil
-    stored_template_position = nil
+      current_template_position = nil
+      stored_template_position = nil
 
-    if from < to
-      (from + 1).upto(to) do |num|
-        current_template_position = templates[num].position
+      if from < to
+        (from + 1).upto(to) do |num|
+          current_template_position = templates[num].position
 
-        if stored_template_position.present?
-          templates[num].position = stored_template_position
-        else
-          templates[num].position = src_template_position
+          if stored_template_position.present?
+            templates[num].position = stored_template_position
+          else
+            templates[num].position = src_template_position
+          end
+
+          stored_template_position = current_template_position
+
+          templates[num].save!
         end
+      elsif from > to
+        (from - 1).downto(to) do |num|
+          current_template_position = templates[num].position
 
-        stored_template_position = current_template_position
+          if stored_template_position.present?
+            templates[num].position = stored_template_position
+          else
+            templates[num].position = src_template_position
+          end
 
-        templates[num].save
+          stored_template_position = current_template_position
+
+          templates[num].save!
+        end
       end
-    elsif from > to
-      (from - 1).downto(to) do |num|
-        current_template_position = templates[num].position
 
-        if stored_template_position.present?
-          templates[num].position = stored_template_position
-        else
-          templates[num].position = src_template_position
-        end
-
-        stored_template_position = current_template_position
-
-        templates[num].save
+      unless Template.where(position: 0).count.zero?
+        error_flag = true
+        raise ActiveRecord::Rollback
       end
     end
 
-    render body: "from: #{params[:from]}, to: #{params[:to]}", status: :ok
+    if error_flag
+      render body: nil, status: :internal_server_error
+    else
+      render body: nil, status: :ok
+    end
   end
 
   private
