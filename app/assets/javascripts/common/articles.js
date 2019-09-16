@@ -21,12 +21,12 @@ $(function() {
               '#post-content h4, '        +
               '#post-content h5, '        +
               '#post-content h6, '        +
-              '#templated-post-body h1, ' +
-              '#templated-post-body h2, ' +
-              '#templated-post-body h3, ' +
-              '#templated-post-body h4, ' +
-              '#templated-post-body h5, ' +
-              '#templated-post-body h6'
+              '.templated-post-body h1, ' +
+              '.templated-post-body h2, ' +
+              '.templated-post-body h3, ' +
+              '.templated-post-body h4, ' +
+              '.templated-post-body h5, ' +
+              '.templated-post-body h6'
 
   headlinesAndFragmentAnchors = headlines                     +
                                 ', '                          +
@@ -36,12 +36,12 @@ $(function() {
                                 '#post-content h4 a, '        +
                                 '#post-content h5 a, '        +
                                 '#post-content h6 a, '        +
-                                '#templated-post-body h1 a, ' +
-                                '#templated-post-body h2 a, ' +
-                                '#templated-post-body h3 a, ' +
-                                '#templated-post-body h4 a, ' +
-                                '#templated-post-body h5 a, ' +
-                                '#templated-post-body h6 a'
+                                '.templated-post-body h1 a, ' +
+                                '.templated-post-body h2 a, ' +
+                                '.templated-post-body h3 a, ' +
+                                '.templated-post-body h4 a, ' +
+                                '.templated-post-body h5 a, ' +
+                                '.templated-post-body h6 a'
 
   $(headlines).find('a').css('display', 'none');
 
@@ -55,7 +55,7 @@ $(function() {
   // MEMO: jQuery 版フラグメントスクロールだとなぜか日本語のフラグメント識別子 (日本語の headline) に対しては
   // Syntax error, unrecognized expression になってしまうので
   // jQuery なしのバージョンでも同じ動作を行う
-  fragments = document.querySelectorAll('#post-content a[href^="#"], #templated-post-body a[href^="#"]');
+  fragments = document.querySelectorAll('#post-content a[href^="#"], .templated-post-body a[href^="#"]');
   for (var i = 0; i < fragments.length; i++) {
     fragments[i].addEventListener('click', function(event) {
 
@@ -74,7 +74,7 @@ $(function() {
   }
 
   // jQuery 版フラグメントスクロール
-  $('#post-content a[href^="#"], #templated-post-body a[href^="#"]').on('click', function(event) {
+  $('#post-content a[href^="#"], .templated-post-body a[href^="#"]').on('click', function(event) {
     const position = $(this.hash).offset().top + getOffset();
 
     scrollWithAnimation(event, position);

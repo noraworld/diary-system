@@ -13,24 +13,24 @@
   <% if @templates && controller.action_name == 'new' %>
     <% @templates.each do |template| %>
       <%= article_form.fields_for :templated_articles do |templated_article_form| %>
-        <div id="templated-post-title"><%= template.title %></div>
+        <div class="templated-post-title"><%= template.title %></div>
         <div><%= templated_article_form.text_field :title, { type: 'hidden', value: template.title } %></div>
-        <div id="textarea"><%= templated_article_form.text_area :body, { value: template.body, placeholder: "Write #{template.title}", id: 'templated-post-body' } %></div>
+        <div id="textarea"><%= templated_article_form.text_area :body, { value: template.body, placeholder: "Write #{template.title}", class: 'templated-post-body' } %></div>
         <div><%= templated_article_form.text_field :position, { type: 'hidden', value: template.position } %></div>
       <% end %>
     <% end %>
   <% elsif controller.action_name == 'create' %>
     <%= article_form.fields_for :templated_articles do |templated_article_form| %>
       <% next if templated_article_form.object.title.blank? %>
-      <div id="templated-post-title"><%= templated_article_form.object.title %></div>
+      <div class="templated-post-title"><%= templated_article_form.object.title %></div>
       <div><%= templated_article_form.text_field :title, { type: 'hidden', value: templated_article_form.object.title } %></div>
-      <div id="textarea"><%= templated_article_form.text_area :body, { placeholder: "Write #{templated_article_form.object.title}", id: 'templated-post-body' } %></div>
+      <div id="textarea"><%= templated_article_form.text_area :body, { placeholder: "Write #{templated_article_form.object.title}", class: 'templated-post-body' } %></div>
       <div><%= templated_article_form.text_field :position, { type: 'hidden', value: templated_article_form.object.position } %></div>
     <% end %>
   <% elsif controller.action_name == 'edit' || controller.action_name == 'update' %>
     <%= article_form.fields_for :templated_articles do |templated_article_form| %>
-      <div id="templated-post-title"><%= templated_article_form.object.title %></div>
-      <div id="textarea"><%= templated_article_form.text_area :body, { placeholder: "Write #{templated_article_form.object.title}", id: 'templated-post-body' } %></div>
+      <div class="templated-post-title"><%= templated_article_form.object.title %></div>
+      <div id="textarea"><%= templated_article_form.text_area :body, { placeholder: "Write #{templated_article_form.object.title}", class: 'templated-post-body' } %></div>
     <% end %>
   <% end %>
 
