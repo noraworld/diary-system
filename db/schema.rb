@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_08_083413) do
+ActiveRecord::Schema.define(version: 2019_09_18_140005) do
 
   create_table "articles", force: :cascade do |t|
     t.text "text", null: false
@@ -21,18 +21,6 @@ ActiveRecord::Schema.define(version: 2019_09_08_083413) do
     t.integer "day", null: false
     t.date "date", null: false
     t.index ["year", "month", "day"], name: "date_unique", unique: true
-  end
-
-  create_table "sample_articles", force: :cascade do |t|
-    t.text "text"
-    t.integer "year"
-    t.integer "month"
-    t.integer "day"
-    t.date "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "kind"
-    t.index ["year", "month", "day"], name: "sample_articles_date_unique", unique: true
   end
 
   create_table "templated_articles", force: :cascade do |t|

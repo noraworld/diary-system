@@ -32,6 +32,4 @@ Rails.application.routes.draw do
   get    '/templates/:uuid' => 'templates#edit'
   post   '/templates/:uuid' => 'templates#update'
   delete '/templates/:uuid' => 'templates#destroy'
-
-  get    '/sample' => 'sample_articles#show'
 end
