@@ -60,8 +60,8 @@ class TemplatesController < ApplicationController
   end
 
   def sort
-    from = params[:from].to_i - 1
-    to   = params[:to].to_i   - 1
+    from = params[:from].to_i
+    to   = params[:to].to_i
 
     error_flag = false
     ActiveRecord::Base.transaction do

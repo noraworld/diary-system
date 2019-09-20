@@ -10,15 +10,15 @@
     <% @templates.each_with_index do |template, index| %>
       <div id="template-content-<%= index + 1 %>" class="template-content draggable">
         <div id="template-title-edit-delete">
-          <div id="template-title"><%= template.title %></div>
+          <div id="template-title" class="handle"><%= template.title %></div>
           <div id="template-edit"><a href="/templates/<%= template.uuid %>"><span class="icon-pencil"></a></div>
           <div id="template-delete"><%= link_to "/templates/#{template.uuid}", { method: :delete, data: { confirm: 'Are you sure you want to delete this template?' } } do %><span class="icon-fire"></span><% end %></div>
         </div>
 
         <% if template.body.present? %>
-          <textarea readonly id="template-body"><%= template.body %></textarea>
+          <textarea readonly id="template-body" class="handle"><%= template.body %></textarea>
         <% else %>
-          <textarea readonly id="template-body" class="no-template-body">The template body is empty.</textarea>
+          <textarea readonly id="template-body" class="no-template-body handle">The template body is empty.</textarea>
         <% end %>
       </div>
     <% end %>

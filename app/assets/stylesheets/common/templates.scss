@@ -47,6 +47,39 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
 
   #template-title-edit-delete {
     position: relative;
+
+    #template-edit, #template-delete, .sort-status-mark {
+      position: absolute;
+      top: 0;
+      font-size: 18px;
+      a {
+        text-decoration: none;
+        color: #444444;
+      }
+      a:hover {
+        color: #808080;
+      }
+    }
+
+    #template-edit {
+      right: 42px;
+    }
+
+    #template-delete {
+      right: 10px;
+    }
+
+    .sort-status-mark {
+      left: 10px;
+    }
+
+    .sort-status-mark-ok {
+      color: green;
+    }
+
+    .sort-status-mark-ng {
+      color: red;
+    }
   }
 
   #template-title {
@@ -58,25 +91,7 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
     font-size: 16px;
     border-right: 1px solid #8a8a8a;
     word-wrap: break-word;
-  }
-
-  #template-edit, #template-delete {
-    position: absolute;
-    top: 0;
-    font-size: 18px;
-    a {
-      text-decoration: none;
-      color: #444444;
-    }
-    a:hover {
-      color: #808080;
-    }
-  }
-  #template-edit {
-    right: 42px;
-  }
-  #template-delete {
-    right: 10px;
+    cursor: move;
   }
 
   #template-body {
@@ -84,6 +99,7 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
     background-color: #f7f7f7;
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
     color: #505050;
+    cursor: move;
   }
 
   #template-body.no-template-body {
