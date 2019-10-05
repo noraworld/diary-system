@@ -13,6 +13,7 @@
 
   <%= f.text_field :title, id: 'template-title', placeholder: 'This field is required. The value of this field will be the template title directly.' %>
   <%= f.text_area :body, { id: 'template-body',  placeholder: 'This field is optional. The value of this field will be filled in to the template post body.' } %>
+  <%= f.select :format, ::Template::FORMAT_TYPES %>
 <% end %>
 
 <%= stylesheet_link_tag    'particular/edit_only.css', media: 'all' %>
