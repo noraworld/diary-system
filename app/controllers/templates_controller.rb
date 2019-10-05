@@ -42,7 +42,7 @@ class TemplatesController < ApplicationController
     @template_form_title = 'Edit the template'
 
     if @template.update(template_params)
-      redirect_to "/templates"
+      redirect_to '/templates'
     else
       @post_template_url = "/templates/#{params[:uuid]}"
       @template_form_title = 'Edit the template'
@@ -56,7 +56,7 @@ class TemplatesController < ApplicationController
     @template = Template.find_by!(uuid: params[:uuid])
     @template.destroy
 
-    redirect_to "/templates"
+    redirect_to '/templates'
   end
 
   def sort
@@ -81,13 +81,7 @@ class TemplatesController < ApplicationController
       if from < to
         (from + 1).upto(to) do |num|
           current_template_position = templates[num].position
-
-          if stored_template_position.present?
-            templates[num].position = stored_template_position
-          else
-            templates[num].position = src_template_position
-          end
-
+          templates[num].position = stored_template_position || src_template_position
           stored_template_position = current_template_position
 
           templates[num].save!
@@ -95,13 +89,7 @@ class TemplatesController < ApplicationController
       elsif from > to
         (from - 1).downto(to) do |num|
           current_template_position = templates[num].position
-
-          if stored_template_position.present?
-            templates[num].position = stored_template_position
-          else
-            templates[num].position = src_template_position
-          end
-
+          templates[num].position = stored_template_position || src_template_position
           stored_template_position = current_template_position
 
           templates[num].save!

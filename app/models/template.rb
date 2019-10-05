@@ -1,12 +1,13 @@
-class Template < ApplicationRecord
+# frozen_string_literal: true
 
+class Template < ApplicationRecord
   FORMAT_TYPES = %w[
     sentence
     star
     duration
     bool
     oneline
-  ]
+  ].freeze
 
   validates :uuid,
             presence: true,

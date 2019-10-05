@@ -57,7 +57,7 @@ module ApplicationHelper
   # Qiita::Markdownを使用する
   def qiita_markdown(markdown)
     processor = Qiita::Markdown::Processor.new(hostname: ENV['HOST_NAME'], script: true)
-    processor.call(markdown)[:output].to_s.html_safe
+    processor.call(markdown)[:output].to_s.html_safe # rubocop:disable Rails/OutputSafety
   end
 
   # 検索結果や meta description に表示させる 200 文字程度の要約

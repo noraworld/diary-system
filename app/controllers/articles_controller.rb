@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   before_action :signed_in?, only: %i[new create edit update destroy]
 
   def index
-    @route = if params[:year].to_i == 0 && params[:month].to_i == 0
+    @route = if params[:year].to_i.zero? && params[:month].to_i.zero?
                true
              else
                false
@@ -12,13 +12,13 @@ class ArticlesController < ApplicationController
 
     # rootにアクセスしたときは@yearは今年
     @year = params[:year].to_i
-    if @year === 0
+    if @year.zero?
       @year = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_i
     end
 
     # rootにアクセスしたときは@monthは今月
     @month = params[:month].to_i
-    if @month === 0
+    if @month.zero?
       @month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_i
     end
 
@@ -146,13 +146,13 @@ class ArticlesController < ApplicationController
     @number_of_pages = hitcount.to_i / quantities.to_i
     @number_of_pages += 1 if hitcount.to_i % quantities.to_i != 0
 
-    if @results.empty?
-      if hitcount != 0 && @page > @number_of_pages
-        @error_message = 'There are no search results anymore.'
-      else
-        @error_message  = 'No matches for'
-        @failed_keyword = params[:q].to_s
-      end
+    return unless @results.empty?
+
+    if hitcount != 0 && @page > @number_of_pages
+      @error_message = 'There are no search results anymore.'
+    else
+      @error_message  = 'No matches for'
+      @failed_keyword = params[:q].to_s
     end
   end
 
@@ -170,11 +170,11 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:text, templated_articles_attributes: [:title, :body, :position])
+    params.require(:article).permit(:text, templated_articles_attributes: %i[title body position])
   end
 
   def update_article_params
-    params.require(:article).permit(:text, templated_articles_attributes: [:title, :body, :position, :_destroy, :id])
+    params.require(:article).permit(:text, templated_articles_attributes: %i[title body position _destroy id])
   end
 
   def signed_in?

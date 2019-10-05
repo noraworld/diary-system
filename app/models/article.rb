@@ -34,8 +34,6 @@ class Article < ApplicationRecord
   validate :day_range
 
   def day_range
-    unless day.between?(1, Date.new(year, month).end_of_month.day.to_i)
-      errors.add(:day, 'その日付は存在しません')
-    end
+    errors.add(:day, 'その日付は存在しません') unless day.between?(1, Date.new(year, month).end_of_month.day.to_i)
   end
 end
