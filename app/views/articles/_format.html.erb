@@ -1,0 +1,28 @@
+<%# See TemplateValidator::FORMAT_TYPES in app/models/concerns/template_validator.rb %>
+
+<% template = template || templated_article_form.object %>
+
+<% case template.format %>
+<% when 'sentence' %>
+  <div id="textarea"><%= templated_article_form.text_area :body, { value: template.body, placeholder: "Write #{template.title}", class: 'templated-post-body' } %></div>
+<% when 'oneline' %>
+  <div class="templated-post-body"><%= templated_article_form.text_field :body, { value: template.body, placeholder: "Write #{template.title}", class: 'oneline' } %></div>
+<% when 'star' %>
+  <div class="templated-post-body">
+    <%= templated_article_form.text_field :body, { type: 'hidden', class: 'star-value' } %>
+    <i class="star far fa-star"></i>
+    <i class="star far fa-star"></i>
+    <i class="star far fa-star"></i>
+    <i class="star far fa-star"></i>
+    <i class="star far fa-star"></i>
+    <i class="star far fa-star"></i>
+    <i class="star far fa-star"></i>
+    <i class="star far fa-star"></i>
+    <i class="star far fa-star"></i>
+    <i class="star far fa-star"></i>
+  </div>
+<% when 'duration' %>
+  <div class="templated-post-body"><%= templated_article_form.text_field :body, { type: 'number', min: 0, placeholder: "Write #{template.title}", class: 'duration' } %></div>
+<% when 'bool' %>
+  <div class="templated-post-body"><%= templated_article_form.text_field :body, { type: 'checkbox', placeholder: "Write #{template.title}", class: 'bool' } %></div>
+<% end %>

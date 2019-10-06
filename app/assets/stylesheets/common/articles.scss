@@ -826,7 +826,7 @@ $rule-margin-left-and-right: 1.3rem;
   margin-top: 0;
 }
 
-.templated-post-body {
+#templated-posts-content .templated-post-body {
   @extend #post-content;
   min-height: 125px;
 }
@@ -889,6 +889,52 @@ $rule-margin-left-and-right: 1.3rem;
     resize: vertical;
     min-height: 150px;
     max-height: $post-content-min-height;
+  }
+}
+
+#post-form {
+  .templated-post-body {
+    text-align: center;
+
+    .oneline {
+      font-family: $post-content-font;
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      height: 45px;
+      padding: 0.4rem 1.4rem;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin: 15px 0 0 0;
+    }
+
+    .star {
+      font-size: 40px;
+      color: gold;
+      text-shadow: 0 0 2px goldenrod;
+      cursor: pointer;
+    }
+    .star.focused:before {
+      text-shadow: 0 0 7px #02b9ff;
+    }
+
+    .duration {
+      font-family: $post-content-font;
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      height: 45px;
+      padding: 0.4rem 1.4rem;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin: 15px 0 0 0;
+    }
+
+    .bool {
+      // TODO: add!
+    }
   }
 }
 

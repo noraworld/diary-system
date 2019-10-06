@@ -170,7 +170,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:text, templated_articles_attributes: %i[title body position template_id])
+    params.require(:article).permit(:text, templated_articles_attributes: %i[title body position format template_id])
   end
 
   def update_article_params
