@@ -1,20 +1,11 @@
 # frozen_string_literal: true
 
 class Template < ApplicationRecord
-  FORMAT_TYPES = %w[
-    sentence
-    star
-    duration
-    bool
-    oneline
-  ].freeze
+  include TemplateValidator
 
   validates :uuid,
             presence: true,
             uniqueness: true
-
-  validates :title,
-            presence: true
 
   validates :position,
             presence: true,
@@ -23,7 +14,4 @@ class Template < ApplicationRecord
               only_integer: true,
               greater_than_or_equal_to: 0
             }
-
-  validates :format,
-            inclusion: { in: FORMAT_TYPES }
 end
