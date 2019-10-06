@@ -53,10 +53,14 @@ class TemplatesController < ApplicationController
   end
 
   def destroy
-    @template = Template.find_by!(uuid: params[:uuid])
-    @template.destroy
+    if Rails.env.production?
+      redirect_to templates_index_path, alert: 'Cannot delete a template in production!'
+    else
+      @template = Template.find_by!(uuid: params[:uuid])
+      @template.destroy if Rails.env.development?
 
-    redirect_to '/templates'
+      redirect_to templates_index_path
+    end
   end
 
   def sort

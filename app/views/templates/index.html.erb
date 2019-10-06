@@ -1,3 +1,9 @@
+<% if flash[:alert] %>
+  <div id="failed-message" class="form-message">
+    <%= flash[:alert] %><span id="times">&times;</span>
+  </div>
+<% end %>
+
 <% if @templates.count == 0 %>
   <div id="template-contents">
     <p>No templates found</p>
