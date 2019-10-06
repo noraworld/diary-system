@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Template < ApplicationRecord
+  has_many :templated_articles, dependent: :restrict_with_exception
+
   include TemplateValidator
 
   validates :uuid,
