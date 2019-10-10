@@ -8,7 +8,7 @@
 <% when 'oneline' %>
   <div class="templated-post-body"><%= templated_article_form.text_field :body, { value: template.body, placeholder: "Write #{template.title}", class: 'oneline' } %></div>
 <% when 'star' %>
-  <div class="templated-post-body">
+  <div class="templated-post-body star-wrapper">
     <%= templated_article_form.text_field :body, { type: 'hidden', class: 'star-value' } %>
     <i class="star far fa-star"></i>
     <i class="star far fa-star"></i>

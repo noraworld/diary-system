@@ -894,8 +894,6 @@ $rule-margin-left-and-right: 1.3rem;
 
 #post-form {
   .templated-post-body {
-    text-align: center;
-
     .oneline {
       font-family: $post-content-font;
       display: block;
@@ -935,6 +933,10 @@ $rule-margin-left-and-right: 1.3rem;
     .bool {
       // TODO: add!
     }
+  }
+
+  .templated-post-body.star-wrapper {
+    text-align: center;
   }
 }
 
