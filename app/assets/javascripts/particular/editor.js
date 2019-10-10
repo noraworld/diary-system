@@ -30,6 +30,29 @@
         document.execCommand('delete', false, null);
       }
     }
+    else if (event.key === 'Enter') {
+      let newlinePosition = 0;
+
+      for (let i = selectionStartPosition - 1; i >= 0; i--) {
+        if (sentence[i] === '\n' || sentence[i] === '\r') {
+          newlinePosition = i;
+          break;
+        }
+      }
+
+      let spaceLength = 0;
+      for (let i = newlinePosition + 1; i <= selectionStartPosition - 1; i++) {
+        if (sentence[i] === ' ') {
+          spaceLength++;
+        }
+        else {
+          break;
+        }
+      }
+
+      event.preventDefault();
+      document.execCommand('insertText', false, '\n' + ' '.repeat(spaceLength));
+    }
   });
 
   function isFormFocused() {
