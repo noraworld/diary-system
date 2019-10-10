@@ -2,23 +2,32 @@
 
 {
   document.addEventListener('keydown', (event) => {
-    if (isFormFocused()) {
-      if (event.key === 'Tab') {
-        event.preventDefault();
+    if (!isFormFocused()) {
+      return false;
+    }
 
-        const TAB_SIZE = 4;
-        const SPACES = ' '.repeat(TAB_SIZE);
+    const TAB_SIZE = 4;
+    const SPACES = ' '.repeat(TAB_SIZE);
 
-        let sentence = document.activeElement.value;
-        let len = sentence.length;
-        let selectionStartPosition = document.activeElement.selectionStart;
-        let selectionEndPosition = document.activeElement.selectionEnd;
-        let before = sentence.substr(0, selectionStartPosition);
-        let after = sentence.substr(selectionEndPosition, len);
+    let sentence = document.activeElement.value;
+    let selectionStartPosition = document.activeElement.selectionStart;
 
-        document.activeElement.value = before + SPACES + after;
-        document.activeElement.selectionStart = selectionStartPosition + TAB_SIZE;
-        document.activeElement.selectionEnd = selectionStartPosition + TAB_SIZE;
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      document.execCommand('insertText', false, SPACES);
+    }
+    else if (event.key === 'Backspace') {
+      // check if string between cursor position and 4 characters ago from cursor position is all spaces
+      for (let i = selectionStartPosition - 1; i > selectionStartPosition - (1 + TAB_SIZE); i--) {
+        if (sentence[i] !== ' ') {
+          return false;
+        }
+      }
+
+      event.preventDefault();
+
+      for (let i = 0; i < TAB_SIZE; i++) {
+        document.execCommand('delete', false, null);
       }
     }
   });
