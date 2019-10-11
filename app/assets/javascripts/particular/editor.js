@@ -35,13 +35,13 @@
 
       for (let i = selectionStartPosition - 1; i >= 0; i--) {
         if (sentence[i] === '\n' || sentence[i] === '\r') {
-          newlinePosition = i;
+          newlinePosition = i + 1;
           break;
         }
       }
 
       let spaceLength = 0;
-      for (let i = newlinePosition + 1; i <= selectionStartPosition - 1; i++) {
+      for (let i = newlinePosition; i <= selectionStartPosition - 1; i++) {
         if (sentence[i] === ' ') {
           spaceLength++;
         }
@@ -52,6 +52,18 @@
 
       event.preventDefault();
       document.execCommand('insertText', false, '\n' + ' '.repeat(spaceLength));
+
+      let lastlineFirstPosition = 0;
+      for (let i = document.activeElement.value.length - 1; i >= 0; i--) {
+        if (document.activeElement.value[i] === '\n' || document.activeElement.value[i] === '\r') {
+          lastlineFirstPosition = i + 1;
+          break;
+        }
+      }
+
+      if (document.activeElement.selectionStart >= lastlineFirstPosition && document.activeElement.selectionStart <= document.activeElement.value.length) {
+        document.activeElement.scrollTop = document.activeElement.scrollHeight;
+      }
     }
   });
 
