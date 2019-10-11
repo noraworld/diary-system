@@ -11,6 +11,10 @@
       <%= @form_title %>
       <%= article_form.submit({ id: 'post-button' }) %>
     </div>
+    <div id="markdown-edit-button">
+      <%# do not start a new line to fill a gap %>
+      <span id="listify"><i class="fas fa-list-ul"></i></span><span><i class="fas fa-list-ul"></i></span>
+    </div>
   </div>
 
   <% if @templates && controller.action_name == 'new' %>
