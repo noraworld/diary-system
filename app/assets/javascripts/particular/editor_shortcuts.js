@@ -2,7 +2,7 @@
 
 {
   document.addEventListener('keydown', (event) => {
-    if (!isFormFocused()) {
+    if (!isFormFocused() || isPressedModifierKey(event)) {
       return false;
     }
 
@@ -78,6 +78,24 @@
       return true;
     }
     else if (document.activeElement.isContentEditable === true) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  function isPressedModifierKey(event) {
+    if (event.metaKey === true) {
+      return true;
+    }
+    else if (event.ctrlKey === true) {
+      return true;
+    }
+    else if (event.altKey === true) {
+      return true;
+    }
+    else if (event.shiftKey === true) {
       return true;
     }
     else {
