@@ -61,13 +61,31 @@
       }
     }
 
+    let scrollTopBeforeListifying = activeTextarea.scrollTop;
     document.execCommand('insertText', false, lines.join('\n'));
+
+    // prevent scrollTop from moving out of position when inserting text by 'document.execCommand'
+    // I don't know why such behavior occurs
+    activeTextarea.scrollTop = scrollTopBeforeListifying;
+    scrollTop = scrollTopBeforeListifying;
   });
 
   let activeElementBeforeClickingListify = null;
   document.querySelector('#listify').addEventListener('mouseover', (event) => {
     activeElementBeforeClickingListify = document.activeElement;
   });
+
+  // prevent scrollTop from moving out of position when undoing or redoing listifying
+  // I don't know why such behavior occurs
+  let scrollTop = null;
+  document.activeElement.oninput = (event) => {
+    if (event.inputType === 'historyUndo' || event.inputType === 'historyRedo') {
+      document.activeElement.scrollTop = scrollTop;
+    }
+    else {
+      scrollTop = document.activeElement.scrollTop;
+    }
+  }
 
   function getActiveTextarea() {
     if (activeElementBeforeClickingListify !== null && activeElementBeforeClickingListify.getAttribute('id') === 'post-content') {
