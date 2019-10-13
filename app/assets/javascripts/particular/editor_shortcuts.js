@@ -11,7 +11,7 @@
   }
 
   // Backspace key
-  function deleteCharacterOrIndent(event) {
+  function deleteCharacterOrDeleteIndent(event) {
     let [sentence, selection] = getTextareaInformation();
 
     // check if string between cursor position and 4 characters ago from cursor position is all spaces
@@ -72,14 +72,22 @@
     }
 
     switch (event.key) {
-      case 'Tab'       : indent(event);                  break;
-      case 'Backspace' : deleteCharacterOrIndent(event); break;
+      case 'Tab'       : indent(event);                        break;
+      case 'Backspace' : deleteCharacterOrDeleteIndent(event); break;
     }
   });
 
   // Use keypress instead of keydown to avoid triggering event when pressing the enter to confirm input on IME
   // HINT: keypress event is not triggered when pressing the enter to confirm input on IME
   document.addEventListener('keypress', (event) => {
+    // great!! shift + enter is now ordinary enter!
+    // so you can use either:
+    //   you want to start a newline with keeping indent    -> use enter
+    //   you want to start a newline without keeping indent -> use shift + enter
+    if (!isFormFocused() || isPressedModifierKey(event)) {
+      return false;
+    }
+
     switch (event.key) {
       case 'Enter' : startNewlineWithKeepingIndent(event); break;
     }
