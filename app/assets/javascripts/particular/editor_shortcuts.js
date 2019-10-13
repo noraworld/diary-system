@@ -31,8 +31,9 @@
   // Enter key
   function startNewlineWithKeepingIndent(event) {
     let [sentence, selection] = getTextareaInformation();
-    let newlinePosition = 0;
 
+    // get the position of beginning of line that exists a caret
+    let newlinePosition = 0;
     for (let i = selection.start - 1; i >= 0; i--) {
       if (sentence[i] === '\n' || sentence[i] === '\r') {
         newlinePosition = i + 1;
@@ -40,6 +41,27 @@
       }
     }
 
+    // get the position of end of line that exists a caret
+    let selectionEndOfLinePosition = sentence.length;
+    for (let i = selection.start; i < sentence.length; i++) {
+      if (sentence[i] === '\n' || sentence[i] === '\r') {
+        selectionEndOfLinePosition = i;
+        break;
+      }
+    }
+
+    // trim all spaces if a line that exists a caret is all spaces
+    let selectionLine = sentence.substr(newlinePosition, selectionEndOfLinePosition - newlinePosition);
+    if (selectionLine.length !== 0 && selectionLine.trim() === '') {
+      event.preventDefault();
+      document.activeElement.selectionStart = newlinePosition;
+      document.activeElement.selectionEnd   = selectionEndOfLinePosition;
+      document.execCommand('insertText', false, '');
+      document.execCommand('insertText', false, '\n');
+      return true;
+    }
+
+    // get the amount of indent of line that exists a caret
     let spaceLength = 0;
     for (let i = newlinePosition; i <= selection.start - 1; i++) {
       if (sentence[i] === ' ') {
@@ -51,8 +73,11 @@
     }
 
     event.preventDefault();
+
+    // start a newline with keeping indent
     document.execCommand('insertText', false, '\n' + ' '.repeat(spaceLength));
 
+    // get the position of beginning of last line
     let lastlineFirstPosition = 0;
     for (let i = document.activeElement.value.length - 1; i >= 0; i--) {
       if (document.activeElement.value[i] === '\n' || document.activeElement.value[i] === '\r') {
@@ -61,6 +86,7 @@
       }
     }
 
+    // scroll to bottom if the caret exists in last line
     if (document.activeElement.selectionStart >= lastlineFirstPosition && document.activeElement.selectionStart <= document.activeElement.value.length) {
       document.activeElement.scrollTop = document.activeElement.scrollHeight;
     }
