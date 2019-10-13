@@ -1,11 +1,43 @@
 'use strict';
 
 {
+  let listifyButtonClickedLength = 0;
+  let previousSentence = null;
+
   document.querySelector('#listify').addEventListener('click', (event) => {
     if (getActiveTextarea() === null) {
       return false;
     }
 
+    // save how many times listify button is clicked
+    listifyButtonClickedLength++;
+
+    if (listifyButtonClickedLength % 2 === 0 && previousSentence === getActiveTextarea().value) {
+      unlistify();
+    }
+    else {
+      listify();
+    }
+  });
+
+  let activeElementBeforeClickingListify = null;
+  document.querySelector('#listify').addEventListener('mouseover', (event) => {
+    activeElementBeforeClickingListify = document.activeElement;
+  });
+
+  // prevent scrollTop from moving out of position when undoing or redoing listifying
+  // I don't know why such behavior occurs
+  let scrollTop = null;
+  document.activeElement.oninput = (event) => {
+    if (event.inputType === 'historyUndo' || event.inputType === 'historyRedo') {
+      document.activeElement.scrollTop = scrollTop;
+    }
+    else {
+      scrollTop = document.activeElement.scrollTop;
+    }
+  }
+
+  function listify() {
     let activeTextarea = getActiveTextarea();
     let sentence = activeTextarea.value;
     let selection = { start: activeTextarea.selectionStart, end: activeTextarea.selectionEnd };
@@ -68,23 +100,13 @@
     // I don't know why such behavior occurs
     activeTextarea.scrollTop = scrollTopBeforeListifying;
     scrollTop = scrollTopBeforeListifying;
-  });
 
-  let activeElementBeforeClickingListify = null;
-  document.querySelector('#listify').addEventListener('mouseover', (event) => {
-    activeElementBeforeClickingListify = document.activeElement;
-  });
+    previousSentence = document.activeElement.value;
+  }
 
-  // prevent scrollTop from moving out of position when undoing or redoing listifying
-  // I don't know why such behavior occurs
-  let scrollTop = null;
-  document.activeElement.oninput = (event) => {
-    if (event.inputType === 'historyUndo' || event.inputType === 'historyRedo') {
-      document.activeElement.scrollTop = scrollTop;
-    }
-    else {
-      scrollTop = document.activeElement.scrollTop;
-    }
+  function unlistify() {
+    getActiveTextarea().focus();
+    document.execCommand('undo', false, null);
   }
 
   function getActiveTextarea() {
