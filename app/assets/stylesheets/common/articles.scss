@@ -810,7 +810,11 @@ $rule-margin-left-and-right: 1.3rem;
 #post-content h4+ol, #post-content h4+p, #post-content h4+ul, #post-content h4+dl,
 #post-content h5+ol, #post-content h5+p, #post-content h5+ul, #post-content h5+dl,
 #post-content h6+ol, #post-content h6+p, #post-content h6+ul, #post-content h6+dl,
-#post-content blockquote + *:not(hr), #post-content blockquote + script + *:not(hr), #post-content hr + *
+#post-content blockquote + *:not(hr), #post-content blockquote + script + *:not(hr), #post-content hr + *,
+#post-content h1+ul li:first-child p, #post-content h2+ul li:first-child p, #post-content h3+ul li:first-child p,
+#post-content h4+ul li:first-child p, #post-content h5+ul li:first-child p, #post-content h6+ul li:first-child p,
+#post-content h1+ol li:first-child p, #post-content h2+ol li:first-child p, #post-content h3+ol li:first-child p,
+#post-content h4+ol li:first-child p, #post-content h5+ol li:first-child p, #post-content h6+ol li:first-child p
 {
   margin-top: 0;
 }
