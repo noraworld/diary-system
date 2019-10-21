@@ -560,7 +560,7 @@ $rule-margin-left-and-right: 1.3rem;
     max-height: $img-max-height;
     width: auto;
     height: auto;
-    margin: 0 auto;
+    margin: 10px auto;
     display: block;
     box-sizing: border-box;
     padding: 10px;
@@ -587,7 +587,28 @@ $rule-margin-left-and-right: 1.3rem;
     ul li {
       list-style-type: circle;
       ul li {
-        list-style-type: square;
+        list-style-type: disc;
+        ul li {
+          list-style-type: circle;
+          ul li {
+            list-style-type: disc;
+            ul li {
+              list-style-type: circle;
+              ul li {
+                list-style-type: disc;
+                ul li {
+                  list-style-type: circle;
+                  ul li {
+                    list-style-type: disc;
+                    ul li {
+                      list-style-type: circle;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
