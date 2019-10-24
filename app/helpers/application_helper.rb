@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  PRIVATE_START_STRING = '<private>'
+  PRIVATE_END_STRING   = '</private>'
+
   def site_title
     if ENV['SITE_TITLE'].present?
       ENV['SITE_TITLE']
@@ -56,8 +59,9 @@ module ApplicationHelper
 
   # Qiita::Markdownを使用する
   def qiita_markdown(markdown)
+    public_contents = trim_private_contents(markdown)
     processor = Qiita::Markdown::Processor.new(hostname: ENV['HOST_NAME'], script: true)
-    processor.call(markdown)[:output].to_s.html_safe # rubocop:disable Rails/OutputSafety
+    processor.call(public_contents)[:output].to_s.html_safe # rubocop:disable Rails/OutputSafety
   end
 
   # 検索結果や meta description に表示させる 200 文字程度の要約
@@ -141,5 +145,30 @@ module ApplicationHelper
   # return -> brタグつきのテキスト(text)
   def linebreak_to_br(text)
     text.gsub(/\r\n|\r|\n/, '<br>')
+  end
+
+  private
+
+  def trim_private_contents(markdown)
+    private_start_string_length = markdown.scan(PRIVATE_START_STRING).length
+    private_end_string_length   = markdown.scan(PRIVATE_END_STRING).length
+
+    raise StandardError unless private_start_string_length == private_end_string_length
+
+    return markdown if private_start_string_length.zero? && private_end_string_length.zero?
+
+    markdown = if signed_in?
+                 markdown.gsub(/#{PRIVATE_START_STRING}(\r\n|\r|\n)?/, '').gsub(/(\r\n|\r|\n)?#{PRIVATE_END_STRING}/, '')
+               else
+                 markdown.gsub(/(\r\n|\r|\n)?#{PRIVATE_START_STRING}.*?#{PRIVATE_END_STRING}/m, '')
+               end
+
+    return markdown if markdown.scan(PRIVATE_START_STRING).length.zero? && markdown.scan(PRIVATE_END_STRING).length.zero?
+
+    raise StandardError
+  end
+
+  def signed_in?
+    current_user.present?
   end
 end
