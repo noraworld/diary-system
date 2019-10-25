@@ -42,7 +42,7 @@ gem 'gemoji'
 gem 'github-linguist'
 gem 'jpmobile'
 gem 'puma'
-gem 'qiita-markdown', '0.26.0'
+gem 'qiita-markdown', '0.27.0'
 gem 'rmagick'
 gem 'ruby-filemagic'
 
