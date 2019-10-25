@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  class NoMatchingPrivateStringError < StandardError; end
+
   PRIVATE_START_STRING = '<private>'
   PRIVATE_END_STRING   = '</private>'
 
@@ -153,7 +155,9 @@ module ApplicationHelper
     private_start_string_length = markdown.scan(PRIVATE_START_STRING).length
     private_end_string_length   = markdown.scan(PRIVATE_END_STRING).length
 
-    raise StandardError unless private_start_string_length == private_end_string_length
+    unless private_start_string_length == private_end_string_length
+      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match before parse'
+    end
 
     return markdown if private_start_string_length.zero? && private_end_string_length.zero?
 
@@ -165,7 +169,7 @@ module ApplicationHelper
 
     return markdown if markdown.scan(PRIVATE_START_STRING).length.zero? && markdown.scan(PRIVATE_END_STRING).length.zero?
 
-    raise StandardError
+    raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match after parse'
   end
 
   def signed_in?
