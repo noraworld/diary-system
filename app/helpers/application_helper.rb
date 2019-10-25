@@ -151,6 +151,7 @@ module ApplicationHelper
 
   private
 
+  # TAKE CARE WHEN EDITING THIS METHOD BECAUSE IT CAN CAUSE EXPOSURE OF PRIVATE CONTENTS TO PUBLIC!
   def trim_private_contents(markdown)
     private_start_string_length = markdown.scan(PRIVATE_START_STRING).length
     private_end_string_length   = markdown.scan(PRIVATE_END_STRING).length
@@ -161,15 +162,24 @@ module ApplicationHelper
 
     return markdown if private_start_string_length.zero? && private_end_string_length.zero?
 
-    markdown = if signed_in?
-                 markdown.gsub(/#{PRIVATE_START_STRING}(\r\n|\r|\n)?/, '').gsub(/(\r\n|\r|\n)?#{PRIVATE_END_STRING}/, '')
-               else
-                 markdown.gsub(/(\r\n|\r|\n)?#{PRIVATE_START_STRING}.*?#{PRIVATE_END_STRING}/m, '')
-               end
+    # for not signed in
+    # raise error to perceive it also when signed in
+    trimmed_markdown = markdown.gsub(/(\r\n|\r|\n)?#{PRIVATE_START_STRING}.*?#{PRIVATE_END_STRING}/m, '')
+    if !trimmed_markdown.scan(PRIVATE_START_STRING).length.zero? || !trimmed_markdown.scan(PRIVATE_END_STRING).length.zero?
+      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match after parse (for NOT signed in)'
+    end
 
-    return markdown if markdown.scan(PRIVATE_START_STRING).length.zero? && markdown.scan(PRIVATE_END_STRING).length.zero?
+    return trimmed_markdown unless signed_in?
 
-    raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match after parse'
+    # the process below here is executed only when signed in
+
+    # for signed in
+    trimmed_markdown = markdown.gsub(/#{PRIVATE_START_STRING}(\r\n|\r|\n)?/, '').gsub(/(\r\n|\r|\n)?#{PRIVATE_END_STRING}/, '')
+    if !trimmed_markdown.scan(PRIVATE_START_STRING).length.zero? || !trimmed_markdown.scan(PRIVATE_END_STRING).length.zero?
+      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match after parse (for signed in)'
+    end
+
+    trimmed_markdown
   end
 
   def signed_in?
