@@ -59,7 +59,7 @@ module ApplicationHelper
 
   # Qiita::Markdownを使用する
   def qiita_markdown(markdown)
-    public_contents = trim_private_contents(markdown)
+    public_contents = markdown.present? ? trim_private_contents(markdown) : markdown
     processor = Qiita::Markdown::Processor.new(hostname: ENV['HOST_NAME'], script: true)
     processor.call(public_contents)[:output].to_s.html_safe # rubocop:disable Rails/OutputSafety
   end
