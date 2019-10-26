@@ -30,7 +30,7 @@
         <div><%= templated_article_form.text_field :template_id, { type: 'hidden', value: template.id } %></div>
         <div class="templated-post-title"><%= template.title %></div>
         <div><%= templated_article_form.text_field :title, { type: 'hidden', value: template.title } %></div>
-        <%= render 'format', { template: template, templated_article_form: templated_article_form } %>
+        <%= render 'format_for_form', { template: template, templated_article_form: templated_article_form } %>
         <div><%= templated_article_form.text_field :position, { type: 'hidden', value: template.position } %></div>
         <div><%= templated_article_form.text_field :format, { type: 'hidden', value: template.format } %></div>
       <% end %>
@@ -41,14 +41,14 @@
       <div><%= templated_article_form.text_field :template_id, { type: 'hidden', value: templated_article_form.object.template_id } %></div>
       <div class="templated-post-title"><%= templated_article_form.object.title %></div>
       <div><%= templated_article_form.text_field :title, { type: 'hidden', value: templated_article_form.object.title } %></div>
-      <%= render 'format', { template: nil, templated_article_form: templated_article_form } %>
+      <%= render 'format_for_form', { template: nil, templated_article_form: templated_article_form } %>
       <div><%= templated_article_form.text_field :position, { type: 'hidden', value: templated_article_form.object.position } %></div>
       <div><%= templated_article_form.text_field :format, { type: 'hidden', value: templated_article_form.object.format } %></div>
     <% end %>
   <% elsif controller.action_name == 'edit' || controller.action_name == 'update' %>
     <%= article_form.fields_for :templated_articles do |templated_article_form| %>
       <div class="templated-post-title"><%= templated_article_form.object.title %></div>
-      <%= render 'format', { template: nil, templated_article_form: templated_article_form } %>
+      <%= render 'format_for_form', { template: nil, templated_article_form: templated_article_form } %>
     <% end %>
   <% end %>
 <% end %>
