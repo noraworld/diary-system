@@ -76,18 +76,33 @@ $(function() {
 
   // focus a clicked star, and set the value to input element
   function fixFilledStars() {
-    // focus a clicked star if it is not focused yet
-    // unfocus a clicked star if it is already focused
-    if (this.classList.contains('focused')) {
-      this.classList.remove('focused');
-    }
-    else {
-      this.classList.add('focused');
-    }
-
     thisPosition  = [].slice.call(stars).indexOf(this);
     startPosition = thisPosition - (thisPosition % 10);
     endPosition   = startPosition + 9;
+    starNodes     = this.parentNode.childNodes;
+
+    if (this.classList.contains('focused')) {
+      // unfocus a clicked star if it is already focused
+      this.classList.remove('focused');
+
+      // remove the value from input element
+      for (var i = 0; i < starNodes.length; i++) {
+        if (starNodes[i].className === 'star-value') {
+          starNodes[i].value = null;
+        }
+      }
+    }
+    else {
+      // focus a clicked star if it is not focused yet
+      this.classList.add('focused');
+
+      // set the value to input element
+      for (var i = 0; i < starNodes.length; i++) {
+        if (starNodes[i].className === 'star-value') {
+          starNodes[i].value = (thisPosition % 10) + 1;
+        }
+      }
+    }
 
     // if a star which is not clicked this time is focused on, unfocus it
     // in other words, if a star is focused the last time, unfocus it
@@ -96,16 +111,6 @@ $(function() {
       if (this === stars[i]) { continue; }
       stars[i].classList.remove('focused');
     }
-
-    // set the value to input element
-    starNodes = this.parentNode.childNodes;
-    for (var i = 0; i < starNodes.length; i++) {
-      if (starNodes[i].className === 'star-value') {
-        starNodes[i].value = (thisPosition % 10) + 1;
-      }
-    }
-    // TODO: remove the value from input element
-    //       when unfocusing a focused star (when a focused star does not exist)
   }
 
   // fill a star
