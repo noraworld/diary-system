@@ -1,8 +1,14 @@
 <%= form_with(model: @article, url: @post_url, id: 'post-form') do |article_form| %>
   <% if flash[:alert] %>
-  <div id="failed-message" class="form-message">
-    <%= flash[:alert] %><span id="times">&times;</span>
-  </div>
+    <div id="failed-message" class="form-message">
+      <span><%= flash[:alert] %><span id="times">&times;</span>
+
+      <ul>
+        <% @article.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
   <div id="form-title-fixed-wrapper">
@@ -13,7 +19,7 @@
     </div>
     <div id="markdown-edit-button">
       <%# do not start a new line to fill a gap %>
-      <span id="listify"><i class="fas fa-list-ul"></i></span><span><i class="fas fa-list-ul"></i></span>
+      <span id="listify"><i class="fas fa-list-ul"></i></span><span><i class="fas fa-mask"></i></span>
     </div>
   </div>
 
