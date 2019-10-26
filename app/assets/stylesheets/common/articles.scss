@@ -30,6 +30,70 @@
     );
   background-size: $sx $sy;
 }
+@mixin format {
+  .oneline {
+    font-family: $post-content-font;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    height: 45px;
+    padding: 0.4rem 1.4rem;
+    font-size: 15px;
+    margin: 15px 0 0 0;
+  }
+
+  .star {
+    font-size: 40px;
+    color: gold;
+    text-shadow: 0 0 2px goldenrod;
+  }
+  .star.focused:before {
+    text-shadow: 0 0 7px #02b9ff;
+  }
+
+  .duration {
+    font-family: $post-content-font;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    height: 45px;
+    padding: 0.4rem 1.4rem;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 15px 0 0 0;
+  }
+
+  .bool {
+    // TODO: add!
+  }
+}
+// Refer to https://mamewaza.com/support/blog/text-emphasis.html. Thanks a lot!
+@mixin handwritten-style-underline {
+  background-repeat: repeat-x;
+  background-size: 0.6em 0.2em,1.6em 0.2em,3.4em 0.2em,3.6em 0.2em;
+  background-position: right bottom;
+
+  background-image:
+    -webkit-gradient(linear, left top, left bottom,
+                      from(rgba(255, 156, 63, 0)),
+                      color-stop(0.1, rgba(246, 89, 115, 0.02)),
+                      color-stop(0.5, rgba(255, 156, 63, 1)),
+                      color-stop(0.98, rgba(255, 156, 63, 0)),
+                      to(rgba(255, 156, 63, 0))
+                    );
+
+  background-image:
+    -webkit-radial-gradient(center center, 0.2em 0.1em, rgba(255,156,63,1) 0, rgba(255,156,63,0) 0.1em, rgba(255,156,63,0) 0.2em),
+    -webkit-radial-gradient(center center, 0.4em 0.1em, rgba(255,156,63,1) 0, rgba(255,156,63,0) 0.3em, rgba(255,156,63,0) 0.4em),
+    -webkit-radial-gradient(center center, 0.7em 0.1em, rgba(255,156,63,1) 0, rgba(255,156,63,0) 0.6em, rgba(255,156,63,0) 0.7em),
+    -webkit-radial-gradient(center center, 7.1em 0.1em, rgba(255,156,63,1) 0, rgba(255,156,63,0) 7em,   rgba(255,156,63,0) 7.1em);
+  background-image:
+    radial-gradient(0.2em 0.1em at center center, rgba(255,156,63,1), rgba(255,156,63,0)),
+    radial-gradient(0.4em 0.1em at center center, rgba(255,156,63,1), rgba(255,156,63,0)),
+    radial-gradient(0.7em 0.1em at center center, rgba(255,156,63,1), rgba(255,156,63,0)),
+    radial-gradient(7.1em 0.1em at center center, rgba(255,156,63,1), rgba(255,156,63,0));
+}
 
 $general-max-width: 750px;
 $img-max-width: 600px;
@@ -81,6 +145,15 @@ $hr-before-after-height: 10px;
   border-radius: 4px;
   box-sizing: border-box;
   position: relative;
+
+  ul {
+    padding: 0 0 0 2.5em;
+    margin: 0.5em 0 0 0;
+
+    li {
+      margin: 0.3em 0 0 0;
+    }
+  }
 }
 #success-message #times, #failed-message #times {
   right: 1.5rem;
@@ -857,6 +930,7 @@ $rule-margin-left-and-right: 1.3rem;
 
 #templated-posts-content .templated-post-body {
   @extend #post-content;
+  width: 100%;
   min-height: 125px;
 }
 
@@ -921,46 +995,39 @@ $rule-margin-left-and-right: 1.3rem;
   }
 }
 
+#templated-posts-content {
+  max-width: $general-max-width;
+  margin: 0 auto;
+
+  @include format;
+
+  .oneline {
+    font-size: 22px;
+    word-wrap: break-word;
+    height: 100%;
+    text-align: center;
+
+    span {
+      @include handwritten-style-underline;
+    }
+  }
+
+  .star-wrapper {
+    text-align: center;
+  }
+}
+
 #post-form {
   .templated-post-body {
+    @include format;
+
     .oneline {
-      font-family: $post-content-font;
-      display: block;
-      width: 100%;
-      box-sizing: border-box;
-      height: 45px;
-      padding: 0.4rem 1.4rem;
-      font-size: 15px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      margin: 15px 0 0 0;
     }
 
     .star {
-      font-size: 40px;
-      color: gold;
-      text-shadow: 0 0 2px goldenrod;
       cursor: pointer;
-    }
-    .star.focused:before {
-      text-shadow: 0 0 7px #02b9ff;
-    }
-
-    .duration {
-      font-family: $post-content-font;
-      display: block;
-      width: 100%;
-      box-sizing: border-box;
-      height: 45px;
-      padding: 0.4rem 1.4rem;
-      font-size: 15px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      margin: 15px 0 0 0;
-    }
-
-    .bool {
-      // TODO: add!
     }
   }
 
@@ -1052,6 +1119,14 @@ $rule-margin-left-and-right: 1.3rem;
         border-right: 1px solid grey;
       }
     }
+  }
+
+  .error {
+    border: 1.5px solid tomato !important;
+  }
+  .star-error {
+    padding: 0 0 5px 0;
+    border-bottom: 1.5px solid tomato !important;
   }
 }
 
