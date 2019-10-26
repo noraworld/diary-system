@@ -40,11 +40,11 @@
 
 <div id="templated-posts-content">
   <% @article.templated_articles.order('position ASC').each do |templated_article| %>
-    <% templated_article_body = qiita_markdown(templated_article.body) %>
+    <% templated_article_body = qiita_markdown(templated_article.body, templated_article.format) %>
 
     <% if templated_article_body.present? %>
       <div class="templated-post-title"><%= templated_article.title %></div>
-      <div class="templated-post-body"><%= templated_article_body %></div>
+      <%= render 'format_for_content', { templated_article: templated_article, templated_article_body: templated_article_body } %>
     <% end %>
   <% end %>
 </div>
