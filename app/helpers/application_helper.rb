@@ -68,10 +68,12 @@ module ApplicationHelper
 
   # 検索結果や meta description に表示させる 200 文字程度の要約
   def qiita_markdown_summary(markdown)
+    public_contents = markdown.present? ? trim_private_contents(markdown) : markdown
+
     # length は omission の文字列を含むので、omission の文字列の長さだけ length を増やす
     processor = Qiita::Markdown::SummaryProcessor.new(truncate: { length: 204, omission: ' ...' }, hostname: ENV['HOST_NAME'])
     # 1 つ以上の改行は 1 つのスペースに置き換える。さらに、ポエム式記述法で、改行直前に句読点がある場合は、置き換えたスペースを省略する。
-    strip_tags(processor.call(markdown)[:output].to_s).gsub(/\n+/, ' ').gsub('、 ', '、').gsub('。 ', '。')
+    strip_tags(processor.call(public_contents)[:output].to_s).gsub(/\n+/, ' ').gsub('、 ', '、').gsub('。 ', '。')
   end
 
   # 数値の月表記を英語の月表記に変換する
