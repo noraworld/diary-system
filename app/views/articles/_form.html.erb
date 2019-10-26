@@ -17,6 +17,13 @@
     </div>
   </div>
 
+  <% if @templates.present? || ((controller.action_name == 'edit' || controller.action_name == 'update') && @article.templated_articles.present?) %>
+    <div id="main-post-title">Main diary</div>
+  <% end %>
+  <div id="textarea">
+    <%= article_form.text_area :text, {:id => 'post-content', :placeholder => 'Write your diary'} %>
+  </div>
+
   <% if @templates && controller.action_name == 'new' %>
     <% @templates.each do |template| %>
       <%= article_form.fields_for :templated_articles do |templated_article_form| %>
@@ -44,13 +51,6 @@
       <%= render 'format', { template: nil, templated_article_form: templated_article_form } %>
     <% end %>
   <% end %>
-
-  <% if @templates.present? || ((controller.action_name == 'edit' || controller.action_name == 'update') && @article.templated_articles.present?) %>
-    <div id="main-post-title">Main diary</div>
-  <% end %>
-  <div id="textarea">
-    <%= article_form.text_area :text, {:id => 'post-content', :placeholder => 'Write your diary'} %>
-  </div>
 <% end %>
 
 <%= form_tag({:controller => 'uploads', :action => 'upload'}, :remote => true, :id => 'upload-dropzone', :class => 'dropzone', multipart: true) do %>
