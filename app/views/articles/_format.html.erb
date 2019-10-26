@@ -10,16 +10,9 @@
 <% when 'star' %>
   <div class="templated-post-body star-wrapper">
     <%= templated_article_form.text_field :body, { type: 'hidden', class: 'star-value' } %>
-    <i class="star far fa-star"></i>
-    <i class="star far fa-star"></i>
-    <i class="star far fa-star"></i>
-    <i class="star far fa-star"></i>
-    <i class="star far fa-star"></i>
-    <i class="star far fa-star"></i>
-    <i class="star far fa-star"></i>
-    <i class="star far fa-star"></i>
-    <i class="star far fa-star"></i>
-    <i class="star far fa-star"></i>
+    <% 10.times do %>
+      <i class="star far fa-star"></i>
+    <% end %>
   </div>
 <% when 'duration' %>
   <div class="templated-post-body"><%= templated_article_form.text_field :body, { type: 'number', min: 0, placeholder: "Write #{template.title}", class: 'duration' } %></div>
