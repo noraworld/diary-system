@@ -1,8 +1,5 @@
 $(function() {
 
-  // 画像を囲む画像リンクを削除する
-  $('a').children('img').unwrap();
-
   // YouTube などの埋め込みタグを div で囲む
   // videoDomains にドメインを追加することによって
   // YouTube の埋め込みと同様のスタイルを適用できる

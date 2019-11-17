@@ -617,7 +617,7 @@ $rule-margin-left-and-right: 1.3rem;
   a[target="_blank"] {
     margin-right: 5px;
   }
-  a[target="_blank"]:after {
+  a[target="_blank"]:not([href^="/images"]):after {
     content: ' \ea7e  ';  // The spaces are needed.
     font-family: 'icomoon';
     letter-spacing: -4px;
