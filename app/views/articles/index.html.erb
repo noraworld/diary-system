@@ -81,7 +81,16 @@
       <% date = '/' + format('%04d', article.year) + '/' + format('%02d', article.month) + '/' + format('%02d', article.day) %>
       <% week = Date.new(@year, @month, day).wday %>
       <% if week == 0 %><tr><% end %>
-      <td class="day-box post-box <%= to_day_of_week(week, 3).downcase! %>"><a href="<%= date %>" class="post-link"><p class="day post-day"><%= post_day %><span class="icon-circle"></span></p></a></td>
+      <td class="day-box post-box <%= to_day_of_week(week, 3).downcase! %>">
+        <a href="<%= date %>" class="post-link">
+          <p class="day post-day"><%= post_day %><span class="icon-circle"></span></p>
+          <% if !current_user && article.date >= Time.zone.today - 1.month %>
+            <p class="recent-article lock"><i class="fas fa-lock"></i></p>
+          <% elsif current_user && article.date >= Time.zone.today - 1.month %>
+            <p class="recent-article lock-open"><i class="fas fa-lock-open"></i></p>
+          <% end %>
+        </a>
+      </td>
       <% if week == 6 %></tr><% end %>
     <% end %>
 
