@@ -237,6 +237,22 @@ $post-link-over-post-day: 1;
   color: #dd453e;
   margin-left: 5px;
 }
+.post-link .recent-article {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  color: #ff5200;
+
+  &.lock {
+    color: #ff2f00;
+  }
+  &.lock-open {
+    color: #1083f9;
+  }
+}
 .day {
   position: absolute;
   top: 10px;
