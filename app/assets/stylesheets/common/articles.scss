@@ -1130,6 +1130,10 @@ $rule-margin-left-and-right: 1.3rem;
   }
 }
 
+#show-error-message {
+  @extend #search-error-message;
+}
+
 #search-result-contents {
   padding-bottom: 10px;
 }
