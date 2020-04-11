@@ -1,8 +1,6 @@
 # Diary
 Simple diary application. Unlike a blog, this application is suitable for writing everyday life, events, thoughts and other miscellaneous contents daily in a sense of diary.
 
-This application is actually used by me. If you are interested in, please visit [Noraworld Diary](https://diary.noraworld.jp).
-
 ## Setup
 You should create a new user to post your diary.
 
