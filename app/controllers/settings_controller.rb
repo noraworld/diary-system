@@ -33,7 +33,7 @@ class SettingsController < ApplicationController
   end
 
   def setting_params
-    params.require(:setting).permit(:site_title, :site_description)
+    params.require(:setting).permit(:site_title, :site_description, :host_name)
   end
 
   def signed_in?

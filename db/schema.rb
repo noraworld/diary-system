@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_11_052351) do
+ActiveRecord::Schema.define(version: 2020_04_11_073819) do
 
   create_table "articles", force: :cascade do |t|
     t.text "text", null: false
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_04_11_052351) do
     t.integer "launched_since"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "host_name"
   end
 
   create_table "templated_articles", force: :cascade do |t|

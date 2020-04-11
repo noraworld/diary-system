@@ -7,10 +7,13 @@ module ApplicationHelper
   PRIVATE_END_STRING   = '</private>'
 
   def site_title
-    if ENV['SITE_TITLE'].present?
-      ENV['SITE_TITLE']
-    elsif ENV['HOST_NAME'].present?
-      ENV['HOST_NAME']
+    settings_site_title = Setting.last&.site_title
+    settings_host_name = Setting.last&.host_name
+
+    if settings_site_title.present?
+      settings_site_title
+    elsif settings_host_name.present?
+      settings_host_name
     else
       request.domain
     end
@@ -18,25 +21,29 @@ module ApplicationHelper
 
   # ページごとにタイトルを変更する
   def page_title
-    if @page_title.present? && ENV['SITE_TITLE'].present?
-      @page_title.to_s + ' - ' + ENV['SITE_TITLE'].to_s
-    elsif @page_title.present? && ENV['SITE_TITLE'].blank?
+    settings_site_title = Setting.last&.site_title
+
+    if @page_title.present? && settings_site_title.present?
+      @page_title.to_s + ' - ' + settings_site_title.to_s
+    elsif @page_title.present? && settings_site_title.blank?
       @page_title.to_s + ' - ' + request.domain
-    elsif @page_title.blank? && ENV['SITE_TITLE'].present?
-      ENV['SITE_TITLE']
-    elsif @page_title.blank? && ENV['SITE_TITLE'].blank?
+    elsif @page_title.blank? && settings_site_title.present?
+      settings_site_title
+    elsif @page_title.blank? && settings_site_title.blank?
       request.domain
     end
   end
 
   # トップページにはサイトの説明文、記事の詳細には、記事内容の要約を meta description に設定する
   def page_description
+    settings_site_description = Setting.last&.site_description
+
     if @page_description == false
       false
     elsif @page_description.present?
       @page_description.to_s
-    elsif ENV['SITE_DESCRIPTION'].present?
-      ENV['SITE_DESCRIPTION'].to_s
+    elsif settings_site_description.present?
+      settings_site_description.to_s
     else
       false
     end
@@ -44,10 +51,11 @@ module ApplicationHelper
 
   # Copyright の年を適切に表示させる
   def copyright_year
+    settings_launched_since = Setting.last&.launched_since
     now = Time.now.in_time_zone('Tokyo').strftime('%Y').to_s
 
-    since = if ENV['LAUNCHED_SINCE'].present? && ENV['LAUNCHED_SINCE'].to_i != 0
-              ENV['LAUNCHED_SINCE'].to_s
+    since = if settings_launched_since.present? && settings_launched_since.to_i != 0
+              settings_launched_since.to_s
             else
               Time.now.in_time_zone('Tokyo').strftime('%Y').to_s
             end
@@ -61,19 +69,21 @@ module ApplicationHelper
 
   # Qiita::Markdownを使用する
   def qiita_markdown(markdown, format = nil)
+    settings_host_name = Setting.last&.host_name
     public_contents = markdown.present? ? trim_private_contents(markdown) : markdown
     return public_contents if !format.nil? && format != 'sentence'
 
-    processor = Qiita::Markdown::Processor.new(hostname: ENV['HOST_NAME'], script: true)
+    processor = Qiita::Markdown::Processor.new(hostname: settings_host_name, script: true)
     processor.call(public_contents)[:output].to_s.html_safe # rubocop:disable Rails/OutputSafety
   end
 
   # 検索結果や meta description に表示させる 200 文字程度の要約
   def qiita_markdown_summary(markdown)
+    settings_host_name = Setting.last&.host_name
     public_contents = markdown.present? ? trim_private_contents(markdown) : markdown
 
     # length は omission の文字列を含むので、omission の文字列の長さだけ length を増やす
-    processor = Qiita::Markdown::SummaryProcessor.new(truncate: { length: 204, omission: ' ...' }, hostname: ENV['HOST_NAME'])
+    processor = Qiita::Markdown::SummaryProcessor.new(truncate: { length: 204, omission: ' ...' }, hostname: settings_host_name)
     # 1 つ以上の改行は 1 つのスペースに置き換える。さらに、ポエム式記述法で、改行直前に句読点がある場合は、置き換えたスペースを省略する。
     strip_tags(processor.call(public_contents)[:output].to_s).gsub(/\n+/, ' ').gsub('、 ', '、').gsub('。 ', '。')
   end
