@@ -1,0 +1,24 @@
+<%= form_for(:setting, html: { id: 'template-form' }) do |f| %>
+  <% if flash[:alert] %>
+  <div id="failed-message" class="form-message">
+    <%= flash[:alert] %><span id="times">&times;</span>
+  </div>
+  <% end %>
+
+  <div id="template-form-title">
+    <p>Settings</p>
+    <%= f.submit({ id: 'template-post-button' }) %>
+  </div>
+
+  <label for="template-title">Site title</label>
+  <%= f.text_field :site_title, id: 'template-title', placeholder: 'This field is required' %>
+
+  <label for="template-title">Site description</label>
+  <%= f.text_field :site_description, id: 'template-title', placeholder: 'This field is optional' %>
+
+  <p>Launched since: <%= @first_article_year %></p>
+<% end %>
+
+<%= stylesheet_link_tag    'particular/edit_only.css', media: 'all' %>
+<%= javascript_include_tag 'particular/warn_without_saving.js' %>
+<%= javascript_include_tag 'particular/no_scroll.js' %>

@@ -150,14 +150,14 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
     font-size: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin: 15px 0 0 0;
+    margin: 5px 0 15px 0;
   }
 
   #template-body {
     @include template-body;
     font-family: $template-content-font;
     display: block;
-    margin: 15px 0 0 0;
+    margin: 5px 0 15px 0;
   }
 
   #template-post-button {

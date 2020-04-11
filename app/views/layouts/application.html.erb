@@ -41,7 +41,8 @@
             <li><a href="https://github.com/noraworld" target="_blank"><span class="icon-github"></span>GitHub</a></li>
             <li><a href="https://qiita.com/noraworld" target="_blank"><span class="icon-search"></span>Qiita</a></li>
             <% if current_user %>
-              <li><%= link_to '/template' do %><span class="icon-plus"></span>Template list<% end %></li>
+              <li><%= link_to '/templates' do %><span class="icon-plus"></span>Template list<% end %></li>
+              <li><%= link_to '/settings' do %><span class="icon-cog"></span>Settings<% end %></li>
               <li><%= link_to logout_path, method: :delete, data: { confirm: 'Are you sure you want to sign out?' } do %><span class="icon-switch"></span>Logout<% end %></li>
             <% end %>
           </ul>
@@ -62,6 +63,7 @@
           <div id="listbox">
             <ul>
               <li class="menulist"><%= link_to 'Template list', '/templates', { :class => 'menulink' } %></li>
+              <li class="menulist"><%= link_to 'Settings', '/settings', { :class => 'menulink' } %></li>
               <li class="menulist"><%= link_to 'Sign out', logout_path, { :class => 'menulink', method: :delete, data: { confirm: 'Are you sure you want to sign out?' } } %></li>
             </ul>
           </div>

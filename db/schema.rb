@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_06_035538) do
+ActiveRecord::Schema.define(version: 2020_04_11_052351) do
 
   create_table "articles", force: :cascade do |t|
     t.text "text", null: false
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 2019_10_06_035538) do
     t.integer "day", null: false
     t.date "date", null: false
     t.index ["year", "month", "day"], name: "date_unique", unique: true
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string "site_title", null: false
+    t.string "site_description"
+    t.integer "launched_since"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "templated_articles", force: :cascade do |t|
