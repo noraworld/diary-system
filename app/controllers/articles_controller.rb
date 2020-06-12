@@ -140,7 +140,7 @@ class ArticlesController < ApplicationController
     @page = @page.to_i
 
     quantities = 10
-    @results = Article.where('text LIKE(?)', '%' + params[:q] + '%').offset((@page - 1) * quantities).limit(quantities)
+    @results = Article.where('text LIKE(?)', '%' + params[:q] + '%').offset((@page - 1) * quantities).limit(quantities).order('date DESC')
 
     hitcount = Article.where('text LIKE(?)', '%' + params[:q] + '%').count
     @number_of_pages = hitcount.to_i / quantities.to_i
