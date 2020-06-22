@@ -26,6 +26,7 @@ class TemplatesController < ApplicationController
       @template_form_title = 'Create a new template'
       @back_link_url = templates_index_path
 
+      flash.now[:alert] = 'Create failed...'
       render 'new'
     end
   end
@@ -48,6 +49,7 @@ class TemplatesController < ApplicationController
       @template_form_title = 'Edit the template'
       @back_link_url = templates_index_path
 
+      flash.now[:alert] = 'Update failed...'
       render 'edit'
     end
   end

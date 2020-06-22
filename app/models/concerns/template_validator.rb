@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+# WARNING: ここのバリデータをいじるときは注意
+# ここで設定されているバリデーションは、データベースの制約として追加されているわけではないため、
+# 既存の FORMAT_TYPES に対してバリデーションを変更したりすると、
+# 順番 (Template.position) の入れ替えができなくなったりするので注意
+#
 module TemplateValidator
   extend ActiveSupport::Concern
 

@@ -1,7 +1,13 @@
 <%= form_for(:template, url: @post_template_url, html: { id: 'template-form' }) do |f| %>
   <% if flash[:alert] %>
   <div id="failed-message" class="form-message">
-    <%= flash[:alert] %><span id="times">&times;</span>
+    <span><%= flash[:alert] %><span id="times">&times;</span>
+
+    <ul>
+        <% @template.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
   </div>
   <% end %>
 

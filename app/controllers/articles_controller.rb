@@ -100,7 +100,7 @@ class ArticlesController < ApplicationController
       @form_title = 'Edit the diary'
       @back_link_url = show_path
 
-      flash.now[:alert] = 'Updated failed...'
+      flash.now[:alert] = 'Update failed...'
       render 'edit'
     end
   end
