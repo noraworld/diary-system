@@ -958,19 +958,34 @@ $rule-margin-left-and-right: 1.3rem;
   list-style-type: disc;
 }
 
-#post-edit-and-delete-link-wrapper {
+#post-link-wrapper {
   font-family: $system-font;
   max-width: 750px;
   margin: 0 auto 15px;
-  text-align: right;
 
-  #edit-link, #delete-link {
+  #post-link-left-wrapper {
+    float: left;
+  }
+
+  #post-link-right-wrapper {
+    float: right;
+  }
+
+  #this-month-link, #edit-link, #delete-link {
     color: #444444;
     padding: 0 7px 0 0;
 
     &:hover {
       color: #808080;
     }
+  }
+
+  #this-month-link {
+    padding: 0 0 0 7px;
+  }
+
+  #edit-link, #delete-link {
+    padding: 0 7px 0 0;
   }
 
   #delete-link {
