@@ -188,7 +188,7 @@ module ApplicationHelper
     # the process below here is executed only when signed in
 
     # for signed in
-    trimmed_markdown = markdown.gsub(/#{PRIVATE_START_STRING}(\r\n|\r|\n)?/, '').gsub(/(\r\n|\r|\n)?#{PRIVATE_END_STRING}/, '')
+    trimmed_markdown = markdown.gsub(/#{PRIVATE_START_STRING}(\r\n|\r|\n)?/, '<span class="private-sentence">').gsub(/(\r\n|\r|\n)?#{PRIVATE_END_STRING}/, '</span>')
     if !trimmed_markdown.scan(PRIVATE_START_STRING).length.zero? || !trimmed_markdown.scan(PRIVATE_END_STRING).length.zero?
       raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match after parse (for signed in)'
     end
