@@ -32,11 +32,32 @@
   <% if next_article_link %><a href="<%= next_article_link %>" id="next-post"><span class="icon-arrow-right"></span></a><% end %>
 
   <% if prev_article_link && !next_article_link %>
-  <span id="date" class="no-next-post"><%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %></span>
+  <span id="date" class="no-next-post">
+    <% if !current_user && @public_date > Time.zone.today %>
+    <i class="fas fa-lock"></i>
+    <% elsif current_user && @public_date > Time.zone.today %>
+    <i class="fas fa-lock-open"></i>
+    <% end %>
+    <%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %>
+  </span>
   <% elsif !prev_article_link && next_article_link %>
-  <span id="date" class="no-prev-post"><%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %></span>
+  <span id="date" class="no-prev-post">
+    <% if !current_user && @public_date > Time.zone.today %>
+    <i class="fas fa-lock"></i>
+    <% elsif current_user && @public_date > Time.zone.today %>
+    <i class="fas fa-lock-open"></i>
+    <% end %>
+    <%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %>
+  </span>
   <% else %>
-  <span id="date"><%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %></span>
+  <span id="date">
+    <% if !current_user && @public_date > Time.zone.today %>
+    <i class="fas fa-lock"></i>
+    <% elsif current_user && @public_date > Time.zone.today %>
+    <i class="fas fa-lock-open"></i>
+    <% end %>
+    <%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %>
+  </span>
   <% end %>
 </div>
 

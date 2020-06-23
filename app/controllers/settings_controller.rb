@@ -15,6 +15,7 @@ class SettingsController < ApplicationController
     if @setting.update(setting_params)
       redirect_to '/settings'
     else
+      flash.now[:alert] = 'Update failed...'
       render 'edit'
     end
   end
@@ -28,12 +29,13 @@ class SettingsController < ApplicationController
     if @setting.save
       redirect_to '/settings'
     else
+      flash.now[:alert] = 'Create failed...'
       render 'edit'
     end
   end
 
   def setting_params
-    params.require(:setting).permit(:site_title, :site_description, :host_name)
+    params.require(:setting).permit(:site_title, :site_description, :host_name, :default_public_in)
   end
 
   def signed_in?

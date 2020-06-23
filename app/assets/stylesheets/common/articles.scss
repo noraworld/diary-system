@@ -477,6 +477,11 @@ $post-link-over-post-day: 1;
   width: 100% - $date-description-prev-next-post-width - $date-description-prev-next-post-width;
   height: 100%;
   padding: 15px 0;
+
+  .fa-lock, .fa-lock-open {
+    font-size: 12px;
+    padding: 0 5px 0 0;
+  }
 }
 #date-description #date.no-prev-post {
   float: right;

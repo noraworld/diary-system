@@ -1,7 +1,13 @@
 <%= form_for(:setting, html: { id: 'template-form' }) do |f| %>
   <% if flash[:alert] %>
   <div id="failed-message" class="form-message">
-    <%= flash[:alert] %><span id="times">&times;</span>
+    <span><%= flash[:alert] %><span id="times">&times;</span>
+
+    <ul>
+      <% @setting.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
   </div>
   <% end %>
 
@@ -18,6 +24,9 @@
 
   <label for="template-title">Host name</label>
   <%= f.text_field :host_name, id: 'template-title', placeholder: 'The application site’s URL' %>
+
+  <label for="template-title">Default schedule post days</label>
+  <%= f.text_field :default_public_in, { type: 'number', min: 0, id: 'template-title', placeholder: 'The diary will be public in given days' } %>
 
   <p>Launched since: <%= @first_article_year %></p>
 <% end %>
