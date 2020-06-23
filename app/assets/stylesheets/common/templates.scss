@@ -18,6 +18,11 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
   padding: 1rem 1.4rem;
 }
 
+@mixin lock-icon-on-the-left-side-of-title {
+  font-size: 12px;
+  padding: 0 5px 0 0;
+}
+
 #template-contents {
   font-family: $template-content-font;
   width: 85%;
@@ -92,6 +97,10 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
     border-right: 1px solid #8a8a8a;
     word-wrap: break-word;
     cursor: move;
+
+    .fa-lock, .fa-lock-open {
+      @include lock-icon-on-the-left-side-of-title;
+    }
   }
 
   #template-body {

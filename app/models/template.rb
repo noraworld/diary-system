@@ -16,4 +16,7 @@ class Template < ApplicationRecord
               only_integer: true,
               greater_than_or_equal_to: 0
             }
+
+  validates :is_private,
+            inclusion: { in: [true, false] }
 end

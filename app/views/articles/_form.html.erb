@@ -38,26 +38,37 @@
     <% @templates.each do |template| %>
       <%= article_form.fields_for :templated_articles do |templated_article_form| %>
         <div><%= templated_article_form.text_field :template_id, { type: 'hidden', value: template.id } %></div>
-        <div class="templated-post-title"><%= template.title %></div>
+        <div class="templated-post-title">
+          <% if template.is_private %><i class="fas fa-lock"></i><% end %>
+          <%= template.title %>
+        </div>
         <div><%= templated_article_form.text_field :title, { type: 'hidden', value: template.title } %></div>
         <%= render 'format_for_form', { template: template, templated_article_form: templated_article_form } %>
         <div><%= templated_article_form.text_field :position, { type: 'hidden', value: template.position } %></div>
         <div><%= templated_article_form.text_field :format, { type: 'hidden', value: template.format } %></div>
+        <div><%= templated_article_form.text_field :is_private, { type: 'hidden', value: template.is_private } %></div>
       <% end %>
     <% end %>
   <% elsif controller.action_name == 'create' %>
     <%= article_form.fields_for :templated_articles do |templated_article_form| %>
       <% next if templated_article_form.object.title.blank? %>
       <div><%= templated_article_form.text_field :template_id, { type: 'hidden', value: templated_article_form.object.template_id } %></div>
-      <div class="templated-post-title"><%= templated_article_form.object.title %></div>
+      <div class="templated-post-title">
+        <% if templated_article_form.object.is_private %><i class="fas fa-lock"></i><% end %>
+        <%= templated_article_form.object.title %>
+      </div>
       <div><%= templated_article_form.text_field :title, { type: 'hidden', value: templated_article_form.object.title } %></div>
       <%= render 'format_for_form', { template: nil, templated_article_form: templated_article_form } %>
       <div><%= templated_article_form.text_field :position, { type: 'hidden', value: templated_article_form.object.position } %></div>
       <div><%= templated_article_form.text_field :format, { type: 'hidden', value: templated_article_form.object.format } %></div>
+      <div><%= templated_article_form.text_field :is_private, { type: 'hidden', value: templated_article_form.object.is_private } %></div>
     <% end %>
   <% elsif controller.action_name == 'edit' || controller.action_name == 'update' %>
     <%= article_form.fields_for :templated_articles do |templated_article_form| %>
-      <div class="templated-post-title"><%= templated_article_form.object.title %></div>
+      <div class="templated-post-title">
+        <% if templated_article_form.object.is_private %><i class="fas fa-lock"></i><% end %>
+        <%= templated_article_form.object.title %>
+      </div>
       <%= render 'format_for_form', { template: nil, templated_article_form: templated_article_form } %>
     <% end %>
   <% end %>

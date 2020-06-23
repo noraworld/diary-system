@@ -7,8 +7,11 @@
   <% @article.templated_articles.order('position ASC').each do |templated_article| %>
     <% templated_article_body = qiita_markdown(templated_article.body, templated_article.format) %>
 
-    <% if templated_article_body.present? %>
-      <div class="templated-post-title"><%= templated_article.title %></div>
+    <% if (templated_article_body.present? && !templated_article.is_private) || (templated_article_body.present? && current_user) %>
+      <div class="templated-post-title">
+        <% if templated_article.is_private %><i class="fas fa-lock"></i><% end %>
+        <%= templated_article.title %>
+      </div>
       <%= render 'format_for_content', { templated_article: templated_article, templated_article_body: templated_article_body } %>
     <% end %>
   <% end %>
