@@ -30,6 +30,10 @@
     <p>This diary will be public in <%= article_form.text_field :public_in, { type: 'number', min: 0, value: @article&.public_in || Setting&.first&.default_public_in || 0 } %> day(s).</p>
     <p>Info: Set 0 to publish immediately.</p>
   </div>
+  <div class="timeline">
+    <%# TODO: change class names 'templated-post-body' and 'oneline' %>
+    <div class="templated-post-body"><%= article_form.text_field :timeline, { placeholder: "Write timeline", class: 'oneline' } %></div>
+  </div>
   <div id="textarea">
     <%= article_form.text_area :text, {:id => 'post-content', :placeholder => 'Write your diary'} %>
   </div>

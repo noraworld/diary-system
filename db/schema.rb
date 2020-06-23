@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_23_112332) do
+ActiveRecord::Schema.define(version: 2020_06_23_132334) do
 
   create_table "articles", force: :cascade do |t|
     t.text "text", null: false
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2020_06_23_112332) do
     t.integer "day", null: false
     t.date "date", null: false
     t.integer "public_in"
+    t.string "timeline"
     t.index ["year", "month", "day"], name: "date_unique", unique: true
   end
 

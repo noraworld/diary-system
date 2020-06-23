@@ -115,6 +115,10 @@ class ArticlesController < ApplicationController
     redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month)
   end
 
+  def timeline
+    @articles = Article.where.not(timeline: [nil, '']).order('date DESC')
+  end
+
   def search
     @error_message  = ''
     @failed_keyword = ''
@@ -171,11 +175,11 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:text, :public_in, templated_articles_attributes: %i[title body position format is_private template_id])
+    params.require(:article).permit(:text, :public_in, :timeline, templated_articles_attributes: %i[title body position format is_private template_id])
   end
 
   def update_article_params
-    params.require(:article).permit(:text, :public_in, templated_articles_attributes: %i[title body position _destroy id])
+    params.require(:article).permit(:text, :public_in, :timeline, templated_articles_attributes: %i[title body position _destroy id])
   end
 
   def signed_in?

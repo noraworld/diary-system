@@ -24,6 +24,7 @@ Rails.application.routes.draw do
          as: 'destroy'
   get    '/search' => 'articles#search'
   post   '/upload' => 'uploads#upload'
+  get    '/timeline' => 'articles#timeline'
 
   get    '/templates'       => 'templates#index', as: 'templates_index'
   get    '/templates/new'   => 'templates#new'
