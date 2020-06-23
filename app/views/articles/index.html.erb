@@ -84,9 +84,9 @@
       <td class="day-box post-box <%= to_day_of_week(week, 3).downcase! %>">
         <a href="<%= date %>" class="post-link">
           <p class="day post-day"><%= post_day %><span class="icon-circle"></span></p>
-          <% if !current_user && article.date >= Time.zone.today - 1.month %>
+          <% if !current_user && article.date + article.public_in.to_i > Time.zone.today %>
             <p class="recent-article lock"><i class="fas fa-lock"></i></p>
-          <% elsif current_user && article.date >= Time.zone.today - 1.month %>
+          <% elsif current_user && article.date + article.public_in.to_i > Time.zone.today %>
             <p class="recent-article lock-open"><i class="fas fa-lock-open"></i></p>
           <% end %>
         </a>

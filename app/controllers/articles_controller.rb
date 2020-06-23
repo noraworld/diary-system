@@ -43,6 +43,7 @@ class ArticlesController < ApplicationController
 
     @prev_article = Article.select('year, month, day').where('date < ?', @article.date).order('date DESC').first
     @next_article = Article.select('year, month, day').where('date > ?', @article.date).order('date ASC').first
+    @public_date = @article.date + @article.public_in.to_i
   end
 
   def new
@@ -170,11 +171,11 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:text, templated_articles_attributes: %i[title body position format template_id])
+    params.require(:article).permit(:text, :public_in, templated_articles_attributes: %i[title body position format template_id])
   end
 
   def update_article_params
-    params.require(:article).permit(:text, templated_articles_attributes: %i[title body position _destroy id])
+    params.require(:article).permit(:text, :public_in, templated_articles_attributes: %i[title body position _destroy id])
   end
 
   def signed_in?

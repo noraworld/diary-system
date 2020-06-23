@@ -33,6 +33,14 @@ class Article < ApplicationRecord
   # 日は1日から月末日まで
   validate :day_range
 
+  # 未来投稿（何日後に公開するか）
+  validates :public_in,
+            numericality: {
+              only_integer: true,
+              greater_than_or_equal_to: 0
+            },
+            allow_nil: true
+
   def day_range
     errors.add(:day, 'その日付は存在しません') unless day.between?(1, Date.new(year, month).end_of_month.day.to_i)
   end

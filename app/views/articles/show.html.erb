@@ -40,10 +40,10 @@
   <% end %>
 </div>
 
-<% if !current_user && @article.date > Time.zone.today - 1.month %>
+<% if !current_user && @public_date > Time.zone.today %>
   <div id="show-error-message">
-    <h2>Permission Denied</h2>
-    <p class="reason">It’s restricted to see the diaries for the last month.<br>This diary will be public at <b><%= @article.date + 1.month + 1.day %></b>.</p>
+    <h2>Viewing Restriction</h2>
+    <p class="reason">This diary will be public at <b><%= @public_date %></b> (in <%= pluralize((@public_date - Time.zone.today).to_i, 'day') %>).</p>
   </div>
 <% else %>
   <%= render 'content', prev_article_link: prev_article_link, next_article_link: next_article_link %>
