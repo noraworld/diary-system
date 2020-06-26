@@ -21,7 +21,10 @@
   <%= f.text_field :title, id: 'template-title', placeholder: 'This field is required. The value of this field will be the template title directly.' %>
 
   <label for="template-body">Template body</label>
-  <%= f.text_area :body, { id: 'template-body',  placeholder: 'This field is optional. The value of this field will be filled in to the template post body.' } %>
+  <%= f.text_area :body, { id: 'template-body', placeholder: 'This field is optional. The value of this field will be filled in to the template post body.' } %>
+
+  <label for="template-placeholder">Template placeholder</label>
+  <%= f.text_field :placeholder, { id: 'template-placeholder', placeholder: 'This field is optional. The value of this field will be shown as placeholder.' } %>
 
   <label for="template-format">Template format:</label>
   <%= f.select :format, ::Template::FORMAT_TYPES, { id: 'template-format' } %>

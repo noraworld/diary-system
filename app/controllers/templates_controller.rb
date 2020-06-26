@@ -118,7 +118,7 @@ class TemplatesController < ApplicationController
   private
 
   def template_params
-    params.require(:template).permit(:title, :body, :position, :format, :is_private, :is_disabled)
+    params.require(:template).permit(:title, :body, :position, :format, :is_private, :is_disabled, :placeholder)
   end
 
   def signed_in?

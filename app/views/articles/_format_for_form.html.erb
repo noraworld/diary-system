@@ -1,19 +1,20 @@
 <%# See TemplateValidator::FORMAT_TYPES in app/models/concerns/template_validator.rb %>
 
 <% template = template || templated_article_form.object %>
+<% placeholder = template.placeholder.present? ? template.placeholder.to_s : 'Write ' + template.title.to_s %>
 
 <% case template.format %>
 <% when 'sentence' %>
   <% if template.errors.full_messages.blank? %>
-    <div id="textarea"><%= templated_article_form.text_area :body, { value: template.body, placeholder: "Write #{template.title}", class: 'templated-post-body' } %></div>
+    <div id="textarea"><%= templated_article_form.text_area :body, { value: template.body, placeholder: placeholder, class: 'templated-post-body' } %></div>
   <% else %>
-    <div id="textarea"><%= templated_article_form.text_area :body, { value: template.body, placeholder: "Write #{template.title}", class: 'templated-post-body error' } %></div>
+    <div id="textarea"><%= templated_article_form.text_area :body, { value: template.body, placeholder: placeholder, class: 'templated-post-body error' } %></div>
   <% end %>
 <% when 'oneline' %>
   <% if template.errors.full_messages.blank? %>
-    <div class="templated-post-body"><%= templated_article_form.text_field :body, { value: template.body, placeholder: "Write #{template.title}", class: 'oneline' } %></div>
+    <div class="templated-post-body"><%= templated_article_form.text_field :body, { value: template.body, placeholder: placeholder, class: 'oneline' } %></div>
   <% else %>
-    <div class="templated-post-body"><%= templated_article_form.text_field :body, { value: template.body, placeholder: "Write #{template.title}", class: 'oneline error' } %></div>
+    <div class="templated-post-body"><%= templated_article_form.text_field :body, { value: template.body, placeholder: placeholder, class: 'oneline error' } %></div>
   <% end %>
 <% when 'star' %>
   <% if template.errors.full_messages.blank? %>

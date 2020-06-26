@@ -149,7 +149,7 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
     }
   }
 
-  #template-title {
+  #template-title, #template-placeholder {
     font-family: $template-content-font;
     display: block;
     width: 100%;
