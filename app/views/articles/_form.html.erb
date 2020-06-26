@@ -41,6 +41,7 @@
   <% if @templates && controller.action_name == 'new' %>
     <% @templates.each do |template| %>
       <%= article_form.fields_for :templated_articles do |templated_article_form| %>
+        <% next if template.is_disabled %>
         <div><%= templated_article_form.text_field :template_id, { type: 'hidden', value: template.id } %></div>
         <div class="templated-post-title">
           <% if template.is_private %><i class="fas fa-lock"></i><% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_23_132334) do
+ActiveRecord::Schema.define(version: 2020_06_26_182839) do
 
   create_table "articles", force: :cascade do |t|
     t.text "text", null: false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2020_06_23_132334) do
     t.string "uuid", null: false
     t.string "format", default: "sentence", null: false
     t.boolean "is_private", default: false, null: false
+    t.boolean "is_disabled", default: false, null: false
     t.index ["position"], name: "templates_position_unique", unique: true
     t.index ["uuid"], name: "templates_uuid_unique", unique: true
   end

@@ -98,7 +98,7 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
     word-wrap: break-word;
     cursor: move;
 
-    .fa-lock, .fa-lock-open {
+    .fa-lock, .fa-lock-open, .fa-eye-slash {
       @include lock-icon-on-the-left-side-of-title;
     }
   }
