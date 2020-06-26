@@ -17,7 +17,7 @@ class TemplatesController < ApplicationController
     @template = Template.new(template_params)
     @template_form_title = 'Create a new template'
     @template.uuid = SecureRandom.hex
-    @template.position = Template.maximum(:position) + 1
+    @template.position = Template.maximum(:position).to_i + 1
 
     if @template.save
       redirect_to '/templates'
