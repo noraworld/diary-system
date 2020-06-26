@@ -165,7 +165,11 @@ module ApplicationHelper
 
   private
 
-  # TAKE CARE WHEN EDITING THIS METHOD BECAUSE IT CAN CAUSE EXPOSURE OF PRIVATE CONTENTS TO PUBLIC!
+  #########################################################################################################
+  ###                                                                                                   ###
+  ### TAKE CARE WHEN EDITING THIS METHOD BECAUSE IT CAN CAUSE EXPOSURE OF PRIVATE CONTENTS TO PUBLIC!!! ###
+  ###                                                                                                   ###
+  #########################################################################################################
   def trim_private_contents(markdown)
     private_start_string_length = markdown.scan(PRIVATE_START_STRING).length
     private_end_string_length   = markdown.scan(PRIVATE_END_STRING).length
@@ -185,7 +189,9 @@ module ApplicationHelper
 
     return trimmed_markdown unless signed_in?
 
-    # the process below here is executed only when signed in
+    #                                                                #
+    # THE PROCESS BELOW HERE SHOULD BE EXECUTED ONLY WHEN SIGNED IN! #
+    #                                                                #
 
     # for signed in
     trimmed_markdown = markdown.gsub(/#{PRIVATE_START_STRING}(\r\n|\r|\n)?/, '<span class="private-sentence">').gsub(/(\r\n|\r|\n)?#{PRIVATE_END_STRING}/, '</span>')
