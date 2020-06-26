@@ -93,7 +93,7 @@
   }
 
   document.addEventListener('keydown', (event) => {
-    // Ignore tab completion when IME is enabled (event.keyCode === 229)
+    // Ignore tab indent when IME is enabled (event.keyCode === 229)
     // Info: event.keyCode is 229 when IME is enabled
     if (!isFormFocused() || isPressedModifierKey(event) || event.keyCode === 229) {
       return false;
