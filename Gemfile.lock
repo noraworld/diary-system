@@ -144,7 +144,7 @@ GEM
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     public_suffix (4.0.1)
-    puma (3.12.4)
+    puma (3.12.6)
     pygments.rb (1.2.1)
       multi_json (>= 1.0.0)
     qiita-markdown (0.27.0)
