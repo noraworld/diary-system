@@ -7,4 +7,11 @@ class Setting < ApplicationRecord
               greater_than_or_equal_to: 0
             },
             allow_nil: true
+
+  validates :ga_tracking_identifier,
+            format: {
+              with: /\AUA-[0-9]{9}-[0-9]{1}\z/,
+              message: 'Tracking ID is invalid'
+            },
+            allow_blank: true
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_26_192725) do
+ActiveRecord::Schema.define(version: 2020_06_27_142336) do
 
   create_table "articles", force: :cascade do |t|
     t.text "text", null: false
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_06_26_192725) do
     t.datetime "updated_at", null: false
     t.string "host_name"
     t.integer "default_public_in"
+    t.string "ga_tracking_identifier"
   end
 
   create_table "templated_articles", force: :cascade do |t|

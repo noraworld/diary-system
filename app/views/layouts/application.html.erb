@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <% if Setting.last&.ga_tracking_identifier.present? %>
+    <% if Rails.env.production? %>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=<%= Setting.last&.ga_tracking_identifier %>"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '<%= Setting.last&.ga_tracking_identifier %>');
+      </script>
+    <% elsif Rails.env.development? %>
+      <script>alert('Google Analytics is enabled successfully.\nTracking ID: <%= Setting.last&.ga_tracking_identifier %>');</script>
+    <% end %>
+  <% end %>
+
   <title><%= page_title %></title>
   <% if page_description %>
     <meta name="description" content="<%= page_description %>">
