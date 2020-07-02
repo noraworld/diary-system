@@ -47,13 +47,17 @@
             <%= template.title %>
           </div>
           <div id="template-edit"><a href="/templates/<%= template.uuid %>"><span class="icon-pencil"></a></div>
-          <% if Rails.env.development? %>
-            <div id="template-delete">
+          <div id="template-delete">
+            <% if Rails.env.development? %>
               <%= link_to "/templates/#{template.uuid}", { method: :delete, data: { confirm: 'Are you sure you want to delete this template?' } } do %>
-              <span class="icon-fire"></span>
+                <span class="icon-fire"></span>
               <% end %>
-            </div>
-          <% end %>
+            <% elsif Rails.env.production? %>
+              <a data-confirm="Cannot delete a template in production!" style="cursor: pointer;">
+                <span class="icon-fire"></span>
+              </a>
+            <% end %>
+          </div>
         </div>
 
         <% if template.body.present? %>
