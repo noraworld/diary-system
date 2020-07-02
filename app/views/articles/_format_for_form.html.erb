@@ -40,8 +40,12 @@
   <% end %>
 <% when 'bool' %>
   <% if template.errors.full_messages.blank? %>
-    <div class="templated-post-body"><%= templated_article_form.text_field :body, { type: 'checkbox', placeholder: "Write #{template.title}", class: 'bool' } %></div>
+    <div class="templated-post-body bool-wrapper">
+      <%= templated_article_form.text_field :body, { type: 'hidden', class: 'bool-value' } %>
+      <span class="bool yes">Yes!</span>
+      <span class="bool no">No...</span>
+    </div>
   <% else %>
-    <div class="templated-post-body"><%= templated_article_form.text_field :body, { type: 'checkbox', placeholder: "Write #{template.title}", class: 'bool error' } %></div>
+    <div class="templated-post-body"><%= templated_article_form.check_box :body, {}, 'yes', '' %></div>
   <% end %>
 <% end %>
