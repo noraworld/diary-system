@@ -11,6 +11,31 @@
   </div>
 <% else %>
   <div id="template-contents">
+    <div class="template-filter-title">Filter options</div>
+    <div class="template-filter">
+      <form method="get">
+        <div class="availability">
+          <label for="availability">Availability: </label>
+          <select name="availability" class="submit-onchange">
+            <option value="enabled"  <% if params[:availability] == 'enabled' || params[:availability].blank? %>selected<% end %>>Enabled only</option>
+            <option value="disabled" <% if params[:availability] == 'disabled'                                %>selected<% end %>>Disabled only</option>
+            <option value="all"      <% if params[:availability] == 'all'                                     %>selected<% end %>>All</option>
+          </select>
+        </div>
+
+        <div class="visibility">
+          <label for="visibility">Visibility: </label>
+          <select name="visibility" class="submit-onchange">
+            <option value="public"  <% if params[:visibility] == 'public'                            %>selected<% end %>>Public only</option>
+            <option value="private" <% if params[:visibility] == 'private'                           %>selected<% end %>>Private only</option>
+            <option value="all"     <% if params[:visibility] == 'all' || params[:visibility].blank? %>selected<% end %>>All</option>
+          </select>
+        </div>
+      </form>
+
+      <a href="/templates" class="reset-button clearfix">Reset</a>
+    </div>
+
     <div class="clearfix"><a href="/templates/new" id="new-template-link">Create a new template</a></div>
 
     <% @templates.each_with_index do |template, index| %>
@@ -43,3 +68,4 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 <%= javascript_include_tag 'particular/template_sort.js' %>
+<%= javascript_include_tag 'particular/select_form_onchange.js' %>

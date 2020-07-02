@@ -4,7 +4,10 @@ class TemplatesController < ApplicationController
   before_action :signed_in?
 
   def index
-    @templates = Template.all.order('position ASC')
+    is_disabled = filter_template('availability', params[:availability])
+    is_private  = filter_template('visibility',   params[:visibility])
+
+    @templates = Template.where(is_disabled: is_disabled, is_private: is_private).order('position ASC')
   end
 
   def new
@@ -116,6 +119,37 @@ class TemplatesController < ApplicationController
   end
 
   private
+
+  def filter_template(param_type, param_value)
+    case param_type
+    when 'availability'
+      case param_value
+      when 'enabled'
+        # when availability is enabled, is_disabled is false
+        false
+      when 'disabled'
+        # when availability is disable, is_disabled is true
+        true
+      when 'all'
+        [true, false]
+      else
+        false
+      end
+    when 'visibility'
+      case param_value
+      when 'public'
+        # when visibility is public, is_private is false
+        false
+      when 'private'
+        # when visibility is private, is_private is true
+        true
+      when 'all'
+        [true, false]
+      else
+        [true, false]
+      end
+    end
+  end
 
   def template_params
     params.require(:template).permit(:title, :body, :position, :format, :is_private, :is_disabled, :placeholder)
