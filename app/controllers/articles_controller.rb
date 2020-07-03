@@ -128,14 +128,35 @@ class ArticlesController < ApplicationController
     @search_validator = SearchQueryForm.new(q: params[:q], page: @page)
     return if @search_validator.invalid?
 
-    # count the number of hits and pages
-    hitcount = Article.where('text LIKE(?)', '%' + params[:q] + '%').count
     @page = @page.to_i
+
+    # '"apple watch" iphone -android' => [["\"apple watch\""], [" iphone -android"]]
+    exact_match_keywords, not_exact_match_keywords = params[:q].split(/(".+?")/).select(&:present?).partition { |keyword| keyword.include?('"') }
+    # ["\"apple watch\""] => ["apple watch"]
+    exact_match_keywords.each { |k| k.delete!('\"') }
+    # [" iphone -android"] => ["iphone", "-android"]
+    not_exact_match_keywords = not_exact_match_keywords.join.split(/[[:blank:]]+/).select(&:present?)
+    # ["iphone", "-android"] => [["-android"], ["iphone"]]
+    negative_keywords, positive_keywords = not_exact_match_keywords.partition { |keyword| keyword.start_with?('-') }
+
+    @results = Article.none # => []
+
+    # OR search
+    (exact_match_keywords + positive_keywords).each do |keyword|
+      @results = @results.or(Article.where('text LIKE ?', "%#{keyword}%"))
+    end
+
+    # negative keyword search
+    negative_keywords.each do |keyword|
+      @results.where!('text NOT LIKE ?', "%#{keyword.delete_prefix('-')}%")
+    end
+
+    # count the number of hits and pages
+    hitcount = @results.count
     @number_of_pages = hitcount / QUANTITIES
     @number_of_pages += 1 unless (hitcount % QUANTITIES).zero?
 
-    # search
-    @results = Article.where('text LIKE(?)', '%' + params[:q] + '%').offset((@page - 1) * QUANTITIES).limit(QUANTITIES).order('date DESC')
+    @results = @results.offset((@page - 1) * QUANTITIES).limit(QUANTITIES).order('date DESC')
 
     # validate search result
     @search_validator = SearchResultForm.new(results: @results, page: @page, hitcount: hitcount, number_of_pages: @number_of_pages)
