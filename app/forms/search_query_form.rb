@@ -9,7 +9,7 @@ class SearchQueryForm
   attr_accessor :q, :page
 
   validates :q, presence: { message: 'The query string must not be empty.' }
-  validates :q, length: { maximum: MAXIMUM_CHARACTERS, message: "The query string is too long. The maximum number of characters are #{MAXIMUM_CHARACTERS}." }
+  validates :q, length: { maximum: MAXIMUM_CHARACTERS, message: "The query string is too long. The maximum number of characters is #{MAXIMUM_CHARACTERS}." }
 
   validates :page, numericality: { only_integer: true, greater_than_or_equal_to: 1, message: 'A positive integer without the plus sign is expected in the page parameter.' }
 end
