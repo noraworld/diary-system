@@ -124,16 +124,20 @@ class ArticlesController < ApplicationController
   def search
     @page = params[:page] || 1
 
+    # validate search query
     @search_validator = SearchQueryForm.new(q: params[:q], page: @page)
     return if @search_validator.invalid?
 
-    @page = @page.to_i
+    # count the number of hits and pages
     hitcount = Article.where('text LIKE(?)', '%' + params[:q] + '%').count
+    @page = @page.to_i
     @number_of_pages = hitcount / QUANTITIES
     @number_of_pages += 1 unless (hitcount % QUANTITIES).zero?
 
+    # search
     @results = Article.where('text LIKE(?)', '%' + params[:q] + '%').offset((@page - 1) * QUANTITIES).limit(QUANTITIES).order('date DESC')
 
+    # validate search result
     @search_validator = SearchResultForm.new(results: @results, page: @page, hitcount: hitcount, number_of_pages: @number_of_pages)
     if @search_validator.invalid? # rubocop:disable Style/GuardClause
       unless @search_validator.errors.details[:results].empty?
