@@ -4,7 +4,7 @@
   </div>
 <% end %>
 
-<% if @templates.count == 0 %>
+<% if @templates.count.zero? %>
   <div id="template-contents">
     <p>No templates found</p>
     <div class="clearfix"><a href="/templates/new" id="new-template-link">Create a new template</a></div>
@@ -44,7 +44,7 @@
           <div id="template-title" class="handle">
             <% if template.is_private %><i class="fas fa-lock"></i><% end %>
             <% if template.is_disabled %><i class="fas fa-eye-slash"></i><% end %>
-            <%= template.title %>
+            <%= template.title %> (<%= template.format %>)
           </div>
           <div id="template-edit"><a href="/templates/<%= template.uuid %>"><span class="icon-pencil"></a></div>
           <div id="template-delete">
