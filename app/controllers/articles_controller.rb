@@ -122,15 +122,10 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    @error_message  = ''
-    @failed_keyword = ''
     @page = params[:page] || 1
 
-    search_query_form = SearchQueryForm.new(q: params[:q], page: @page)
-    if search_query_form.invalid?
-      @error_message = search_query_form.errors.messages.values.first.first
-      return
-    end
+    @search_validator = SearchQueryForm.new(q: params[:q], page: @page)
+    return if @search_validator.invalid?
 
     @page = @page.to_i
     hitcount = Article.where('text LIKE(?)', '%' + params[:q] + '%').count
@@ -139,8 +134,12 @@ class ArticlesController < ApplicationController
 
     @results = Article.where('text LIKE(?)', '%' + params[:q] + '%').offset((@page - 1) * QUANTITIES).limit(QUANTITIES).order('date DESC')
 
-    search_result_form = SearchResultForm.new(results: @results, page: @page, hitcount: hitcount, number_of_pages: @number_of_pages)
-    @error_message = search_result_form.errors.messages.values.first.first if search_result_form.invalid?
+    @search_validator = SearchResultForm.new(results: @results, page: @page, hitcount: hitcount, number_of_pages: @number_of_pages)
+    if @search_validator.invalid? # rubocop:disable Style/GuardClause
+      unless @search_validator.errors.details[:results].empty?
+        @failed_keyword_required = @search_validator.errors.details[:results].first[:error] == :query_not_match
+      end
+    end
   end
 
   private
