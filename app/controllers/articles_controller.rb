@@ -3,6 +3,8 @@
 class ArticlesController < ApplicationController
   before_action :signed_in?, only: %i[new create edit update destroy]
 
+  QUANTITIES = 10
+
   def index
     @route = if params[:year].to_i.zero? && params[:month].to_i.zero?
                true
@@ -122,43 +124,23 @@ class ArticlesController < ApplicationController
   def search
     @error_message  = ''
     @failed_keyword = ''
-
-    if params[:q].blank?
-      @error_message = 'The query string must not be empty.'
-      return
-    end
-
-    # maximum_characters は本当は定数にしたいけど
-    # Ruby ではなぜかメソッド内で定数を定義できないので
-    # とりあえず変数で定義しておく
-    maximum_characters = 128
-    if params[:q].length > maximum_characters
-      @error_message = "The query string is too long. The maximum number of characters are #{maximum_characters}."
-      return
-    end
-
     @page = params[:page] || 1
-    unless @page.to_s =~ /^[0-9]+$/ && @page.to_s != '0'
-      @error_message = 'A positive integer without the plus sign is expected in the page parameter.'
+
+    search_query_form = SearchQueryForm.new(q: params[:q], page: @page)
+    if search_query_form.invalid?
+      @error_message = search_query_form.errors.messages.values.first.first
       return
     end
+
     @page = @page.to_i
-
-    quantities = 10
-    @results = Article.where('text LIKE(?)', '%' + params[:q] + '%').offset((@page - 1) * quantities).limit(quantities).order('date DESC')
-
     hitcount = Article.where('text LIKE(?)', '%' + params[:q] + '%').count
-    @number_of_pages = hitcount.to_i / quantities.to_i
-    @number_of_pages += 1 if hitcount.to_i % quantities.to_i != 0
+    @number_of_pages = hitcount / QUANTITIES
+    @number_of_pages += 1 unless (hitcount % QUANTITIES).zero?
 
-    return unless @results.empty?
+    @results = Article.where('text LIKE(?)', '%' + params[:q] + '%').offset((@page - 1) * QUANTITIES).limit(QUANTITIES).order('date DESC')
 
-    if hitcount != 0 && @page > @number_of_pages
-      @error_message = 'There are no search results anymore.'
-    else
-      @error_message  = 'No matches for'
-      @failed_keyword = params[:q].to_s
-    end
+    search_result_form = SearchResultForm.new(results: @results, page: @page, hitcount: hitcount, number_of_pages: @number_of_pages)
+    @error_message = search_result_form.errors.messages.values.first.first if search_result_form.invalid?
   end
 
   private
