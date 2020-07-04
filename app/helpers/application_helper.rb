@@ -181,7 +181,7 @@ module ApplicationHelper
     private_end_string_length   = markdown.scan(PRIVATE_END_STRING).length
 
     unless private_start_string_length == private_end_string_length
-      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match before parse'
+      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match (BEFORE PARSE)'
     end
 
     return markdown if private_start_string_length.zero? && private_end_string_length.zero?
@@ -190,7 +190,7 @@ module ApplicationHelper
     # raise error to perceive it also when signed in
     trimmed_markdown = markdown.gsub(/(\r\n|\r|\n)?#{PRIVATE_START_STRING}.*?#{PRIVATE_END_STRING}/m, '')
     if !trimmed_markdown.scan(PRIVATE_START_STRING).length.zero? || !trimmed_markdown.scan(PRIVATE_END_STRING).length.zero?
-      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match after parse (for NOT signed in)'
+      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match (AFTER PARSE, FOR NOT SIGNED IN)'
     end
 
     return trimmed_markdown unless signed_in?
@@ -209,7 +209,7 @@ module ApplicationHelper
     end.gsub(/#{PRIVATE_START_STRING}(\r\n|\r|\n)?/, '').gsub(/(\r\n|\r|\n)?#{PRIVATE_END_STRING}/, '')
 
     if !trimmed_markdown.scan(PRIVATE_START_STRING).length.zero? || !trimmed_markdown.scan(PRIVATE_END_STRING).length.zero?
-      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match after parse (for signed in)'
+      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match (AFTER PARSE, FOR SIGNED IN)'
     end
 
     trimmed_markdown
