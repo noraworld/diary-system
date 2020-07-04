@@ -6,8 +6,11 @@ module ApplicationHelper
   PRIVATE_START_STRING = '<private>'
   PRIVATE_END_STRING   = '</private>'
 
-  REPLACED_PRIVATE_START_STRING = '<div class="private-sentence">'
-  REPLACED_PRIVATE_END_STRING   = '</div>'
+  REPLACED_PRIVATE_START_INLINE_TAG = '<span class="private-sentence inline">'
+  REPLACED_PRIVATE_END_INLINE_TAG   = '</span>'
+
+  REPLACED_PRIVATE_START_BLOCK_TAG = '<div class="private-sentence block">'
+  REPLACED_PRIVATE_END_BLOCK_TAG   = '</div>'
 
   def site_title
     settings_site_title = Setting.last&.site_title
@@ -198,8 +201,13 @@ module ApplicationHelper
 
     # for signed in
     trimmed_markdown = markdown.gsub(/[\r\n|\r|\n]?#{PRIVATE_START_STRING}(.*?)#{PRIVATE_END_STRING}/m) do |private_sentence|
-      "#{REPLACED_PRIVATE_START_STRING}#{parse_markdown(private_sentence)}#{REPLACED_PRIVATE_END_STRING}"
-    end
+      if private_sentence.scan(/\r\n|\r|\n/).empty?
+        "#{REPLACED_PRIVATE_START_INLINE_TAG}#{private_sentence}#{REPLACED_PRIVATE_END_INLINE_TAG}"
+      else
+        "#{REPLACED_PRIVATE_START_BLOCK_TAG}#{parse_markdown(private_sentence)}#{REPLACED_PRIVATE_END_BLOCK_TAG}"
+      end
+    end.gsub(/#{PRIVATE_START_STRING}(\r\n|\r|\n)?/, '').gsub(/(\r\n|\r|\n)?#{PRIVATE_END_STRING}/, '')
+
     if !trimmed_markdown.scan(PRIVATE_START_STRING).length.zero? || !trimmed_markdown.scan(PRIVATE_END_STRING).length.zero?
       raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match after parse (for signed in)'
     end
