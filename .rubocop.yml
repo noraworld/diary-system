@@ -10,6 +10,10 @@ AllCops:
 Rails:
   Enabled: true
 
+Rails/Output:
+  Exclude:
+    - 'lib/**/*'
+
 Style/AsciiComments:
   Enabled: false
 Style/Documentation:
