@@ -46,6 +46,19 @@ module Batch
         end
       end
 
+      # Check
+      Article.all.each do |article|
+        puts "CAUTION!!! #{old_private_start_tag}  still left! Perhaps this script has a critical bug." if article.text.include?(old_private_start_tag)
+        puts "CAUTION!!! #{old_private_end_tag} still left! Perhaps this script has a critical bug."    if article.text.include?(old_private_end_tag)
+
+        article.templated_articles.each do |templated_article|
+          if templated_article.format == 'sentence'
+            puts "CAUTION!!! #{old_private_start_tag}  still left! Perhaps this script has a critical bug." if templated_article.body.include?(old_private_start_tag)
+            puts "CAUTION!!! #{old_private_end_tag} still left! Perhaps this script has a critical bug."    if templated_article.body.include?(old_private_end_tag)
+          end
+        end
+      end
+
       puts 'Done!'
     end
   end
