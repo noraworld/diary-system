@@ -943,7 +943,9 @@ $rule-margin-left-and-right: 1.3rem;
 }
 
 .private-sentence {
-  background: #efa9e3;
+  background: rgba(239, 169, 227, 0.55);
+  border-radius: 4px;
+  padding: 0 7px;
 }
 
 .templated-post-title, #main-post-title {
