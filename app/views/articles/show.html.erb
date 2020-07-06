@@ -26,7 +26,11 @@
         <% end %>
       <% elsif flash[:alert].class == Hash %>
         <% flash[:alert].deep_symbolize_keys.except(:alert).values.each do |error| %>
-          <li><%= error %></li>
+          <% if error.class == String %>
+            <li><%= error %></li>
+          <% elsif error.class == Hash %>
+            <li><%= error[:message] %></li>
+          <% end %>
         <% end %>
       <% end %>
     </ul>
