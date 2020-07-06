@@ -11,6 +11,28 @@
   </div>
 <% end %>
 
+<% if flash[:alert] %>
+  <div id="failed-message" class="form-message">
+    <% if flash[:alert].class == String %>
+      <span><%= flash[:alert] %><span id="times">&times;</span>
+    <% elsif flash[:alert].class == Hash %>
+      <span><%= flash[:alert].deep_symbolize_keys[:alert] %><span id="times">&times;</span>
+    <% end %>
+
+    <ul>
+      <% if flash[:alert].class == String %>
+        <% @article.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      <% elsif flash[:alert].class == Hash %>
+        <% flash[:alert].deep_symbolize_keys.except(:alert).values.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div id="post-link-wrapper" class="clearfix">
   <div id="post-link-left-wrapper">
     <a href="<%= this_month_link %>" id="this-month-link">Go to this month’s calendar</a>

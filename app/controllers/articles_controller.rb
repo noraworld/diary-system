@@ -168,9 +168,9 @@ class ArticlesController < ApplicationController
   end
 
   def migrate
-    if MigrateForm.new(from: params[:from], to: params[:to]).invalid?
-      flash.now[:alert] = 'Fail!'
-      return redirect_back(fallback_location: root_path)
+    @migrate_validator = MigrateForm.new(from: params[:from], to: params[:to])
+    if @migrate_validator.invalid?
+      return redirect_back fallback_location: root_path, alert: @migrate_validator.errors.to_h.merge(alert: 'Migration failed!') # 🤔
     end
 
     year_from, month_from, day_from = params[:from].split('-').map(&:to_i)
@@ -182,12 +182,9 @@ class ArticlesController < ApplicationController
     article_from.month = month_to
     article_from.day   = day_to
 
-    if article_from.save
-      redirect_to build_show_path(year_to, month_to, day_to)
-    else
-      flash.now[:alert] = 'Fail!'
-      return redirect_to build_show_path(year_from, month_from, day_from)
-    end
+    return redirect_to build_show_path(year_from, month_from, day_from), alert: 'Migration failed!' unless article_from.save
+
+    redirect_to build_show_path(year_to, month_to, day_to), notice: 'Migrated successfully!'
   end
 
   private
