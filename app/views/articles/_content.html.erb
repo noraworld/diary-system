@@ -1,7 +1,10 @@
-<% if @article.templated_articles.any? { |templated_article| templated_article.body.present? } %>
-  <div id="main-post-title">Main diary</div>
+<% nothing_to_show = true %>
+
+<% article_text = qiita_markdown(@article.text) %>
+<% if article_text.present? %>
+  <% nothing_to_show = false %>
+  <div id="post-content"><%= article_text %></div>
 <% end %>
-<div id="post-content"><%= qiita_markdown(@article.text) %></div>
 
 <div id="templated-posts-content">
   <% @article.templated_articles.order('position ASC').each do |templated_article| %>
@@ -12,7 +15,15 @@
         <% if templated_article.is_private %><i class="fas fa-lock"></i><% end %>
         <%= templated_article.title %>
       </div>
+      <% nothing_to_show = false %>
       <%= render 'format_for_content', { templated_article: templated_article, templated_article_body: templated_article_body } %>
     <% end %>
   <% end %>
 </div>
+
+<% if nothing_to_show %>
+  <div id="show-error-message">
+    <h2>Nothing to show</h2>
+    <p class="reason">All contents are empty or private.</p>
+  </div>
+<% end %>
