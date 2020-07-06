@@ -990,7 +990,7 @@ $rule-margin-left-and-right: 1.3rem;
     float: right;
   }
 
-  #this-month-link, #edit-link, #delete-link {
+  #this-month-link, #edit-link, #delete-link, #migrate-link {
     color: #444444;
     padding: 0 7px 0 0;
 
@@ -1003,7 +1003,7 @@ $rule-margin-left-and-right: 1.3rem;
     padding: 0 0 0 7px;
   }
 
-  #edit-link, #delete-link {
+  #edit-link, #delete-link, #migrate-link {
     padding: 0 7px 0 0;
   }
 

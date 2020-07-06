@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
-  before_action :signed_in?, only: %i[new create edit update destroy]
+  before_action :signed_in?, only: %i[new create edit update destroy migrate]
 
   QUANTITIES = 10
 
@@ -117,10 +117,6 @@ class ArticlesController < ApplicationController
     redirect_to '/' + format('%02d', @article.year) + '/' + format('%02d', @article.month)
   end
 
-  def timeline
-    @articles = Article.where.not(timeline: [nil, '']).order('date DESC')
-  end
-
   def search
     @page = params[:page] || 1
 
@@ -167,6 +163,33 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def timeline
+    @articles = Article.where.not(timeline: [nil, '']).order('date DESC')
+  end
+
+  def migrate
+    if MigrateForm.new(from: params[:from], to: params[:to]).invalid?
+      flash.now[:alert] = 'Fail!'
+      return redirect_back(fallback_location: root_path)
+    end
+
+    year_from, month_from, day_from = params[:from].split('-').map(&:to_i)
+    year_to,   month_to,   day_to   = params[:to].split('-').map(&:to_i)
+
+    article_from       = Article.find_by!(date: Date.new(year_from, month_from, day_from))
+    article_from.date  = Date.new(year_to, month_to, day_to)
+    article_from.year  = year_to
+    article_from.month = month_to
+    article_from.day   = day_to
+
+    if article_from.save
+      redirect_to build_show_path(year_to, month_to, day_to)
+    else
+      flash.now[:alert] = 'Fail!'
+      return redirect_to build_show_path(year_from, month_from, day_from)
+    end
+  end
+
   private
 
   def find_todays_article
@@ -174,6 +197,10 @@ class ArticlesController < ApplicationController
     month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_i
     day   = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%d').to_i
     Article.find_by(year: year, month: month, day: day)
+  end
+
+  def build_show_path(year, month, day)
+    "/#{format('%02d', year)}/#{format('%02d', month)}/#{format('%02d', day)}"
   end
 
   def build_edit_path(year, month, day)
