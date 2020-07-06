@@ -4,9 +4,8 @@ class Article < ApplicationRecord
   has_many :templated_articles, dependent: :destroy
   accepts_nested_attributes_for :templated_articles, allow_destroy: true
 
-  # 日記本文が空白はダメ
-  validates :text,
-            presence: true
+  # 日記本文が空、かつテンプレートもすべて空はダメ
+  validate :all_blank
 
   # 同じ日に2つ以上の投稿はダメ
   validates :year,
@@ -41,7 +40,13 @@ class Article < ApplicationRecord
             },
             allow_nil: true
 
+  private
+
   def day_range
     errors.add(:day, 'その日付は存在しません') unless day.between?(1, Date.new(year, month).end_of_month.day.to_i)
+  end
+
+  def all_blank
+    errors.add(:text, 'Emptying all posts is not acceptable.') if text.blank? && templated_articles.all? { |templated_article| templated_article.body.blank? }
   end
 end
