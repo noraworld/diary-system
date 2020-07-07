@@ -937,7 +937,8 @@ $rule-margin-left-and-right: 1.3rem;
 #post-content h1+ul li:first-child p, #post-content h2+ul li:first-child p, #post-content h3+ul li:first-child p,
 #post-content h4+ul li:first-child p, #post-content h5+ul li:first-child p, #post-content h6+ul li:first-child p,
 #post-content h1+ol li:first-child p, #post-content h2+ol li:first-child p, #post-content h3+ol li:first-child p,
-#post-content h4+ol li:first-child p, #post-content h5+ol li:first-child p, #post-content h6+ol li:first-child p
+#post-content h4+ol li:first-child p, #post-content h5+ol li:first-child p, #post-content h6+ol li:first-child p,
+#post-content .private-sentence:first-child *
 {
   margin-top: 0;
 }
@@ -951,7 +952,11 @@ $rule-margin-left-and-right: 1.3rem;
     padding: 3px 0;
   }
   &.block {
-    padding: 0 7px;
+    // padding: 0 7px 5px;
+    padding: 0 7px 0;
+  }
+  *:first-child {
+    // padding-top: 7px;
   }
 }
 
