@@ -943,8 +943,9 @@ $rule-margin-left-and-right: 1.3rem;
   margin-top: 0;
 }
 
+$private-color: rgba(239, 169, 227, 0.55);
 .private-sentence {
-  background: rgba(239, 169, 227, 0.55);
+  background: $private-color;
   border-radius: 4px;
 
   &.inline {
@@ -985,6 +986,10 @@ $rule-margin-left-and-right: 1.3rem;
   @extend #post-content;
   width: 100%;
   min-height: 125px;
+
+  &.private-content {
+    @include note($private-color);
+  }
 }
 
 #post-content ul > li {
