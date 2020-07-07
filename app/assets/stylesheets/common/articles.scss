@@ -1205,13 +1205,26 @@ $rule-margin-left-and-right: 1.3rem;
   @extend #search-error-message;
 }
 
+@mixin search-result-width {
+  width: $general-width-percent;
+  max-width: $general-max-width;
+}
+
+.search-result-infomation {
+  font-family: $system-font;
+  @include search-result-width;
+  margin: 0 auto 14px;
+
+  .info {
+    font-size: 14px;
+  }
+}
 #search-result-contents {
   padding-bottom: 10px;
 }
 #search-result-content {
   font-family: $post-content-font;
-  width: $general-width-percent;
-  max-width: $general-max-width;
+  @include search-result-width;
   margin: 20px auto 0;
   font-size: 15px;
   line-height: 31px;

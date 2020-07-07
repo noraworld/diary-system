@@ -12,6 +12,10 @@
 <% end %>
 
 <% unless @search_validator.errors.any? %>
+  <div class="search-result-infomation">
+    <span class="info">Hit <b><%= @hitcount %></b> results out of <%= Article.all.count %> posts. Page <b><%= params[:page] || 1 %></b> of <%= @number_of_pages %>.</span>
+  </div>
+
   <div id="search-result-contents">
     <% @results.each do |result| %>
       <% post_link = '/' + format('%04d', result.year) + '/' + format('%02d', result.month) + '/' + format('%02d', result.day) %>

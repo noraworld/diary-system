@@ -148,14 +148,14 @@ class ArticlesController < ApplicationController
     end
 
     # count the number of hits and pages
-    hitcount = @results.count
-    @number_of_pages = hitcount / QUANTITIES
-    @number_of_pages += 1 unless (hitcount % QUANTITIES).zero?
+    @hitcount = @results.count
+    @number_of_pages = @hitcount / QUANTITIES
+    @number_of_pages += 1 unless (@hitcount % QUANTITIES).zero?
 
     @results = @results.offset((@page - 1) * QUANTITIES).limit(QUANTITIES).order('date DESC')
 
     # validate search result
-    @search_validator = SearchResultForm.new(results: @results, page: @page, hitcount: hitcount, number_of_pages: @number_of_pages)
+    @search_validator = SearchResultForm.new(results: @results, page: @page, hitcount: @hitcount, number_of_pages: @number_of_pages)
     if @search_validator.invalid? # rubocop:disable Style/GuardClause
       unless @search_validator.errors.details[:results].empty?
         @failed_keyword_required = @search_validator.errors.details[:results].first[:error] == :query_not_match
