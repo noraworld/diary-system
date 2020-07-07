@@ -35,6 +35,7 @@ module Diary
     # the framework and any gems in your application.
 
     # for rails runner
-    config.autoload_paths += Dir["#{config.root}/lib"]
+    config.autoload_paths   += Dir["#{config.root}/lib/**/"]
+    config.eager_load_paths += Dir["#{config.root}/lib/**/"]
   end
 end
