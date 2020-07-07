@@ -61,5 +61,71 @@ module Batch
 
       puts 'Done!'
     end
+
+    # bundle exec rails runner Batch::ArticlesRunner.find_legacy_private_tag
+    def self.find_legacy_private_tag
+      print 'Enter OLD private start tag: '
+      private_start_tag = STDIN.gets.strip
+      private_end_tag_candidate = "#{private_start_tag[0]}/#{private_start_tag[1..-1]}"
+
+      print "Enter OLD private end tag (#{private_end_tag_candidate}): "
+      private_end_tag = STDIN.gets.strip
+      puts
+
+      private_end_tag = private_end_tag_candidate if private_end_tag.empty?
+
+      results = []
+      Article.all.each do |article|
+        results.append("#{Setting.last&.host_name}/#{article.date.to_s.tr('-', '/')}") if article.text.include?(private_start_tag)
+        results.append("#{Setting.last&.host_name}/#{article.date.to_s.tr('-', '/')}") if article.text.include?(private_end_tag)
+
+        article.templated_articles.each do |templated_article|
+          if templated_article.format == 'sentence'
+            results.append("#{Setting.last&.host_name}/#{Article.find(templated_article.article_id).date.to_s.tr('-', '/')}") if templated_article.body.include?(private_start_tag)
+            results.append("#{Setting.last&.host_name}/#{Article.find(templated_article.article_id).date.to_s.tr('-', '/')}") if templated_article.body.include?(private_end_tag)
+          end
+        end
+      end
+
+      if results.present?
+        results.uniq.each do |result|
+          puts result
+        end
+      else
+        puts 'No legacy private tags found. Congrats!'
+      end
+    end
+
+    # bundle exec rails runner Batch::ArticlesRunner.find_footnotes_inside_of_private_tag
+    def self.find_footnotes_inside_of_private_tag
+      print 'Enter private start tag: '
+      private_start_tag = STDIN.gets.strip
+      private_end_tag_candidate = "#{private_start_tag[0]}/#{private_start_tag[1..-1]}"
+
+      print "Enter private end tag (#{private_end_tag_candidate}): "
+      private_end_tag = STDIN.gets.strip
+      puts
+
+      private_end_tag = private_end_tag_candidate if private_end_tag.empty?
+
+      results = []
+      Article.all.each do |article|
+        results.append("#{Setting.last&.host_name}/#{article.date.to_s.tr('-', '/')}") if article.text.scan(/#{private_start_tag}\[\^(.*?)\]#{private_end_tag}/).present?
+
+        article.templated_articles.each do |templated_article|
+          if templated_article.format == 'sentence'
+            results.append("#{Setting.last&.host_name}/#{Article.find(templated_article.article_id).date.to_s.tr('-', '/')}") if templated_article.body.scan(/#{private_start_tag}\[\^(.*?)\]#{private_end_tag}/).present?
+          end
+        end
+      end
+
+      if results.present?
+        results.each do |result|
+          puts result
+        end
+      else
+        puts 'No footnotes inside of the private tags found. Congrats!'
+      end
+    end
   end
 end
