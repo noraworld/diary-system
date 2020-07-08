@@ -741,12 +741,15 @@ $rule-margin-left-and-right: 1.3rem;
     font-family: $system-font;
     font-size: 16px;
     display: block;
-    overflow: auto;
-    margin: 1.5em 0;
+    overflow-x: scroll;
+    overflow-y: auto;
+    white-space: nowrap;
+    margin: 1.5em 0 0 0;
     border-collapse: collapse;
     border-spacing: 0;
     background-color: transparent;
     border: none;
+    -webkit-overflow-scrolling: touch;
 
     tr:nth-child(odd) {
       background-color: #fafbfc;
