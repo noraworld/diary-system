@@ -1,0 +1,6 @@
+#!/bin/bash
+
+bundle install
+RAILS_ENV=production bundle exec rails db:migrate
+RAILS_ENV=production bundle exec rails assets:precompile
+sudo systemctl restart diary
