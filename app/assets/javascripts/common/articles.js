@@ -2,7 +2,7 @@ $(function() {
 
   // CSS 4 の :has() が登場したら CSS で書きたい！
   // https://qiita.com/yassh/items/bf3c341e53c0f86a384a
-  $('#post-content p, .templated-post-body p').has('img:not(.emoji)').css('text-align', 'center').css('line-height', '0');
+  $('#post-content p, .templated-post-body p').has('img:not(.emoji)').css('text-align', 'center').css('line-height', '1.15');
   $('#post-content a, .templated-post-body a').has('img:not(.emoji)').css('border-bottom', '0').css('margin', '0');
   $('#post-content p a img, .templated-post-body p a img').css('margin-top', '31px');
   $('#post-content p a:first-of-type img, .templated-post-body p a:first-of-type img').css('margin-top', '0');
