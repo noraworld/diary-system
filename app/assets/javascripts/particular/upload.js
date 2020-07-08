@@ -66,17 +66,18 @@ $(function() {
     var pos = activeTextarea.selectionStart;
     var before = sentence.substr(0, pos);
     var after = sentence.substr(pos, len);
+    var newline = '\n';
 
     var sentence = before + image;
     if (pos == len) {
-      sentence += '\n\n';
+      sentence += newline;
     }
     sentence += after;
 
     activeTextarea.value = sentence;
 
     if (pos == len) {
-      activeTextarea.selectionStart = activeTextarea.selectionEnd = (before + image + '\n\n').length;
+      activeTextarea.selectionStart = activeTextarea.selectionEnd = (before + image + newline).length;
     }
     else {
       activeTextarea.selectionStart = activeTextarea.selectionEnd = (before + image).length;
