@@ -98,7 +98,7 @@
 <% if !current_user && @public_date > Time.zone.today %>
   <div id="show-error-message">
     <h2>Viewing Restriction</h2>
-    <p class="reason">This diary will be public at <b><%= @public_date.to_s.gsub('-', '/') %></b> (in <%= pluralize((@public_date - Time.zone.today).to_i, 'day') %>).</p>
+    <p class="reason">It is limited to access to this diary for some reasons for now.<br>This diary will be public at <b><%= @public_date.to_s.gsub('-', '/') %></b> (in <%= pluralize((@public_date - Time.zone.today).to_i, 'day') %>).</p>
   </div>
 <% else %>
   <%= render 'content', prev_article_link: prev_article_link, next_article_link: next_article_link %>
