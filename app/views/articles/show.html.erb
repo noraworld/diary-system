@@ -47,7 +47,7 @@
       <a href="<%= edit_path %>" id="edit-link">Edit</a>
 
       <%# Migrate the lastest diary to yesterday one %>
-      <% if @article.date == (Time.now.in_time_zone('Tokyo') - 3600 * 5).to_date && Article.find_by(date: @article.date.yesterday).nil? %>
+      <% if @article.date == adjusted_current_time.to_date && Article.find_by(date: @article.date.yesterday).nil? %>
         <% article_date_from = @article.date.to_s %>
         <% article_date_to   = @article.date.yesterday.to_s %>
         <%= link_to 'Migrate', migrate_path(from: article_date_from, to: article_date_to), id: 'migrate-link', method: :post, data: { confirm: "Are you sure you want to migrate this diary to yesterday one?\nCAUTION: This operation cannot be undone!\n\n" + article_date_from + ' → ' + article_date_to } %>

@@ -3,6 +3,8 @@
 class ArticlesController < ApplicationController
   before_action :signed_in?, only: %i[new create edit update destroy migrate]
 
+  include ArticlesHelper
+
   QUANTITIES = 10
 
   def index
@@ -14,15 +16,11 @@ class ArticlesController < ApplicationController
 
     # rootにアクセスしたときは@yearは今年
     @year = params[:year].to_i
-    if @year.zero?
-      @year = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_i
-    end
+    @year = adjusted_current_time.strftime('%Y').to_i if @year.zero?
 
     # rootにアクセスしたときは@monthは今月
     @month = params[:month].to_i
-    if @month.zero?
-      @month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_i
-    end
+    @month = adjusted_current_time.strftime('%m').to_i if @month.zero?
 
     @articles = Article.order('day').where(year: @year).where(month: @month)
 
@@ -67,9 +65,9 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
 
-    @article.year  = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_i
-    @article.month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_i
-    @article.day   = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%d').to_i
+    @article.year  = adjusted_current_time.strftime('%Y').to_i
+    @article.month = adjusted_current_time.strftime('%m').to_i
+    @article.day   = adjusted_current_time.strftime('%d').to_i
     @article.date  = Date.new(@article.year, @article.month, @article.day)
 
     if @article.save
@@ -190,9 +188,9 @@ class ArticlesController < ApplicationController
   private
 
   def find_todays_article
-    year  = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_i
-    month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_i
-    day   = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%d').to_i
+    year  = adjusted_current_time.strftime('%Y').to_i
+    month = adjusted_current_time.strftime('%m').to_i
+    day   = adjusted_current_time.strftime('%d').to_i
     Article.find_by(year: year, month: month, day: day)
   end
 

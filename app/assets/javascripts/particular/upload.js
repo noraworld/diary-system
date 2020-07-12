@@ -22,6 +22,8 @@ $(function() {
 
         var date = new Date();
         // 5時間前(午前5時までは前の日の日付で保存される)
+        // TODO: 「5 時間前」の「5」という値は Setting の next_day_adjustment_hour から取得したい
+        // API を作る必要がありそう？
         date.setMinutes(date.getMinutes() - 60 * 5);
         var year = date.getFullYear() + '';
         var month = ('0' + (date.getMonth() + 1)).slice(-2);

@@ -11,10 +11,14 @@ if Rails.env.production?
   return
 end
 
+class ArticlesHelperClass
+  extend ArticlesHelper
+end
+
 def create_sample_article
-  year  = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_i
-  month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_i
-  day   = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%d').to_i
+  year  = ArticlesHelperClass.adjusted_current_time.strftime('%Y').to_i
+  month = ArticlesHelperClass.adjusted_current_time.strftime('%m').to_i
+  day   = ArticlesHelperClass.adjusted_current_time.strftime('%d').to_i
 
   article = Article.find_by(year: year, month: month, day: day)
 

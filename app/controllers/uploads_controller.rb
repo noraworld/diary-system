@@ -6,11 +6,13 @@ class UploadsController < ApplicationController
   require 'filemagic'
   require 'RMagick'
 
+  include ArticlesHelper
+
   def upload
     # dropzone.jsで使用するパラメータと一致していないといけない
     data  = params[:data]
-    year  = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%Y').to_s
-    month = (Time.now.in_time_zone('Tokyo') - 3600 * 5).strftime('%m').to_s
+    year  = adjusted_current_time.strftime('%Y').to_s
+    month = adjusted_current_time.strftime('%m').to_s
     path  = 'public/images/' + year + '/' + month + '/'
 
     # public/images/year/month ディレクトリがなければ作成する
