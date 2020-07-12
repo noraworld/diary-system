@@ -58,12 +58,12 @@ module ApplicationHelper
   # Copyright の年を適切に表示させる
   def copyright_year
     settings_launched_since = Setting.last&.launched_since
-    now = Time.now.in_time_zone('Tokyo').strftime('%Y').to_s
+    now = adjusted_current_time.strftime('%Y').to_s
 
     since = if settings_launched_since.present? && settings_launched_since.to_i != 0
               settings_launched_since.to_s
             else
-              Time.now.in_time_zone('Tokyo').strftime('%Y').to_s
+              adjusted_current_time.strftime('%Y').to_s
             end
 
     if since.to_i < now.to_i
