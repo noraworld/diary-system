@@ -31,7 +31,8 @@
   <label for="template-title">Google Analytics Tracking ID</label>
   <%= f.text_field :ga_tracking_identifier, id: 'template-title', placeholder: 'UA-123456789-0' %>
 
-  <p>Launched since: <%= @first_article_year %></p>
+  <label for="template-title">Launched since</label>
+  <%= f.text_field :launched_since, { type: 'number', min: 0, id: 'template-title', disabled: true } %>
 <% end %>
 
 <%= stylesheet_link_tag    'particular/edit_only.css', media: 'all' %>

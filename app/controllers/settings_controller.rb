@@ -5,7 +5,6 @@ class SettingsController < ApplicationController
 
   def edit
     @setting = Setting.first # it returns nil if Setting is empty
-    @first_article_year = @setting&.launched_since || Article.first&.year || 'Unknown'
   end
 
   def update
