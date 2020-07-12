@@ -23,6 +23,15 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
   padding: 0 5px 0 0;
 }
 
+@mixin template-title-and-choices-inner {
+  padding: 0.4rem 1.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
+  box-sizing: border-box;
+  font-family: $template-content-font;
+}
+
 #template-contents {
   font-family: $template-content-font;
   width: 85%;
@@ -196,16 +205,19 @@ $template-content-font: YuGothic, $system-font, 'Open Sans Regular';
   }
 
   #template-title, #template-placeholder {
-    font-family: $template-content-font;
     display: block;
     width: 100%;
-    box-sizing: border-box;
     height: 45px;
-    padding: 0.4rem 1.4rem;
-    font-size: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
     margin: 5px 0 15px 0;
+    @include template-title-and-choices-inner;
+  }
+
+  .choices__inner {
+    background-color: white;
+    @include template-title-and-choices-inner;
+  }
+  .choices__list.choices__list--dropdown {
+    box-sizing: border-box;
   }
 
   #template-body {
