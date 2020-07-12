@@ -44,9 +44,13 @@
   <%= text_field nil, nil, value: adjusted_current_time, id: 'template-title', disabled: true %>
 <% end %>
 
+<%# Thanks! %>
+<%# https://www.hypertextcandy.com/css-coding-recipes-form %>
+<%# https://github.com/jshjohnson/Choices %>
 <%= stylesheet_link_tag    'https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/styles/choices.min.css', crossorigin: 'anonymous' %>
 <%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js', crossorigin: 'anonymous' %>
 <%= javascript_include_tag 'particular/activate_choices.js' %>
 <style>body { margin-bottom: 77px; }</style><%# WHY!?!? %>
+
 <%= javascript_include_tag 'particular/warn_without_saving.js' %>
 <%= javascript_include_tag 'particular/no_scroll.js' %>
