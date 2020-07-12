@@ -17,6 +17,15 @@ class Setting < ApplicationRecord
             },
             allow_nil: false
 
+  validates :time_zone,
+            inclusion: {
+              # https://moreta.github.io/ruby/rails/ruby-rails-time-date-timezone.html#%E6%9C%89%E5%8A%B9%E3%81%AAtimezone%E4%B8%80%E8%A6%A7
+              # https://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html
+              in: TZInfo::Timezone.all.map(&:name),
+              message: 'is out of range of time zone'
+            },
+            allow_nil: false
+
   validates :ga_tracking_identifier,
             format: {
               with: /\AUA-[0-9]{9}-[0-9]{1}\z/,

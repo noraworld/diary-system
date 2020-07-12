@@ -31,11 +31,17 @@
   <label for="template-title">Next day adjustment hour</label>
   <%= f.text_field :next_day_adjustment_hour, { type: 'number', min: 0, max: 23, id: 'template-title', placeholder: 'It does not go to the next day until given hours' } %>
 
+  <label for="template-title">Time zone</label>
+  <%= f.select :time_zone, TZInfo::Timezone.all.map(&:name), {}, { id: 'template-title', require: true } %>
+
   <label for="template-title">Google Analytics Tracking ID</label>
   <%= f.text_field :ga_tracking_identifier, id: 'template-title', placeholder: 'UA-123456789-0' %>
 
-  <label for="template-title">Launched since</label>
+  <label for="template-title">[For confirmation] Launched since</label>
   <%= f.text_field :launched_since, { type: 'number', min: 0, id: 'template-title', disabled: true } %>
+
+  <label for="template-title">[For confirmation] Adjusted current time (<code><%= pluralize(Setting.last.next_day_adjustment_hour, 'hour') %></code> before in time zone <code><%= Setting.last.time_zone %></code>)</label>
+  <%= text_field nil, nil, value: adjusted_current_time, id: 'template-title', disabled: true %>
 <% end %>
 
 <%= javascript_include_tag 'particular/warn_without_saving.js' %>
