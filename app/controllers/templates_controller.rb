@@ -11,7 +11,7 @@ class TemplatesController < ApplicationController
   end
 
   def new
-    @post_template_url = '/templates/new'
+    @post_template_url = templates_new_path
     @template_form_title = 'Create a new template'
     @back_link_url = templates_index_path
   end
@@ -23,9 +23,9 @@ class TemplatesController < ApplicationController
     @template.position = Template.maximum(:position).to_i + 1
 
     if @template.save
-      redirect_to '/templates'
+      redirect_to templates_index_path(availability: 'all', visibility: 'all')
     else
-      @post_template_url = '/templates/new'
+      @post_template_url = templates_new_path
       @template_form_title = 'Create a new template'
       @back_link_url = templates_index_path
 
@@ -38,7 +38,7 @@ class TemplatesController < ApplicationController
     @template = Template.find_by!(uuid: params[:uuid])
     @post_template_url = "/templates/#{params[:uuid]}"
     @template_form_title = 'Edit the template'
-    @back_link_url = templates_index_path
+    @back_link_url = templates_index_path(availability: 'all', visibility: 'all')
   end
 
   def update
@@ -46,11 +46,11 @@ class TemplatesController < ApplicationController
     @template_form_title = 'Edit the template'
 
     if @template.update(template_params)
-      redirect_to '/templates'
+      redirect_to templates_index_path(availability: 'all', visibility: 'all')
     else
       @post_template_url = "/templates/#{params[:uuid]}"
       @template_form_title = 'Edit the template'
-      @back_link_url = templates_index_path
+      @back_link_url = templates_index_path(availability: 'all', visibility: 'all')
 
       flash.now[:alert] = 'Update failed...'
       render 'edit'
@@ -64,7 +64,7 @@ class TemplatesController < ApplicationController
       @template = Template.find_by!(uuid: params[:uuid])
       @template.destroy if Rails.env.development?
 
-      redirect_to templates_index_path
+      redirect_to templates_index_path(availability: 'all', visibility: 'all')
     end
   end
 

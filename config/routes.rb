@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   post '/migrate'  => 'articles#migrate', as: 'migrate'
 
   get    '/templates'       => 'templates#index', as: 'templates_index'
-  get    '/templates/new'   => 'templates#new'
+  get    '/templates/new'   => 'templates#new',   as: 'templates_new'
   post   '/templates/new'   => 'templates#create'
   get    '/templates/sort'  => 'templates#sort'
   get    '/templates/:uuid' => 'templates#edit'
