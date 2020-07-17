@@ -34,7 +34,7 @@ class SettingsController < ApplicationController
   end
 
   def setting_params
-    params.require(:setting).permit(:site_title, :site_description, :host_name, :default_public_in, :ga_tracking_identifier, :next_day_adjustment_hour, :time_zone)
+    params.require(:setting).permit(:site_title, :site_description, :host_name, :default_public_in, :ga_tracking_identifier, :time_zone)
   end
 
   def signed_in?
