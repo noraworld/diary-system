@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_12_030614) do
+ActiveRecord::Schema.define(version: 2020_07_17_225429) do
 
   create_table "articles", force: :cascade do |t|
     t.text "text", null: false
@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(version: 2020_07_12_030614) do
     t.integer "default_public_in"
     t.string "ga_tracking_identifier"
     t.integer "next_day_adjustment_hour", default: 0, null: false
-    t.string "time_zone", default: "UTC", null: false
   end
 
   create_table "templated_articles", force: :cascade do |t|
