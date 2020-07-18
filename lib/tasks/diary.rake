@@ -17,4 +17,16 @@ namespace :diary do
     user = User.create!(username: username, password: password)
     puts "Created a new user: #{user.username}" if user
   end
+
+  desc 'Update next day adjustment hour'
+  task update_next_day_adjustment_hour: :environment do
+    puts 'Update next day adjustment hour'
+
+    print 'next day adjustment hour: '
+    next_day_adjustment_hour = STDIN.gets.strip
+    puts "\n"
+
+    ok = Setting.last.update!(next_day_adjustment_hour: next_day_adjustment_hour.to_i)
+    puts "Updated successfully: #{Setting.last.next_day_adjustment_hour} hour(s)" if ok
+  end
 end
