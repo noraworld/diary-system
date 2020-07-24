@@ -1,7 +1,7 @@
 'use strict';
 
 {
-  const TAB_SIZE = 4;
+  const TAB_SIZE = 2;
   const SPACES = ' '.repeat(TAB_SIZE);
 
   // Tab key
@@ -14,7 +14,7 @@
   function deleteCharacterOrDeleteIndent(event) {
     let [sentence, selection] = getTextareaInformation();
 
-    // check if string between cursor position and 4 characters ago from cursor position is all spaces
+    // check if string between cursor position and TAB_SIZE characters ago from cursor position is all spaces
     for (let i = selection.start - 1; i > selection.start - (1 + TAB_SIZE); i--) {
       if (sentence[i] !== ' ') {
         return false;
