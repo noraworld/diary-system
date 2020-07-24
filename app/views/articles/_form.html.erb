@@ -49,6 +49,7 @@
         </div>
         <div><%= templated_article_form.text_field :title, { type: 'hidden', value: template.title } %></div>
         <%= render 'format_for_form', { template: template, templated_article_form: templated_article_form } %>
+        <div><%= templated_article_form.text_field :template_body, { type: 'hidden', value: template.body } %></div>
         <div><%= templated_article_form.text_field :placeholder, { type: 'hidden', value: template.placeholder } %></div>
         <div><%= templated_article_form.text_field :position, { type: 'hidden', value: template.position } %></div>
         <div><%= templated_article_form.text_field :format, { type: 'hidden', value: template.format } %></div>
@@ -65,6 +66,7 @@
       </div>
       <div><%= templated_article_form.text_field :title, { type: 'hidden', value: templated_article_form.object.title } %></div>
       <%= render 'format_for_form', { template: nil, templated_article_form: templated_article_form } %>
+      <div><%= templated_article_form.text_field :template_body, { type: 'hidden', value: templated_article_form.object.template_body } %></div>
       <div><%= templated_article_form.text_field :placeholder, { type: 'hidden', value: templated_article_form.object.placeholder } %></div>
       <div><%= templated_article_form.text_field :position, { type: 'hidden', value: templated_article_form.object.position } %></div>
       <div><%= templated_article_form.text_field :format, { type: 'hidden', value: templated_article_form.object.format } %></div>

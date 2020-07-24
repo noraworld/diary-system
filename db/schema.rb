@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_17_225429) do
+ActiveRecord::Schema.define(version: 2020_07_24_220043) do
 
   create_table "articles", force: :cascade do |t|
     t.text "text", null: false
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2020_07_17_225429) do
     t.string "format", default: "sentence", null: false
     t.boolean "is_private", default: false, null: false
     t.string "placeholder"
+    t.text "template_body"
     t.index ["position", "article_id"], name: "templated_articles_position_unique", unique: true
   end
 
