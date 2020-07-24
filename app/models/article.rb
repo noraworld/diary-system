@@ -47,6 +47,6 @@ class Article < ApplicationRecord
   end
 
   def all_blank
-    errors.add(:text, 'Emptying all posts is not acceptable.') if text.blank? && templated_articles.all? { |templated_article| templated_article.body.blank? }
+    errors.add(:text, 'Emptying all posts and that all template posts are same as template body are not acceptable.') if text.blank? && templated_articles.all? { |templated_article| templated_article.body.blank? || templated_article.body == templated_article.template_body }
   end
 end
