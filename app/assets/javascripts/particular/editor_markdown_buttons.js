@@ -1,10 +1,14 @@
 'use strict';
 
 {
+  const BUTTON_SELECTORS = '#listify, #privatify';
+  let buttonElements = document.querySelectorAll(BUTTON_SELECTORS);
+
   let listifyButtonClickedLength = 0;
   let previousSentence = null;
 
-  document.querySelector('#listify').addEventListener('click', (event) => {
+  // Listify event listener
+  document.querySelector('#listify').addEventListener('click', () => {
     if (getActiveTextarea() === null) {
       return false;
     }
@@ -20,12 +24,23 @@
     }
   });
 
-  let activeElementBeforeClickingListify = null;
-  document.querySelector('#listify').addEventListener('mouseover', (event) => {
-    activeElementBeforeClickingListify = document.activeElement;
+  document.querySelector('#privatify').addEventListener('click', () => {
+    if (getActiveTextarea() === null) {
+      return false;
+    }
+
+    privatify();
   });
 
-  // prevent scrollTop from moving out of position when undoing or redoing listifying
+  // Remember active element before clicking editor markdown buttons
+  let activeElementBeforeClickingListify = null;
+  for (var i = 0; i < buttonElements.length; i++) {
+    buttonElements[i].addEventListener('mouseover', () => {
+      activeElementBeforeClickingListify = document.activeElement;
+    });
+  }
+
+  // Prevent scrollTop from moving out of position when undoing or redoing listifying
   // I don't know why such behavior occurs
   let scrollTop = null;
   document.activeElement.oninput = (event) => {
@@ -107,6 +122,19 @@
   function unlistify() {
     getActiveTextarea().focus();
     document.execCommand('undo', false, null);
+  }
+
+  function privatify() {
+    const PRIVATE_START_STRING = '{private}'
+    const PRIVATE_END_STRING   = '{/private}'
+
+    let activeTextarea = getActiveTextarea();
+    activeTextarea.focus();
+
+    document.execCommand('insertText', false, PRIVATE_START_STRING + PRIVATE_END_STRING);
+
+    // Move a caret between PRIVATE_START_STRING and PRIVATE_END_STRING
+    activeTextarea.selectionStart = activeTextarea.selectionEnd = activeTextarea.selectionStart - PRIVATE_END_STRING.length;
   }
 
   function getActiveTextarea() {
