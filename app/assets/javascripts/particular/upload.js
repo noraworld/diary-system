@@ -69,21 +69,10 @@ $(function() {
     var before = sentence.substr(0, pos);
     var after = sentence.substr(pos, len);
     var newline = '\n';
-
-    var sentence = before + image;
-    if (pos == len) {
-      sentence += newline;
-    }
-    sentence += after;
+    var sentence = before + image + newline + after;
 
     activeTextarea.value = sentence;
-
-    if (pos == len) {
-      activeTextarea.selectionStart = activeTextarea.selectionEnd = (before + image + newline).length;
-    }
-    else {
-      activeTextarea.selectionStart = activeTextarea.selectionEnd = (before + image).length;
-    }
+    activeTextarea.selectionStart = activeTextarea.selectionEnd = (before + image + newline).length;
 
     return true;
   }
