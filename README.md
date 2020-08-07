@@ -1,6 +1,8 @@
 # Diary
 Simple diary application. Unlike a blog, this application is suitable for writing everyday life, events, thoughts and other miscellaneous contents daily in a sense of diary.
 
+![Diary](./diary.png)
+
 ## Setup
 You should create a new user to post your diary.
 
