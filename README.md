@@ -7,7 +7,13 @@ Simple diary application. Unlike a blog, this application is suitable for writin
 You should create a new user to post your diary.
 
 ```
+# For development environment
 $ bundle exec rails diary:create_user
+```
+Or
+```
+# For production environment
+$ RAILS_ENV=production bundle exec rails diary:create_user
 ```
 ```
 Create a new user
@@ -17,7 +23,7 @@ password: (Not shown)
 Created a new user: alice
 ```
 
-You can now sign in with username and password that you set up in `/login` page. In production environment, run `RAILS_ENV=production bundle exec rails diary:create_user` instead of `bundle exec rails diary:create_user`.
+You can now sign in with username and password that you set up in `/login` page.
 
 ## Environment Variables
 The environment variables are under the control of `.env` file. Copy `.env.sample` and rename it as `.env`. Then replace the environment variables with your own environment.
