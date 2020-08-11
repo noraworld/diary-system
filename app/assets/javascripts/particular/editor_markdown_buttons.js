@@ -131,10 +131,12 @@
     let activeTextarea = getActiveTextarea();
     activeTextarea.focus();
 
-    document.execCommand('insertText', false, PRIVATE_START_STRING + PRIVATE_END_STRING);
+    document.execCommand('insertText', false, PRIVATE_START_STRING + activeTextarea.value.slice(activeTextarea.selectionStart, activeTextarea.selectionEnd) + PRIVATE_END_STRING);
 
     // Move a caret between PRIVATE_START_STRING and PRIVATE_END_STRING
-    activeTextarea.selectionStart = activeTextarea.selectionEnd = activeTextarea.selectionStart - PRIVATE_END_STRING.length;
+    if (activeTextarea.selectionStart === activeTextarea.selectionEnd) {
+      activeTextarea.selectionStart = activeTextarea.selectionEnd = activeTextarea.selectionStart - PRIVATE_END_STRING.length;
+    }
   }
 
   function getActiveTextarea() {
