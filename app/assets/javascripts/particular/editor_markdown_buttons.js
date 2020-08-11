@@ -4,31 +4,15 @@
   const BUTTON_SELECTORS = '#listify, #privatify';
   let buttonElements = document.querySelectorAll(BUTTON_SELECTORS);
 
-  let listifyButtonClickedLength = 0;
   let previousSentence = null;
 
-  // Listify event listener
+  // event listener
   document.querySelector('#listify').addEventListener('click', () => {
-    if (getActiveTextarea() === null) {
-      return false;
-    }
-
-    // save how many times listify button is clicked
-    listifyButtonClickedLength++;
-
-    if (listifyButtonClickedLength % 2 === 0 && previousSentence === getActiveTextarea().value) {
-      unlistify();
-    }
-    else {
-      listify();
-    }
+    if (getActiveTextarea() === null) { return false; }
+    listify();
   });
-
   document.querySelector('#privatify').addEventListener('click', () => {
-    if (getActiveTextarea() === null) {
-      return false;
-    }
-
+    if (getActiveTextarea() === null) { return false; }
     privatify();
   });
 
@@ -117,11 +101,6 @@
     scrollTop = scrollTopBeforeListifying;
 
     previousSentence = document.activeElement.value;
-  }
-
-  function unlistify() {
-    getActiveTextarea().focus();
-    document.execCommand('undo', false, null);
   }
 
   function privatify() {
