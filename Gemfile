@@ -34,6 +34,7 @@ gem 'unicorn'
 # gem 'capistrano-rails', group: :development
 
 # Additional packages here
+gem 'active_model_serializers'
 gem 'bootsnap', require: false
 gem 'dotenv-rails'
 gem 'dropzonejs-rails'
