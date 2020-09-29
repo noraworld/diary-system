@@ -30,6 +30,10 @@
   <%= javascript_include_tag 'particular/close_alert_message.js' %>
   <% end %>
   <%= csrf_meta_tags %>
+
+  <% if Setting.last&.custom_snippet.present? %>
+  <%= Setting.last&.custom_snippet.html_safe %>
+  <% end %>
 </head>
 <body>
   <div class="container">

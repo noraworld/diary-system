@@ -28,8 +28,11 @@
   <label for="template-title">Default schedule post days</label>
   <%= f.text_field :default_public_in, { type: 'number', min: 0, id: 'template-title', placeholder: 'The diary will be public in given days' } %>
 
-  <label for="template-title">Google Analytics Tracking ID</label>
+  <label for="template-title">Google Analytics tracking ID</label>
   <%= f.text_field :ga_tracking_identifier, id: 'template-title', placeholder: 'UA-123456789-0' %>
+
+  <label for="template-title">Custom JavaScript snippet</label>
+  <%= f.text_area :custom_snippet, id: 'template-body', placeholder: 'This snippet will be placed before the end of the head tag' %>
 
   <label for="template-title">Application time zone (Read only)</label>
   <%= text_field nil, nil, value: ENV.fetch('TIME_ZONE'), id: 'template-title', disabled: true %>
