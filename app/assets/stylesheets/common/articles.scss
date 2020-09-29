@@ -121,7 +121,7 @@ $post-content-min-height: 600px;
 
 $system-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
 $post-content-font: "FOT-ニューシネマA Std D", YuGothic, $system-font, 'Open Sans Regular';
-$post-content-edit-font: YuGothic, $system-font, 'Open Sans Regular';
+$post-content-edit-font: YuGothic, $system-font, 'Open Sans Regular'; // FONTPLUS font cannot be used on input field and textarea field
 
 // iPad の縦幅は 1024px なので、それ以上にすると
 // タブレットでは、画面左右の丸い矢印が出なくなる
