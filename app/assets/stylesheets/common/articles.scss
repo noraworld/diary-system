@@ -120,7 +120,8 @@ $post-content-border-color: #ccc;
 $post-content-min-height: 600px;
 
 $system-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
-$post-content-font: YuGothic, $system-font, 'Open Sans Regular';
+$post-content-font: "FOT-ニューシネマA Std D", YuGothic, $system-font, 'Open Sans Regular';
+$post-content-edit-font: YuGothic, $system-font, 'Open Sans Regular';
 
 // iPad の縦幅は 1024px なので、それ以上にすると
 // タブレットでは、画面左右の丸い矢印が出なくなる
@@ -1053,7 +1054,7 @@ $rule-margin-left-and-right: 1.3rem;
     // padding: 1.5rem 2rem 0;
     padding: $post-content-padding-top $post-content-padding-left-and-right $post-content-padding-bottom;
     // font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-family: $post-content-font;
+    font-family: $post-content-edit-font;
     text-align: initial;
     // font-size: 16px;
     // line-height: 25px;
@@ -1148,7 +1149,7 @@ $rule-margin-left-and-right: 1.3rem;
   }
 
   #form-title {
-    font-family: $post-content-font;
+    font-family: $post-content-edit-font;
     text-align: center;
     position: relative;
     height: 35px;
