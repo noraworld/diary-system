@@ -8,6 +8,8 @@ class UploadsController < ApplicationController
 
   include ArticlesHelper
 
+  RANDOMIZED_HEXADECIMAL_LENGTH = 64
+
   def upload
     # dropzone.jsで使用するパラメータと一致していないといけない
     data  = params[:data]
@@ -39,7 +41,27 @@ class UploadsController < ApplicationController
     render body: nil, status: :ok
   end
 
+  def s3
+    # TODO: implement validation with form object
+    file_extension = params[:filename].match(/(.*)(?:\.([^.]+$))/)[2].downcase
+    mimetype = params[:mimetype]
+
+    presigned_object = S3_BUCKET.presigned_post(
+      key: "test/#{SecureRandom.hex(RANDOMIZED_HEXADECIMAL_LENGTH / 2)}.#{file_extension}",
+      content_type: mimetype,
+      success_action_status: '201',
+      acl: 'public-read'
+    )
+
+    render json: { url: presigned_object.url, fields: presigned_object.fields, s3_url: s3_url(presigned_object.fields['key']) }
+  end
+
   private
+
+  def s3_url(path)
+    url_scheme = ENV.fetch('S3_ENABLED') ? 'https' : 'http'
+    "#{url_scheme}://#{ENV.fetch('S3_BUCKET')}/#{path}"
+  end
 
   def signed_in?
     redirect_to login_path if current_user.nil?

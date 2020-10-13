@@ -19,7 +19,8 @@
     </div>
     <div id="markdown-edit-button">
       <span id="listify"><i class="fas fa-list-ul"></i></span><%# don't care
-    %><span id="privatify"><i class="fas fa-mask"></i></span>
+    %><span id="privatify"><i class="fas fa-mask"></i></span><%# don't care
+    %><span id="upload-image"><i class="far fa-image"></i><input type="file" id="files" multiple="multiple" style="display: none;"></span>
     </div>
   </div>
 
@@ -96,3 +97,4 @@
 <%= javascript_include_tag 'particular/star.js' %>
 <%= javascript_include_tag 'particular/editor_shortcuts.js' %>
 <%= javascript_include_tag 'particular/editor_markdown_buttons.js' %>
+<%= javascript_include_tag 'particular/upload_s3.js' %>

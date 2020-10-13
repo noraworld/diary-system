@@ -15,9 +15,18 @@
     if (getActiveTextarea() === null) { return false; }
     privatify();
   });
+  document.querySelector('#upload-image').addEventListener('click', () => {
+    if (getActiveTextarea() === null) { return false; }
+    let activeTextarea = getActiveTextarea();
+    activeTextarea.focus();
+    document.querySelector('#upload-image input').click();
+  });
+  document.querySelector('#upload-image input').addEventListener('change', () => {
+    uploadS3();
+  });
 
   // Remember active element before clicking editor markdown buttons
-  let activeElementBeforeClickingListify = null;
+  var activeElementBeforeClickingListify = null;
   for (var i = 0; i < buttonElements.length; i++) {
     buttonElements[i].addEventListener('mouseover', () => {
       activeElementBeforeClickingListify = document.activeElement;
@@ -35,7 +44,7 @@
       scrollTop = document.activeElement.scrollTop;
     }
   }
-
+}
   function listify() {
     let activeTextarea = getActiveTextarea();
     let sentence = activeTextarea.value;
@@ -135,4 +144,3 @@
       return null;
     }
   }
-}
