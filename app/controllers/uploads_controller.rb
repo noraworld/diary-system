@@ -59,8 +59,7 @@ class UploadsController < ApplicationController
   private
 
   def s3_url(path)
-    url_scheme = ENV.fetch('S3_ENABLED') ? 'https' : 'http'
-    "#{url_scheme}://#{ENV.fetch('S3_BUCKET')}/#{path}"
+    "#{ENV.fetch('S3_PROTOCOL')}://#{ENV.fetch('S3_BUCKET')}/#{path}"
   end
 
   def signed_in?
