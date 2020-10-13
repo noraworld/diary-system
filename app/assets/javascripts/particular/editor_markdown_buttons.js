@@ -1,7 +1,7 @@
 'use strict';
 
 {
-  const BUTTON_SELECTORS = '#listify, #privatify';
+  const BUTTON_SELECTORS = '#listify, #privatify, #upload-image';
   let buttonElements = document.querySelectorAll(BUTTON_SELECTORS);
 
   let previousSentence = null;
