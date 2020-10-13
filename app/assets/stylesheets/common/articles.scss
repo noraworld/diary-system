@@ -1213,6 +1213,16 @@ $rule-margin-left-and-right: 1.3rem;
         border-radius: 0 4px 4px 0;
         border-right: 1px solid grey;
       }
+
+      .progress, .completed, .all {
+        display: inline-block;
+      }
+      .completed {
+        padding: 0 2px 0 7px;
+      }
+      .all {
+        padding: 0 0 0 2px;
+      }
     }
   }
 

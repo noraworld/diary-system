@@ -12,8 +12,10 @@ function uploadS3() {
   }
 
   for (var i = 0; i < uploadedFiles.files.length; i++) {
+    document.querySelector('#markdown-edit-button #upload-image #progress #all').textContent = parseInt(document.querySelector('#markdown-edit-button #upload-image #progress #all').textContent) + 1;
     var url = '/s3?filename=' + uploadedFiles.files[i].name + "&mimetype=" + uploadedFiles.files[i].type;
 
+    console.log('Fetching AWS presigned URL...');
     fetch(
       url,
       {
@@ -21,6 +23,7 @@ function uploadS3() {
       }
     ).then(response => {
       if (response.ok) {
+        console.log('Fetched AWS presigned URL sucessfully.');
         return response.json();
       }
     }).then((data) => {
@@ -31,14 +34,15 @@ function uploadS3() {
         formdata[fileCounter].append(key, data.fields[key]);
       }
 
-      s3Urls.push(data.s3_url);
-      filenames.push(uploadedFiles.files[fileCounter].name);
+      getActiveTextarea().focus();
+      document.execCommand('insertText', false, '![' + uploadedFiles.files[fileCounter].name + '](' + data.s3_url + ')\n');
 
       formdata[fileCounter].append("file", uploadedFiles.files[fileCounter]);
       const headers = {
         'accept': 'multipart/form-data'
       }
 
+      console.log('Posting images to AWS S3...');
       fetch(
         data.url,
         {
@@ -48,10 +52,8 @@ function uploadS3() {
         }
       ).then((response) => {
         if (response.ok) {
-          getActiveTextarea().focus();
-          document.execCommand('insertText', false, '![' + filenames[0] + '](' + s3Urls[0] + ')\n');
-          s3Urls.shift();
-          filenames.shift();
+          console.log('Posted images sucessfully!');
+          document.querySelector('#markdown-edit-button #upload-image #progress #completed').textContent = parseInt(document.querySelector('#markdown-edit-button #upload-image #progress #completed').textContent) + 1;
 
           return response.text();
         }
