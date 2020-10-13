@@ -47,7 +47,7 @@ class UploadsController < ApplicationController
     mimetype = params[:mimetype]
 
     presigned_object = S3_BUCKET.presigned_post(
-      key: "test/#{SecureRandom.hex(RANDOMIZED_HEXADECIMAL_LENGTH / 2)}.#{file_extension}",
+      key: "images/#{adjusted_current_time.to_date.year}/#{adjusted_current_time.to_date.month}/#{SecureRandom.hex(RANDOMIZED_HEXADECIMAL_LENGTH / 2)}.#{file_extension}",
       content_type: mimetype,
       success_action_status: '201',
       acl: 'public-read'
