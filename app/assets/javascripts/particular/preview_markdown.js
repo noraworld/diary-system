@@ -5,12 +5,23 @@
   const templatedPostBodies = document.querySelectorAll('#textarea .templated-post-body');
 
   preview(postContent);
-
   postContent.addEventListener('input', preview);
+  postContent.addEventListener('input', scrollSync);
+  postContent.addEventListener('scroll', scrollSync);
+
   for (var i = 0; i < templatedPostBodies.length; i++) {
     preview(templatedPostBodies[i]);
     templatedPostBodies[i].addEventListener('input', preview);
+    templatedPostBodies[i].addEventListener('input', scrollSync);
+    templatedPostBodies[i].addEventListener('scroll', scrollSync);
   }
+}
+
+function scrollSync() {
+  const editorScrollRatio = this.scrollTop / (this.scrollHeight - this.clientHeight);
+  const previewAutoScrollPosition = Math.round((this.parentNode.children.namedItem('post-content-preview').scrollHeight - this.parentNode.children.namedItem('post-content-preview').clientHeight) * editorScrollRatio);
+
+  this.parentNode.children.namedItem('post-content-preview').scrollTop = previewAutoScrollPosition;
 }
 
 function preview(node = null) {
