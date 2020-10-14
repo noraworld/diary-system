@@ -6,9 +6,15 @@
 <% case template.format %>
 <% when 'sentence' %>
   <% if template.errors.full_messages.blank? %>
-    <div id="textarea"><%= templated_article_form.text_area :body, { value: template.body, placeholder: placeholder, class: 'templated-post-body' } %></div>
+    <div id="textarea">
+      <%= templated_article_form.text_area :body, { value: template.body, placeholder: placeholder, class: 'templated-post-body' } %>
+      <div id="post-content-preview" class="post-content-preview"></div>
+    </div>
   <% else %>
-    <div id="textarea"><%= templated_article_form.text_area :body, { value: template.body, placeholder: placeholder, class: 'templated-post-body error' } %></div>
+    <div id="textarea">
+      <%= templated_article_form.text_area :body, { value: template.body, placeholder: placeholder, class: 'templated-post-body error' } %>
+      <div id="post-content-preview" class="post-content-preview"></div>
+    </div>
   <% end %>
 <% when 'oneline' %>
   <% if template.errors.full_messages.blank? %>
