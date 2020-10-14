@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     namespace 'v1' do
       get  '/media' => 'media#show'
       post '/media' => 'media#create', as: 'media_post'
+
+      post '/markdown' => 'markdowns#markdown'
     end
   end
 end

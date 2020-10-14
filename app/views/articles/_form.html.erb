@@ -37,6 +37,7 @@
   </div>
   <div id="textarea">
     <%= article_form.text_area :text, {:id => 'post-content', :placeholder => 'Write your diary'} %>
+    <div id="post-content-preview" class="post-content-preview"></div>
   </div>
 
   <% if @templates && controller.action_name == 'new' %>
@@ -98,3 +99,4 @@
 <%= javascript_include_tag 'particular/editor_shortcuts.js' %>
 <%= javascript_include_tag 'particular/editor_markdown_buttons.js' %>
 <%= javascript_include_tag 'particular/upload_s3.js' %>
+<%= javascript_include_tag 'particular/preview_markdown.js' %>
