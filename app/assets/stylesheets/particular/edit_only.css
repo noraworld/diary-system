@@ -23,6 +23,12 @@ html, body {
   height: 100%;
   overflow-y: auto;
 }
+header {
+  margin-bottom: 5px;
+}
+#footer {
+  position: sticky;
+}
 
 @media screen and (min-width: 501px) {
 

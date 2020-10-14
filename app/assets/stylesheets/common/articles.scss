@@ -1066,18 +1066,22 @@ $rule-margin-left-and-right: 1.3rem;
     width: 50%;
     max-width: initial;
     float: left;
+    min-height: $post-content-min-height;
+    border-radius: 0;
+    border-left: 0;
   }
 
   .templated-post-body {
     @extend #post-content;
-    resize: vertical;
-    min-height: 150px;
-    max-height: $post-content-min-height;
+    height: $post-content-min-height;
   }
 
   .post-content-preview {
     @extend #post-content;
     float: right;
+    max-height: $post-content-min-height;
+    overflow: scroll;
+    border-right: 0;
   }
 }
 
@@ -1126,7 +1130,15 @@ $rule-margin-left-and-right: 1.3rem;
 
     .oneline {
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
+    }
+    .duration {
+      border: 1px solid #ccc;
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
     }
 
     .star {
@@ -1148,11 +1160,13 @@ $rule-margin-left-and-right: 1.3rem;
     top: 0;
     height: 100%;
     width: 100%;
-    padding: 10px 0 17px 0;
+    padding: 10px 0 17px;
     background-color: white;
-    border-bottom: 1px solid;
-    border-image: linear-gradient(90deg, #f3f3f3, #bbbbbb, #f3f3f3);
-    border-image-slice: 1;
+    border-bottom: 1px solid #bbbbbb;
+    z-index: 1;
+    // border-bottom: 1px solid;
+    // border-image: linear-gradient(90deg, #f3f3f3, #bbbbbb, #f3f3f3);
+    // border-image-slice: 1;
   }
 
   #form-title {
@@ -1164,7 +1178,7 @@ $rule-margin-left-and-right: 1.3rem;
     justify-content: center;
     align-items: center;
     font-size: 17px;
-    margin: 0 0 12px 0;
+    margin: 0 25px 12px;
 
     #back-link {
       position: absolute;
