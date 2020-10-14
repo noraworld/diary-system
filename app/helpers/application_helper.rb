@@ -94,6 +94,10 @@ module ApplicationHelper
     strip_tags(processor.call(public_contents)[:output].to_s).gsub(/\n+/, ' ').gsub('、 ', '、').gsub('。 ', '。')
   end
 
+  def file_storage
+    ActiveRecord::Type::Boolean.new.cast(ENV.fetch('S3_ENABLED')) ? 's3' : 'local'
+  end
+
   # 数値の月表記を英語の月表記に変換する
   # month: 変換する月(integer), short: 先頭から何文字まで表示するか
   # return -> 英語の月表記(string)

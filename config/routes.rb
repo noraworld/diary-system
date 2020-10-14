@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   delete '/destroy/:year/:month/:day' => 'articles#destroy', constraints: { year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/ }, as: 'destroy'
 
   post '/upload'   => 'uploads#upload'
-  get  '/s3'       => 'uploads#s3'
   get  '/search'   => 'articles#search'
   get  '/timeline' => 'articles#timeline'
   post '/migrate'  => 'articles#migrate', as: 'migrate'
@@ -30,4 +29,11 @@ Rails.application.routes.draw do
 
   get  '/settings' => 'settings#edit'
   post '/settings' => 'settings#update'
+
+  namespace 'api' do
+    namespace 'v1' do
+      get  '/media' => 'media#show'
+      post '/media' => 'media#create', as: 'media_post'
+    end
+  end
 end

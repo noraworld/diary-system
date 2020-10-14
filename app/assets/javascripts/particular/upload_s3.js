@@ -2,8 +2,6 @@
 
 function uploadS3() {
   const uploadedFiles = document.getElementById('files');
-  var s3Urls          = [];
-  var filenames       = [];
   var fileCounter     = 0;
 
   if (uploadedFiles.value === '') {
@@ -13,9 +11,9 @@ function uploadS3() {
 
   for (var i = 0; i < uploadedFiles.files.length; i++) {
     document.querySelector('#markdown-edit-button #upload-image #progress #all').textContent = parseInt(document.querySelector('#markdown-edit-button #upload-image #progress #all').textContent) + 1;
-    var url = '/s3?filename=' + uploadedFiles.files[i].name + "&mimetype=" + uploadedFiles.files[i].type;
+    var url = getMediaApiEndpoint(uploadedFiles.files[i].name, uploadedFiles.files[i].type);
 
-    console.log('Fetching AWS presigned URL...');
+    console.log('Fetching media information...');
     fetch(
       url,
       {
@@ -23,7 +21,7 @@ function uploadS3() {
       }
     ).then(response => {
       if (response.ok) {
-        console.log('Fetched AWS presigned URL sucessfully.');
+        console.log('Fetched media information sucessfully.');
         return response.json();
       }
     }).then((data) => {
@@ -35,16 +33,20 @@ function uploadS3() {
       }
 
       getActiveTextarea().focus();
-      document.execCommand('insertText', false, '![' + uploadedFiles.files[fileCounter].name + '](' + data.s3_url + ')\n');
+      document.execCommand('insertText', false, '![' + uploadedFiles.files[fileCounter].name + '](' + data.media_url + ')\n');
 
-      formdata[fileCounter].append("file", uploadedFiles.files[fileCounter]);
+      formdata[fileCounter].append('file', uploadedFiles.files[fileCounter]);
+      console.log(data.file_storage);
+      if (data.file_storage === 'local') {
+        formdata[fileCounter].append('authenticity_token', $('meta[name="csrf-token"]').attr('content'));
+      }
       const headers = {
         'accept': 'multipart/form-data'
       }
 
-      console.log('Posting images to AWS S3...');
+      console.log('Posting images...');
       fetch(
-        data.url,
+        data.dest_domain,
         {
           method: 'POST',
           headers,
@@ -62,4 +64,8 @@ function uploadS3() {
       fileCounter = fileCounter + 1;
     });
   }
+}
+
+function getMediaApiEndpoint(filename, mimetype) {
+  return '/api/v1/media?filename=' + filename + '&mimetype=' + mimetype;
 }
