@@ -18,9 +18,16 @@
       <%= article_form.submit({ id: 'post-button' }) %>
     </div>
     <div id="markdown-edit-button">
-      <span id="listify"><i class="fas fa-list-ul"></i></span><%# don't care
-    %><span id="privatify"><i class="fas fa-mask"></i></span><%# don't care
-    %><span id="upload-image"><i class="far fa-image"></i><div id="progress" class="progress"><div id="completed" class="completed">0</div>/<div id="all" class="all">0</div></div><input type="file" id="files" class="<%= file_storage %>" multiple="multiple" style="display: none;"></span>
+      <span id="listify"><i class="fas fa-list-ul"></i></span>
+      <span id="privatify"><i class="fas fa-mask"></i></span>
+      <span id="upload-image">
+        <i class="far fa-image"></i>
+        <div id="progress" class="progress">
+          <div id="completed" class="completed">0</div>/<div id="all" class="all">0</div>
+          <i id="status" class="fas fa-check"></i>
+        </div>
+        <input type="file" id="files" class="<%= file_storage %>" multiple="multiple" style="display: none;">
+      </span>
     </div>
   </div>
 
