@@ -11,11 +11,7 @@ function uploadS3() {
 
   for (var i = 0; i < uploadedFiles.files.length; i++) {
     document.querySelector('#markdown-edit-button #upload-image #progress #all').textContent = parseInt(document.querySelector('#markdown-edit-button #upload-image #progress #all').textContent) + 1;
-    if (parseInt(document.querySelector('#markdown-edit-button #upload-image #progress #completed').textContent) !== parseInt(document.querySelector('#markdown-edit-button #upload-image #progress #all').textContent)) {
-      document.querySelector('#markdown-edit-button #upload-image #progress #status').classList.remove('fa-check');
-      document.querySelector('#markdown-edit-button #upload-image #progress #status').classList.add('fa-spinner');
-      document.querySelector('#markdown-edit-button #upload-image #progress #status').classList.add('fa-spin');
-    }
+    updateUploadingStatus();
 
     var url = getMediaApiEndpoint(uploadedFiles.files[i].name, uploadedFiles.files[i].type);
 
@@ -63,11 +59,7 @@ function uploadS3() {
           console.log('Posted images sucessfully!');
 
           document.querySelector('#markdown-edit-button #upload-image #progress #completed').textContent = parseInt(document.querySelector('#markdown-edit-button #upload-image #progress #completed').textContent) + 1;
-          if (parseInt(document.querySelector('#markdown-edit-button #upload-image #progress #completed').textContent) === parseInt(document.querySelector('#markdown-edit-button #upload-image #progress #all').textContent)) {
-            document.querySelector('#markdown-edit-button #upload-image #progress #status').classList.remove('fa-spinner');
-            document.querySelector('#markdown-edit-button #upload-image #progress #status').classList.remove('fa-spin');
-            document.querySelector('#markdown-edit-button #upload-image #progress #status').classList.add('fa-check');
-          }
+          updateUploadingStatus();
 
           return response.text();
         }
@@ -75,6 +67,19 @@ function uploadS3() {
 
       fileCounter = fileCounter + 1;
     });
+  }
+}
+
+function updateUploadingStatus() {
+  if (parseInt(document.querySelector('#markdown-edit-button #upload-image #progress #completed').textContent) === parseInt(document.querySelector('#markdown-edit-button #upload-image #progress #all').textContent)) {
+    document.querySelector('#markdown-edit-button #upload-image #progress #status').classList.remove('fa-spinner');
+    document.querySelector('#markdown-edit-button #upload-image #progress #status').classList.remove('fa-spin');
+    document.querySelector('#markdown-edit-button #upload-image #progress #status').classList.add('fa-check');
+  }
+  else {
+    document.querySelector('#markdown-edit-button #upload-image #progress #status').classList.remove('fa-check');
+    document.querySelector('#markdown-edit-button #upload-image #progress #status').classList.add('fa-spinner');
+    document.querySelector('#markdown-edit-button #upload-image #progress #status').classList.add('fa-spin');
   }
 }
 
