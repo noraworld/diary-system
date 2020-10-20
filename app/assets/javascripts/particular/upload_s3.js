@@ -1,6 +1,6 @@
 'use strict';
 
-function uploadS3() {
+function uploadS3(dropTarget = null) {
   const uploadedFiles = document.getElementById('files');
   var fileCounter     = 0;
 
@@ -34,7 +34,14 @@ function uploadS3() {
         formdata[fileCounter].append(key, data.fields[key]);
       }
 
-      getActiveTextarea().focus();
+      // Somehow 'this.focus()' sometimes does not take effect in drag_and_drop_to_upload.js.
+      // In other words, 'document.activeElement' is '<body>' after executing 'this.focus()' even if 'this' is a drag-and-drop element.
+      if (dropTarget) {
+        dropTarget.focus();
+      }
+      else {
+        getActiveTextarea().focus();
+      }
       document.execCommand('insertText', false, '![' + uploadedFiles.files[fileCounter].name + '](' + data.media_url + ')\n');
 
       formdata[fileCounter].append('file', uploadedFiles.files[fileCounter]);

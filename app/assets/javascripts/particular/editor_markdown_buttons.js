@@ -135,7 +135,7 @@ function getActiveTextarea() {
   else if (activeElementBeforeClickingListify !== null && activeElementBeforeClickingListify.getAttribute('class') === 'templated-post-body') {
     return activeElementBeforeClickingListify;
   }
-  else if (document.activeElement.getAttribute('class') === 'templated-post-body') {
+  else if (document.activeElement.classList.contains('templated-post-body')) {
     return document.activeElement;
   }
   else if (document.activeElement.getAttribute('id') === 'post-content') {

@@ -945,6 +945,9 @@ $rule-margin-left-and-right: 1.3rem;
 {
   margin-top: 0;
 }
+#post-content.dragover {
+  background: #efefef;
+}
 
 @function private-color($alpha) {
   @return rgba(239, 169, 227, $alpha);
