@@ -1212,9 +1212,12 @@ $rule-margin-left-and-right: 1.3rem;
 
   #markdown-edit-button {
     padding: 10px 60px;
-    font-size: 15px;
+    font-size: 0px; // for strange space
 
     span {
+      // https://qiita.com/nabettu/items/f34624d9094276d05e70
+      display: inline-block; // for strange space
+      font-size: 15px;       // for strange space
       padding: 8px;
       border: 1px solid grey;
       border-right: none;
