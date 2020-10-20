@@ -1242,10 +1242,13 @@ $rule-margin-left-and-right: 1.3rem;
         display: inline-block;
       }
       .completed {
-        padding: 0 2px 0 7px;
+        padding: 0 2px 0 4px;
       }
       .all {
-        padding: 0 0 0 2px;
+        padding: 0 3px 0 2px;
+      }
+      .status.fa-check {
+        color: green;
       }
     }
   }
