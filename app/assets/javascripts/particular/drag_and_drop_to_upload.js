@@ -1,7 +1,7 @@
 'use strict';
 
 {
-  const dragAndDropFields = document.querySelectorAll('#post-content, .templated-post-body');
+  const dragAndDropFields = document.querySelectorAll('textarea#post-content, textarea.templated-post-body');
 
   for (var i = 0; i < dragAndDropFields.length; i++) {
     dragAndDropFields[i].addEventListener('dragover', function(event) {
