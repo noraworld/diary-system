@@ -6,7 +6,7 @@ class Api::V1::MarkdownsController < ApplicationController
   include ApplicationHelper
 
   def markdown
-    render json: { markdown: qiita_markdown(params[:body]) }
+    render json: { markdown: qiita_markdown(params[:body], script: false) }
   end
 
   private

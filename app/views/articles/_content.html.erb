@@ -8,7 +8,7 @@
 
 <div id="templated-posts-content">
   <% @article.templated_articles.order('position ASC').each do |templated_article| %>
-    <% templated_article_body = qiita_markdown(templated_article.body, templated_article.format) %>
+    <% templated_article_body = qiita_markdown(templated_article.body, format: templated_article.format) %>
 
     <% if ((templated_article_body.present? && !templated_article.is_private) || (templated_article_body.present? && current_user)) && (templated_article.body != templated_article.template_body) %>
       <div class="templated-post-title">

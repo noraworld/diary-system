@@ -74,12 +74,12 @@ module ApplicationHelper
   end
 
   # Qiita::Markdownを使用する
-  def qiita_markdown(markdown, format = nil)
+  def qiita_markdown(markdown, format: nil, script: true)
     settings_host_name = Setting.last&.host_name
     public_contents = markdown.present? ? trim_private_contents(markdown) : markdown
     return public_contents if !format.nil? && format != 'sentence'
 
-    processor = Qiita::Markdown::Processor.new(hostname: settings_host_name, script: true)
+    processor = Qiita::Markdown::Processor.new(hostname: settings_host_name, script: script)
     processor.call(public_contents)[:output].to_s.html_safe # rubocop:disable Rails/OutputSafety
   end
 
