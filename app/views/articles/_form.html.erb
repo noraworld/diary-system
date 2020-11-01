@@ -28,6 +28,7 @@
         </div>
         <input type="file" id="files" class="<%= file_storage %>" multiple="multiple" style="display: none;">
       </span>
+      <span id="annotate"><i class="fas fa-asterisk"></i></span>
     </div>
   </div>
 
@@ -108,3 +109,4 @@
 <%= javascript_include_tag 'particular/upload_s3.js' %>
 <%= javascript_include_tag 'particular/preview_markdown.js' %>
 <%= javascript_include_tag 'particular/drag_and_drop_to_upload.js' %>
+<%= javascript_include_tag 'particular/annotate.js' %>

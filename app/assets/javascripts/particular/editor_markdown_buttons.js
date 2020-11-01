@@ -1,7 +1,7 @@
 'use strict';
 
 {
-  const BUTTON_SELECTORS = '#listify, #privatify, #upload-image';
+  const BUTTON_SELECTORS = '#listify, #privatify, #upload-image, #annotate';
   let buttonElements = document.querySelectorAll(BUTTON_SELECTORS);
 
   let previousSentence = null;
@@ -23,6 +23,10 @@
   });
   document.querySelector('#upload-image input').addEventListener('change', () => {
     uploadS3();
+  });
+  document.querySelector('#annotate').addEventListener('click', () => {
+    if (getActiveTextarea() === null) { return false; }
+    annotate();
   });
 
   // Remember active element before clicking editor markdown buttons
