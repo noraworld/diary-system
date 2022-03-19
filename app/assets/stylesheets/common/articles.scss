@@ -30,6 +30,75 @@
     );
   background-size: $sx $sy;
 }
+@mixin format {
+  .oneline {
+    font-family: $post-content-font;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    height: 45px;
+    padding: 0 1.4rem;
+    font-size: 15px;
+    margin: 0 0 0 0;
+  }
+
+  .star {
+    font-size: 40px;
+    color: gold;
+    text-shadow: 0 0 2px goldenrod;
+  }
+  .star.focused:before {
+    text-shadow: 0 0 7px #02b9ff;
+  }
+
+  .duration {
+    font-family: $post-content-font;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    height: 45px;
+    padding: 0.4rem 1.4rem;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 15px 0 0 0;
+  }
+
+  .bool {
+    // TODO: add!
+  }
+}
+// Refer to https://mamewaza.com/support/blog/text-emphasis.html. Thanks a lot!
+@mixin handwritten-style-underline {
+  background-repeat: repeat-x;
+  background-size: 0.6em 0.2em,1.6em 0.2em,3.4em 0.2em,3.6em 0.2em;
+  background-position: right bottom;
+
+  background-image:
+    -webkit-gradient(linear, left top, left bottom,
+                      from(rgba(255, 156, 63, 0)),
+                      color-stop(0.1, rgba(246, 89, 115, 0.02)),
+                      color-stop(0.5, rgba(255, 156, 63, 1)),
+                      color-stop(0.98, rgba(255, 156, 63, 0)),
+                      to(rgba(255, 156, 63, 0))
+                    );
+
+  background-image:
+    -webkit-radial-gradient(center center, 0.2em 0.1em, rgba(255,156,63,1) 0, rgba(255,156,63,0) 0.1em, rgba(255,156,63,0) 0.2em),
+    -webkit-radial-gradient(center center, 0.4em 0.1em, rgba(255,156,63,1) 0, rgba(255,156,63,0) 0.3em, rgba(255,156,63,0) 0.4em),
+    -webkit-radial-gradient(center center, 0.7em 0.1em, rgba(255,156,63,1) 0, rgba(255,156,63,0) 0.6em, rgba(255,156,63,0) 0.7em),
+    -webkit-radial-gradient(center center, 7.1em 0.1em, rgba(255,156,63,1) 0, rgba(255,156,63,0) 7em,   rgba(255,156,63,0) 7.1em);
+  background-image:
+    radial-gradient(0.2em 0.1em at center center, rgba(255,156,63,1), rgba(255,156,63,0)),
+    radial-gradient(0.4em 0.1em at center center, rgba(255,156,63,1), rgba(255,156,63,0)),
+    radial-gradient(0.7em 0.1em at center center, rgba(255,156,63,1), rgba(255,156,63,0)),
+    radial-gradient(7.1em 0.1em at center center, rgba(255,156,63,1), rgba(255,156,63,0));
+}
+
+@mixin lock-icon-on-the-left-side-of-title {
+  font-size: 12px;
+  padding: 0 5px 0 0;
+}
 
 $general-max-width: 750px;
 $img-max-width: 600px;
@@ -48,10 +117,16 @@ $post-content-padding-bottom: 1rem;
 $post-content-padding-top: 1.3rem;
 $post-content-padding-top-tablet: 1rem;
 $post-content-border-color: #ccc;
+$post-content-min-height: 600px;
+
 $system-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
+$post-content-font: "FOT-ニューシネマA Std D", YuGothic, $system-font, 'Open Sans Regular';
+$post-content-edit-font: YuGothic, $system-font, 'Open Sans Regular'; // FONTPLUS font cannot be used on input field and textarea field
+
 // iPad の縦幅は 1024px なので、それ以上にすると
 // タブレットでは、画面左右の丸い矢印が出なくなる
 $prev-next-post-threshold: 1050px;
+
 $hr-color: #fff;
 $hr-before-after-height: 10px;
 
@@ -76,6 +151,15 @@ $hr-before-after-height: 10px;
   border-radius: 4px;
   box-sizing: border-box;
   position: relative;
+
+  ul {
+    padding: 0 0 0 2.5em;
+    margin: 0.5em 0 0 0;
+
+    li {
+      margin: 0.3em 0 0 0;
+    }
+  }
 }
 #success-message #times, #failed-message #times {
   right: 1.5rem;
@@ -237,6 +321,22 @@ $post-link-over-post-day: 1;
   color: #dd453e;
   margin-left: 5px;
 }
+.post-link .recent-article {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  color: #ff5200;
+
+  &.lock {
+    color: #4a4a4a;
+  }
+  &.lock-open {
+    color: #4a4a4a;
+  }
+}
 .day {
   position: absolute;
   top: 10px;
@@ -290,7 +390,29 @@ $post-link-over-post-day: 1;
   justify-content: center;
   font-family: $system-font;
   font-size: 14px;
-  padding: 20px 0;
+  margin: 20px 0;
+  position: relative;
+
+  #todays-diary-button {
+    position: absolute;
+    right: 15px;
+    height: 100%;
+    background: black;
+    padding: 0 15px;
+    border-radius: 4px;
+    background-color: #5ba4e5;
+    border: 1px solid #308ddf;
+    cursor: pointer;
+
+    #todays-diary-link {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+    }
+  }
 }
 #calendar {
   display: inline-block;
@@ -361,6 +483,10 @@ $post-link-over-post-day: 1;
   width: 100% - $date-description-prev-next-post-width - $date-description-prev-next-post-width;
   height: 100%;
   padding: 15px 0;
+
+  .fa-lock, .fa-lock-open {
+    @include lock-icon-on-the-left-side-of-title;
+  }
 }
 #date-description #date.no-prev-post {
   float: right;
@@ -381,10 +507,10 @@ $rule-margin-left-and-right: 1.3rem;
 }
 
 #post-content {
-  font-family: 'Open Sans Regular';
+  font-family: $post-content-font;
   width: $general-width-percent;
   max-width: $general-max-width;
-  min-height: 600px;
+  min-height: $post-content-min-height;
   margin: 0 auto;
   font-size: 15px;
   line-height: 31px;
@@ -398,46 +524,101 @@ $rule-margin-left-and-right: 1.3rem;
   word-wrap: break-word;
 
   h1 {
-    // font-family: 'Open Sans Bold';
-    font-size: 26px;  // default: 30px;
+    font-size: 20px;  // default: 30px;
     font-weight: normal;
     margin-top: 50px;
     margin-bottom: 15px;
+    padding-left: 12px;
+    position: relative;
+
+    &:before {
+      content: '';
+      width: 3.5px;
+      height: 100%;
+      background: #62a6ea;
+      position: absolute;
+      left: 0;
+    }
   }
+
   h2 {
-    // font-family: 'Open Sans Bold';
-    font-size: 24px;  // default: 22.5px;
+    font-size: 18px;  // default: 22.5px;
     font-weight: normal;
     margin-top: 40px;
     margin-bottom: 15px;
+    padding-left: 10px;
+    position: relative;
+
+    &:before {
+      content: '';
+      width: 2.5px;
+      height: 100%;
+      background: #62a6ea;
+      position: absolute;
+      left: 0;
+    }
   }
+
   h3 {
-    // font-family: 'Open Sans Bold';
-    font-size: 22px;  // default: 17.55px;
+    font-size: 16px;  // default: 17.55px;
     font-weight: normal;
     margin-top: 31px;
     margin-bottom: 10px;
+    padding-left: 9px;
+    position: relative;
+
+    &:before {
+      content: '';
+      width: 2.5px;
+      height: 100%;
+      background: #62a6ea;
+      position: absolute;
+      left: 0;
+    }
   }
+
   h4 {
-    // font-family: 'Open Sans Bold';
-    font-size: 20px;  // default: 15px;
-    font-weight: normal;
+    font-size: 15px;  // default: 15px;
+    font-weight: bold;
     margin-top: 31px;
     margin-bottom: 5px;
+    position: relative;
   }
+
   h5 {
-    // font-family: 'Open Sans Bold';
-    font-size: 18px;  // default: 12.45px;
-    font-weight: normal;
+    font-size: 14.25px;  // default: 12.45px;
+    font-weight: bold;
     margin-top: 31px;
     margin-bottom: 5px;
+    position: relative;
   }
+
   h6 {
-    // font-family: 'Open Sans Bold';
-    font-size: 16px;  // default: 10.05px;
-    font-weight: normal;
+    font-size: 13.5px;  // default: 10.05px;
+    font-weight: bold;
     margin-top: 31px;
     margin-bottom: 5px;
+    position: relative;
+  }
+
+  h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    position: absolute;
+    width: 31px;
+    height: 100%;
+    left: -31px;
+    border: none;
+
+    &:hover {
+      border: none;
+    }
+
+    i {
+      font-size: 14px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   p, ul, ol, dl, table {
@@ -446,23 +627,23 @@ $rule-margin-left-and-right: 1.3rem;
   }
 
   strong {
-    font-family: 'Open Sans Bold';
+    font-family: $post-content-font;
     font-weight: bold;
   }
 
   a {
-    color: #000080;
+    color: #000080 !important;
     text-decoration: none;
     border-bottom: 1px dashed #000080;
   }
   a:hover {
-    color: #048dbd;
+    color: #048dbd !important;
     border-bottom: 1px dashed #048dbd;
   }
   a[target="_blank"] {
     margin-right: 5px;
   }
-  a[target="_blank"]:after {
+  a[target="_blank"]:not([href*="/images/"]):not([href*=".png"]):not([href*=".jpg"]):not([href*=".jpeg"]):not([href*=".gif"]):after {
     content: ' \ea7e  ';  // The spaces are needed.
     font-family: 'icomoon';
     letter-spacing: -4px;
@@ -479,7 +660,6 @@ $rule-margin-left-and-right: 1.3rem;
     width: auto;
     height: auto;
     margin: 0 auto;
-    display: block;
     box-sizing: border-box;
     padding: 10px;
     box-shadow: 0 0 4px #999;
@@ -494,6 +674,10 @@ $rule-margin-left-and-right: 1.3rem;
     padding-left: 1.5em;
     /*text-indent: -1em;*/
     /*list-style-position: inside;*/
+
+    ul, ol {
+      padding-left: 2.5em;
+    }
   }
 
   ul li {
@@ -501,7 +685,28 @@ $rule-margin-left-and-right: 1.3rem;
     ul li {
       list-style-type: circle;
       ul li {
-        list-style-type: square;
+        list-style-type: disc;
+        ul li {
+          list-style-type: circle;
+          ul li {
+            list-style-type: disc;
+            ul li {
+              list-style-type: circle;
+              ul li {
+                list-style-type: disc;
+                ul li {
+                  list-style-type: circle;
+                  ul li {
+                    list-style-type: disc;
+                    ul li {
+                      list-style-type: circle;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -536,12 +741,15 @@ $rule-margin-left-and-right: 1.3rem;
     font-family: $system-font;
     font-size: 16px;
     display: block;
-    overflow: auto;
-    margin: 1.5em 0;
+    overflow-x: scroll;
+    overflow-y: auto;
+    white-space: nowrap;
+    margin: 1.5em 0 0 0;
     border-collapse: collapse;
     border-spacing: 0;
     background-color: transparent;
     border: none;
+    -webkit-overflow-scrolling: touch;
 
     tr:nth-child(odd) {
       background-color: #fafbfc;
@@ -728,30 +936,118 @@ $rule-margin-left-and-right: 1.3rem;
 #post-content h4+ol, #post-content h4+p, #post-content h4+ul, #post-content h4+dl,
 #post-content h5+ol, #post-content h5+p, #post-content h5+ul, #post-content h5+dl,
 #post-content h6+ol, #post-content h6+p, #post-content h6+ul, #post-content h6+dl,
-#post-content blockquote + *:not(hr), #post-content blockquote + script + *:not(hr), #post-content hr + *
+#post-content blockquote + *:not(hr), #post-content blockquote + script + *:not(hr), #post-content hr + *,
+#post-content h1+ul li:first-child p, #post-content h2+ul li:first-child p, #post-content h3+ul li:first-child p,
+#post-content h4+ul li:first-child p, #post-content h5+ul li:first-child p, #post-content h6+ul li:first-child p,
+#post-content h1+ol li:first-child p, #post-content h2+ol li:first-child p, #post-content h3+ol li:first-child p,
+#post-content h4+ol li:first-child p, #post-content h5+ol li:first-child p, #post-content h6+ol li:first-child p,
+#post-content .private-sentence:first-child *
 {
   margin-top: 0;
 }
 
-// display: none が複数箇所にあるのはよくないので
-// display: none はすべてここに集約している
-// なので、ここを丸ごと消すと、すべての要素の display: none が
-// 消えてしまうことに注意する
-#post-button {
-  display: none;
+@function private-color($alpha) {
+  @return rgba(239, 169, 227, $alpha);
+}
+.private-sentence {
+  background: private-color(0.55);
+  border-radius: 4px;
+
+  &.inline {
+    margin: 0 1px;
+    padding: 3px 0;
+  }
+  &.block {
+    // padding: 0 7px 5px;
+    padding: 0 7px 0;
+  }
+  *:first-child {
+    // padding-top: 7px;
+  }
+}
+
+.templated-post-title, #main-post-title {
+  font-family: $post-content-font;
+  text-align: center;
+  max-width: $general-max-width - 20px;
+  word-wrap: break-word;
+}
+.templated-post-title {
+  margin: 40px auto 7px;
+}
+#main-post-title {
+  margin: 27px auto 7px;
+}
+#form-title + .templated-post-title {
+  margin-top: 0;
+}
+.templated-post-title {
+  .fa-lock, .fa-lock-open {
+    @include lock-icon-on-the-left-side-of-title;
+  }
+}
+
+#templated-posts-content .templated-post-body {
+  @extend #post-content;
+  width: 100%;
+  min-height: 125px;
+
+  &.private-content {
+    @include note(private-color(0.30));
+  }
 }
 
 #post-content ul > li {
   list-style-type: disc;
 }
 
+#post-link-wrapper {
+  font-family: $system-font;
+  max-width: 750px;
+  margin: 0 auto 15px;
+
+  #post-link-left-wrapper {
+    float: left;
+  }
+
+  #post-link-right-wrapper {
+    float: right;
+  }
+
+  #this-month-link, #edit-link, #delete-link, #migrate-link {
+    color: #444444;
+    padding: 0 7px 0 0;
+
+    &:hover {
+      color: #808080;
+    }
+  }
+
+  #this-month-link {
+    padding: 0 0 0 7px;
+  }
+
+  #edit-link, #delete-link, #migrate-link {
+    padding: 0 7px 0 0;
+  }
+
+  #delete-link {
+    color: #ff0000;
+
+    &:hover {
+      color: #ff7676;
+    }
+  }
+}
+
 #textarea {
-  text-align: center;
-  width: $general-width-percent;
+  // text-align: center;
   // min-height: 55vh;
   // max-height: 55vh;
   /*min-height: 500px;*/
-  margin: 10px auto;
+  margin: 10px 0px 20px;
+  overflow: auto;
+
   #post-content {
     // min-height: 55vh;
     // max-height: 55vh;
@@ -759,7 +1055,7 @@ $rule-margin-left-and-right: 1.3rem;
     // padding: 1.5rem 2rem 0;
     padding: $post-content-padding-top $post-content-padding-left-and-right $post-content-padding-bottom;
     // font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-family: 'Open Sans Regular';
+    font-family: $post-content-edit-font;
     text-align: initial;
     // font-size: 16px;
     // line-height: 25px;
@@ -767,17 +1063,232 @@ $rule-margin-left-and-right: 1.3rem;
     outline: none;
     -webkit-overflow-scrolling: touch;
     background-image: none;
-    width: 100%;
+    width: 50%;
+    max-width: initial;
+    float: left;
+    min-height: $post-content-min-height;
+    border-radius: 0;
+    border-left: 0;
+  }
+  #post-content.dragover {
+    background: #efefef;
+  }
+
+  .templated-post-body {
+    @extend #post-content;
+    height: $post-content-min-height;
+  }
+
+  .post-content-preview {
+    @extend #post-content;
+    float: right;
+    max-height: $post-content-min-height;
+    overflow: scroll;
+    border-right: 0;
   }
 }
 
+.public-in {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
+  text-align: center;
+  padding: 15px 0;
+  line-height: 25px;
+
+  input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 28px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Open Sans Light";
+    width: 60px;
+    text-align: center;
+    padding: 3px;
+  }
+}
+
+#templated-posts-content {
+  max-width: $general-max-width;
+  margin: 0 auto;
+
+  @include format;
+
+  .oneline {
+    font-size: 22px;
+    word-wrap: break-word;
+    height: 100%;
+    text-align: center;
+
+    span {
+      @include handwritten-style-underline;
+    }
+  }
+
+  .star-wrapper {
+    text-align: center;
+  }
+}
+
+#post-form {
+  .templated-post-body {
+    @include format;
+
+    .oneline {
+      border: 1px solid #ccc;
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
+    }
+    .duration {
+      border: 1px solid #ccc;
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
+    }
+
+    .star {
+      cursor: pointer;
+    }
+  }
+
+  .templated-post-body.star-wrapper {
+    text-align: center;
+  }
+}
+#post-form {
+  // width: $general-width-percent;
+  // max-width: 750px;
+  margin: 0 auto;
+
+  #form-title-fixed-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    padding: 10px 0 17px;
+    background-color: white;
+    border-bottom: 1px solid #bbbbbb;
+    z-index: 1;
+    // border-bottom: 1px solid;
+    // border-image: linear-gradient(90deg, #f3f3f3, #bbbbbb, #f3f3f3);
+    // border-image-slice: 1;
+  }
+
+  #form-title {
+    font-family: $post-content-edit-font;
+    text-align: center;
+    position: relative;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    margin: 0 25px 12px;
+
+    #back-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #444444;
+      font-size: 19px;
+    }
+
+    #post-button {
+      position: absolute;
+      top: 0;
+      right: 15px;
+      width: 130px;
+      height: 35px;
+      font-size: 14px;
+      color: #ffffff;
+      padding: 0 15px;
+      border-radius: 4px;
+      background-color: #5ba4e5;
+      border: 1px solid #308ddf;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+
+  #markdown-edit-button {
+    padding: 10px 60px;
+    font-size: 0px; // for strange space
+
+    span {
+      // https://qiita.com/nabettu/items/f34624d9094276d05e70
+      display: inline-block; // for strange space
+      font-size: 15px;       // for strange space
+      padding: 8px;
+      border: 1px solid grey;
+      border-right: none;
+      cursor: pointer;
+
+      &:hover {
+        background: #e2e2e2;
+      }
+      &:active {
+        background: radial-gradient(circle, whitesmoke, #bfbfbf);
+      }
+
+      &:first-child {
+        border-radius: 4px 0 0 4px;
+      }
+      &:last-child {
+        border-radius: 0 4px 4px 0;
+        border-right: 1px solid grey;
+      }
+
+      .progress, .completed, .all {
+        display: inline-block;
+      }
+      .completed {
+        padding: 0 2px 0 4px;
+      }
+      .all {
+        padding: 0 3px 0 2px;
+      }
+      .status.fa-check {
+        color: green;
+      }
+    }
+  }
+
+  .error {
+    border: 1.5px solid tomato !important;
+  }
+  .star-error {
+    padding: 0 0 5px 0;
+    border-bottom: 1.5px solid tomato !important;
+  }
+}
+
+#show-error-message {
+  @extend #search-error-message;
+}
+
+@mixin search-result-width {
+  width: $general-width-percent;
+  max-width: $general-max-width;
+}
+
+.search-result-infomation {
+  font-family: $system-font;
+  @include search-result-width;
+  margin: 0 auto 14px;
+
+  .info {
+    font-size: 14px;
+  }
+}
 #search-result-contents {
   padding-bottom: 10px;
 }
 #search-result-content {
-  font-family: 'Open Sans Regular';
-  width: $general-width-percent;
-  max-width: $general-max-width;
+  font-family: $post-content-font;
+  @include search-result-width;
   margin: 20px auto 0;
   font-size: 15px;
   line-height: 31px;
@@ -1498,6 +2009,7 @@ iframe[class="mastodon-embed"] {
   }
   #search-result-contents #search-result-content:first-child, #search-error-message {
     margin-top: 20px;
+    margin-bottom: 20px;
   }
   #search-result-content {
     line-height: 26px;

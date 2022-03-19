@@ -1,0 +1,6 @@
+<% @articles.each do |article| %>
+<div style="text-align: center; margin: 0 0 10px 0;">
+  <a href="/<%= article.date.to_s.gsub('-', '/') %>"><span style="padding: 0 30px 0 0;"><%= article.year %> / <%= article.month %> / <%= article.day %></span></a>
+  <span><%= article.timeline %></span>
+</div>
+<% end %>

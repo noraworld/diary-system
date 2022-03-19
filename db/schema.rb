@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_19_045753) do
+ActiveRecord::Schema.define(version: 2020_09_29_055913) do
 
   create_table "articles", force: :cascade do |t|
     t.text "text", null: false
@@ -20,19 +20,52 @@ ActiveRecord::Schema.define(version: 2018_02_19_045753) do
     t.integer "month", null: false
     t.integer "day", null: false
     t.date "date", null: false
+    t.integer "public_in"
+    t.string "timeline"
     t.index ["year", "month", "day"], name: "date_unique", unique: true
   end
 
-  create_table "sample_articles", force: :cascade do |t|
-    t.text "text"
-    t.integer "year"
-    t.integer "month"
-    t.integer "day"
-    t.date "date"
+  create_table "settings", force: :cascade do |t|
+    t.string "site_title", null: false
+    t.string "site_description"
+    t.integer "launched_since"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "kind"
-    t.index ["year", "month", "day"], name: "sample_articles_date_unique", unique: true
+    t.string "host_name"
+    t.integer "default_public_in"
+    t.string "ga_tracking_identifier"
+    t.integer "next_day_adjustment_hour", default: 0, null: false
+    t.string "custom_snippet"
+  end
+
+  create_table "templated_articles", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "body"
+    t.integer "position", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "article_id"
+    t.integer "template_id"
+    t.string "format", default: "sentence", null: false
+    t.boolean "is_private", default: false, null: false
+    t.string "placeholder"
+    t.text "template_body"
+    t.index ["position", "article_id"], name: "templated_articles_position_unique", unique: true
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "body"
+    t.integer "position", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "uuid", null: false
+    t.string "format", default: "sentence", null: false
+    t.boolean "is_private", default: false, null: false
+    t.boolean "is_disabled", default: false, null: false
+    t.string "placeholder"
+    t.index ["position"], name: "templates_position_unique", unique: true
+    t.index ["uuid"], name: "templates_uuid_unique", unique: true
   end
 
   create_table "users", force: :cascade do |t|

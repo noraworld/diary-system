@@ -13,7 +13,7 @@
   </div>
   <% else %>
   <div class="page-box <%= n %>">
-    <a class="page <%= n %>" href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
+    <a class="page <%= n %>" href="/search?q=<%= URI.encode_www_form_component(params[:q]) %>&page=<%= n %>"><%= n %></a>
   </div>
   <% end %>
   <% end %>
@@ -32,7 +32,7 @@
   </div>
   <% else %>
   <div class="page-box <%= n %>">
-    <a class="page <%= n %>" href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
+    <a class="page <%= n %>" href="/search?q=<%= URI.encode_www_form_component(params[:q]) %>&page=<%= n %>"><%= n %></a>
   </div>
   <% end %>
   <% end %>
@@ -41,7 +41,7 @@
   </div>
   <% (@number_of_pages - (number_of_side_pages - 1)).upto(@number_of_pages) do |n| %>
   <div class="page-box <%= n %>">
-    <a class="page <%= n %>" href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
+    <a class="page <%= n %>" href="/search?q=<%= URI.encode_www_form_component(params[:q]) %>&page=<%= n %>"><%= n %></a>
   </div>
   <% end %>
 
@@ -49,7 +49,7 @@
   <% elsif @page >= number_of_side_pages + number_of_surrounding_pages + 3 && @page <= @number_of_pages - (number_of_side_pages + number_of_surrounding_pages + 2) %>
   <% 1.upto(number_of_side_pages) do |n| %>
   <div class="page-box <%= n %>">
-    <a class="page <%= n %>" href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
+    <a class="page <%= n %>" href="/search?q=<%= URI.encode_www_form_component(params[:q]) %>&page=<%= n %>"><%= n %></a>
   </div>
   <% end %>
   <div class="ellipsis-box">
@@ -62,7 +62,7 @@
   </div>
   <% else %>
   <div class="page-box <%= n %>">
-    <a class="page <%= n %>" href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
+    <a class="page <%= n %>" href="/search?q=<%= URI.encode_www_form_component(params[:q]) %>&page=<%= n %>"><%= n %></a>
   </div>
   <% end %>
   <% end %>
@@ -71,7 +71,7 @@
   </div>
   <% (@number_of_pages - (number_of_side_pages - 1)).upto(@number_of_pages) do |n| %>
   <div class="page-box <%= n %>">
-    <a class="page <%= n %>" href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
+    <a class="page <%= n %>" href="/search?q=<%= URI.encode_www_form_component(params[:q]) %>&page=<%= n %>"><%= n %></a>
   </div>
   <% end %>
 
@@ -79,7 +79,7 @@
   <% elsif @page >= @number_of_pages - (number_of_side_pages + number_of_surrounding_pages + 1) && @page <= @number_of_pages %>
   <% 1.upto(number_of_side_pages) do |n| %>
   <div class="page-box <%= n %>">
-    <a class="page <%= n %>" href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
+    <a class="page <%= n %>" href="/search?q=<%= URI.encode_www_form_component(params[:q]) %>&page=<%= n %>"><%= n %></a>
   </div>
   <% end %>
   <div class="ellipsis-box">
@@ -97,7 +97,7 @@
   </div>
   <% else %>
   <div class="page-box <%= n %>">
-    <a class="page <%= n %>" href="/search?q=<%= params[:q] %>&page=<%= n %>"><%= n %></a>
+    <a class="page <%= n %>" href="/search?q=<%= URI.encode_www_form_component(params[:q]) %>&page=<%= n %>"><%= n %></a>
   </div>
   <% end %>
   <% end %>

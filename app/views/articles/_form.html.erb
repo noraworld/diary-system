@@ -1,14 +1,96 @@
-<%= form_for(:article, url: @post_url) do |f| %>
+<%= form_with(model: @article, url: @post_url, id: 'post-form') do |article_form| %>
   <% if flash[:alert] %>
-  <div id="failed-message" class="form-message">
-    <%= flash[:alert] %><span id="times">&times;</span>
-  </div>
+    <div id="failed-message" class="form-message">
+      <span><%= flash[:alert] %><span id="times">&times;</span>
+
+      <ul>
+        <% @article.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
-  <div id="textarea">
-    <%= f.text_area :text, {:id => 'post-content', :placeholder => 'Write your diary'} %>
-    <%= f.submit({:id => 'post-button'}) %>
+  <div id="form-title-fixed-wrapper">
+    <div id="form-title">
+      <a href="<%= @back_link_url %>"><i id="back-link" class="fas fa-arrow-left"></i></a>
+      <%= @form_title %>
+      <%= article_form.submit({ id: 'post-button' }) %>
+    </div>
+    <div id="markdown-edit-button">
+      <span id="listify"><i class="fas fa-list-ul"></i></span>
+      <span id="privatify"><i class="fas fa-mask"></i></span>
+      <span id="upload-image">
+        <i class="far fa-image"></i>
+        <div id="progress" class="progress">
+          <div id="completed" class="completed">0</div>/<div id="all" class="all">0</div>
+          <i id="status" class="status fas fa-check"></i>
+        </div>
+        <input type="file" id="files" class="<%= file_storage %>" multiple="multiple" style="display: none;">
+      </span>
+      <span id="annotate"><i class="fas fa-asterisk"></i></span>
+    </div>
   </div>
+
+  <% if @templates.present? || ((controller.action_name == 'edit' || controller.action_name == 'update') && @article.templated_articles.present?) %>
+    <div id="main-post-title">Main diary</div>
+  <% end %>
+  <div class="public-in">
+    <p>This diary will be public in <%= article_form.text_field :public_in, { type: 'number', min: 0, value: @article&.public_in || Setting&.first&.default_public_in || 0 } %> day(s).</p>
+    <p>Info: Set 0 to publish immediately.</p>
+  </div>
+  <div class="timeline">
+    <%# TODO: change class names 'templated-post-body' and 'oneline' %>
+    <div class="templated-post-body"><%= article_form.text_field :timeline, { placeholder: "Was it a special day today? Let’s make a record of a special event!", class: 'oneline' } %></div>
+  </div>
+  <div id="textarea">
+    <%= article_form.text_area :text, {:id => 'post-content', :placeholder => 'Write your diary'} %>
+    <div id="post-content-preview" class="post-content-preview"></div>
+  </div>
+
+  <% if @templates && controller.action_name == 'new' %>
+    <% @templates.each do |template| %>
+      <%= article_form.fields_for :templated_articles do |templated_article_form| %>
+        <% next if template.is_disabled %>
+        <div><%= templated_article_form.text_field :template_id, { type: 'hidden', value: template.id } %></div>
+        <div class="templated-post-title">
+          <% if template.is_private %><i class="fas fa-lock"></i><% end %>
+          <%= template.title %>
+        </div>
+        <div><%= templated_article_form.text_field :title, { type: 'hidden', value: template.title } %></div>
+        <%= render 'format_for_form', { template: template, templated_article_form: templated_article_form } %>
+        <div><%= templated_article_form.text_field :template_body, { type: 'hidden', value: template.body } %></div>
+        <div><%= templated_article_form.text_field :placeholder, { type: 'hidden', value: template.placeholder } %></div>
+        <div><%= templated_article_form.text_field :position, { type: 'hidden', value: template.position } %></div>
+        <div><%= templated_article_form.text_field :format, { type: 'hidden', value: template.format } %></div>
+        <div><%= templated_article_form.text_field :is_private, { type: 'hidden', value: template.is_private } %></div>
+      <% end %>
+    <% end %>
+  <% elsif controller.action_name == 'create' %>
+    <%= article_form.fields_for :templated_articles do |templated_article_form| %>
+      <% next if templated_article_form.object.title.blank? %>
+      <div><%= templated_article_form.text_field :template_id, { type: 'hidden', value: templated_article_form.object.template_id } %></div>
+      <div class="templated-post-title">
+        <% if templated_article_form.object.is_private %><i class="fas fa-lock"></i><% end %>
+        <%= templated_article_form.object.title %>
+      </div>
+      <div><%= templated_article_form.text_field :title, { type: 'hidden', value: templated_article_form.object.title } %></div>
+      <%= render 'format_for_form', { template: nil, templated_article_form: templated_article_form } %>
+      <div><%= templated_article_form.text_field :template_body, { type: 'hidden', value: templated_article_form.object.template_body } %></div>
+      <div><%= templated_article_form.text_field :placeholder, { type: 'hidden', value: templated_article_form.object.placeholder } %></div>
+      <div><%= templated_article_form.text_field :position, { type: 'hidden', value: templated_article_form.object.position } %></div>
+      <div><%= templated_article_form.text_field :format, { type: 'hidden', value: templated_article_form.object.format } %></div>
+      <div><%= templated_article_form.text_field :is_private, { type: 'hidden', value: templated_article_form.object.is_private } %></div>
+    <% end %>
+  <% elsif controller.action_name == 'edit' || controller.action_name == 'update' %>
+    <%= article_form.fields_for :templated_articles do |templated_article_form| %>
+      <div class="templated-post-title">
+        <% if templated_article_form.object.is_private %><i class="fas fa-lock"></i><% end %>
+        <%= templated_article_form.object.title %>
+      </div>
+      <%= render 'format_for_form', { template: nil, templated_article_form: templated_article_form } %>
+    <% end %>
+  <% end %>
 <% end %>
 
 <%= form_tag({:controller => 'uploads', :action => 'upload'}, :remote => true, :id => 'upload-dropzone', :class => 'dropzone', multipart: true) do %>
@@ -18,6 +100,13 @@
 <% end %>
 
 <%= stylesheet_link_tag    'particular/edit_only.css', media: 'all' %>
-<%= javascript_include_tag 'particular/post_button_click.js' %>
 <%= javascript_include_tag 'particular/warn_without_saving.js' %>
 <%= javascript_include_tag 'particular/no_scroll.js' %>
+<%= javascript_include_tag 'particular/upload.js' %>
+<%= javascript_include_tag 'particular/star.js' %>
+<%= javascript_include_tag 'particular/editor_shortcuts.js' %>
+<%= javascript_include_tag 'particular/editor_markdown_buttons.js' %>
+<%= javascript_include_tag 'particular/upload_s3.js' %>
+<%= javascript_include_tag 'particular/preview_markdown.js' %>
+<%= javascript_include_tag 'particular/drag_and_drop_to_upload.js' %>
+<%= javascript_include_tag 'particular/annotate.js' %>

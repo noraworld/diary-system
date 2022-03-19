@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <% if Setting.last&.ga_tracking_identifier.present? %>
+    <% if Rails.env.production? %>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=<%= Setting.last&.ga_tracking_identifier %>"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '<%= Setting.last&.ga_tracking_identifier %>');
+      </script>
+    <% elsif Rails.env.development? %>
+      <script>alert('Google Analytics is enabled successfully.\nTracking ID: <%= Setting.last&.ga_tracking_identifier %>');</script>
+    <% end %>
+  <% end %>
+
   <title><%= page_title %></title>
   <% if page_description %>
     <meta name="description" content="<%= page_description %>">
@@ -12,16 +28,18 @@
   <% if current_user %>
   <%= javascript_include_tag 'particular/signed_in_config.js' %>
   <%= javascript_include_tag 'particular/close_alert_message.js' %>
-  <%= javascript_include_tag 'particular/upload.js' %>
   <% end %>
   <%= csrf_meta_tags %>
+
+  <% if Setting.last&.custom_snippet.present? %>
+  <%= Setting.last&.custom_snippet.html_safe %>
+  <% end %>
 </head>
 <body>
   <div class="container">
     <header>
       <div id="header" class="clearfix">
         <ul id="left-header">
-          <li class="left-edge"><a href="/" tabindex="-1"><span class="icon-calendar"></span></a></li>
           <li>
             <%= form_tag('/search', method: 'get', enforce_utf8: false, :id => 'search-form') do %>
               <%= text_field_tag(:q, "#{params[:q]}", :placeholder => 'Search', :id => 'search') %>
@@ -35,59 +53,43 @@
         </ul>
         <div class="hamburger-menu">
           <ul>
-            <li><a href="https://noraworld.jp"><span class="icon-home"></span>Portfolio</a></li>
-            <li><a href="https://noraworld.blog"><span class="icon-quill"></span>Blog</a></li>
-            <li><a href="https://twitter.com/noraworld_jp" target="_blank"><span class="icon-twitter"></span>Twitter</a></li>
-            <li><a href="https://www.instagram.com/noraworld_jp" target="_blank"><span class="icon-instagram"></span>Instagram</a></li>
-            <li><a href="https://github.com/noraworld" target="_blank"><span class="icon-github"></span>GitHub</a></li>
+            <li><a href="https://noraworld.com" target="_blank"><span class="icon-home"></span>Portfolio</a></li>
+            <li><a href="https://noraworld.blog" target="_blank"><span class="icon-quill"></span>Blog</a></li>
+            <li><a href="https://twitter.com/noraworld_com" target="_blank"><span class="icon-twitter"></span>Twitter</a></li>
+            <li><a href="https://mastodon.noraworld.com/@noraworld" target="_blank"><i class="fab fa-mastodon" style="font-size: 21px;"></i>Mastodon</a></li>
+            <li><a href="https://www.instagram.com/noraworld_com/" target="_blank"><span class="icon-instagram"></span>Instagram</a></li>
+            <li><a href="https://github.com/noraworld/diary" target="_blank"><span class="icon-github"></span>GitHub</a></li>
             <li><a href="https://qiita.com/noraworld" target="_blank"><span class="icon-search"></span>Qiita</a></li>
             <% if current_user %>
-            <% case controller.action_name %>
-            <% when 'index', 'search' %>
-            <li><%= link_to '/new' do %><span class="icon-plus"></span>New post<% end %></li>
-            <li><%= link_to logout_path, method: :delete do %><span class="icon-switch"></span>Logout<% end %></li>
-            <% when 'show' %>
-            <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
-            <li><%= link_to '/edit' + date do %><span class="icon-pencil"></span>Edit post<% end %></li>
-            <% when 'new', 'create' %>
-            <li><a href="#" id="publish-link"><span class="icon-upload"></span>Publish post</a></li>
-            <% when 'edit', 'update' %>
-            <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
-            <li><a href="#" id="update-link"><span class="icon-loop2"></span>Update post</a></li>
-            <li><%= link_to '/destroy' + date, { :id => 'delete-link', method: :delete, data: {confirm: 'Are you sure you want to delete?'} } do %><span class="icon-fire"></span>Delete post</li><% end %>
-            <% end %>
+              <li><%= link_to '/templates' do %><span class="icon-plus"></span>Template list<% end %></li>
+              <li><%= link_to '/settings' do %><span class="icon-cog"></span>Settings<% end %></li>
+              <li><%= link_to logout_path, method: :delete, data: { confirm: 'Are you sure you want to sign out?' } do %><span class="icon-switch"></span>Logout<% end %></li>
             <% end %>
           </ul>
         </div>
 
+        <ul id="header-logo">
+          <a href="/"><img src="/favicon.png"></a>
+        </ul>
+
         <% unless request.smart_phone? && !request.tablet? %>
         <ul id="right-header">
-          <li><a href="https://noraworld.jp" tabindex="-1">Home</a></li>
-          <li><a href="https://noraworld.blog" tabindex="-1">Blog</a></li>
-          <li><%= link_to 'Diary', '/', { :tabindex => -1 } %></li>
-          <li><a href="https://twitter.com/noraworld_jp" target="_blank" tabindex="-1"><span class="icon-twitter"></span></a></li>
-          <li><a href="https://www.instagram.com/noraworld_jp" target="_blank" tabindex="-1"><span class="icon-instagram"></span></a></li>
-          <li><a href="https://github.com/noraworld" target="_blank" tabindex="-1"><span class="icon-github"></span></a></li>
+          <li><a href="https://noraworld.com" target="_blank" tabindex="-1"><span class="icon-home"></span></a></li>
+          <li><a href="https://noraworld.blog" target="_blank" tabindex="-1"><span class="icon-quill"></span></a></li>
+          <li><a href="https://twitter.com/noraworld_com" target="_blank" tabindex="-1"><span class="icon-twitter"></span></a></li>
+          <li><a href="https://mastodon.noraworld.com/@noraworld" target="_blank" tabindex="-1"><i class="fab fa-mastodon" style="font-size: 21px;"></i></a></li>
+          <li><a href="https://www.instagram.com/noraworld_com/" target="_blank" tabindex="-1"><span class="icon-instagram"></span></a></li>
+          <li><a href="https://github.com/noraworld/diary" target="_blank" tabindex="-1"><span class="icon-github"></span></a></li>
           <li><a href="https://qiita.com/noraworld" target="_blank" tabindex="-1"><span class="icon-search"></span></a></li>
 
           <% if current_user %>
           <a id="config" class="icon-cog"></a>
           <div id="listbox">
             <ul>
-              <% case controller.action_name %>
-              <% when 'index', 'search' %>
-              <li class="menulist"><%= link_to 'New post', '/new', { :class => 'menulink' } %></li>
-              <li class="menulist"><%= link_to 'Sign out', logout_path, { :class => 'menulink', method: :delete } %></li>
-              <% when 'show' %>
-              <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
-              <li class="menulist"><%= link_to 'Edit post', '/edit' + date, { :class => 'menulink' } %></li>
-              <% when 'new', 'create' %>
-              <li class="menulist"><a class="menulink" id="publish-link">Publish post</a></li>
-              <% when 'edit', 'update' %>
-              <% date = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) + '/' + format('%02d', @article.day) %>
-              <li class="menulist"><a class="menulink" id="update-link">Update post</a></li>
-              <li class="menulist"><%= link_to 'Delete post', '/destroy' + date, { :class => 'menulink', :id => 'delete-link', method: :delete, data: {confirm: 'Are you sure you want to delete?'} } %></li>
-              <% end %>
+              <li class="menulist"><%= link_to 'Templates', '/templates', { :class => 'menulink' } %></li>
+              <li class="menulist"><%= link_to 'Timeline', '/timeline', { :class => 'menulink' } %></li>
+              <li class="menulist"><%= link_to 'Settings', '/settings', { :class => 'menulink' } %></li>
+              <li class="menulist"><%= link_to 'Sign out', logout_path, { :class => 'menulink', method: :delete, data: { confirm: 'Are you sure you want to sign out?' } } %></li>
             </ul>
           </div>
           <% end %>
@@ -99,7 +101,7 @@
     <%= yield %>
 
     <footer id="footer" class="clearfix">
-      <section id="copyright">Copyright &copy; <%= copyright_year %> <%= link_to ENV['SITE_TITLE'] || ENV['HOST_NAME'] || request.domain, '/', { :tabindex => -1 } %>. All rights reserved.</section>
+      <section id="copyright">Copyright &copy; <%= copyright_year %> <%= link_to site_title, '/', { :tabindex => -1 } %>. All rights reserved.</section>
     </footer>
   </div>
 </body>

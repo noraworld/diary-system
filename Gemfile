@@ -37,13 +37,15 @@ gem 'unicorn'
 gem 'bootsnap', require: false
 gem 'dotenv-rails'
 gem 'dropzonejs-rails'
+gem 'font-awesome-sass'
 gem 'gemoji'
 gem 'github-linguist'
 gem 'jpmobile'
-gem 'qiita-markdown', '0.26.0'
+gem 'puma'
+gem 'qiita-markdown', '0.34.0'
 gem 'rmagick'
 gem 'ruby-filemagic'
-gem 'puma'
+gem 'aws-sdk', '~> 3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

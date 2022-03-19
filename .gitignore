@@ -24,3 +24,6 @@
 /public/assets/.*
 /public/assets/application*
 /public/assets/particular
+/public/assets/font-awesome
+/node_modules
+/yarn.lock

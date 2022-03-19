@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo -e "Execute \"bundle install\"..."
+bundle install
+
+echo -e "\nExecute \"RAILS_ENV=production bundle exec rails db:migrate\"..."
+RAILS_ENV=production bundle exec rails db:migrate
+
+echo -e "\nExecute \"RAILS_ENV=production bundle exec rails assets:precompile\"..."
+RAILS_ENV=production bundle exec rails assets:precompile
+
+echo -e "\nExecute \"sudo systemctl restart diary\"..."
+sudo systemctl restart diary
+
+echo -e "\nDone!"

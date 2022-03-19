@@ -1,38 +1,44 @@
-<% if @error_message.empty? %>
-<% @page_title       = "#{params[:q]}" %>
-<% @page_description = "Search results of `#{params[:q]}`." %>
+<% unless @search_validator.errors.any? %>
+  <% @page_title       = "#{params[:q]}" %>
+  <% @page_description = "Search results of `#{params[:q]}`." %>
 <% else %>
-<% @page_title       = 'Search Failed' %>
-<% if @failed_keyword.empty? %>
-<% @page_description = "#{@error_message} Please try another keyword." %>
-<% else %>
-<% @page_description = "#{@error_message} `#{@failed_keyword}`. Please try another keyword." %>
-<% end %>
-<% end %>
+  <% @page_title = 'Search Failed' %>
 
-<% if @error_message.empty? %>
-<div id="search-result-contents">
-  <% @results.each do |result| %>
-  <% post_link = '/' + format('%04d', result.year) + '/' + format('%02d', result.month) + '/' + format('%02d', result.day) %>
-  <a id="search-result-content" href="<%= post_link %>">
-    <% post_date = format('%04d', result.year) + ' / ' + format('%02d', result.month) + ' / ' + format('%02d', result.day) %>
-    <p id=post-date><%= post_date %></p>
-    <p><%= qiita_markdown_summary(result.text) %></p>
-  </a>
-  <% end %>
-</div>
-
-<% if @number_of_pages >= 2 %>
-<%= render 'paginator' %>
-<% end %>
-
-<% else %>
-<div id="search-error-message">
-  <h2>Search Failed</h2>
-  <% if @failed_keyword.empty? %>
-  <p class="reason"><%= @error_message %></p>
+  <% if @failed_keyword_required %>
+    <% @page_description = "#{@search_validator.errors.messages.values.first.first} `#{params[:q]}`. Please try another keyword." %>
   <% else %>
-  <p class="reason"><%= @error_message %> "<b><%= @failed_keyword %></b>".</p>
+    <% @page_description = "#{@search_validator.errors.messages.values.first.first} Please try another keyword." %>
   <% end %>
-</div>
+<% end %>
+
+<% unless @search_validator.errors.any? %>
+  <div class="search-result-infomation">
+    <span class="info">Hit <b><%= pluralize(@hitcount, 'result') %></b> out of <%= pluralize(Article.all.count, 'post') %>. Page <b><%= params[:page] || 1 %></b> of <%= @number_of_pages %>.</span>
+  </div>
+
+  <div id="search-result-contents">
+    <% @results.each do |result| %>
+      <% post_link = "/#{format('%04d', result.year)}/#{format('%02d', result.month)}/#{format('%02d', result.day)}" %>
+
+      <a id="search-result-content" href="<%= post_link %>">
+        <% post_date = format('%04d', result.year) + ' / ' + format('%02d', result.month) + ' / ' + format('%02d', result.day) %>
+        <p id=post-date><%= post_date %></p>
+        <p><%= qiita_markdown_summary(result.text) %></p>
+      </a>
+    <% end %>
+  </div>
+
+  <% if @number_of_pages >= 2 %>
+    <%= render 'paginator' %>
+  <% end %>
+<% else %>
+  <div id="search-error-message">
+    <h2>Search Failed</h2>
+
+    <% if @failed_keyword_required %>
+      <p class="reason"><%= @search_validator.errors.messages.values.first.first %> "<b><%= params[:q] %></b>".</p>
+    <% else %>
+      <p class="reason"><%= @search_validator.errors.messages.values.first.first %></p>
+    <% end %>
+  </div>
 <% end %>

@@ -1,1 +1,109 @@
-<%= render 'content' %>
+<% @page_title       = format('%04d', @article.year).to_s + ' / ' + format('%02d', @article.month).to_s + ' / ' + format('%02d', @article.day).to_s %>
+<% @page_description = qiita_markdown_summary(@article.text) %>
+
+<% this_month_link   = '/' + format('%04d', @article.year) + '/' + format('%02d', @article.month) %>
+<% prev_article_link = '/' + format('%04d', @prev_article.year) + '/' + format('%02d', @prev_article.month) + '/' + format('%02d', @prev_article.day) if @prev_article %>
+<% next_article_link = '/' + format('%04d', @next_article.year) + '/' + format('%02d', @next_article.month) + '/' + format('%02d', @next_article.day) if @next_article %>
+
+<% if flash[:notice] %>
+  <div id="success-message" class="show-message">
+    <%= flash[:notice] %><span id="times">&times;</span>
+  </div>
+<% end %>
+
+<% if flash[:alert] %>
+  <div id="failed-message" class="form-message">
+    <% if flash[:alert].class == String %>
+      <span><%= flash[:alert] %><span id="times">&times;</span>
+    <% elsif flash[:alert].class == Hash %>
+      <span><%= flash[:alert].deep_symbolize_keys[:alert] %><span id="times">&times;</span>
+    <% end %>
+
+    <ul>
+      <% if flash[:alert].class == String %>
+        <% @article.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      <% elsif flash[:alert].class == Hash %>
+        <% flash[:alert].deep_symbolize_keys.except(:alert).values.each do |error| %>
+          <% if error.class == String %>
+            <li><%= error %></li>
+          <% elsif error.class == Hash %>
+            <li><%= error[:message] %></li>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div id="post-link-wrapper" class="clearfix">
+  <div id="post-link-left-wrapper">
+    <a href="<%= this_month_link %>" id="this-month-link">Go to this month’s calendar</a>
+  </div>
+
+  <% if current_user %>
+    <div id="post-link-right-wrapper">
+      <a href="<%= edit_path %>" id="edit-link">Edit</a>
+
+      <% if Rails.env.development? %>
+        <%= link_to 'Delete', destroy_path, { id: 'delete-link', method: :delete, data: { confirm: 'Are you sure you want to delete the diary?' } } %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div id="date-description" class="clearfix">
+  <%# prev-post, next-post, date の順番は重要。一番古いポストのときに date に float: right をかけたとき、順番がおかしくなるのを防ぐため %>
+  <% if prev_article_link %><a href="<%= prev_article_link %>" id="prev-post"><span class="icon-arrow-left"></span></a><% end %>
+  <% if next_article_link %><a href="<%= next_article_link %>" id="next-post"><span class="icon-arrow-right"></span></a><% end %>
+
+  <% if prev_article_link && !next_article_link %>
+  <span id="date" class="no-next-post">
+    <% if !current_user && @public_date > adjusted_current_time.to_date %>
+    <i class="fas fa-lock"></i>
+    <% elsif current_user && @public_date > adjusted_current_time.to_date %>
+    <i class="fas fa-lock-open"></i>
+    <% end %>
+    <%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %>
+  </span>
+  <% elsif !prev_article_link && next_article_link %>
+  <span id="date" class="no-prev-post">
+    <% if !current_user && @public_date > adjusted_current_time.to_date %>
+    <i class="fas fa-lock"></i>
+    <% elsif current_user && @public_date > adjusted_current_time.to_date %>
+    <i class="fas fa-lock-open"></i>
+    <% end %>
+    <%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %>
+  </span>
+  <% else %>
+  <span id="date">
+    <% if !current_user && @public_date > adjusted_current_time.to_date %>
+    <i class="fas fa-lock"></i>
+    <% elsif current_user && @public_date > adjusted_current_time.to_date %>
+    <i class="fas fa-lock-open"></i>
+    <% end %>
+    <%= format('%04d', @article.year) %> / <%= format('%02d', @article.month) %> / <%= format('%02d', @article.day) %>
+  </span>
+  <% end %>
+</div>
+
+<% if !current_user && @public_date > adjusted_current_time.to_date %>
+  <div id="show-error-message">
+    <h2>Viewing Restriction</h2>
+    <p class="reason">It is limited to access to this diary for some reasons for now.<br>This diary will be public at <b><%= @public_date.to_s.gsub('-', '/') %></b> (in <%= pluralize((@public_date - adjusted_current_time.to_date).to_i, 'day') %>).</p>
+  </div>
+<% else %>
+  <%= render 'content', prev_article_link: prev_article_link, next_article_link: next_article_link %>
+<% end %>
+
+<div id="prev-next-post" class="clearfix">
+  <% if prev_article_link && !next_article_link %>
+  <a href="<%= prev_article_link %>" id="prev-post" class="no-next-post"><span class="icon-arrow-left2 icon"></span></a>
+  <% elsif !prev_article_link && next_article_link %>
+  <a href="<%= next_article_link %>" id="next-post" class="no-prev-post"><span class="icon-arrow-right2 icon"></span></a>
+  <% elsif prev_article_link && next_article_link %>
+  <a href="<%= prev_article_link %>" id="prev-post"><span class="icon-arrow-left2 icon"></span></a>
+  <a href="<%= next_article_link %>" id="next-post"><span class="icon-arrow-right2 icon"></span></a>
+  <% end %>
+</div>

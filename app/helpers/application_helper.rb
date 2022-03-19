@@ -3,14 +3,23 @@
 module ApplicationHelper
   class NoMatchingPrivateStringError < StandardError; end
 
-  PRIVATE_START_STRING = '<private>'
-  PRIVATE_END_STRING   = '</private>'
+  PRIVATE_START_STRING = '{private}'
+  PRIVATE_END_STRING   = '{/private}'
+
+  REPLACED_PRIVATE_START_INLINE_TAG = '<span class="private-sentence inline">'
+  REPLACED_PRIVATE_END_INLINE_TAG   = '</span>'
+
+  REPLACED_PRIVATE_START_BLOCK_TAG = '<div class="private-sentence block">'
+  REPLACED_PRIVATE_END_BLOCK_TAG   = '</div>'
 
   def site_title
-    if ENV['SITE_TITLE'].present?
-      ENV['SITE_TITLE']
-    elsif ENV['HOST_NAME'].present?
-      ENV['HOST_NAME']
+    settings_site_title = Setting.last&.site_title
+    settings_host_name = Setting.last&.host_name
+
+    if settings_site_title.present?
+      settings_site_title
+    elsif settings_host_name.present?
+      settings_host_name
     else
       request.domain
     end
@@ -18,25 +27,29 @@ module ApplicationHelper
 
   # ページごとにタイトルを変更する
   def page_title
-    if @page_title && ENV['SITE_TITLE']
-      @page_title.to_s + ' - ' + ENV['SITE_TITLE'].to_s
-    elsif @page_title && !ENV['SITE_TITLE']
+    settings_site_title = Setting.last&.site_title
+
+    if @page_title.present? && settings_site_title.present?
+      @page_title.to_s + ' - ' + settings_site_title.to_s
+    elsif @page_title.present? && settings_site_title.blank?
       @page_title.to_s + ' - ' + request.domain
-    elsif !@page_title && ENV['SITE_TITLE']
-      ENV['SITE_TITLE']
-    elsif !@page_title && !ENV['SITE_TITLE']
+    elsif @page_title.blank? && settings_site_title.present?
+      settings_site_title
+    elsif @page_title.blank? && settings_site_title.blank?
       request.domain
     end
   end
 
   # トップページにはサイトの説明文、記事の詳細には、記事内容の要約を meta description に設定する
   def page_description
+    settings_site_description = Setting.last&.site_description
+
     if @page_description == false
       false
-    elsif @page_description
+    elsif @page_description.present?
       @page_description.to_s
-    elsif ENV['SITE_DESCRIPTION']
-      ENV['SITE_DESCRIPTION'].to_s
+    elsif settings_site_description.present?
+      settings_site_description.to_s
     else
       false
     end
@@ -44,12 +57,13 @@ module ApplicationHelper
 
   # Copyright の年を適切に表示させる
   def copyright_year
-    now = Time.now.in_time_zone('Tokyo').strftime('%Y').to_s
+    settings_launched_since = Setting.last&.launched_since
+    now = adjusted_current_time.strftime('%Y').to_s
 
-    since = if ENV['LAUNCHED_SINCE']
-              ENV['LAUNCHED_SINCE'].to_s
+    since = if settings_launched_since.present? && settings_launched_since.to_i != 0
+              settings_launched_since.to_s
             else
-              Time.now.in_time_zone('Tokyo').strftime('%Y').to_s
+              adjusted_current_time.strftime('%Y').to_s
             end
 
     if since.to_i < now.to_i
@@ -60,20 +74,28 @@ module ApplicationHelper
   end
 
   # Qiita::Markdownを使用する
-  def qiita_markdown(markdown)
+  def qiita_markdown(markdown, format: nil, script: true)
+    settings_host_name = Setting.last&.host_name
     public_contents = markdown.present? ? trim_private_contents(markdown) : markdown
-    processor = Qiita::Markdown::Processor.new(hostname: ENV['HOST_NAME'], script: true)
+    return public_contents if !format.nil? && format != 'sentence'
+
+    processor = Qiita::Markdown::Processor.new(hostname: settings_host_name, script: script)
     processor.call(public_contents)[:output].to_s.html_safe # rubocop:disable Rails/OutputSafety
   end
 
   # 検索結果や meta description に表示させる 200 文字程度の要約
   def qiita_markdown_summary(markdown)
+    settings_host_name = Setting.last&.host_name
     public_contents = markdown.present? ? trim_private_contents(markdown) : markdown
 
     # length は omission の文字列を含むので、omission の文字列の長さだけ length を増やす
-    processor = Qiita::Markdown::SummaryProcessor.new(truncate: { length: 204, omission: ' ...' }, hostname: ENV['HOST_NAME'])
+    processor = Qiita::Markdown::SummaryProcessor.new(truncate: { length: 204, omission: ' ...' }, hostname: settings_host_name)
     # 1 つ以上の改行は 1 つのスペースに置き換える。さらに、ポエム式記述法で、改行直前に句読点がある場合は、置き換えたスペースを省略する。
     strip_tags(processor.call(public_contents)[:output].to_s).gsub(/\n+/, ' ').gsub('、 ', '、').gsub('。 ', '。')
+  end
+
+  def file_storage
+    ActiveRecord::Type::Boolean.new.cast(ENV.fetch('S3_ENABLED')) ? 's3' : 'local'
   end
 
   # 数値の月表記を英語の月表記に変換する
@@ -153,13 +175,17 @@ module ApplicationHelper
 
   private
 
-  # TAKE CARE WHEN EDITING THIS METHOD BECAUSE IT CAN CAUSE EXPOSURE OF PRIVATE CONTENTS TO PUBLIC!
+  #########################################################################################################
+  ###                                                                                                   ###
+  ### TAKE CARE WHEN EDITING THIS METHOD BECAUSE IT CAN CAUSE EXPOSURE OF PRIVATE CONTENTS TO PUBLIC!!! ###
+  ###                                                                                                   ###
+  #########################################################################################################
   def trim_private_contents(markdown)
     private_start_string_length = markdown.scan(PRIVATE_START_STRING).length
     private_end_string_length   = markdown.scan(PRIVATE_END_STRING).length
 
     unless private_start_string_length == private_end_string_length
-      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match before parse'
+      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match (BEFORE PARSE)'
     end
 
     return markdown if private_start_string_length.zero? && private_end_string_length.zero?
@@ -168,20 +194,37 @@ module ApplicationHelper
     # raise error to perceive it also when signed in
     trimmed_markdown = markdown.gsub(/(\r\n|\r|\n)?#{PRIVATE_START_STRING}.*?#{PRIVATE_END_STRING}/m, '')
     if !trimmed_markdown.scan(PRIVATE_START_STRING).length.zero? || !trimmed_markdown.scan(PRIVATE_END_STRING).length.zero?
-      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match after parse (for NOT signed in)'
+      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match (AFTER PARSE, FOR NOT SIGNED IN)'
     end
 
     return trimmed_markdown unless signed_in?
 
-    # the process below here is executed only when signed in
+    #                                                                #
+    # THE PROCESS BELOW HERE SHOULD BE EXECUTED ONLY WHEN SIGNED IN! #
+    #                                                                #
 
     # for signed in
-    trimmed_markdown = markdown.gsub(/#{PRIVATE_START_STRING}(\r\n|\r|\n)?/, '').gsub(/(\r\n|\r|\n)?#{PRIVATE_END_STRING}/, '')
+    trimmed_markdown = markdown.gsub(/[\r\n|\r|\n]?#{PRIVATE_START_STRING}(.*?)#{PRIVATE_END_STRING}/m) do |private_sentence|
+      private_sentence.gsub!(/#{PRIVATE_START_STRING}[\r\n|\r|\n]?/, '').gsub!(/[\r\n|\r|\n]?#{PRIVATE_END_STRING}/, '')
+
+      if private_sentence.scan(/\r\n|\r|\n/).empty?
+        "#{REPLACED_PRIVATE_START_INLINE_TAG}#{private_sentence}#{REPLACED_PRIVATE_END_INLINE_TAG}"
+      else
+        "#{REPLACED_PRIVATE_START_BLOCK_TAG}#{parse_markdown(private_sentence)}#{REPLACED_PRIVATE_END_BLOCK_TAG}"
+      end
+    end
+
     if !trimmed_markdown.scan(PRIVATE_START_STRING).length.zero? || !trimmed_markdown.scan(PRIVATE_END_STRING).length.zero?
-      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match after parse (for signed in)'
+      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match (AFTER PARSE, FOR SIGNED IN)'
     end
 
     trimmed_markdown
+  end
+
+  def parse_markdown(markdown)
+    settings_host_name = Setting.last&.host_name
+    processor = Qiita::Markdown::Processor.new(hostname: settings_host_name, script: true)
+    processor.call(markdown)[:output].to_s.html_safe # rubocop:disable Rails/OutputSafety
   end
 
   def signed_in?

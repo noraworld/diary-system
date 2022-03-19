@@ -1,0 +1,21 @@
+<%# See TemplateValidator::FORMAT_TYPES in app/models/concerns/template_validator.rb %>
+
+<% case templated_article.format %>
+<% when 'sentence' %>
+  <div class="templated-post-body<% if templated_article.is_private %> private-content<% end %>"><%= templated_article_body %></div>
+<% when 'oneline' %>
+  <div class="oneline<% if templated_article.is_private %> private-content<% end %>"><span><%= templated_article_body %></span></div>
+<% when 'star' %>
+  <div class="star-wrapper<% if templated_article.is_private %> private-content<% end %>">
+    <% templated_article.body.to_i.times do %>
+      <i class="star fas fa-star"></i>
+    <% end %>
+    <% (10 - templated_article.body.to_i).times do %>
+      <i class="star far fa-star"></i>
+    <% end %>
+  </div>
+<% when 'duration' %>
+  <div class="templated-post-body<% if templated_article.is_private %> private-content<% end %>"><%= templated_article_body %></div>
+<% when 'bool' %>
+  <div class="templated-post-body<% if templated_article.is_private %> private-content<% end %>"><%= templated_article_body %></div>
+<% end %>
