@@ -30,10 +30,15 @@ Rails.application.routes.draw do
   get  '/settings' => 'settings#edit'
   post '/settings' => 'settings#update'
 
-  namespace 'api' do
-    namespace 'v1' do
-      get  '/media' => 'media#show'
-      post '/media' => 'media#create', as: 'media_post'
+  # get    '/:year/:month/:day/private'         => 'private_articles#show',    constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
+  # get    '/edit/:year/:month/:day/private'    => 'private_articles#edit',    constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
+  # delete '/destroy/:year/:month/:day/private' => 'private_articles#destroy', constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
+  # get    '/private/new'                       => 'private_articles#new'
+  # post   '/private/new'                       => 'private_articles#create'
+  # post   '/:year/:month/:day/private'         => 'private_articles#update',  constraints: {year: /20[0-9][0-9]/, month: /0[1-9]|1[0-2]/, day: /0[1-9]|[1-2][0-9]|3[0-1]/}
+
+  post   '/upload' => 'uploads#upload'
+  get    '/search' => 'articles#search'
 
       post '/markdown' => 'markdowns#markdown'
     end
