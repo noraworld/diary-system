@@ -105,50 +105,65 @@ class TemplatesController < ApplicationController
         end
       end
 
-      unless Template.where(position: 0).count.zero?
-        error_flag = true
-        raise ActiveRecord::Rollback
-      end
+    if from < to
+      sort_up_to_down(templates, from, to)
+    elsif from > to
+      sort_down_to_up(templates, from, to)
     end
 
-    if error_flag
-      render body: nil, status: :internal_server_error
-    else
-      render body: nil, status: :ok
-    end
+    render body: "from: #{params[:from]}, to: #{params[:to]}", status: :ok
   end
 
   private
 
-  def filter_template(param_type, param_value)
-    case param_type
-    when 'availability'
-      case param_value
-      when 'enabled'
-        # when availability is enabled, is_disabled is false
-        false
-      when 'disabled'
-        # when availability is disable, is_disabled is true
-        true
-      when 'all'
-        [true, false]
-      else
-        false
-      end
-    when 'visibility'
-      case param_value
-      when 'public'
-        # when visibility is public, is_private is false
-        false
-      when 'private'
-        # when visibility is private, is_private is true
-        true
-      when 'all'
-        [true, false]
-      else
-        [true, false]
-      end
+  def sort_up_to_down(templates, from, to)
+    swap_src_and_dest(templates, from, to)
+
+    current_template_position = nil
+    stored_template_position = nil
+
+    (from + 1).upto(to) do |num|
+      current_template_position, stored_template_position =
+        shift_position(templates, current_template_position, stored_template_position)
     end
+  end
+
+  def sort_down_to_up(templates, from, to)
+    swap_src_and_dest(templates, from, to)
+
+    current_template_position = nil
+    stored_template_position = nil
+
+    (from - 1).downto(to) do |num|
+      current_template_position, stored_template_position =
+        shift_position(templates, current_template_position, stored_template_position)
+    end
+  end
+
+  def swap_src_and_dest(templates, from, to)
+    dest_template_position = templates[to].position
+    templates[to].position = 0
+    templates[to].save
+
+    src_template_position = templates[from].position
+    templates[from].position = dest_template_position
+    templates[from].save
+  end
+
+  def shift_position(templates, current_template_position = nil, stored_template_position = nil)
+    current_template_position = templates[num].position
+
+    if stored_template_position.present?
+      templates[num].position = stored_template_position
+    else
+      templates[num].position = src_template_position
+    end
+
+    stored_template_position = current_template_position
+
+    templates[num].save
+
+    return current_template_position, stored_template_position
   end
 
   def template_params
