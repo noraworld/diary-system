@@ -74,13 +74,14 @@ module ApplicationHelper
   end
 
   # Qiita::Markdownを使用する
-  def qiita_markdown(markdown, format: nil, script: true)
-    settings_host_name = Setting.last&.host_name
-    public_contents = markdown.present? ? trim_private_contents(markdown) : markdown
-    return public_contents if !format.nil? && format != 'sentence'
+  def qiita_markdown(markdown, format = nil)
+    if format.nil? || format == 'sentence'
+      settings_host_name = Setting.last&.host_name
+      processor = Qiita::Markdown::Processor.new(hostname: settings_host_name, script: true)
+      markdown = processor.call(markdown)[:output].to_s
+    end
 
-    processor = Qiita::Markdown::Processor.new(hostname: settings_host_name, script: script)
-    processor.call(public_contents)[:output].to_s.html_safe # rubocop:disable Rails/OutputSafety
+    markdown.present? ? trim_private_contents(markdown).html_safe : markdown # rubocop:disable Rails/OutputSafety
   end
 
   # 検索結果や meta description に表示させる 200 文字程度の要約
@@ -204,15 +205,17 @@ module ApplicationHelper
     #                                                                #
 
     # for signed in
-    trimmed_markdown = markdown.gsub(/[\r\n|\r|\n]?#{PRIVATE_START_STRING}(.*?)#{PRIVATE_END_STRING}/m) do |private_sentence|
-      private_sentence.gsub!(/#{PRIVATE_START_STRING}[\r\n|\r|\n]?/, '').gsub!(/[\r\n|\r|\n]?#{PRIVATE_END_STRING}/, '')
-
-      if private_sentence.scan(/\r\n|\r|\n/).empty?
+    # trimmed_markdown = markdown.gsub(/#{PRIVATE_START_STRING}/, REPLACED_PRIVATE_START_BLOCK_TAG)
+    #                            .gsub(/#{PRIVATE_END_STRING}/, REPLACED_PRIVATE_END_BLOCK_TAG)
+    #                            .gsub(/<.+>#{REPLACED_PRIVATE_START_BLOCK_TAG}<.+>/, REPLACED_PRIVATE_START_BLOCK_TAG)
+    #                            .gsub(/<.+>#{REPLACED_PRIVATE_END_BLOCK_TAG}<.+>/, REPLACED_PRIVATE_END_BLOCK_TAG)
+    trimmed_markdown = markdown.gsub(/#{PRIVATE_START_STRING}(.*?)#{PRIVATE_END_STRING}/m) do |private_sentence|
+      if private_sentence.scan(/<.+>/).empty?
         "#{REPLACED_PRIVATE_START_INLINE_TAG}#{private_sentence}#{REPLACED_PRIVATE_END_INLINE_TAG}"
       else
-        "#{REPLACED_PRIVATE_START_BLOCK_TAG}#{parse_markdown(private_sentence)}#{REPLACED_PRIVATE_END_BLOCK_TAG}"
+        "#{REPLACED_PRIVATE_START_BLOCK_TAG}#{private_sentence}#{REPLACED_PRIVATE_END_BLOCK_TAG}"
       end
-    end
+    end.gsub(PRIVATE_START_STRING, '').gsub(PRIVATE_END_STRING, '')
 
     if !trimmed_markdown.scan(PRIVATE_START_STRING).length.zero? || !trimmed_markdown.scan(PRIVATE_END_STRING).length.zero?
       raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match (AFTER PARSE, FOR SIGNED IN)'

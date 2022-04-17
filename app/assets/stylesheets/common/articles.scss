@@ -958,11 +958,7 @@ $rule-margin-left-and-right: 1.3rem;
     padding: 3px 0;
   }
   &.block {
-    // padding: 0 7px 5px;
-    padding: 0 7px 0;
-  }
-  *:first-child {
-    // padding-top: 7px;
+    padding: 2px 7px;
   }
 }
 
