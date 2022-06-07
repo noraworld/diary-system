@@ -1042,7 +1042,7 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
-    jmespath (1.4.0)
+    jmespath (1.6.1)
     jpmobile (5.2.2)
       mail (~> 2.7.0)
     jquery-rails (4.3.3)
