@@ -48,9 +48,7 @@ class Api::V1::MediaController < ApplicationController
   end
 
   def create
-    year  = adjusted_current_time.strftime('%Y').to_s
-    month = adjusted_current_time.strftime('%m').to_s
-    path  = 'public/images/' + year + '/' + month + '/'
+    path = 'public/images/' + adjusted_current_time_year + '/' + adjusted_current_time_month + '/'
     FileUtils.mkdir_p(path) unless FileTest.exist?(path)
 
     content = params[:file].read
@@ -75,11 +73,19 @@ class Api::V1::MediaController < ApplicationController
   end
 
   def media_path(file_extension)
-    "images/#{adjusted_current_time.to_date.year}/#{adjusted_current_time.to_date.month}/#{SecureRandom.hex(RANDOMIZED_HEXADECIMAL_LENGTH / 2)}.#{file_extension}"
+    "images/#{adjusted_current_time_year}/#{adjusted_current_time_month}/#{SecureRandom.hex(RANDOMIZED_HEXADECIMAL_LENGTH / 2)}.#{file_extension}"
   end
 
   def signed_in?
     redirect_to login_path if current_user.nil?
+  end
+
+  def adjusted_current_time_year
+    adjusted_current_time.strftime('%Y').to_s
+  end
+
+  def adjusted_current_time_month
+    adjusted_current_time.strftime('%m').to_s
   end
 
   def filename_not_found
