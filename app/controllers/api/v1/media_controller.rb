@@ -12,6 +12,8 @@ class Api::V1::MediaController < ApplicationController
   RANDOMIZED_HEXADECIMAL_LENGTH = 64
 
   def show
+    return render json: filename_not_found, status: :not_acceptable unless params[:filename]
+
     # TODO: implement validation with form object
     file_extension = params[:filename].match(/(.*)(?:\.([^.]+$))/)[2].downcase
     mimetype = params[:mimetype]
@@ -78,5 +80,12 @@ class Api::V1::MediaController < ApplicationController
 
   def signed_in?
     redirect_to login_path if current_user.nil?
+  end
+
+  def filename_not_found
+    {
+      status: 'ng',
+      reason: 'A file name is missing.'
+    }
   end
 end
