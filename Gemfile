@@ -13,7 +13,10 @@ gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+# LEGACY WARNING:
+#   therubyracer can't be installed on M1 Mac, but it's probably unnecessary.
+#   If something goes wrong, comment out this line to install therubyracer.
+# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
