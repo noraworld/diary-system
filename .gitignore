@@ -27,3 +27,4 @@
 /public/assets/font-awesome
 /node_modules
 /yarn.lock
+/vendor/bundle/
