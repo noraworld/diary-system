@@ -26,7 +26,13 @@ namespace :diary do
     next_day_adjustment_hour = STDIN.gets.strip
     puts "\n"
 
-    ok = Setting.last.update!(next_day_adjustment_hour: next_day_adjustment_hour.to_i)
+    ok = if Setting.last
+           Setting.last.update!(next_day_adjustment_hour: next_day_adjustment_hour.to_i)
+         else
+           # "site_title" is required to create a record
+           Setting.create!(site_title: '', next_day_adjustment_hour: next_day_adjustment_hour.to_i)
+         end
+
     puts "Updated successfully: #{Setting.last.next_day_adjustment_hour} hour(s)" if ok
   end
 end
