@@ -154,11 +154,11 @@ class ArticlesController < ApplicationController
 
     # validate search result
     @search_validator = SearchResultForm.new(results: @results, page: @page, hitcount: @hitcount, number_of_pages: @number_of_pages)
-    if @search_validator.invalid? # rubocop:disable Style/GuardClause
-      unless @search_validator.errors.details[:results].empty?
-        @failed_keyword_required = @search_validator.errors.details[:results].first[:error] == :query_not_match
-      end
-    end
+
+    return unless @search_validator.invalid?
+    return if @search_validator.errors.details[:results].empty?
+
+    @failed_keyword_required = @search_validator.errors.details[:results].first[:error] == :query_not_match
   end
 
   def timeline
