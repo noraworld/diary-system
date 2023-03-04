@@ -9,6 +9,12 @@
   </div>
 <% end %>
 
+<% if flash[:alert] %>
+  <div id="failed-message" class="index-message">
+    <%= flash[:alert] %><span id="times">&times;</span>
+  </div>
+<% end %>
+
 <div id="calendar-outline">
   <div id="calendar-header">
     <%# 去年へのリンク %>
