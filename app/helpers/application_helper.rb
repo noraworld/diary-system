@@ -221,6 +221,47 @@ module ApplicationHelper
     trimmed_markdown
   end
 
+  def trim_private_contents_for_export(markdown, replacement_sentence)
+    private_start_string_length = markdown.scan(PRIVATE_START_STRING).length
+    private_end_string_length   = markdown.scan(PRIVATE_END_STRING).length
+
+    unless private_start_string_length == private_end_string_length
+      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match (BEFORE PARSE)'
+    end
+
+    return markdown if private_start_string_length.zero? && private_end_string_length.zero?
+
+    trimmed_markdown = markdown.gsub(/#{PRIVATE_START_STRING}.*?#{PRIVATE_END_STRING}/m, replacement_sentence)
+
+    if !trimmed_markdown.scan(PRIVATE_START_STRING).length.zero? || !trimmed_markdown.scan(PRIVATE_END_STRING).length.zero?
+      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match (AFTER PARSE)'
+    end
+
+    trimmed_markdown
+  end
+
+  def extract_private_contents_for_export(markdown)
+    private_start_string_length = markdown.scan(PRIVATE_START_STRING).length
+    private_end_string_length   = markdown.scan(PRIVATE_END_STRING).length
+
+    unless private_start_string_length == private_end_string_length
+      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match (BEFORE PARSE)'
+    end
+
+    return nil if private_start_string_length.zero? && private_end_string_length.zero?
+
+    trimmed_markdown = markdown.scan(/[\r\n|\r|\n]?#{PRIVATE_START_STRING}(.*?)#{PRIVATE_END_STRING}/m).flatten.map do |private_sentence|
+      private_sentence.gsub!(/^[\r\n|\r|\n]?/, '').gsub!(/[\r\n|\r|\n]?$/, '')
+      "#{private_sentence}\n\n---\n\n"
+    end.join
+
+    if !trimmed_markdown.scan(PRIVATE_START_STRING).length.zero? || !trimmed_markdown.scan(PRIVATE_END_STRING).length.zero?
+      raise NoMatchingPrivateStringError, 'The private start string and the private end string did not match (AFTER PARSE)'
+    end
+
+    trimmed_markdown
+  end
+
   def parse_markdown(markdown)
     settings_host_name = Setting.last&.host_name
     processor = Qiita::Markdown::Processor.new(hostname: settings_host_name, script: true)

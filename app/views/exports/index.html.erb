@@ -1,0 +1,12 @@
+<% if flash[:notice] %>
+  <div id="success-message" class="show-message">
+    <%= flash[:notice] %><span id="times">&times;</span>
+  </div>
+<% end %>
+
+<%= form_for(:export, html: { id: 'template-form' }) do |f| %>
+  <div id="template-form-title">
+    <p>Export all the articles</p>
+    <%= f.submit('Export', { id: 'template-post-button' }) %>
+  </div>
+<% end %>

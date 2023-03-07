@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   get  '/timeline' => 'articles#timeline'
   post '/migrate'  => 'articles#migrate', as: 'migrate'
 
+  get  '/export' => 'exports#index'
+  post '/export' => 'exports#create'
+
   get    '/templates'       => 'templates#index', as: 'templates_index'
   get    '/templates/new'   => 'templates#new',   as: 'templates_new'
   post   '/templates/new'   => 'templates#create'

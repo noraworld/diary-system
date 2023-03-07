@@ -1150,6 +1150,7 @@ GEM
     ruby-filemagic (0.7.2)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
+    rubyzip (2.3.2)
     rugged (0.28.3.1)
     sanitize (5.2.1)
       crass (~> 1.0.2)
@@ -1228,6 +1229,7 @@ DEPENDENCIES
   rmagick
   rubocop
   ruby-filemagic
+  rubyzip
   sass-rails
   sdoc
   spring

@@ -49,6 +49,7 @@ gem 'qiita-markdown', '0.27.0'
 gem 'rmagick'
 gem 'ruby-filemagic'
 gem 'aws-sdk', '~> 3'
+gem 'rubyzip'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
