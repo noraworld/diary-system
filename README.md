@@ -6,7 +6,6 @@ Simple diary application. Unlike a blog, this application is suitable for writin
 ## Installation
 ```
 $ bundle config --local build.libv8 --with-system-v8
-$ bundle config --local build.therubyracer --with-v8-dir=$(brew --prefix v8-315)
 $ bundle install
 ```
 
