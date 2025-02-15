@@ -251,7 +251,8 @@ module ApplicationHelper
     return nil if private_start_string_length.zero? && private_end_string_length.zero?
 
     trimmed_markdown = markdown.scan(/[\r\n|\r|\n]?#{PRIVATE_START_STRING}(.*?)#{PRIVATE_END_STRING}/m).flatten.map do |private_sentence|
-      private_sentence.gsub!(/^[\r\n|\r|\n]?/, '').gsub!(/[\r\n|\r|\n]?$/, '')
+      private_sentence.gsub!(/\A[\r\n|\r|\n]+/, '')
+      private_sentence.gsub!(/[\r\n|\r|\n]+\z/, '')
       "#{private_sentence}\n\n---\n\n"
     end.join
 
