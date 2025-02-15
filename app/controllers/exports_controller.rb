@@ -23,8 +23,8 @@ class ExportsController < ApplicationController
       day                    = format('%<number>02d', number: article.day)
       public_directory_path  = Rails.root.join('public', 'exports', 'public', year, month)
       private_directory_path = Rails.root.join('public', 'exports', 'private', year, month)
-      public_file_path       = "#{public_directory_path}/#{year}-#{month}-#{day}-.txt"
-      private_file_path      = "#{private_directory_path}/#{year}-#{month}-#{day}-.txt"
+      public_file_path       = "#{public_directory_path}/#{year}-#{month}-#{day}-.md"
+      private_file_path      = "#{private_directory_path}/#{year}-#{month}-#{day}-.md"
       public_content         = ''
       private_content        = ''
 
