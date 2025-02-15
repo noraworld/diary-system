@@ -3,12 +3,6 @@ Simple diary application. Unlike a blog, this application is suitable for writin
 
 ![Diary](./diary.png)
 
-## Installation
-```
-$ bundle config --local build.libv8 --with-system-v8
-$ bundle install
-```
-
 ## Setup
 You should create a new user to post your diary.
 
@@ -36,11 +30,6 @@ The environment variables are under the control of `.env` file. Copy `.env.sampl
 
 ```bash
 $ cp .env.sample .env
-```
-
-```Ruby
-SECRET_KEY_BASE='random string'
-TIME_ZONE='your time zone'
 ```
 
 ### Secret Key Base (required)
